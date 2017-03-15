@@ -119,7 +119,7 @@ public class NightPanel{
 	private void displayCenter(){
 		int k=0;
 		for(int i=0;i<playerInfo.size();i++){
-			if(playerInfo.get(i).getStatus()!=4){
+			if(!playerInfo.get(i).isDead()){
 				displayPlayerButton(i);
 			}
 			k = i+1;
@@ -129,8 +129,10 @@ public class NightPanel{
 		center.add(btnDetective, "cell 0 "+k+",alignx center");
 		btnDetective.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
-    			checkMafia();
-    			btnDetective.setVisible(false);
+    			if(target!=-1){
+    				checkMafia();
+    				btnDetective.setVisible(false);
+    			}
 		}});
 		btnDetective.setVisible(false);
 		lblDetective = new MyLabel("", textColor, btnFont);
@@ -205,7 +207,8 @@ public class NightPanel{
 			lblDetective.setText("Not Part of the Mafia");
 		}
 	}
-	public void setPLayerInfo(List<Player> pI){
+	
+	public void setPlayerInfo(List<Player> pI){
 		playerInfo = pI;
 	}
 	
@@ -216,7 +219,11 @@ public class NightPanel{
 	public JPanel getContentPane(){
 		return contentPane;
 	}
-	
+	/**
+	 * Sets the display for the new player at night
+	 * @param i, position in list of current player
+	 * @param mafiaMember
+	 */
 	public void setDisplay(int i, List<String> mafiaMember){
 		target = -1;
 		lblDetective.setText("");

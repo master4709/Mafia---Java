@@ -23,10 +23,10 @@ public class Action{
     private List<Player> of;
     protected HashMap<String, Integer> playersJobPosition = new HashMap<>();
    
-    public Action(List<Player> playerInfo){
-    	this.of = playerInfo;
+    public Action(){
+    	//this.of = playerInfo;
     	initJobPositionMap();
-    	nightActions();
+    	//nightActions();
     }
     public void initJobPositionMap() {
         for (Player player : of) {
@@ -41,9 +41,10 @@ public class Action{
         return target;
     }
     
+    //This will be called in the Game class
     public void nightActions(){
     	// If such players exist, their actions will be implemented
-    	
+    	//This should be changed to loop through all of the players and call each method depending on what role the player is
     	if(of.size()>5) barman(); 
         if(of.size()>6) bodyguard();
         if(of.size()>8) godFather();
@@ -139,7 +140,7 @@ public class Action{
 			}
 		}
 	}
-    
+
     public List<Player> getPlayerInfo(){
     	return of;
     }

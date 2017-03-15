@@ -37,6 +37,4 @@ public enum Role {
     String getRoleGoal() {
         return roleGoal;
     }
-
-
 }

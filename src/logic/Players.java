@@ -91,11 +91,15 @@ public class Players {
 			playerInfo.add(p);
 			playerInfo.get(i).setName(names.get(i));
 			playerInfo.get(i).setPlayPosition(i);
-			playerInfo.get(i).setStatus(0);//0:Alive | 1:Targeted by Mafia/Vigilante | 2:Heal | 3:Protected | 4:Dead for more than one night
-			playerInfo.get(i).setInBar(false);
 			playerInfo.get(i).setPlayerTarget(-1);
 			playerInfo.get(i).setOldPlayerTarget(-1);
-			playerInfo.get(i).setWasLynched(false);
+			playerInfo.get(i).setIsDead(false);
+			playerInfo.get(i).setIsHealed(false);
+			playerInfo.get(i).setIsTargeted(false);
+			playerInfo.get(i).setIsProtected(false);
+			playerInfo.get(i).setInBar(false);
+			playerInfo.get(i).setIsLynched(false);
+			
 			
 		}		
 	}

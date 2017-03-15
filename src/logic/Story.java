@@ -28,9 +28,9 @@ public class Story {
 	//method to extract information from text files
 	public void information() {
 		//file names
-	    String fileName = "C:/Users/pierc/OneDrive - University of Calgary/CompSci 233/Mafia2/src/stories.txt";
-	    String fileName2 = "C:/Users/pierc/OneDrive - University of Calgary/CompSci 233/Mafia2/src/locations.txt";
-	    String fileName3 = "C:/Users/pierc/OneDrive - University of Calgary/CompSci 233/Mafia2/src/causeOfDeath.txt";
+	    String fileName = "data/stories/stories.txt";
+	    String fileName2 = "data/stories/locations.txt";
+	    String fileName3 = "data/stories/causeOfDeath.txt";
 	    try {
 	    	Scanner inputStream = new Scanner (new File(fileName));
 	    

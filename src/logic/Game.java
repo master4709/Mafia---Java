@@ -39,8 +39,8 @@ public class Game{
 	public void dayCycle(int target){
 		if(target!=-1){
 			System.out.println(playerInfo.get(target).getName()+" has been lynched");
-			playerInfo.get(target).setStatus(4);//Sets the target of the lynching to dead, So they can not be used or targeted again
-			playerInfo.get(target).setWasLynched(true);
+			playerInfo.get(target).setIsDead(true);//Sets the target of the lynching to dead, So they can not be used or targeted again
+			playerInfo.get(target).setIsLynched(true);
 		}
 	}
 	
@@ -50,8 +50,8 @@ public class Game{
 	 */
 	public void nightAction(){
 		
-		Action a = new Action(playerInfo);
-		setPlayerInfo(a.getPlayerInfo());
+		//Action a = new Action(playerInfo);
+		//setPlayerInfo(a.getPlayerInfo());
 		resetStatus();
 	}
 	
@@ -65,24 +65,18 @@ public class Game{
 		for(int i=0;i<playerInfo.size();i++){
 			//Saves the target of that night to the variable OldPlayerTarget for the 
 			playerInfo.get(i).setOldPlayerTarget(playerInfo.get(i).getPlayerTarget());
-			//If the player is in Protected status puts them into Alive Status (0)
-			if(playerInfo.get(i).getStatus()==3){
-				
-				playerInfo.get(i).setStatus(0);
-				
-			//If the player is in targeted by Mafia prints the death story and puts them into Dead status (4)
-			}else if(playerInfo.get(i).getStatus()==1){
+			
+			if(playerInfo.get(i).isDead()){
 				printEvent(i,"dead");
-				playerInfo.get(i).setStatus(4);
-				
-			//If the player was Saved, prints the saved story and sets them to Alive status(0)
-			}else if(playerInfo.get(i).getStatus()==2){
-				System.out.println("Saved");
+			}
+			if(playerInfo.get(i).isHealed()&&playerInfo.get(i).isTargeted()){
 				printEvent(i,"alive");
-				playerInfo.get(i).setStatus(0);
 			}
 			
-			playerInfo.get(i).setInBar(false);//Removes any  player that may have been in the bar out
+			playerInfo.get(i).setIsTargeted(false);
+			playerInfo.get(i).setIsHealed(false);
+			playerInfo.get(i).setIsProtected(false);
+			playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
 			playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
 		}
 	}

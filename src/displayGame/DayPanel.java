@@ -116,7 +116,7 @@ public class DayPanel{
 	
 	private void displayCenter(){
 		for(int i=0;i<playerInfo.size();i++){
-			if(playerInfo.get(i).getStatus()!=4){
+			if(!playerInfo.get(i).isDead()){
 				displayPlayerButton(i);
 			}
 		}

@@ -1,7 +1,6 @@
 package displayMain;
 
 import myJStuff.*;
-import logic.*;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -90,7 +89,7 @@ public class MainPanel{
 		JLabel lblTitle = new MyLabel("Mafia", textColor, titleFont);
 		north.add(lblTitle, "cell 0 0,alignx center");
 		
-		ImageIcon icon = new ImageIcon("data/man.png");
+		ImageIcon icon = new ImageIcon("data/pictures/man.png");
 		lblMan = new JLabel(icon);
 		north.add(lblMan, "cell 1 0");
 	}

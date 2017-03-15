@@ -73,7 +73,7 @@ public class GameController {
 		position = 0;
 		nd = new NightPanel(g.getPlayerInfo());
 		for(int k=position;k<g.getPlayerInfo().size();k++){
-			if(g.getPlayerInfo().get(k).getStatus()!=4){
+			if(!g.getPlayerInfo().get(k).isDead()){
 				position = k;
 				checkPlayer();
 				break;
@@ -90,7 +90,7 @@ public class GameController {
 
 		g.getPlayerInfo().get(position).setPlayerTarget(target);
 		position++;
-		if(position<g.getPlayerInfo().size()&&g.getPlayerInfo().get(position).getStatus()!=4){
+		if(position<g.getPlayerInfo().size()&& !g.getPlayerInfo().get(position).isDead()){
 			checkPlayer();
 		}else if(position==g.getPlayerInfo().size()){
 			for(int m=0;m<g.getPlayerInfo().size();m++){
@@ -100,7 +100,7 @@ public class GameController {
 		}
 		else{
 			for(int k=position;k<g.getPlayerInfo().size();k++){
-				if(g.getPlayerInfo().get(k).getStatus()!=4){
+				if(!g.getPlayerInfo().get(k).isDead()){
 					position = k;
 					checkPlayer();
 					break;

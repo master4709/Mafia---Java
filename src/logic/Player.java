@@ -12,7 +12,6 @@ package logic;
 public class Player {
 	
 	private int playPosition;
-	private int status;//0:Alive | 1:Targeted by Mafia/Vigilante | 2:Heal | 3:Protected | 4: Dead for more that one turn
 	private int playerTarget;
 	private int oldPlayerTarget;
 	private String name;
@@ -20,8 +19,12 @@ public class Player {
 	private String roleInfo;
 	private String goal;
 	private boolean isMafia;
-	private boolean isBar;//If true the player cannot do anything that night.
-	private boolean wasLynched;
+	private boolean isDead;
+	private boolean isHealed;
+	private boolean isTargeted;
+	private boolean isProtected;
+	private boolean inBar;//If true the player cannot do anything that night.
+	private boolean isLynched;
 	
 	
 	
@@ -31,9 +34,6 @@ public class Player {
 	}
 	public void setPlayPosition(int playPosition) {
 		this.playPosition = playPosition;
-	}
-	public void setStatus(int status) {
-		this.status = status;
 	}
 	public void setPlayerTarget(int playerTarget){
 		this.playerTarget = playerTarget;
@@ -50,14 +50,26 @@ public class Player {
 	public void setIsMafia(boolean isMafia) {
 		this.isMafia = isMafia;
 	}
+	public void setIsHealed(boolean isHealed){
+		this.isHealed = isHealed;
+	}
+	public void setIsDead(boolean isDead){
+		this.isDead = isDead;
+	}
+	public void setIsTargeted(boolean isTargeted){
+		this.isTargeted = isTargeted;
+	}
+	public void setIsProtected(boolean isProtected){
+		this.isProtected = isProtected;
+	}
 	public void setInBar(boolean isBar) {
-		this.isBar = isBar;
+		this.inBar = isBar;
 	}
 	public void setGoal(String goal) {
 		this.goal = goal;
 	}
-	public void setWasLynched(boolean wasLynched) {
-		this.wasLynched = wasLynched;
+	public void setIsLynched(boolean isLynched) {
+		this.isLynched = isLynched;
 	}
 	
 	
@@ -68,9 +80,6 @@ public class Player {
 	}
 	public int getPlayPosition() {
 		return playPosition;
-	}
-	public int getStatus() {
-		return status;
 	}
 	public int getPlayerTarget(){
 		return playerTarget;
@@ -87,14 +96,26 @@ public class Player {
 	public boolean isMafia() {
 		return isMafia;
 	}
+	public boolean isHealed(){
+		return isHealed;
+	}
+	public boolean isDead(){
+		return isDead;
+	}
+	public boolean isTargeted(){
+		return isTargeted;
+	}
+	public boolean isProtected(){
+		return isProtected;
+	}
 	public boolean inBar() {
-		return isBar;
+		return inBar;
 	}
 	public String getGoal() {
 		return goal;
 	}
-	public boolean wasLynched() {
-		return wasLynched;
+	public boolean islynched() {
+		return isLynched;
 	}
 	
 }

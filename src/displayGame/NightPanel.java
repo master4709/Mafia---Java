@@ -54,14 +54,16 @@ public class NightPanel{
 	private List<Player> playerInfo;
 	
 	private List<JButton> buttonList = new ArrayList<>();
+	private List<String> mafiaMember = new ArrayList<>();
 
 	/**
 	 * Create the panel and all of the sub panels
 	 * Displays all of the needed buttons and labels etc...
 	 * @param playerInfo
 	 */
-	public NightPanel(List<Player> playerInfo) {
+	public NightPanel(List<Player> playerInfo, List<String> mafiaMember) {
 		this.playerInfo = playerInfo;
+		this.mafiaMember = mafiaMember;
 		
 		setFont();
 		setColor();
@@ -225,7 +227,7 @@ public class NightPanel{
 	 * @param i, position in list of current player
 	 * @param mafiaMember
 	 */
-	public void setDisplay(int i, List<String> mafiaMember){
+	public void setDisplay(int i){
 		target = -1;
 		lblDetective.setText("");
 		lblMafia.setText("");

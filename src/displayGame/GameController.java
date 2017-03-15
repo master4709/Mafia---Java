@@ -2,6 +2,8 @@ package displayGame;
 
 import logic.*;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -22,15 +24,15 @@ public class GameController {
 	
 	private int position = 0;
 	
-	private GameController(JFrame frame, Game game){
+	private GameController(JFrame frame, List<Player> playerInfo, List<String> mafiaMembers, int lynchTarget){
 		this.frame = frame;
-		this.g = game;
+		g = new Game(playerInfo,mafiaMembers,lynchTarget);
 		start();
 	}
 	
-	public static void createInstance(JFrame frame, Game game){
+	public static void createInstance(JFrame frame, List<Player> playerInfo, List<String> mafiaMembers, int lynchTarget){
 		if(instance==null){
-			instance = new GameController(frame,game);
+			instance = new GameController(frame,playerInfo,mafiaMembers,lynchTarget);
 		}
 	}
 	
@@ -71,7 +73,7 @@ public class GameController {
 		g.dayCycle(target);
 		frame.getContentPane().setVisible(false);
 		position = 0;
-		nd = new NightPanel(g.getPlayerInfo());
+		nd = new NightPanel(g.getPlayerInfo(),g.getMafiaMember());
 		for(int k=position;k<g.getPlayerInfo().size();k++){
 			if(!g.getPlayerInfo().get(k).isDead()){
 				position = k;
@@ -110,7 +112,7 @@ public class GameController {
 	}
 	
 	public void setNightPlayer(){
-		nd.setDisplay(position,g.getMafiaMember());
+		nd.setDisplay(position);
 		frame.getContentPane().setVisible(false);
 		panelNight = nd.getContentPane();
 		frame.setContentPane(panelNight);

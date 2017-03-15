@@ -63,7 +63,6 @@ public class SetUpController {
 	 */
 	public void switchToGame(){
 		Players p = new Players();
-		Game game = new Game(p.getPlayerInfo(),p.getMafiaMembers(),p.getLynchTarget());
-		GameController.createInstance(frame, game);
+		GameController.createInstance(frame, p.getPlayerInfo(),p.getMafiaMembers(),p.getLynchTarget());
 	}
 }

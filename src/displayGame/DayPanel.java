@@ -37,7 +37,6 @@ public class DayPanel{
 	
 	private JLabel lblDayTime;
 	private JLabel lblDiscription;
-	private JLabel lblDiscription2;
 	
 	private JButton btnContinue;
 	
@@ -93,13 +92,11 @@ public class DayPanel{
 		lblDayTime = new MyLabel("Day Time", textColor, titleFont);
 		north.add(lblDayTime, "flowy,cell 0 0");
 		
-		String text = "One player must be voted out";
+		String text = "One player must be voted out each day.";// There must be a 50% majority to lynch him/her";
 		lblDiscription = new MyLabel(text, textColor, btnFont);
-		north.add(lblDiscription, "cell 0 1,alignx center,growy");
-		
-		text = "Over 50% of the votes to be killed";
-		lblDiscription2 = new MyLabel(text, textColor, btnFont);
-		north.add(lblDiscription2, "cell 0 2,alignx center,growy");
+		//lblDiscription.setWrapStyleWord(true);
+		//lblDiscription.setLineWrap(true);
+		north.add(lblDiscription, "cell 0 1,");
 	
 	}
 	/**

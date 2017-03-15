@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -40,7 +41,7 @@ public class NightPanel{
 	
 	private JLabel lblName;
 	private JLabel lblRole;
-	private JLabel lblInfo;
+	private JTextArea lblInfo;
 	private JLabel lblMafia;
 	private JLabel lblDetective;
 	
@@ -105,11 +106,11 @@ public class NightPanel{
 		lblName = new MyLabel(text, textColor, titleFont);
 		north.add(lblName, "flowy,cell 0 0");
 		lblRole = new MyLabel(text, textColor, btnFont);
-		north.add(lblRole, "cell 0 1,alignx center");
-		lblInfo = new MyLabel(text, textColor, infoFont);
-		north.add(lblInfo, "cell 0 2,alignx center");
+		north.add(lblRole, "cell 0 1");
+		lblInfo = new MyTextArea(text, textColor, backgroundColor, infoFont);
+		north.add(lblInfo, "cell 0 2");
 		lblMafia= new MyLabel(text, textColor, infoFont);
-		north.add(lblMafia, "cell 0 3, alignx center");
+		north.add(lblMafia, "cell 0 3");
 	}
 	
 	/**
@@ -189,7 +190,7 @@ public class NightPanel{
 	
 	private void setFont(){
 		titleFont = new MyFont(100);
-		btnFont = new MyFont(30);
+		btnFont = new MyFont(50);
 		infoFont = new MyFont(20);
 	}
 	

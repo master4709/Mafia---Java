@@ -24,6 +24,8 @@ public class Game{
 	//Index value for the target of the Lyncher
 	private int lynchTarget;
 	
+	private Action a = new Action();
+	
 	public Game(List<Player> playerInfo, List<String> mafiaMembers, int lynchTarget){
 		this.lynchTarget = lynchTarget;
 		this.playerInfo = playerInfo;
@@ -49,9 +51,9 @@ public class Game{
 	 * @param playerTarget
 	 */
 	public void nightAction(){
-		
-		//Action a = new Action(playerInfo);
-		//setPlayerInfo(a.getPlayerInfo());
+		a.setPlayerInfo(playerInfo);
+		a.nightActions();
+		setPlayerInfo(a.getPlayerInfo());
 		resetStatus();
 	}
 	
@@ -66,11 +68,13 @@ public class Game{
 			//Saves the target of that night to the variable OldPlayerTarget for the 
 			playerInfo.get(i).setOldPlayerTarget(playerInfo.get(i).getPlayerTarget());
 			
-			if(playerInfo.get(i).isDead()){
+			if(playerInfo.get(i).isTargeted()&& !playerInfo.get(i).islynched()){
 				printEvent(i,"dead");
+				playerInfo.get(i).setIsDead(true);
 			}
 			if(playerInfo.get(i).isHealed()&&playerInfo.get(i).isTargeted()){
 				printEvent(i,"alive");
+				playerInfo.get(i).setIsDead(false);
 			}
 			
 			playerInfo.get(i).setIsTargeted(false);

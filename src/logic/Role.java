@@ -8,7 +8,7 @@ public enum Role {
     TOWNIE              ("Townie", "Do nothing at night", "To have only town members left"),
     DETECTIVE           ("Detective", "Reveals the team for one player per night", "To have only town members left"),
     MAFIA_HITMAN        ("Mafia: Hitman", "May kill someone each night", "To make the majority of the town mafia members"),
-    DOCTOR              ("Doctor", "May heal one player each nigh", "To have only town members left"),
+    DOCTOR              ("Doctor", "May heal one player each night", "To have only town members left"),
     SURVIVOR            ("Survivor", "Do nothing at night", "To be the last town member left alive"),
     MAFIA_BARMAN        ("Mafia: Barman", "May stop the action of another player each night", "To make the majority of the town mafia members"),
     BODYGUARD           ("Bodyguard", "May save another person by dying in their place", "To have only town members left"),

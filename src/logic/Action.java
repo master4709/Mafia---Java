@@ -25,7 +25,7 @@ public class Action{
    
     public Action(){
     	//this.of = playerInfo;
-    	initJobPositionMap();
+    	//initJobPositionMap();
     	//nightActions();
     }
     public void initJobPositionMap() {
@@ -58,11 +58,13 @@ public class Action{
     
     //sets all the players
     protected void setPlayerInfo(List<Player> playerInfo){
+    	
     	of = playerInfo;
+    	initJobPositionMap();
     }
     
     protected void barman(){
-        int position = playersJobPosition.get("Mafia- Barman");
+        int position = playersJobPosition.get("Mafia: Barman");
         
         // Sets the target of the barman to be in the bar.
     	// They can not do anything that night in that case
@@ -76,7 +78,7 @@ public class Action{
         //If the player did not target someone or was stopped by the barman
         if(target(position)!=-1 && !of.get(position).inBar()){
         	
-            of.get(target(position)).setStatus(3);
+            of.get(target(position)).setIsProtected(true);;
             //Sets the target of the bodyguard to protected for the night
             
             bodyguardPosition = position;
@@ -96,13 +98,13 @@ public class Action{
         
         //If the player did not target someone or was stopped by the barman
         if(target(position)!=-1 && !of.get(position).inBar()){
-            if(of.get(target(position)).getStatus()==3){
-                of.get(bodyguardPosition).setStatus(1);
+            if(of.get(target(position)).isProtected()){
+                of.get(bodyguardPosition).setIsTargeted(true);;
                 //If the target was protected, bodyguard is killed instead    
             }
             
             else{
-                of.get(target(position)).setStatus(1);
+                of.get(target(position)).setIsTargeted(true);
                 //Sets the target of the hitman to 1. this kills them :(
                 
             }
@@ -114,32 +116,18 @@ public class Action{
         //If the player did not target someone to save or was stopped by the barman
         if(target(position) !=-1 && !of.get(position).inBar()){
         
-        	
-        	if(of.get(target(position)).getStatus()==1) of.get(target(position)).setStatus(2);
+        	of.get(target(position)).setIsHealed(true);
         	//This saves them from death
         }
     }
 
     protected void godFather(){
-        int position = playersJobPosition.get("Mafiaboss- GodFather");
+        int position = playersJobPosition.get("Mafiaboss: GodFather");
         //If the player did not target someone or was stopped by the barman
         //Do nothing
         if(target(position) !=-1 && !of.get(position).inBar()) ;
         	// TODO
     }
-    
-    // Unlike the other player methods, this is called during the dayCycle
-    protected void detective(int position){
-		//Store the index value of the position for the target of the detective
-		int target = target(position);
-		if(target!=-1){//If Detective does not want to target someone that night
-			if(of.get(target).isMafia() == true){//Gets the target number of current player and gets target player team 
-				System.out.println(of.get(target).getName()+ " is part of the mafia"); //and checks if they are Mafia
-			}else{
-				System.out.println(of.get(target).getName()+ " is not part of the mafia");
-			}
-		}
-	}
 
     public List<Player> getPlayerInfo(){
     	return of;

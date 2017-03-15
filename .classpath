@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="mafia-3.0/src"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="mafia3.0/src" kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar"/>
 	<classpathentry kind="output" path="bin"/>

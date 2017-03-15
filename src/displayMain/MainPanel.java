@@ -89,7 +89,7 @@ public class MainPanel{
 		JLabel lblTitle = new MyLabel("Mafia", textColor, titleFont);
 		north.add(lblTitle, "cell 0 0,alignx center");
 		
-		ImageIcon icon = new ImageIcon("mafia-3.0/data/pictures/man.png");
+		ImageIcon icon = new ImageIcon("data/pictures/man.png");
 		lblMan = new JLabel(icon);
 		north.add(lblMan, "cell 1 0");
 	}
@@ -111,7 +111,7 @@ public class MainPanel{
 		center.add(btnNewGame, "cell 0 0,growx");
 		btnNewGame.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
-    			MainController.getInstance().switchToGame();
+    			MainController.getInstance().switchToSetUp();
     	}});
 		
 		btnContinueGame = new MyButton("Continue Game", textColor, btnBackgroundColor, buttonFont);

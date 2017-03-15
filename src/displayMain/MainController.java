@@ -1,7 +1,6 @@
 package displayMain;
 
-import displayGame.GameController;
-import logic.*;
+import displaySetUp.SetUpController;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -96,9 +95,7 @@ public class MainController {
 	/**
 	 * This method goes to the GameController
 	 */
-	public void switchToGame(){
-		Players p = new Players();
-		Game game = new Game(p.getPlayerInfo(),p.getMafiaMembers(),p.getLynchTarget());
-		GameController.createInstance(frame, game);
+	public void switchToSetUp(){
+		SetUpController.createInstance(frame);
 	}
 }

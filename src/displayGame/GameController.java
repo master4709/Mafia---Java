@@ -9,7 +9,7 @@ public class GameController {
 	
 	private static GameController instance = null;
 	
-	private JFrame frame = new JFrame();
+	private JFrame frame;
 	
 	private Game g;
 	private DayPanel dd;

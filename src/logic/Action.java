@@ -122,7 +122,7 @@ public class Action{
     }
 
     protected void godFather(){
-        int position = playersJobPosition.get("Mafiaboss: GodFather");
+        int position = playersJobPosition.get("Mafia- GodFather");
         //If the player did not target someone or was stopped by the barman
         //Do nothing
         if(target(position) !=-1 && !of.get(position).inBar()) ;

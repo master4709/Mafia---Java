@@ -113,7 +113,7 @@ public class CheckPlayerPanel{
 	
 	private void setFont(){
 		titleFont = new MyFont(100);
-		buttonFont = new MyFont(50);
+		buttonFont = new MyButtonFont();
 	}
 	
 	private void setColor(){

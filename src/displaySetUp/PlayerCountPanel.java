@@ -1,7 +1,4 @@
-package displayGame;
-
-import myJStuff.*;
-import logic.*;
+package displaySetUp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,9 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import myJStuff.Colors;
+import myJStuff.MyButton;
+import myJStuff.MyButtonFont;
+import myJStuff.MyFont;
+import myJStuff.MyLabel;
 import net.miginfocom.swing.MigLayout;
 
-public class DayPanel{
+public class PlayerCountPanel{
 	
 	private Color textColor;
 	private Color btnBackgroundColor;
@@ -26,31 +28,28 @@ public class DayPanel{
 	private Color selectColor;
 	
 	private Font titleFont;
-	private Font infoFont;
 	private Font btnFont;
 
 	private JPanel contentPane;
 	private JPanel north;
 	private JPanel south;
+	
+	private JLabel lblText;
+	private JLabel lblText2;
+	private JButton btnContinue;
 	private JPanel west;
 	private JPanel east;
 	private JPanel center;
 	
-	private JLabel lblDayTime;
-	private JLabel lblDiscription;
+	private int playerTotal;
 	
-	private JButton btnContinue;
-	
-	private List<Player> playerInfo;
 	private List<JButton> buttonList = new ArrayList<>();
-	private int target;
 
 	/**
-	 * Create the panel.
+	 * Create the frame.
 	 */
-	public DayPanel(List<Player> playerInfo) {
-		this.playerInfo = playerInfo;
-		target = -1;
+	public PlayerCountPanel() {
+		playerTotal = 5;
 		setFont();
 		setColor();
 
@@ -60,19 +59,17 @@ public class DayPanel{
 		
 		north = new JPanel();
 		contentPane.add(north, BorderLayout.NORTH);
-		north.setLayout(new MigLayout("", "[grow,center]", "[][grow]"));
+		north.setLayout(new MigLayout("", "[grow,center]", "[]"));
 		
 		south = new JPanel();
 		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[grow,fill]", "[]"));
+		south.setLayout(new MigLayout("", "[grow]", "[]"));
 		
 		west = new JPanel();
 		contentPane.add(west, BorderLayout.WEST);
-		west.setLayout(new MigLayout("", "[]", "[]"));
 		
 		east = new JPanel();
 		contentPane.add(east, BorderLayout.EAST);
-		east.setLayout(new MigLayout("", "[]", "[]"));
 		
 		center = new JPanel();
 		contentPane.add(center, BorderLayout.CENTER);
@@ -81,56 +78,35 @@ public class DayPanel{
 		displayNorth();
 		displaySouth();
 		displayCenter();
-		displayEast();
-		displayWest();
 		
-		setBackground(backgroundColor);
+		setBackgroundColor(backgroundColor);
 	}
-	/**
-	 * Displays that it is Day Time and rules of the day
-	 */
+	
 	private void displayNorth(){
-		lblDayTime = new MyLabel("Day Time", textColor, titleFont);
-		north.add(lblDayTime, "flowy,cell 0 0");
+		lblText = new MyLabel("How Many", textColor, titleFont);
+		north.add(lblText, "cell 0 0,alignx center");
 		
-		String text = "One player must be voted out each day.";// There must be a 50% majority to lynch him/her";
-		lblDiscription = new MyLabel(text, textColor, infoFont);
-		//lblDiscription.setWrapStyleWord(true);
-		//lblDiscription.setLineWrap(true);
-		north.add(lblDiscription, "cell 0 1,");
-	
+		lblText2 = new MyLabel("Playes?", textColor, titleFont);
+		north.add(lblText2, "cell 0 1,alignx center");
 	}
-	/**
-	 * Creates button needed to be pressed to go to next screen
-	 */
-	private void displaySouth(){
-		btnContinue = new MyButton("Continue", textColor, btnBackgroundColor, btnFont);
-		south.add(btnContinue, "cell 0 0");
-		btnContinue.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			GameController.getInstance().switchNightCycle(target);
-		}});
-	}
-	
+
 	private void displayCenter(){
-		for(int i=0;i<playerInfo.size();i++){
-			if(!playerInfo.get(i).isDead()){
-				displayPlayerButton(i);
-			}
+		for(int i=5;i<11;i++){
+			displayPlayerButton(i);
 		}
 	}
-	
-	private void displayEast(){
-		
-	}
-	
-	private void displayWest(){
+	private void displaySouth(){
+		btnContinue = new MyButton("Continue", textColor, btnBackgroundColor, btnFont);
+		south.add(btnContinue, "cell 0 0,growx");
+		btnContinue.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent e){
+    			SetUpController.getInstance().switchToGame(playerTotal);
+		}});
 		
 	}
 	
 	private void displayPlayerButton(int i){
-		String text = playerInfo.get(i).getName()+"|"+playerInfo.get(i).getRole();
-		JButton btnPlayer = new MyButton(text,textColor,btnBackgroundColor,btnFont);
+		JButton btnPlayer = new MyButton(Integer.toString(i), textColor, btnBackgroundColor, btnFont);
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position);
 		btnPlayer.addActionListener(new ActionListener(){
@@ -139,12 +115,13 @@ public class DayPanel{
     				buttonList.get(m).setBackground(btnBackgroundColor);
     			}
     			btnPlayer.setBackground(selectColor);
-    			target = i;
+    			playerTotal = i;
 		}});
 		buttonList.add(btnPlayer);
+		
 	}
 	
-	private void setBackground(Color c){
+	private void setBackgroundColor(Color c){
 		north.setBackground(c);
 		south.setBackground(c);
 		east.setBackground(c);
@@ -153,8 +130,7 @@ public class DayPanel{
 	}
 	
 	private void setFont(){
-		titleFont = new MyFont(100);
-		infoFont = new MyFont(30);
+		titleFont = new MyFont(80);
 		btnFont = new MyButtonFont();
 	}
 	

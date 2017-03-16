@@ -11,20 +11,20 @@ public class SetUpController {
 	
 	private static SetUpController instance = null;
 	
+	private Players p;
+	private PlayerCountPanel pcp;
+	
 	private JFrame frame;
-	
+	private JPanel panelCount;
 
-	
-	
-	//All of the possible panels to be displayed on the frame
-	private JPanel panelPlayerTotal;
 	/**
 	 * initialize the frame and set the bounds
 	 */
 	private SetUpController(JFrame frame){
 		//Set the bounds and exit command
 		this.frame = frame;
-		
+		pcp = new PlayerCountPanel();
+		panelCount = pcp.getContentPane();
 		start();
 		frame.setVisible(true);
 	}
@@ -45,9 +45,7 @@ public class SetUpController {
 	public void start(){
 		//Create all of the panel
 		//Sets the frame to the main screen and to visible
-		//frame.setContentPane(panelPlayerTotal);
-		//panelPlayerTotal.setVisible(true);
-		switchToGame();
+		switchPlayerTotal();
 	}
 	
 	/**
@@ -55,14 +53,14 @@ public class SetUpController {
 	 */
 	public void switchPlayerTotal(){
 		frame.getContentPane().setVisible(false);
-		frame.setContentPane(panelPlayerTotal);
-		panelPlayerTotal.setVisible(true);
+		frame.setContentPane(panelCount);
+		panelCount.setVisible(true);
 	}
 	/**
 	 * This method goes to the GameController
 	 */
-	public void switchToGame(){
-		Players p = new Players();
+	public void switchToGame(int playerTotal){
+		p = new Players(playerTotal);
 		GameController.createInstance(frame, p.getPlayerInfo(),p.getMafiaMembers(),p.getLynchTarget());
 	}
 }

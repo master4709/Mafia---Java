@@ -85,7 +85,7 @@ public class MainPanel{
 		setBackground(backgroundColor);
 	}
 	
-	public void displayTop(){
+	private void displayTop(){
 		JLabel lblTitle = new MyLabel("Mafia", textColor, titleFont);
 		north.add(lblTitle, "cell 0 0,alignx center");
 		
@@ -94,19 +94,19 @@ public class MainPanel{
 		north.add(lblMan, "cell 1 0");
 	}
 
-	public void displayLeft(){
+	private void displayLeft(){
 		
 	}
 	
-	public void displayRight(){
+	private void displayRight(){
 		
 	}
 	
-	public void displayBottom(){
+	private void displayBottom(){
 		
 	}
 	
-	public void displayCenter(){
+	private void displayCenter(){
 		btnNewGame = new MyButton("New Game", textColor, btnBackgroundColor, buttonFont);
 		center.add(btnNewGame, "cell 0 0,growx");
 		btnNewGame.addActionListener(new ActionListener(){
@@ -147,7 +147,7 @@ public class MainPanel{
 	
 	private void setFont(){
 		titleFont = new MyFont(100);
-		buttonFont = new MyFont(50);
+		buttonFont = new MyButtonFont();
 	}
 	
 	private void setColor(){

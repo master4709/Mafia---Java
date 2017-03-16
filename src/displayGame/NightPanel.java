@@ -192,7 +192,7 @@ public class NightPanel{
 	
 	private void setFont(){
 		titleFont = new MyFont(100);
-		btnFont = new MyFont(50);
+		btnFont = new MyButtonFont();
 		infoFont = new MyFont(20);
 	}
 	

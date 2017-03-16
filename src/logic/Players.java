@@ -18,7 +18,7 @@ public class Players {
 	private  Scanner scan;
 	
 	//This int stores the total number of Players, does not once entered in numberOfPlayers()
-	private int totalPlayers;
+	private int playerTotal;
 	
 	//This string will store the theme of the game
 	private String playTheme;
@@ -32,7 +32,8 @@ public class Players {
 	//This int stores the information for the lyncher target	
 	private int lynchTargetID;
 	
-	public Players(){
+	public Players(int playerTotal){
+		this.playerTotal = playerTotal;
 		init();
 	}
 
@@ -41,28 +42,11 @@ public class Players {
 	 * This method calls other methods in the Players class
 	 */
 	public void init(){
-		numberOfPlayers();
 		//themeOfGame();
 		nameOfPlayers();
 		roleOfPlayers();
 	}
 		
-	/**
-	 * This method asks the user to input the total number of Players
-	 */
-	public void numberOfPlayers(){
-		scan = new Scanner(System.in);
-		
-		System.out.print("How many players? Min 5, Max 10: ");
-		totalPlayers = 7;//scan.nextInt();
-			
-		if((10 < totalPlayers) ||(totalPlayers < 5)) {
-			System.out.println("Input must be in between 5 and 10.");
-			System.out.println();
-			numberOfPlayers();
-		}
-		 
-	}
 	
 	/**
 	 * This class will asks user to choose the theme of the game
@@ -86,7 +70,7 @@ public class Players {
 	public void nameOfPlayers(){
 		List<String> names = new ArrayList<>(Arrays.asList("Frodo","Gandalf","Sam","Merry","Gimli","Legolas","Aragorn","Eomer","Elrond","Theoden"));
 		System.out.println("Please enter each players name followed by enter: ");
-		for(int i =0; i<totalPlayers; i++){
+		for(int i =0; i<playerTotal; i++){
 			Player p = new Player();
 			playerInfo.add(p);
 			playerInfo.get(i).setName(names.get(i));
@@ -111,13 +95,13 @@ public class Players {
 	 * If the role contains Mafia, sets the isMafia variable to true 
 	 */
 	public void roleOfPlayers(){
-		RoleAssignment r = new RoleAssignment(totalPlayers);
+		RoleAssignment r = new RoleAssignment(playerTotal);
 		r.playerAssignment();
 		List<String> roles = r.getRoles();
 		List<String> rolesInfo = r.getRolesInfo();
 		List<String> Goals = r.getGoals();
 		//Loops through all of the players and assigns them a Role, Info and Goal
-		for(int i=0; i<totalPlayers; i++){
+		for(int i=0; i<playerTotal; i++){
 			playerInfo.get(i).setRole(roles.get(i));			
 			playerInfo.get(i).setRoleInfo(rolesInfo.get(i));
 			playerInfo.get(i).setGoal(Goals.get(i));
@@ -146,9 +130,9 @@ public class Players {
 	// Finds a random target for the lyncher
 	public void lynchTarget(){
 		List<Player> possibleTargets = playerInfo;
-		int i = new Random().nextInt(totalPlayers-1);
+		int i = new Random().nextInt(playerTotal-1);
 		while(possibleTargets.get(i).getRole() == "Lyncher") {
-			i = new Random().nextInt(totalPlayers-1);			
+			i = new Random().nextInt(playerTotal-1);			
 		}
 		lynchTargetID = i;
 	}

@@ -93,7 +93,7 @@ public class RulePanel{
 	
 	private void setFont(){
 		titleFont = new MyFont(50);
-		buttonFont = new MyFont(30);
+		buttonFont = new MyButtonFont();
 	}
 	
 	private void setColor(){

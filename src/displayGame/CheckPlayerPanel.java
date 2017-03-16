@@ -117,7 +117,7 @@ public class CheckPlayerPanel{
 		south.add(btnYes, "cell 0 0,growx");
 		btnYes.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
-    			GameController.getInstance().setNightPlayer();
+    			GameController.getInstance().switchNightPlayer();
 		}});
 		
 	}

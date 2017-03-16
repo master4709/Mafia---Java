@@ -76,6 +76,7 @@ public class DayPanel{
 	public DayPanel(List<Player> playerInfo) {
 		this.playerInfo = playerInfo;
 		target = -1;
+		
 		setFont();
 		setColor();
 
@@ -137,7 +138,12 @@ public class DayPanel{
     			//Switches the screen to the NightCycle
     			//If a target has not been selected yet, the action will not be performed
     			if(target!=-1){
+    				//Remove the button representing the targeted player of the lynching from the screen
+    				//removePlayerButton(target);
+    				//Switch to the nightCycle using the GameController
     				GameController.getInstance().switchNightCycle(target);
+    				//Reset the status of the target to -1
+    				target = -1;
     			}
 		}});
 	}
@@ -216,6 +222,11 @@ public class DayPanel{
 		backgroundColor = Colors.defaultBackgroundColor;
 		selectColor = Colors.blue;
 	}
+	
+	public void removePlayerButton(int i){
+		center.remove(buttonList.get(target));
+	}
+	
 	/**
 	 * Returns the contentPane with everything added to it
 	 * @return contentPane

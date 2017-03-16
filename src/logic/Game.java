@@ -50,6 +50,9 @@ public class Game{
 			System.out.println(playerInfo.get(target).getName()+" has been lynched");
 			playerInfo.get(target).setIsDead(true);//Sets the target of the lynching to dead, So they can not be used or targeted again
 			playerInfo.get(target).setIsLynched(true);
+			if(playerInfo.get(target).getRole().contains("Hitman")){
+				//newHitman(target);
+			}
 		}
 	}
 	
@@ -66,9 +69,7 @@ public class Game{
 	
 	
 	/**
-	 * This method resets the status of all players to 0 (alive)
-	 * If the player has a status of 1 (targeted by mafia/vigilante) a story is printed displaying how they died and their status is set to 4
-	 * If the status of the player is 4 ( dead) will skip them as both a player an a target for each player
+	 * Resets all of the status for every player
 	 */
 	private void resetStatus(){
 		for(int i=0;i<playerInfo.size();i++){
@@ -83,12 +84,24 @@ public class Game{
 				printEvent(i,"alive");
 				playerInfo.get(i).setIsDead(false);
 			}
-			
+			if(playerInfo.get(i).isDead()&&playerInfo.get(i).getRole().contains("Hitman")){
+				//newHitman(i);
+			}
 			playerInfo.get(i).setIsTargeted(false);
 			playerInfo.get(i).setIsHealed(false);
 			playerInfo.get(i).setIsProtected(false);
 			playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
 			playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
+		}
+	}
+	
+	private void newHitman(int k){
+		for(int i=0;i<playerInfo.size();i++){
+			if(playerInfo.get(i).getRole().contains("Barman")){
+				Player hitman = playerInfo.get(k);
+				playerInfo.get(i).setRole(hitman.getRole());
+				playerInfo.get(i).setRoleInfo(hitman.getRoleInfo());
+			}
 		}
 	}
 	/**
@@ -108,10 +121,17 @@ public class Game{
 		}
 	}
 	/**
+	 * Sets the target of the current player
+	 * @param position
+	 * @param target
+	 */
+	public void setPlayerTarget(int position, int target){
+		playerInfo.get(position).setPlayerTarget(target);
+	}
+	/**
 	 * Sets the list of Players to the param
 	 * @param playerInfo
 	 */
-	
 	public void setPlayerInfo(List<Player> playerInfo){
 		this.playerInfo = playerInfo;
 	}
@@ -133,6 +153,4 @@ public class Game{
 		List<String> x = mafiaMembers;
 		return x;
 	}
-	
-	
 }

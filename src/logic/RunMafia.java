@@ -2,7 +2,8 @@ package logic;
 import displayMain.MainController;
 /**
  * This class runs the entire game
- * @author Pierce de Jong 30006609
+ * @authors Christilyn, Elvin, Masha, Pierce, Ronelle 
+ * 
  *
  */
 public class RunMafia {

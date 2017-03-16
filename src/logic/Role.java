@@ -13,7 +13,7 @@ public enum Role {
     MAFIA_BARMAN        ("Mafia: Barman", "May stop the action of another player each night", "To make the majority of the town mafia members"),
     BODYGUARD           ("Bodyguard", "May save another person by dying in their place", "Lynch all Mafia to win the game"),
     LYNCHER             ("Lyncher", "Do nothing at night", "To Lynch a specific player to win solo win the game | "),
-    MAFIABOSS_GODFATHER ("Mafiaboss: GodFather", "Hidden from the Detective. Can send a message to another Mafia memeber each night", "To make the majority of the town mafia members"),
+    MAFIABOSS_GODFATHER ("Mafia- GodFather", "Hidden from the Detective", "To make the majority of the town mafia members"),
     VIGILANTE           ("Vigilante", "May kill new person each night", "Lynch all Mafia to win the game");
 
     private final String roleName;

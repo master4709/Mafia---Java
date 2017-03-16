@@ -57,7 +57,7 @@ public class RoleAssignment {
 	 */
 	private List<String> getChoices() {
 
-		Scanner in = new Scanner("TOWNIE,MAFIA_HITMAN,DOCTOR,SURVIVOR,DETECTIVE,MAFIA_BARMAN,BODYGUARD,LYNCHER,TOWNIE,DETECTIVE");
+		Scanner in = new Scanner("TOWNIE,MAFIA_HITMAN,DOCTOR,SURVIVOR,DETECTIVE,MAFIA_BARMAN,BODYGUARD,LYNCHER,MAFIABOSS_GODFATHER,VIGILANTE");
 		String rolesSelected = in.nextLine();
 		in.close();
 		List<String> choicesList = new ArrayList<>(Arrays.asList(rolesSelected.split("\\s*,\\s*")));

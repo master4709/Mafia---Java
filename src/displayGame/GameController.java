@@ -62,6 +62,7 @@ public class GameController {
 	 * switches the content panel to the dayCycle page
 	 */
 	public void switchDayCycle(){
+
 		g.nightAction();
 		frame.getContentPane().setVisible(false);
 		dd = new DayPanel(g.getPlayerInfo());
@@ -85,7 +86,7 @@ public class GameController {
 	}
 	
 	/**
-	 * finds the next alive player in the list and displays screen asking who they are
+	 * finds the next alive player in the list and displays screen asking if they are that person
 	 * once all players have gone goes to dayCycle 
 	 * @param position
 	 */
@@ -93,12 +94,18 @@ public class GameController {
 
 		g.getPlayerInfo().get(position).setPlayerTarget(target);
 		position++;
+		//Checks if the next player is alive and the position is not out of bounds
 		if(position<g.getPlayerInfo().size()&& !g.getPlayerInfo().get(position).isDead()){
 			checkPlayer();
+		//If the poisiton is out of bounds(gone through every player) changes the screen to the day Cycle
 		}else if(position==g.getPlayerInfo().size()){
+			//prints every players target and their name
 			for(int m=0;m<g.getPlayerInfo().size();m++){
-				System.out.println(g.getPlayerInfo().get(m).getName()+"|"+g.getPlayerInfo().get(m).getPlayerTarget());
+				System.out.print(g.getPlayerInfo().get(m).getName()+"|"+g.getPlayerInfo().get(m).getPlayerTarget()+" ");
 			}
+			System.out.println();
+			
+			//Calls the actions of each player
 			switchDayCycle();
 		}
 		else{

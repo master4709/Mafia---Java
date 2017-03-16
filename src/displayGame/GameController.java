@@ -26,6 +26,7 @@ public class GameController {
 	
 	private GameController(JFrame frame, List<Player> playerInfo, List<String> mafiaMembers, int lynchTarget){
 		this.frame = frame;
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		g = new Game(playerInfo,mafiaMembers,lynchTarget);
 		start();
 	}

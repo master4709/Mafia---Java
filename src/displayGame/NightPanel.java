@@ -41,7 +41,8 @@ public class NightPanel{
 	
 	private JLabel lblName;
 	private JLabel lblRole;
-	private JTextArea lblInfo;
+	private JLabel lblInfo;
+	private JLabel lblGoal;
 	private JLabel lblMafia;
 	private JLabel lblDetective;
 	
@@ -109,10 +110,12 @@ public class NightPanel{
 		north.add(lblName, "flowy,cell 0 0");
 		lblRole = new MyLabel(text, textColor, btnFont);
 		north.add(lblRole, "cell 0 1");
-		lblInfo = new MyTextArea(text, textColor, backgroundColor, infoFont);
+		lblInfo = new MyLabel(text, textColor, infoFont);
 		north.add(lblInfo, "cell 0 2");
+		lblGoal = new MyLabel(text, textColor, infoFont);
+		north.add(lblGoal, "cell 0 3");
 		lblMafia= new MyLabel(text, textColor, infoFont);
-		north.add(lblMafia, "cell 0 3");
+		north.add(lblMafia, "cell 0 4");
 	}
 	
 	/**

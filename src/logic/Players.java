@@ -108,7 +108,7 @@ public class Players {
 			
 			if(playerInfo.get(i).getRole().contains("Lynch")) {
 				lynchTarget();
-				playerInfo.get(i).setGoal("To win the game, you should lynch this person: "+ playerInfo.get(lynchTargetID).getName());
+				playerInfo.get(i).setGoal("Lynch "+ playerInfo.get(lynchTargetID).getName()+ " to win the game");
 			}
 			
 			//If the String role of the player contains the word "Mafia:"

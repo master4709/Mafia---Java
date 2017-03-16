@@ -23,6 +23,7 @@ public class SetUpController {
 	private SetUpController(JFrame frame){
 		//Set the bounds and exit command
 		this.frame = frame;
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pcp = new PlayerCountPanel();
 		panelCount = pcp.getContentPane();
 		start();

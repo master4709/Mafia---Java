@@ -132,17 +132,17 @@ public class NightPanel{
 		}
 		
 		btnDetective = new MyButton("Confirm Target", textColor, btnBackgroundColor, btnFont);
-		center.add(btnDetective, "cell 0 "+k+",alignx center");
+		center.add(btnDetective, "cell 0 "+k+1+",alignx center");
 		btnDetective.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			if(target!=-1){
-    				checkMafia();
     				btnDetective.setVisible(false);
+    				checkMafia();
     			}
 		}});
 		btnDetective.setVisible(false);
 		lblDetective = new MyLabel("", textColor, btnFont);
-		center.add(lblDetective, "cell 0 "+k+1+",alignx center");
+		center.add(lblDetective, "cell 0 "+k+",alignx center");
 		
 	}
 	

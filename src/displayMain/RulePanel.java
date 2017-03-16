@@ -19,6 +19,7 @@ public class RulePanel{
 	
 	private Color textColor;
 	private Color btnBackgroundColor;
+	private Color backgroundColor;
 	
 	private Font titleFont;
 	private Font buttonFont;
@@ -65,6 +66,7 @@ public class RulePanel{
 		
 		displayNorth();
 		displaySouth();
+		setBackground(backgroundColor);
 	}
 	
 	private void displayNorth(){
@@ -99,6 +101,7 @@ public class RulePanel{
 	private void setColor(){
 		textColor = Colors.purple;
 		btnBackgroundColor = Colors.blue;
+		backgroundColor = Colors.grey;
 	}
 	
 	public JPanel getContentPane(){

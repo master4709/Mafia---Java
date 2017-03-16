@@ -69,7 +69,6 @@ public class Players {
 	 */
 	public void nameOfPlayers(){
 		List<String> names = new ArrayList<>(Arrays.asList("Frodo","Gandalf","Sam","Merry","Gimli","Legolas","Aragorn","Eomer","Elrond","Theoden"));
-		System.out.println("Please enter each players name followed by enter: ");
 		for(int i =0; i<playerTotal; i++){
 			Player p = new Player();
 			playerInfo.add(p);

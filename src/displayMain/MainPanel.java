@@ -21,10 +21,8 @@ import net.miginfocom.swing.MigLayout;
 public class MainPanel{
 	
 	private Font titleFont;
-	private Font buttonFont;
 	
 	private Color textColor;
-	private Color btnBackgroundColor;
 	private Color backgroundColor;
 	
 	private JPanel contentPane;
@@ -107,28 +105,28 @@ public class MainPanel{
 	}
 	
 	private void displayCenter(){
-		btnNewGame = new MyButton("New Game", textColor, btnBackgroundColor, buttonFont);
+		btnNewGame = new MyButton("New Game");
 		center.add(btnNewGame, "cell 0 0,growx");
 		btnNewGame.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			MainController.getInstance().switchToSetUp();
     	}});
 		
-		btnContinueGame = new MyButton("Continue Game", textColor, btnBackgroundColor, buttonFont);
+		btnContinueGame = new MyButton("Continue Game");
 		center.add(btnContinueGame, "cell 0 1,growx");
 		btnContinueGame.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
 				
     	}});
 		
-		btnRules = new MyButton("Rules", textColor, btnBackgroundColor, buttonFont);;
+		btnRules = new MyButton("Rules");
 		center.add(btnRules, "cell 0 2,growx");
 		btnRules.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			MainController.getInstance().switchRule();
 		}});
 		
-		btnAbout = new MyButton("About", textColor, btnBackgroundColor, buttonFont);
+		btnAbout = new MyButton("About");
 		center.add(btnAbout, "cell 0 3,growx");
 		btnAbout.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
@@ -137,23 +135,28 @@ public class MainPanel{
 		
 	}
 	
+	/**
+	 * Sets all of the panels background to the passed Color
+	 * Also creates a black border around the edge of the screen
+	 * @param c
+	 */
 	private void setBackground(Color c){
 		north.setBackground(c);
 		south.setBackground(c);
 		east.setBackground(c);
 		west.setBackground(c);
 		center.setBackground(c);
+		//Creates a black border on the screen
+		contentPane.setBackground(Colors.defaultBorderColor);
 	}
 	
 	private void setFont(){
 		titleFont = new MyFont(100);
-		buttonFont = new MyButtonFont();
 	}
 	
 	private void setColor(){
 		textColor = Colors.black;
-		btnBackgroundColor = Colors.white;
-		backgroundColor = Colors.grey;
+		backgroundColor = Colors.defaultBackgroundColor;
 	}
 	
 	public JPanel getContentPane(){

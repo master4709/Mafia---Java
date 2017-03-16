@@ -14,7 +14,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -24,12 +23,11 @@ public class NightPanel{
 	
 	
 	private Color textColor;
-	private Color btnBackgroundColor;
 	private Color backgroundColor;
 	private Color selectColor;
 	
 	private Font titleFont;
-	private Font btnFont;
+	private Font roleFont;
 	private Font infoFont;
 
 	private JPanel contentPane;
@@ -97,6 +95,8 @@ public class NightPanel{
 		//Initializes the labels, does not fill them with anything
 		displayNorth();
 		displayCenter();
+		displayEast();
+		displayWest();
 		setBackground(backgroundColor);
 	}
 	
@@ -108,7 +108,7 @@ public class NightPanel{
 		String text = "";
 		lblName = new MyLabel(text, textColor, titleFont);
 		north.add(lblName, "flowy,cell 0 0");
-		lblRole = new MyLabel(text, textColor, btnFont);
+		lblRole = new MyLabel(text, textColor, roleFont);
 		north.add(lblRole, "cell 0 1");
 		lblInfo = new MyLabel(text, textColor, infoFont);
 		north.add(lblInfo, "cell 0 2");
@@ -131,7 +131,7 @@ public class NightPanel{
 			k = i+1;
 		}
 		
-		btnDetective = new MyButton("Confirm Target", textColor, btnBackgroundColor, btnFont);
+		btnDetective = new MyButton("Confirm Target");
 		center.add(btnDetective, "cell 0 "+k+1+",alignx center");
 		btnDetective.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
@@ -141,7 +141,7 @@ public class NightPanel{
     			}
 		}});
 		btnDetective.setVisible(false);
-		lblDetective = new MyLabel("", textColor, btnFont);
+		lblDetective = new MyLabel("", textColor, new MyFont(40));
 		center.add(lblDetective, "cell 0 "+k+",alignx center");
 		
 	}
@@ -157,7 +157,7 @@ public class NightPanel{
 	 * Displays the button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		btnContinue = new MyButton("Continue", textColor, btnBackgroundColor, btnFont);
+		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 0 0");
 		btnContinue.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
@@ -170,13 +170,13 @@ public class NightPanel{
 	 */
 	private void displayPlayerButton(int i){
 		String text = playerInfo.get(i).getName();
-		JButton btnPlayer = new MyButton(text,textColor,btnBackgroundColor,btnFont);
+		JButton btnPlayer = new MyButton(text);
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position);
 		btnPlayer.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			for(int m=0;m<buttonList.size();m++){
-    				buttonList.get(m).setBackground(btnBackgroundColor);
+    				buttonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
     			}
     			btnPlayer.setBackground(selectColor);
     			target = i;
@@ -185,25 +185,31 @@ public class NightPanel{
 		buttonList.add(btnPlayer);
 	}
 	
+	/**
+	 * Sets all of the panels background to the passed Color
+	 * Also creates a black border around the edge of the screen
+	 * @param c
+	 */
 	private void setBackground(Color c){
 		north.setBackground(c);
 		south.setBackground(c);
 		east.setBackground(c);
 		west.setBackground(c);
 		center.setBackground(c);
+		//Creates a black border on the screen
+		contentPane.setBackground(Colors.defaultBorderColor);
 	}
 	
 	private void setFont(){
 		titleFont = new MyFont(100);
-		btnFont = new MyButtonFont();
 		infoFont = new MyFont(20);
+		roleFont = new MyFont(40);
 	}
 	
 	private void setColor(){
 		selectColor = Colors.blue;
 		textColor = Colors.black;
-		btnBackgroundColor = Colors.white;
-		backgroundColor = Colors.grey;
+		backgroundColor = Colors.defaultBackgroundColor;
 	}
 	
 	private void checkMafia(){
@@ -239,7 +245,7 @@ public class NightPanel{
 		lblRole.setText(playerInfo.get(i).getRole());
 		lblInfo.setText(playerInfo.get(i).getRoleInfo());
 		for(int m=0;m<buttonList.size();m++){
-			buttonList.get(m).setBackground(btnBackgroundColor);
+			buttonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
 		}
 		if(playerInfo.get(i).getRole().contains("Detective")){
 			btnDetective.setVisible(true);

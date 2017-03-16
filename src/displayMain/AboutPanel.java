@@ -17,11 +17,9 @@ import javax.swing.JButton;
 public class AboutPanel{
 	
 	private Color textColor;
-	private Color btnBackgroundColor;
 	private Color backgroundColor;
 	
 	private Font titleFont;
-	private Font buttonFont;
 
 	private JPanel contentPane;
 	private JPanel north;
@@ -74,7 +72,7 @@ public class AboutPanel{
 	}
 	
 	private void displaySouth(){
-		btnBack = new MyButton("Back", textColor, btnBackgroundColor, buttonFont);
+		btnBack = new MyButton("Back");
 		south.add(btnBack, "cell 0 0");
 		btnBack.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
@@ -83,23 +81,28 @@ public class AboutPanel{
 		
 	}
 	
+	/**
+	 * Sets all of the panels background to the passed Color
+	 * Also creates a black border around the edge of the screen
+	 * @param c
+	 */
 	private void setBackground(Color c){
 		north.setBackground(c);
 		south.setBackground(c);
 		east.setBackground(c);
 		west.setBackground(c);
 		center.setBackground(c);
+		//Creates a black border on the screen
+		contentPane.setBackground(Colors.defaultBorderColor);
 	}
 	
 	private void setFont(){
 		titleFont = new MyFont(50);
-		buttonFont = new MyButtonFont();
 	}
 	
 	private void setColor(){
 		textColor = Colors.black;
-		btnBackgroundColor = Colors.white;
-		backgroundColor = Colors.grey;
+		backgroundColor = Colors.defaultBackgroundColor;
 	}
 	
 	public JPanel getContentPane(){

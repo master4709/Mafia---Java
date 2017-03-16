@@ -21,13 +21,11 @@ import net.miginfocom.swing.MigLayout;
 public class DayPanel{
 	
 	private Color textColor;
-	private Color btnBackgroundColor;
 	private Color backgroundColor;
 	private Color selectColor;
 	
 	private Font titleFont;
 	private Font infoFont;
-	private Font btnFont;
 
 	private JPanel contentPane;
 	private JPanel north;
@@ -104,7 +102,7 @@ public class DayPanel{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		btnContinue = new MyButton("Continue", textColor, btnBackgroundColor, btnFont);
+		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 0 0");
 		btnContinue.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
@@ -130,13 +128,13 @@ public class DayPanel{
 	
 	private void displayPlayerButton(int i){
 		String text = playerInfo.get(i).getName()+"|"+playerInfo.get(i).getRole();
-		JButton btnPlayer = new MyButton(text,textColor,btnBackgroundColor,btnFont);
+		JButton btnPlayer = new MyButton(text);
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position);
 		btnPlayer.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			for(int m=0;m<buttonList.size();m++){
-    				buttonList.get(m).setBackground(btnBackgroundColor);
+    				buttonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
     			}
     			btnPlayer.setBackground(selectColor);
     			target = i;
@@ -144,24 +142,29 @@ public class DayPanel{
 		buttonList.add(btnPlayer);
 	}
 	
+	/**
+	 * Sets all of the panels background to the passed Color
+	 * Also creates a black border around the edge of the screen
+	 * @param c
+	 */
 	private void setBackground(Color c){
 		north.setBackground(c);
 		south.setBackground(c);
 		east.setBackground(c);
 		west.setBackground(c);
 		center.setBackground(c);
+		//Creates a black border on the screen
+		contentPane.setBackground(Colors.defaultBorderColor);
 	}
 	
 	private void setFont(){
 		titleFont = new MyFont(100);
 		infoFont = new MyFont(30);
-		btnFont = new MyButtonFont();
 	}
 	
 	private void setColor(){
 		textColor = Colors.black;
-		btnBackgroundColor = Colors.white;
-		backgroundColor = Colors.grey;
+		backgroundColor = Colors.defaultBackgroundColor;
 		selectColor = Colors.blue;
 	}
 	

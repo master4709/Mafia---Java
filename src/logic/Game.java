@@ -3,6 +3,8 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import displayGame.GameController;
+
 /**Game Class
 	*This class runs the main logic and loop for the game
 	*This class uses the Players class to assign values for the amount of players and their names vis Player Input
@@ -65,6 +67,7 @@ public class Game{
 		a.nightActions();
 		setPlayerInfo(a.getPlayerInfo());
 		resetStatus();
+		
 	}
 	
 	
@@ -72,16 +75,20 @@ public class Game{
 	 * Resets all of the status for every player
 	 */
 	private void resetStatus(){
+		String name ="";
+		boolean dead = false;
 		for(int i=0;i<playerInfo.size();i++){
 			//Saves the target of that night to the variable OldPlayerTarget for the 
 			playerInfo.get(i).setOldPlayerTarget(playerInfo.get(i).getPlayerTarget());
 			
 			if(playerInfo.get(i).isTargeted()&& !playerInfo.get(i).islynched()){
-				printEvent(i,"dead");
+				name = playerInfo.get(i).getName();
+				dead = true;
 				playerInfo.get(i).setIsDead(true);
 			}
 			if(playerInfo.get(i).isHealed()&&playerInfo.get(i).isTargeted()){
-				printEvent(i,"alive");
+				name = playerInfo.get(i).getName();
+				dead = false;
 				playerInfo.get(i).setIsDead(false);
 			}
 			if(playerInfo.get(i).isDead()&&playerInfo.get(i).getRole().contains("Hitman")){
@@ -92,6 +99,12 @@ public class Game{
 			playerInfo.get(i).setIsProtected(false);
 			playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
 			playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
+		}
+		//If a player died last night
+		if(!name.equals("")){
+			GameController.getInstance().switchStoryPanel(name, dead);
+		}else{
+			GameController.getInstance().switchDayCycle();
 		}
 	}
 	
@@ -104,22 +117,7 @@ public class Game{
 			}
 		}
 	}
-	/**
-	 * This method prints the death message of any player that may have died during the night
-	 * Then prints that they were either killed by the attacker or saved by the doctor
-	 * @param player, status
-	 */
-	private void printEvent(int player, String status){
-		String name = playerInfo.get(player).getName();
-		Story s = new Story(name);
-		s.information();
-		s.initialScenario();
-		if(status.equals("dead")){
-			s.dead();
-		}else if (status.equals("alive")){
-			s.healed();
-		}
-	}
+
 	/**
 	 * Sets the target of the current player
 	 * @param position

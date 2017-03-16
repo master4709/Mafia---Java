@@ -17,10 +17,13 @@ public class GameController {
 	private DayPanel dd;
 	private NightPanel nd;
 	private CheckPlayerPanel cpd;
+	private StoryPanel sp;
+	
 	//All of the possible panels to be displayed on the frame
 	private JPanel panelDay;
 	private JPanel panelNight;
 	private JPanel panelCheck;
+	private JPanel panelStory;
 	
 	//Location inside the list of players for the night cycle
 	private int position = 0;
@@ -82,6 +85,43 @@ public class GameController {
 	}
 	
 	/**
+	 * Updates the north panel of the Night Panel text with the information of the next player
+	 * Hide the current view
+	 * set the nightPanel to the update ContentPane
+	 * update the frame with new content pane
+	 */
+	public void switchNightPlayer(){
+		nd.setDisplay(position);
+		frame.getContentPane().setVisible(false);
+		panelNight = nd.getContentPane();
+		frame.setContentPane(panelNight);
+		panelNight.setVisible(true);
+	}
+	/**
+	 * Updates the Check Player panel text with the next player
+	 * Switch the frame to the CheckPlayerPanel
+	 */
+	public void switchCheckPlayer(){
+		cpd.setPlayerName(g.getPlayerInfo().get(position).getName());
+		frame.getContentPane().setVisible(false);
+		panelCheck = cpd.getContentPane();
+		frame.setContentPane(panelCheck);
+		panelCheck.setVisible(true);
+	}
+	/**
+	 * Switches the frame to the Story Panel to display the death or savior of a player
+	 * @param name
+	 * @param dead
+	 */
+	public void switchStoryPanel(String name, boolean dead){
+		sp = new StoryPanel(name,dead);
+		panelStory = sp.getContentPane();
+		frame.getContentPane().setVisible(false);
+		frame.setContentPane(panelStory);
+		panelStory.setVisible(true);
+	}
+	
+	/**
 	 * finds the next alive player in the list and displays screen asking if they are that person
 	 * once all players have gone goes to dayCycle 
 	 * @param position
@@ -112,7 +152,7 @@ public class GameController {
 			g.nightAction();
 			
 			//
-			switchDayCycle();
+			//switchDayCycle();
 		}
 		//Loops through the list of players 
 		else{
@@ -135,30 +175,7 @@ public class GameController {
 			}
 		}
 	}
-	/**
-	 * Updates the north panel of the Night Panel text with the information of the next player
-	 * Hide the current view
-	 * set the nightPanel to the update ContentPane
-	 * update the frame with new content pane
-	 */
-	public void switchNightPlayer(){
-		nd.setDisplay(position);
-		frame.getContentPane().setVisible(false);
-		panelNight = nd.getContentPane();
-		frame.setContentPane(panelNight);
-		panelNight.setVisible(true);
-	}
-	/**
-	 * Updates the Check Player panel text with the next player
-	 * Switch the frame to the CheckPlayerPanel
-	 */
-	public void switchCheckPlayer(){
-		cpd.setPlayerName(g.getPlayerInfo().get(position).getName());
-		frame.getContentPane().setVisible(false);
-		panelCheck = cpd.getContentPane();
-		frame.setContentPane(panelCheck);
-		panelCheck.setVisible(true);
-	}
+	
 
 	
 }

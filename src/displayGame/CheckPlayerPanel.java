@@ -34,10 +34,11 @@ public class CheckPlayerPanel{
 	private Font nameFont;
 	private Font questionFont;
 
+	//This is the main JPanel for this class
 	//Every other JPanel gets added to this one
 	//Has a getter method to be used to display the content pane to the frame
 	private JPanel contentPane;
-	
+			
 	//All of the panels that get displayed on the content pane
 	//Every other JObject for the content pane is displayed on one of these JPanels
 	private JPanel north;
@@ -135,7 +136,10 @@ public class CheckPlayerPanel{
 		//Creates a black border on the screen
 		contentPane.setBackground(Colors.defaultBorderColor);
 	}
-	
+	/**
+	 * Sets the lblPlayer text to the current player
+	 * @param text
+	 */
 	public void setPlayerName(String text){
 		lblPlayer.setText(text);
 	}

@@ -25,7 +25,14 @@ public class Game{
 	private int lynchTarget;
 	
 	private Action a = new Action();
-	
+	/**
+	 * Constructor
+	 * Takes params values and stores them into local versions
+	 *
+	 * @param playerInfo
+	 * @param mafiaMembers
+	 * @param lynchTarget
+	 */
 	public Game(List<Player> playerInfo, List<String> mafiaMembers, int lynchTarget){
 		this.lynchTarget = lynchTarget;
 		this.playerInfo = playerInfo;
@@ -100,18 +107,31 @@ public class Game{
 			s.healed();
 		}
 	}
-	
+	/**
+	 * Sets the list of Players to the param
+	 * @param playerInfo
+	 */
 	
 	public void setPlayerInfo(List<Player> playerInfo){
 		this.playerInfo = playerInfo;
 	}
-
+	/**
+	 * Returns a COPY of the list of Players
+	 * This is used for printing information in the different Panels
+	 * @return
+	 */
 	public List<Player> getPlayerInfo(){
-		return playerInfo;
+		List<Player> x = playerInfo;
+		return x;
 	}
-	
+	/**
+	 * Returns a COPY of the list of Mafia Members
+	 * This is used for printing in the NightPanel
+	 * @return
+	 */
 	public List<String> getMafiaMember(){
-		return mafiaMembers;
+		List<String> x = mafiaMembers;
+		return x;
 	}
 	
 	

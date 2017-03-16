@@ -22,20 +22,31 @@ import net.miginfocom.swing.MigLayout;
 public class NightPanel{
 	
 	
+	//All of the Color variables needed for the screen
+	//Receive values in setColor()
 	private Color textColor;
 	private Color backgroundColor;
 	private Color selectColor;
 	
+	//All of the Font variables needed for the screen
+	//Receive values in setFont()
 	private Font titleFont;
-	private Font roleFont;
 	private Font infoFont;
+	private Font roleFont;
 
+	//This is the main JPanel for this class
+	//Every other JPanel gets added to this one
+	//Has a getter method to be used to display the content pane to the frame
 	private JPanel contentPane;
+			
+	//All of the panels that get displayed on the content pane
+	//Every other JObject for the content pane is displayed on one of these JPanels
 	private JPanel north;
 	private JPanel south;
 	private JPanel west;
 	private JPanel east;
 	private JPanel center;
+	
 	
 	private JLabel lblName;
 	private JLabel lblRole;

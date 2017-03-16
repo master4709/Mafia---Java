@@ -31,7 +31,7 @@ public class MainController {
 		//Set the bounds and exit command
 		width = 563;
 		height = 1000;
-		frame.setBounds(600, 25, width, height);
+		frame.setBounds(550, 25, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		start();

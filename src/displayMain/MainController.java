@@ -29,18 +29,6 @@ public class MainController {
 	private JPanel panelRule;
 	private JPanel panelAbout;
 	
-	private void someMethod(){
-		try{
-			Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResource("../../data/Cinzel-Regular.ttf").openStream());   
-			}
-		catch(IOException ex){
-		    //exception handled here I suppose  
-			}
-		catch(FontFormatException ex2) {
-		    //same here
-			}
-	}
-	
 	/**
 	 * initialize the frame and set the bounds
 	 */

@@ -129,15 +129,6 @@ public class Game{
 	 * @param player, status
 	 */
 	private void printEvent(int player, String status){
-		String name = playerInfo.get(player).getName();
-		Story s = new Story(name);
-		s.information();
-		s.initialScenario();
-		if(status.equals("dead")){
-			s.dead();
-		}else if (status.equals("alive")){
-			s.healed();
-		}
 	}
 	/**
 	 * Sets the target of the current player

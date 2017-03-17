@@ -19,12 +19,13 @@ public class Story {
 	private ArrayList<String> causeOfDeath = new ArrayList<String>();
 	//instance variable for the name of the current target
 	private String name;
+	private boolean isDead;
 	
 	//constructor for story object. Create a story object with a string as a parameter
-	public Story (String str) {
+	public Story (String str, boolean dead) {
 		name = str;
+		isDead = dead;
 	}
-	
 	//method to extract information from text files
 	public void information() {
 		//file names
@@ -84,30 +85,36 @@ public class Story {
 	    }
 	}
 	//prints out what happens if the current target gets killed
-	public void dead() {
+	public String[] dead() {
 		int randomNumber = new Random().nextInt(10);
-		System.out.println("They were killed by the assasin.");
+		String dead[] = new String[3];
+		dead[0] = "They were killed by the assasin.";
 		//prints out a random outcome from causeOfDeath ArrayList
-		String cause1 = causeOfDeath.get(randomNumber);
-		System.out.println("Cause of death: " + cause1);
+		dead[1] = causeOfDeath.get(randomNumber);
+		dead[2] = "Cause of death: " + dead[1].toString();
+		return dead;
 	}
 	//prints out what happens if the current target gets healed by the doctor
-	public void healed() {
+	public String[] healed() {
 		int randomNumber = new Random().nextInt(10);
-		System.out.println("They were saved by the doctor.");
+		String[] healed = new String[3];
+		healed[0] = "They were saved by the doctor.";
 		//prints out random outcome from causeOfDeath ArrayList
-		String cause1 = causeOfDeath.get(randomNumber);
-		System.out.println("Potential cause of death: " + cause1);
+		healed[1] = causeOfDeath.get(randomNumber);
+		healed[2] = "Potential cause of death: " + healed[1].toString();
+		return healed;
 	}
 	//prints out a random story, name and location
-	public void initialScenario() {
+	public String[] initialScenario() {
 		int randomNumber = new Random().nextInt(10);
 		//randomizes a story and location from ArrayLists
-	    String story1 = stories.get(randomNumber);
-	    String location1 = locations.get(randomNumber);
-	    System.out.println("Name: " + name);
-	    System.out.println("Location: " + location1);
-	    System.out.println("Here's what happened...\n" + story1);
+		String[] initalize = new String[5];
+	    initalize[0] = stories.get(randomNumber);
+	    initalize[1] = locations.get(randomNumber);
+	    initalize[2] = "Name: " + name;
+	    initalize[3] = "Location: " + initalize[1].toString();
+	    initalize[4] = "Here's what happened...\n" + initalize[0].toString();
+	    return initalize;
 	}
 
 }

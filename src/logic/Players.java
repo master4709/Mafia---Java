@@ -17,9 +17,6 @@ public class Players extends RoleAssignment {
 	
 	private  Scanner scan;
 	
-	//This int stores the total number of Players, does not once entered in numberOfPlayers()
-	private int playerTotal;
-	
 	//This string will store the theme of the game
 	private String playTheme;
 	
@@ -33,27 +30,22 @@ public class Players extends RoleAssignment {
 	private int lynchTargetID;
 	
 	public Players(int playerTotal){
-		this.playerTotal = playerTotal;
-		init();
+		super(playerTotal);
+		nameOfPlayers();
+		roleOfPlayers();
 	}
 
 	
 	/**
 	 * This method calls other methods in the Players class
 	 */
-	public void init(){
-		//themeOfGame();
-		nameOfPlayers();
-		roleOfPlayers();
-	}
-		
 	
 	/**
 	 * This class will asks user to choose the theme of the game
 	 */
 	public void themeOfGame(){
 		scan = new Scanner(System.in);
-		System.out.print("Which theme do you want to play?(Enter 'M' for Mafia or 'W' for Werewolf): ");
+		$("Which theme do you want to play?(Enter 'M' for Mafia or 'W' for Werewolf): ", noln);
 		playTheme = scan.nextLine();
 	}
 	
@@ -69,7 +61,7 @@ public class Players extends RoleAssignment {
 	 */
 	public void nameOfPlayers(){
 		List<String> names = new ArrayList<>(Arrays.asList("Frodo","Gandalf","Sam","Merry","Gimli","Legolas","Aragorn","Eomer","Elrond","Theoden"));
-		for(int i =0; i<playerTotal; i++){
+		for(int i =0; i<totalPlayers; i++){
 			Player p = new Player();
 			playerInfo.add(p);
 			playerInfo.get(i).setName(names.get(i));
@@ -99,7 +91,7 @@ public class Players extends RoleAssignment {
 		List<String> rolesInfo = getRolesInfo();
 		List<String> Goals = getGoals();
 		//Loops through all of the players and assigns them a Role, Info and Goal
-		for(int i=0; i<playerTotal; i++){
+		for(int i=0; i<totalPlayers; i++){
 			playerInfo.get(i).setRole(roles.get(i));			
 			playerInfo.get(i).setRoleInfo(rolesInfo.get(i));
 			playerInfo.get(i).setGoal(Goals.get(i));
@@ -128,9 +120,9 @@ public class Players extends RoleAssignment {
 	// Finds a random target for the lyncher
 	public void lynchTarget(){
 		List<Player> possibleTargets = playerInfo;
-		int i = new Random().nextInt(playerTotal-1);
+		int i = new Random().nextInt(totalPlayers-1);
 		while(possibleTargets.get(i).getRole() == "Lyncher") {
-			i = new Random().nextInt(playerTotal-1);			
+			i = new Random().nextInt(totalPlayers-1);			
 		}
 		lynchTargetID = i;
 	}

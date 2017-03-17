@@ -6,9 +6,9 @@ import java.util.*;
  *
  * Each player will have a unique role.
  */
-public abstract class RoleAssignment {
+public class RoleAssignment extends Debug {
 
-	private int totalPlayers;
+	protected int totalPlayers;
 
 	private List<String> assignments = new ArrayList<>();
 	private List<String> assignmentsInfo = new ArrayList<>();
@@ -20,6 +20,10 @@ public abstract class RoleAssignment {
 	 *
 	 * @param numOfPlayers
 	 */
+	
+	public RoleAssignment(int t){
+		totalPlayers = t;
+	}
 
 	/**
 	 * Asks user which roles are to be included in the game and generates
@@ -30,12 +34,12 @@ public abstract class RoleAssignment {
 	 */
 	protected void playerAssignment(){
 
-		System.out.println("Available Roles:\n");
+		$("Available Roles:", ln);
 		for (Role role : Role.values()) {
-			System.out.print(role + " | ");
-		} System.out.println();
+			$(role + " | ", noln);
+		} $();
 
-		System.out.print("Enter the roles that you wish to include in the game separated by a comma: ");
+		$("Enter the roles that you wish to include in the game separated by a comma: ", noln);
 		
 		List<String> chosenRoles = getChoices();
 		generateAssignments(chosenRoles);
@@ -57,7 +61,7 @@ public abstract class RoleAssignment {
 		String rolesSelected = in.nextLine();
 		in.close();
 		List<String> choicesList = new ArrayList<>(Arrays.asList(rolesSelected.split("\\s*,\\s*")));
-		System.out.println("\nYOUR CHOICES ARE: " + choicesList.toString());
+		$(ln, "YOUR CHOICES ARE: " + choicesList.toString());
 
 		return choicesList;
 
@@ -88,7 +92,7 @@ public abstract class RoleAssignment {
 		}
 
 		// TEMPORARY
-		System.out.println("(temp) RANDOMIZED ROLES: " + assignments.toString());
+		$("(temp) RANDOMIZED ROLES: " + assignments.toString());
 
 	}
 

@@ -53,7 +53,7 @@ public class Game extends Action{
 	 */
 	public void dayCycle(int target){
 		if(target!=-1){
-			System.out.println(playerInfo.get(target).getName()+" has been lynched");
+			$(playerInfo.get(target).getName()+" has been lynched");
 			playerInfo.get(target).setIsDead(true);//Sets the target of the lynching to dead, So they can not be used or targeted again
 			playerInfo.get(target).setIsLynched(true);
 			if(playerInfo.get(target).getRole().contains("Hitman")){

@@ -1,7 +1,11 @@
 package logic;
 
 import java.util.Scanner;
-
+/**
+ * 
+ * @author
+ *
+ */
 public abstract class Debug {
 	public static String ln = "line";
 	public static String prompt = "enter";

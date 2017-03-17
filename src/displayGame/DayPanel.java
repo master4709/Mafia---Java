@@ -22,6 +22,8 @@ import net.miginfocom.swing.MigLayout;
  * 
  * @author Pierce de Jong 30006609
  *
+ *
+ *
  */
 public class DayPanel{
 	

@@ -21,6 +21,8 @@ import net.miginfocom.swing.MigLayout;
  * This class creates a content pane with the current players name at the top of the screen.
  * A button is created at the bottom of the screen and when pressed goes to the night screen for the current player
  *
+ *
+ *
  */
 public class CheckPlayerPanel{
 

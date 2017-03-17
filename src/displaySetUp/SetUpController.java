@@ -6,7 +6,11 @@ import logic.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+/**
+ * 
+ * @author 
+ *
+ */
 public class SetUpController {
 	
 	private static SetUpController instance = null;

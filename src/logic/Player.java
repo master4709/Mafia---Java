@@ -5,6 +5,8 @@ package logic;
 
 /**
  * This class stores the data of each player
+ * 
+ * 
  */
 
 

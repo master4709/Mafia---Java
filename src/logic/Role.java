@@ -1,6 +1,7 @@
 package logic;
 /**
  * 2/28/17
+ * 
  *
  */
 public enum Role {

@@ -20,6 +20,7 @@ import net.miginfocom.swing.MigLayout;
 /**
  * This class creates the Panel for selecting how many players you want in the game
  * @author
+ * 
  *
  */
 public class PlayerCountPanel{

@@ -21,6 +21,7 @@ import java.awt.Component;
 /**
  * This class creates About panel for Mafia game.
  * @author
+ * 
  *
  */
 public class AboutPanel{

@@ -4,7 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JTextArea;
-
+/**
+ * 
+ * @author Pierce de Jong 30006609
+ *
+ */
 public class MyTextArea extends JTextArea{
 	
 	/**

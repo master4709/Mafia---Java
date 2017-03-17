@@ -33,6 +33,7 @@ import javax.swing.JScrollBar;
 
 /**
  * This class creates panel for Rules of Mafia game.
+ * 
  * @author
  *
  */

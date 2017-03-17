@@ -22,7 +22,11 @@ import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
-
+/**
+ * 
+ * @author
+ *
+ */
 public class RoleSelectionPanel {
 
 	private JPanel contentPane;

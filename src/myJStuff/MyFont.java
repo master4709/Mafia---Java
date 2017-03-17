@@ -1,6 +1,8 @@
 package myJStuff;
 
-
+/**
+ * 
+ */
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;

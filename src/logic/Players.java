@@ -1,18 +1,16 @@
 package logic;
-/**
- * Author: Mahsa Lotfi Gaskarimahalleh, UCID#10072013
- */
 
-/**
-*This class will stores the number, name and role of each player
-*/
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
+/**
+ * Author: Mahsa Lotfi Gaskarimahalleh, UCID#10072013
+ * 
+ *This class will stores the number, name and role of each player
+*/
 public class Players extends RoleAssignment {
 	
 	private  Scanner scan;

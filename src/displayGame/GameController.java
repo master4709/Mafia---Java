@@ -6,7 +6,16 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * Class GameController
+ * 
+ * 
+ * 
+ * 
+ * 
+ * @author Pierce de Jong 30006609
+ *
+ */
 public class GameController {
 	
 	private static GameController instance = null;

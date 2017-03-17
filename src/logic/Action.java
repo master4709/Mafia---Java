@@ -4,7 +4,7 @@ package logic;
 import java.util.HashMap;
 import java.util.List;
 
-/*
+/**
  * This class is the Action scenario that happens every night
  * for every set of actions that the characters do
  * Initialize a new Action every night cycle.

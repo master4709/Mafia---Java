@@ -17,7 +17,11 @@ import javax.swing.JButton;
 
 
 import net.miginfocom.swing.MigLayout;
-
+/**
+ * 
+ * @author
+ *
+ */
 public class MainPanel{
 	
 	private Font titleFont;

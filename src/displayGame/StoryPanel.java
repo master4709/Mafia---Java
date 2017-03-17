@@ -16,7 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Story Panel
+ * @author
+ *
+ */
 public class StoryPanel {
 	private Font titleFont;
 	

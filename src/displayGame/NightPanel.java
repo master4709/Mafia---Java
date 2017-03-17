@@ -18,7 +18,11 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 
-
+/**
+ * NightPanel
+ * @author Pierce de Jong 30006609
+ *
+ */
 public class NightPanel{
 	
 	

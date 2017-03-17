@@ -15,6 +15,7 @@ import displayGame.GameController;
 	*The game then goes to the nightCycle() which asks for the target of each player every night. Players may die during this phase also
 	*The gave is over when the Mafia out number the town members or no Mafia members are left
 	*@author Pierce de Jong 30006609
+	*
 */
 
 public class Game extends Action{

@@ -16,33 +16,28 @@ import java.util.List;
  ***  For the Hash Map  ***
  *  Key-Value: Role-PositionIndex
  */
-public class Action{
+public abstract class Action{
 
 	// Instance variables
     private int bodyguardPosition;
     private List<Player> of;
     protected HashMap<String, Integer> playersJobPosition = new HashMap<>();
    
-    public Action(){
-    	//this.of = playerInfo;
-    	//initJobPositionMap();
-    	//nightActions();
-    }
-    public void initJobPositionMap() {
+    protected void initJobPositionMap() {
         for (Player player : of) {
             playersJobPosition.put(player.getRole(), player.getPlayPosition());
         }
     }
     
     // Searches for the position of the target
-    public int target(int position){
+    protected int target(int position){
         int target;
         target = of.get(position).getPlayerTarget();
         return target;
     }
     
     //This will be called in the Game class
-    public void nightActions(){
+    protected void nightActions(){
     	// If such players exist, their actions will be implemented
     	//This should be changed to loop through all of the players and call each method depending on what role the player is
     	if(of.size()>5) barman(); 

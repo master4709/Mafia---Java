@@ -6,7 +6,7 @@ import java.util.*;
  *
  * Each player will have a unique role.
  */
-public class RoleAssignment {
+public abstract class RoleAssignment {
 
 	private int totalPlayers;
 
@@ -20,10 +20,6 @@ public class RoleAssignment {
 	 *
 	 * @param numOfPlayers
 	 */
-	RoleAssignment(int numOfPlayers) {
-		totalPlayers = numOfPlayers;
-		System.out.println("num of total players: " + totalPlayers);
-	}
 
 	/**
 	 * Asks user which roles are to be included in the game and generates
@@ -32,7 +28,7 @@ public class RoleAssignment {
 	 * @see #getChoices()
 	 * @see #generateAssignments(List)
 	 */
-	void playerAssignment(){
+	protected void playerAssignment(){
 
 		System.out.println("Available Roles:\n");
 		for (Role role : Role.values()) {
@@ -99,14 +95,14 @@ public class RoleAssignment {
 	/**
 	 * @return randomized order of specified roles
 	 */
-	List<String> getRoles() {
+	protected List<String> getRoles() {
 		return assignments;
 	}
 
 	/**
 	 * @return list of info about each role in assignments in corresponding order
 	 */
-	List<String> getRolesInfo() {
+	protected List<String> getRolesInfo() {
 
 		for (int count = 0; count < assignments.size(); count++) {
 			for (Role role : Role.values()) {
@@ -121,7 +117,7 @@ public class RoleAssignment {
 	/**
 	 * @return list of the role's goal in assignments in corresponding order
 	 */
-	List<String> getGoals() {
+	protected List<String> getGoals() {
 
 		for (int count = 0; count < assignments.size(); count++) {
 			for (Role role : Role.values()) {

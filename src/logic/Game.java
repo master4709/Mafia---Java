@@ -15,7 +15,7 @@ import displayGame.GameController;
 	*@author Pierce de Jong 30006609
 */
 
-public class Game{
+public class Game extends Action{
 	
 	//List of all of the Mafia members to be presented to each one every night
 	private List<String> mafiaMembers = new ArrayList<>();
@@ -25,8 +25,6 @@ public class Game{
 	
 	//Index value for the target of the Lyncher
 	private int lynchTarget;
-	
-	private Action a = new Action();
 	/**
 	 * Constructor
 	 * Takes params values and stores them into local versions
@@ -69,9 +67,9 @@ public class Game{
 	 * @param playerTarget
 	 */
 	public void nightAction(){
-		a.setPlayerInfo(playerInfo);
-		a.nightActions();
-		setPlayerInfo(a.getPlayerInfo());
+		setPlayerInfo(playerInfo);
+		nightActions();
+		setPlayerInfo(getPlayerInfo());
 		resetStatus();
 		
 	}

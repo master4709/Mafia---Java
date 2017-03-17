@@ -1,9 +1,11 @@
+
 package logic;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import displayGame.GameController;
+
 
 /**Game Class
 	*This class runs the main logic and loop for the game
@@ -15,7 +17,7 @@ import displayGame.GameController;
 	*@author Pierce de Jong 30006609
 */
 
-public class Game{
+public class Game extends Action{
 	
 	//List of all of the Mafia members to be presented to each one every night
 	private List<String> mafiaMembers = new ArrayList<>();
@@ -24,10 +26,7 @@ public class Game{
 	private List<Player> playerInfo = new ArrayList<>();
 	
 	//Index value for the target of the Lyncher
-	@SuppressWarnings("unused")
 	private int lynchTarget;
-	
-	private Action a = new Action();
 	/**
 	 * Constructor
 	 * Takes params values and stores them into local versions
@@ -70,9 +69,9 @@ public class Game{
 	 * @param playerTarget
 	 */
 	public void nightAction(){
-		a.setPlayerInfo(playerInfo);
-		a.nightActions();
-		setPlayerInfo(a.getPlayerInfo());
+		setPlayerInfo(playerInfo);
+		nightActions();
+		setPlayerInfo(getPlayerInfo());
 		resetStatus();
 		
 	}
@@ -161,8 +160,7 @@ public class Game{
 	 * @return
 	 */
 	public List<Player> getPlayerInfo(){
-		//creates a copy of the list
-		List<Player> x = new ArrayList<Player>(playerInfo); 
+		List<Player> x = playerInfo;
 		return x;
 	}
 	/**
@@ -171,6 +169,7 @@ public class Game{
 	 * @return
 	 */
 	public List<String> getMafiaMember(){
-		return mafiaMembers;
+		List<String> x = mafiaMembers;
+		return x;
 	}
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Players {
+public class Players extends RoleAssignment {
 	
 	private  Scanner scan;
 	
@@ -94,11 +94,10 @@ public class Players {
 	 * If the role contains Mafia, sets the isMafia variable to true 
 	 */
 	public void roleOfPlayers(){
-		RoleAssignment r = new RoleAssignment(playerTotal);
-		r.playerAssignment();
-		List<String> roles = r.getRoles();
-		List<String> rolesInfo = r.getRolesInfo();
-		List<String> Goals = r.getGoals();
+		playerAssignment();
+		List<String> roles = getRoles();
+		List<String> rolesInfo = getRolesInfo();
+		List<String> Goals = getGoals();
 		//Loops through all of the players and assigns them a Role, Info and Goal
 		for(int i=0; i<playerTotal; i++){
 			playerInfo.get(i).setRole(roles.get(i));			

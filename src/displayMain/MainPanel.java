@@ -82,11 +82,12 @@ public class MainPanel{
 	
 	private void displayTop(){
 		JLabel lblTitle = new MyLabel("Mafia", textColor, titleFont);
-		north.add(lblTitle, "cell 0 0,alignx center");
+		north.add(lblTitle, "cell 0 1,alignx center");
 		
+		//TODO img = ImageIO.read(new File("strawberry.jpg"));
 		ImageIcon icon = new ImageIcon("data/pictures/man.png");
 		lblMan = new JLabel(icon);
-		north.add(lblMan, "cell 1 0");
+		north.add(lblMan, "cell 0 0, alignx center");
 	}
 
 	private void displayLeft(){
@@ -148,7 +149,7 @@ public class MainPanel{
 	}
 	
 	private void setFont(){
-		titleFont = new MyFont(100);
+		titleFont = new MyFont(50);
 	}
 	
 	private void setColor(){

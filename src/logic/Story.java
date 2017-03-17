@@ -26,6 +26,10 @@ public class Story {
 		name = str;
 		isDead = dead;
 	}
+	
+	public Story (String str){
+		name = str;
+	}
 	//method to extract information from text files
 	public void information() {
 		//file names

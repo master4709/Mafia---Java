@@ -7,6 +7,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -64,7 +67,10 @@ public class RulePanel{
 	//Panes for center panel
 	private MyTextArea myTxtPane;
 	private JScrollPane scrollPane;
-
+	
+	
+	private String textFromFile = "";
+	
 	/**
 	 * Create the frame.
 	 */
@@ -95,6 +101,7 @@ public class RulePanel{
 		
 		center = new JPanel();
 		contentPane.add(center, BorderLayout.CENTER);
+		center.setLayout(new MigLayout("", "[grow,center]", "[]"));
 		
 		//displaying contents of each panels
 		displayNorth();
@@ -107,27 +114,25 @@ public class RulePanel{
 	
 	/**
 	 * Method to display content of center panel. It will set up the text and scroll panes.
+	 * @throws  
 	 */
 	private void displayCenter(){
-		//textField set up.
-		myTxtPane = new MyTextArea("text", textColor, backgroundColor, textFont);
-		myTxtPane.setText("The Mafia party game presents a \r\nconflict between the Mafia "
-				+ "(the \r\ninformed minority) and the \r\nInnocents (the uninformed \r\nmajority). "
-				+ "The game has two \r\nphases; \"night\", when the Mafia \r\nmight secretly murder an innocent,"
-				+ "\r\nand \"day\" when Innocents vote\r\nto eliminate a Mafiosi suspect. \r\n\r\nThe game ends "
-				+ "when all the Mafia \r\nmembers are eliminated or there \r\nare more Mafia members than \r\n"
-				+ "Innocents.\r\n\r\nHow to play:\r\n\r\n1-Choose Players.\r\n\r\n2-Each player is going to be "
-				+ "\r\nassigned for a role in Mafia's \r\nworld. \r\n\r\nThe roles are:\r\n-Townie:Do nothing at "
-				+ "night.\r\n-Detective:Reveals the team for \r\none player per night.\r\n-Mafia(Hitman):May kill "
-				+ "someone \r\neach night.\r\n-Doctor:May heal one player each \r\nnight (Cant go same person two "
-				+ "\r\nnights in a row).\r\n-Survivor:Do nothing at night \r\n-Mafia(Barman):May stop the \r\naction "
-				+ "of another player each \r\nnight (Can't go same person \r\neach night).[6+ players]\r\n"
-				+ "-Bodyguard:May save another \r\nperson by stepping infront of \r\nthe bullet per night. "
-				+ "(You will die \r\nin their place).[7+ players]\r\n-Lyncher:Do nothing at night.\r\n[8+ players]"
-				+ "\r\n-Mafiaboss(GodFather):Hidden \r\nfrom the Detective. Can send a \r\nmessage to another Mafia "
-				+ "\r\nmemeber each night. [9+ players]\r\n-Vigilante:May kill new person each \r\nnight, but is "
-				+ "trying to kill Mafia. \r\nNote: Do not have to kill someone \r\neach night. [10 players].\r\n\r\n"
-				+ "3-Play through the day and night \r\ncycles to see which side is going \r\nto win.\r\n\r\n");
+		//Reading text from a file in data folder and store it as a string.
+		try {
+			String fileName = "data/ruleTxt/ruleTxt.txt";
+			Scanner inputStream = new Scanner (new File(fileName));        	
+			while (inputStream.hasNextLine() == true) {
+				textFromFile += "\n";
+				textFromFile += inputStream.nextLine();
+			}
+			inputStream.close();
+		}
+		catch(FileNotFoundException e){
+	    	System.out.println("File not found");
+	    }	
+		
+		//textField set up.	
+		myTxtPane = new MyTextArea(textFromFile, textColor, backgroundColor, textFont);
 		
 		//scrollPane set up.
 		scrollPane = new JScrollPane(myTxtPane);

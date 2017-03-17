@@ -1,4 +1,5 @@
 
+
 package logic;
 
 import java.util.ArrayList;
@@ -123,22 +124,7 @@ public class Game extends Action{
 			}
 		}
 	}
-	/**
-	 * This method prints the death message of any player that may have died during the night
-	 * Then prints that they were either killed by the attacker or saved by the doctor
-	 * @param player, status
-	 */
-	private void printEvent(int player, String status){
-		String name = playerInfo.get(player).getName();
-		Story s = new Story(name);
-		s.information();
-		s.initialScenario();
-		if(status.equals("dead")){
-			s.dead();
-		}else if (status.equals("alive")){
-			s.healed();
-		}
-	}
+
 	/**
 	 * Sets the target of the current player
 	 * @param position

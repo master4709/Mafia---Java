@@ -144,7 +144,7 @@ public class AboutPanel{
 	 */
 	private void setFont(){
 		titleFont = new MyFont(50);
-		buttonFont = new MyButtonFont();
+		buttonFont = new MyFont(30);
 		textFont =new MyFont(30);
 	}
 	

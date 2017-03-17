@@ -24,6 +24,7 @@ public class Game{
 	private List<Player> playerInfo = new ArrayList<>();
 	
 	//Index value for the target of the Lyncher
+	@SuppressWarnings("unused")
 	private int lynchTarget;
 	
 	private Action a = new Action();
@@ -160,7 +161,8 @@ public class Game{
 	 * @return
 	 */
 	public List<Player> getPlayerInfo(){
-		List<Player> x = playerInfo;
+		//creates a copy of the list
+		List<Player> x = new ArrayList<Player>(playerInfo); 
 		return x;
 	}
 	/**
@@ -169,7 +171,6 @@ public class Game{
 	 * @return
 	 */
 	public List<String> getMafiaMember(){
-		List<String> x = mafiaMembers;
-		return x;
+		return mafiaMembers;
 	}
 }

@@ -44,7 +44,6 @@ public class GameController {
 	}
 	
 	public void start(List<Player> playerInfo, int lynchTarget){
-		
 		g = new Game(playerInfo,lynchTarget);
 		cpd = new CheckPlayerPanel();
 		dd = new DayPanel(g.getPlayerInfo());
@@ -53,6 +52,8 @@ public class GameController {
 	}
 	
 	public void setUpScreen(){
+		//Hides the current content Pane
+		frame.getContentPane().setVisible(false);
 		//Sets the panelDay to the content pane from the Day Time screen
 		panelDay = dd.getContentPane();
 		//sets the frame's content pane to day screen
@@ -115,7 +116,7 @@ public class GameController {
 	public void switchStoryPanel(String name, boolean dead){
 		frame.getContentPane().setVisible(false);
 		sp = new StoryPanel(name,dead);
-		panelStory = sp.getContentPane();
+		panelStory = sp.getContentPane(); 
 		frame.setContentPane(panelStory);
 		panelStory.setVisible(true);
 	}

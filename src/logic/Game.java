@@ -1,3 +1,4 @@
+<<<<<<< Upstream, based on origin/master
 
 package logic;
 
@@ -7,6 +8,15 @@ import java.util.List;
 import displayGame.GameController;
 
 
+=======
+package logic;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import displayGame.GameController;
+
+>>>>>>> 3a8c909 I didn't really change anything but action lol
 /**Game Class
 	*This class runs the main logic and loop for the game
 	*This class uses the Players class to assign values for the amount of players and their names vis Player Input
@@ -178,4 +188,8 @@ public class Game extends Action{
 		List<String> x = mafiaMembers;
 		return x;
 	}
+<<<<<<< Upstream, based on origin/master
+=======
+//>>>>>>> branch 'master' of https://ronelle_bakima@bitbucket.org/cpscteam18/mafia-3.0.git
+>>>>>>> 3a8c909 I didn't really change anything but action lol
 }

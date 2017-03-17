@@ -29,7 +29,6 @@ public class GameController {
 	private int position = 0;
 	
 	private GameController(JFrame frame){
-		
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -45,16 +44,17 @@ public class GameController {
 	}
 	
 	public void start(List<Player> playerInfo, int lynchTarget){
+		
 		g = new Game(playerInfo,lynchTarget);
 		cpd = new CheckPlayerPanel();
 		dd = new DayPanel(g.getPlayerInfo());
-		panelDay = dd.getContentPane();
+		
 		setUpScreen();
 	}
 	
 	public void setUpScreen(){
-		//Sets current content pane to invisible
-		frame.getContentPane().setVisible(false);
+		//Sets the panelDay to the content pane from the Day Time screen
+		panelDay = dd.getContentPane();
 		//sets the frame's content pane to day screen
 		frame.setContentPane(panelDay);
 		//sets the current content pane to visible
@@ -90,8 +90,8 @@ public class GameController {
 	 * update the frame with new content pane
 	 */
 	public void switchNightPlayer(){
-		nd.setDisplay(position);
 		frame.getContentPane().setVisible(false);
+		nd.setDisplay(position);
 		panelNight = nd.getContentPane();
 		frame.setContentPane(panelNight);
 		panelNight.setVisible(true);
@@ -101,8 +101,8 @@ public class GameController {
 	 * Switch the frame to the CheckPlayerPanel
 	 */
 	public void switchCheckPlayer(){
-		cpd.setPlayerName(g.getPlayerInfo().get(position).getName());
 		frame.getContentPane().setVisible(false);
+		cpd.setPlayerName(g.getPlayerInfo().get(position).getName());
 		panelCheck = cpd.getContentPane();
 		frame.setContentPane(panelCheck);
 		panelCheck.setVisible(true);
@@ -113,9 +113,9 @@ public class GameController {
 	 * @param dead
 	 */
 	public void switchStoryPanel(String name, boolean dead){
+		frame.getContentPane().setVisible(false);
 		sp = new StoryPanel(name,dead);
 		panelStory = sp.getContentPane();
-		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panelStory);
 		panelStory.setVisible(true);
 	}

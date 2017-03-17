@@ -2,6 +2,10 @@ package displayMain;
 
 import displaySetUp.SetUpController;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -24,6 +28,19 @@ public class MainController {
 	private JPanel panelMain;
 	private JPanel panelRule;
 	private JPanel panelAbout;
+	
+	private void someMethod(){
+		try{
+			Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResource("../../data/Cinzel-Regular.ttf").openStream());   
+			}
+		catch(IOException ex){
+		    //exception handled here I suppose  
+			}
+		catch(FontFormatException ex2) {
+		    //same here
+			}
+	}
+	
 	/**
 	 * initialize the frame and set the bounds
 	 */

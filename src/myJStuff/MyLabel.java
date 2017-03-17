@@ -13,7 +13,11 @@ public class MyLabel extends JLabel{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public MyLabel(String text, Color color, Font font){
+	public MyLabel(
+			String text,
+			Color color,
+			Font font){
+		
 		setText(text);
 		setForeground(color);
 		setFont(font);

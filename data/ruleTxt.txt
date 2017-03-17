@@ -1,0 +1,57 @@
+The Mafia party game presents a 
+conflict between the Mafia(the 
+informed minority) and the 
+Innocents (the uninformed 
+majority). The game has two 
+phases: "night", when the Mafia
+might secretly murder an innocent,
+and "day" when Innocents vote
+to eliminate a Mafiosi suspect.
+
+The game ends when all the Mafia 
+members are eliminated or there 
+are more Mafia members than 
+Innocents.
+
+How to play:
+
+1-Choose Players.
+
+2-Each player is going to be 
+assigned for a role in Mafia's 
+world. 
+
+The roles are:
+-Townie:Do nothing at night.
+-Detective:Reveals the team for 
+one player per night.
+-Mafia(Hitman):May kill someone 
+each night.
+-Doctor:May heal one player each 
+night (Cant go same person two 
+nights in a row).
+-Survivor:Do nothing at night 
+-Mafia(Barman):May stop the 
+action "
+of another player each 
+night (Can't go same person 
+each night).[6+ players]
+-Bodyguard:May save another
+person by stepping infront of 
+the bullet per night. (You will die
+in their place).[7+ players]
+-Lyncher:Do nothing at night.
+[8+ players]
+-Mafiaboss(GodFather):Hidden 
+from the Detective. Can send a 
+message to another Mafia 
+memeber each night. [9+ players]
+-Vigilante:May kill new person each
+night, but is trying to kill Mafia.
+Note: Do not have to kill someone
+each night. [10 players].
+
+3-Play through the day and night
+cycles to see which side is going
+to win.
+

@@ -1,3 +1,8 @@
+package displaySetUp;
+
+import logic.*;
+import myJStuff.*;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -18,7 +23,7 @@ import javax.swing.event.ChangeListener;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 
-public class RolesSelectionPanel {
+public class RoleSelectionPanel {
 
 	private JPanel contentPane;
 	

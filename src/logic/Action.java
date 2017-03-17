@@ -52,7 +52,7 @@ public abstract class Action extends Debug{
     
     
     //sets all the players
-    protected void setPlayerInfo(List<Player> playerInfo){
+    protected void setPlayerInfoAction(List<Player> playerInfo){
     	
     	of = playerInfo;
     	initJobPositionMap();

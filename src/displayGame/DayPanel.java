@@ -137,14 +137,15 @@ public class DayPanel{
     		public void actionPerformed(ActionEvent e){
     			//Switches the screen to the NightCycle
     			//If a target has not been selected yet, the action will not be performed
-    			if(target!=-1){
+    			
+    			//if(target!=-1){
     				//Remove the button representing the targeted player of the lynching from the screen
     				//removePlayerButton(target);
     				//Switch to the nightCycle using the GameController
     				GameController.getInstance().switchNightCycle(target);
     				//Reset the status of the target to -1
     				target = -1;
-    			}
+    			//}
 		}});
 	}
 	/**

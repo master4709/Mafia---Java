@@ -28,6 +28,8 @@ public class Game extends Action{
 	
 	//Index value for the target of the Lyncher
 	private int lynchTarget;
+	
+	private int position;
 	/**
 	 * Constructor
 	 * Takes params values and stores them into local versions
@@ -70,9 +72,10 @@ public class Game extends Action{
 	 * @param playerTarget
 	 */
 	public void nightAction(){
-		setPlayerInfo(playerInfo);
+		setPlayerInfoAction(playerInfo);
 		nightActions();
 		setPlayerInfo(getPlayerInfo());
+		position = 0;
 		resetStatus();
 		
 	}
@@ -80,23 +83,27 @@ public class Game extends Action{
 	
 	/**
 	 * Resets all of the status for every player
+	 * Starts the loop through players at the last position 
 	 */
-	private void resetStatus(){
-		String name ="";
-		boolean dead = false;
-		for(int i=0;i<playerInfo.size();i++){
+	public void resetStatus(){
+		//Stores the position
+		int x=0;
+		for(int i=position;i<playerInfo.size();i++){
+			x=i;
 			//Saves the target of that night to the variable OldPlayerTarget for the 
 			playerInfo.get(i).setOldPlayerTarget(playerInfo.get(i).getPlayerTarget());
 			
-			if(playerInfo.get(i).isTargeted()&& !playerInfo.get(i).islynched()){
-				name = playerInfo.get(i).getName();
-				dead = true;
-				playerInfo.get(i).setIsDead(true);
+			//If the player was targeted by either Mafia or vigilante and the doctor did NOT save the player
+			if(playerInfo.get(i).isTargeted()&& !playerInfo.get(i).isHealed()){
+				//Call the story panel with a death story
+				callStory(i,true);
+				break;
 			}
-			if(playerInfo.get(i).isHealed()&&playerInfo.get(i).isTargeted()){
-				name = playerInfo.get(i).getName();
-				dead = false;
-				playerInfo.get(i).setIsDead(false);
+			//If the player was targeted by either the Mafia or vigilante and the doctor saved the player
+			if(playerInfo.get(i).isTargeted()&& playerInfo.get(i).isHealed()){
+				//Call the story panel with a survived story
+				callStory(i,false);
+				break;
 			}
 			if(playerInfo.get(i).isDead()&&playerInfo.get(i).getRole().contains("Hitman")){
 				//newHitman(i);
@@ -106,13 +113,27 @@ public class Game extends Action{
 			playerInfo.get(i).setIsProtected(false);
 			playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
 			playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
+			
 		}
-		
-		if(!name.equals("")){
-			GameController.getInstance().switchStoryPanel(name, dead);
-		}else{
+		position = x+1;
+		if(position==playerInfo.size()){
+			$("Go to Day");
+			position = 0;
 			GameController.getInstance().switchDayCycle();
 		}
+	}
+	/**
+	 * Sets the status of the player to either dead or alive depending on params
+	 * Calls the Story panel in GameController to display what happened to the player
+	 * @param i
+	 * @param dead
+	 */
+	private void callStory(int i, boolean dead){
+		position=i;
+		String name = playerInfo.get(i).getName();
+		playerInfo.get(i).setIsDead(dead);
+		$(name + " "+ dead);
+		GameController.getInstance().switchStoryPanel(name, dead);
 	}
 	
 	private void newHitman(int k){

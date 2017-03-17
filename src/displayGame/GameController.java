@@ -32,7 +32,10 @@ public class GameController {
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+	/**
+	 * This method ensures only one instance of the GameController Class can be made
+	 * @param frame
+	 */
 	public static void createInstance(JFrame frame){
 		if(instance==null){
 			instance = new GameController(frame);
@@ -40,7 +43,11 @@ public class GameController {
 	}
 	
 	public static GameController getInstance(){
-		return instance;
+		if(instance!=null){
+			return instance;
+		}else{
+			return null;
+		}
 	}
 	
 	public void start(List<Player> playerInfo, int lynchTarget){
@@ -66,6 +73,7 @@ public class GameController {
 	 * switches the content panel to the dayCycle page
 	 */
 	public void switchDayCycle(){
+		System.out.println("Day Panel");
 		frame.getContentPane().setVisible(false);
 		dd = new DayPanel(g.getPlayerInfo());
 		panelDay = dd.getContentPane();
@@ -78,6 +86,7 @@ public class GameController {
 	 * @param target
 	 */
 	public void switchNightCycle(int target){
+		System.out.println("Night Panel");
 		g.dayCycle(target);
 		position = 0;
 		nd = new NightPanel(g.getPlayerInfo(),g.getMafiaMember());
@@ -114,6 +123,7 @@ public class GameController {
 	 * @param dead
 	 */
 	public void switchStoryPanel(String name, boolean dead){
+		System.out.println("Story Panel");
 		frame.getContentPane().setVisible(false);
 		sp = new StoryPanel(name,dead);
 		panelStory = sp.getContentPane(); 
@@ -128,6 +138,7 @@ public class GameController {
 	 */
 	public void rotateNightPlayer(int target){
 		//Sets the target of the player to the button that was pressed on the night panel
+		//System.out.println(g.getPlayerInfo().get(position).getName()+"  "+ g.getPlayerInfo().get(target).getName());
 		g.setPlayerTarget(position, target);
 		//Goes to the next player
 		position++;
@@ -174,6 +185,10 @@ public class GameController {
 				break;
 			}
 		}
+	}
+	
+	public void resetPlayers(){
+		g.resetStatus();
 	}
 	
 

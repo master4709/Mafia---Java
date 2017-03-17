@@ -1,12 +1,9 @@
-//Ayyyy
-//L:ets fgogasrdg
 package logic;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import displayGame.GameController;
-
 
 /**Game Class
 	*This class runs the main logic and loop for the game
@@ -180,4 +177,5 @@ public class Game extends Action{
 		List<String> x = mafiaMembers;
 		return x;
 	}
+
 }

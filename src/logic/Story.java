@@ -1,5 +1,5 @@
+
 package logic;
-//Ronelle Bakima, 30005568
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,12 +7,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * To use the class you must create a story object with the name of the current target as a parameter.  
+
+/*To use the class you must create a story object with the name of the current target as a parameter.  
  The class then calls initialScenario() right away and based of the status of the target 
  defined in the game class, either method dead() or healed() gets called. It prints out a 
- story based on what happened to the target during that turn.
- */
+ story based on what happened to the target during that turn.*/
 
 public class Story {
 	//instance variables declared to store the information for text files
@@ -27,6 +26,10 @@ public class Story {
 	public Story (String str, boolean dead) {
 		name = str;
 		isDead = dead;
+	}
+	
+	public Story (String str){
+		name = str;
 	}
 	//method to extract information from text files
 	public void information() {

@@ -1,6 +1,8 @@
 package logic;
 // Author: Elvin Limpin 30018832
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +24,8 @@ public abstract class Action extends Debug{
     private int bodyguardPosition;
     private List<Player> of;
     protected HashMap<String, Integer> playersJobPosition = new HashMap<>();
+    private List<String> nightPlayer = new ArrayList<>(Arrays.asList("mafia: barman","bodyguard","Mafia: Hitman","MafiaBoss; Godfather","doctor"));
+    
    
     protected void initJobPositionMap() {
         for (Player player : of) {
@@ -36,16 +40,26 @@ public abstract class Action extends Debug{
         return target;
     }
     
+    // Calls the appropriate action
+    protected void doAction(String role){
+    	switch(role){
+    	case "barman": barman(); break;
+    	case "bodyguard": bodyguard(); break;
+    	case "godFather": godFather(); break;
+    	case "hitman": killer("hitman"); break;
+    	case "doctor": doctor(); break;
+    	}
+    }
+    
     //This will be called in the Game class
     protected void nightActions(){
     	// If such players exist, their actions will be implemented
-    	//This should be changed to loop through all of the players and call each method depending on what role the player is
-    	if(of.size()>5) barman(); 
-        if(of.size()>6) bodyguard();
-        if(of.size()>8) godFather();
-        killer("hitman");
-        if(of.size()>9) killer("vigilante");
-        doctor();
+    	//
+        for(int j = 0; j < nightPlayer.size(); j++){
+        	for(int i = 0; i < of.size() ; i++){
+        		if(of.get(i).getRole().equalsIgnoreCase(nightPlayer.get(j))) doAction(nightPlayer.get(j));
+        	}
+        }
     }
     
     //Modifying the properties of the players//

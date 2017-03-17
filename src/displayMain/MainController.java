@@ -38,13 +38,14 @@ public class MainController {
 	 */
 	private MainController(){
 		//Set the bounds and exit command
-		width = 563;
-		height = 1000;
+		width = 480;
+		height = 720;
 		frame.setBounds(550, 25, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		start();
 		frame.setVisible(true);
+		frame.setResizable(false);
 	}
 	
 	public static void createInstance(){

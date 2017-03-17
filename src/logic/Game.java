@@ -100,7 +100,7 @@ public class Game{
 			playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
 			playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
 		}
-		//If a player died last night
+		
 		if(!name.equals("")){
 			GameController.getInstance().switchStoryPanel(name, dead);
 		}else{
@@ -117,7 +117,22 @@ public class Game{
 			}
 		}
 	}
-
+	/**
+	 * This method prints the death message of any player that may have died during the night
+	 * Then prints that they were either killed by the attacker or saved by the doctor
+	 * @param player, status
+	 */
+	private void printEvent(int player, String status){
+		String name = playerInfo.get(player).getName();
+		Story s = new Story(name);
+		s.information();
+		s.initialScenario();
+		if(status.equals("dead")){
+			s.dead();
+		}else if (status.equals("alive")){
+			s.healed();
+		}
+	}
 	/**
 	 * Sets the target of the current player
 	 * @param position

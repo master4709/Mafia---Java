@@ -28,17 +28,15 @@ public class GameController {
 	//Location inside the list of players for the night cycle
 	private int position = 0;
 	
-	private GameController(JFrame frame, List<Player> playerInfo, int lynchTarget){
-		g = new Game(playerInfo,lynchTarget);
+	private GameController(JFrame frame){
+		
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		start();
 	}
 	
-	public static void createInstance(JFrame frame, List<Player> playerInfo, int lynchTarget){
+	public static void createInstance(JFrame frame){
 		if(instance==null){
-			instance = new GameController(frame,playerInfo,lynchTarget);
+			instance = new GameController(frame);
 		}
 	}
 	
@@ -46,7 +44,8 @@ public class GameController {
 		return instance;
 	}
 	
-	public void start(){
+	public void start(List<Player> playerInfo, int lynchTarget){
+		g = new Game(playerInfo,lynchTarget);
 		cpd = new CheckPlayerPanel();
 		dd = new DayPanel(g.getPlayerInfo());
 		panelDay = dd.getContentPane();

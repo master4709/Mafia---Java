@@ -57,10 +57,6 @@ public class Players extends RoleAssignment {
 		playTheme = scan.nextLine();
 	}
 	
-	
-	
-	
-	
 	/**
 	 * Asks the user to input the name of each player followed by enter
 	 * Sets the play position of each player to the order then names were inputed

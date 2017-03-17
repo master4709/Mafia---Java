@@ -119,7 +119,7 @@ public class RulePanel{
 	private void displayCenter(){
 		//Reading text from a file in data folder and store it as a string.
 		try {
-			String fileName = "data/ruleTxt/ruleTxt.txt";
+			String fileName = "data/ruleTxt.txt";
 			Scanner inputStream = new Scanner (new File(fileName));        	
 			while (inputStream.hasNextLine() == true) {
 				textFromFile += "\n";

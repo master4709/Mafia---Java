@@ -12,7 +12,12 @@ public class MyTextArea extends JTextArea{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public MyTextArea(String text, Color textColor, Color backgroundColor, Font font){
+	public MyTextArea(
+			String text,
+			Color textColor,
+			Color backgroundColor,
+			Font font){
+		
 		setText(text);
 		setForeground(textColor);
 		setBackground(backgroundColor);

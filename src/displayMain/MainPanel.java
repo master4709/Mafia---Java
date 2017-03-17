@@ -42,14 +42,7 @@ public class MainPanel{
 	 * Create the application.
 	 */
 	public MainPanel() {
-		initialize();
-	}
 
-	/**
-	 * Initialize the contents of the 
-	 */
-	private void initialize() {
-		
 		setFont();
 		setColor();
 		
@@ -82,6 +75,10 @@ public class MainPanel{
 		
 		setBackground(backgroundColor);
 	}
+
+	/**
+	 * Initialize the contents of the 
+	 */
 	
 	private void displayTop(){
 		JLabel lblTitle = new MyLabel("Mafia", textColor, titleFont);

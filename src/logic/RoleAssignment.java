@@ -6,9 +6,9 @@ import java.util.*;
  *
  * Each player will have a unique role.
  */
-public class RoleAssignment {
+public class RoleAssignment extends Debug {
 
-	private int totalPlayers;
+	protected int totalPlayers;
 
 	private List<String> assignments = new ArrayList<>();
 	private List<String> assignmentsInfo = new ArrayList<>();
@@ -20,9 +20,9 @@ public class RoleAssignment {
 	 *
 	 * @param numOfPlayers
 	 */
-	RoleAssignment(int numOfPlayers) {
-		totalPlayers = numOfPlayers;
-		System.out.println("num of total players: " + totalPlayers);
+	
+	public RoleAssignment(int t){
+		totalPlayers = t;
 	}
 
 	/**
@@ -32,14 +32,14 @@ public class RoleAssignment {
 	 * @see #getChoices()
 	 * @see #generateAssignments(List)
 	 */
-	void playerAssignment(){
+	protected void playerAssignment(){
 
-		System.out.println("Available Roles:\n");
+		$("Available Roles:", ln);
 		for (Role role : Role.values()) {
-			System.out.print(role + " | ");
-		} System.out.println();
+			$(role + " | ", noln);
+		} $();
 
-		System.out.print("Enter the roles that you wish to include in the game separated by a comma: ");
+		$("Enter the roles that you wish to include in the game separated by a comma: ", noln);
 		
 		List<String> chosenRoles = getChoices();
 		generateAssignments(chosenRoles);
@@ -61,7 +61,7 @@ public class RoleAssignment {
 		String rolesSelected = in.nextLine();
 		in.close();
 		List<String> choicesList = new ArrayList<>(Arrays.asList(rolesSelected.split("\\s*,\\s*")));
-		System.out.println("\nYOUR CHOICES ARE: " + choicesList.toString());
+		$(ln, "YOUR CHOICES ARE: " + choicesList.toString());
 
 		return choicesList;
 
@@ -92,21 +92,21 @@ public class RoleAssignment {
 		}
 
 		// TEMPORARY
-		System.out.println("(temp) RANDOMIZED ROLES: " + assignments.toString());
+		$("(temp) RANDOMIZED ROLES: " + assignments.toString());
 
 	}
 
 	/**
 	 * @return randomized order of specified roles
 	 */
-	List<String> getRoles() {
+	protected List<String> getRoles() {
 		return assignments;
 	}
 
 	/**
 	 * @return list of info about each role in assignments in corresponding order
 	 */
-	List<String> getRolesInfo() {
+	protected List<String> getRolesInfo() {
 
 		for (int count = 0; count < assignments.size(); count++) {
 			for (Role role : Role.values()) {
@@ -121,7 +121,7 @@ public class RoleAssignment {
 	/**
 	 * @return list of the role's goal in assignments in corresponding order
 	 */
-	List<String> getGoals() {
+	protected List<String> getGoals() {
 
 		for (int count = 0; count < assignments.size(); count++) {
 			for (Role role : Role.values()) {

@@ -28,17 +28,17 @@ public class GameController {
 	//Location inside the list of players for the night cycle
 	private int position = 0;
 	
-	private GameController(JFrame frame, List<Player> playerInfo, List<String> mafiaMembers, int lynchTarget){
-		g = new Game(playerInfo,mafiaMembers,lynchTarget);
+	private GameController(JFrame frame, List<Player> playerInfo, int lynchTarget){
+		g = new Game(playerInfo,lynchTarget);
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		start();
 	}
 	
-	public static void createInstance(JFrame frame, List<Player> playerInfo, List<String> mafiaMembers, int lynchTarget){
+	public static void createInstance(JFrame frame, List<Player> playerInfo, int lynchTarget){
 		if(instance==null){
-			instance = new GameController(frame,playerInfo,mafiaMembers,lynchTarget);
+			instance = new GameController(frame,playerInfo,lynchTarget);
 		}
 	}
 	
@@ -154,7 +154,7 @@ public class GameController {
 			//
 			//switchDayCycle();
 		}
-		//Loops through the list of players 
+		//Loops through the list of players until the 
 		else{
 			findNextPlayer();
 		}

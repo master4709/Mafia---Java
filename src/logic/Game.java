@@ -35,13 +35,19 @@ public class Game{
 	 * @param mafiaMembers
 	 * @param lynchTarget
 	 */
-	public Game(List<Player> playerInfo, List<String> mafiaMembers, int lynchTarget){
+	public Game(List<Player> playerInfo, int lynchTarget){
 		this.lynchTarget = lynchTarget;
 		this.playerInfo = playerInfo;
-		this.mafiaMembers = mafiaMembers;
+		mafiaMembers();
 	}
 	
-	public Game(){	
+	
+	public void mafiaMembers(){
+		for(int i =0;i<playerInfo.size();i++){
+			if(playerInfo.get(i).getRole().contains("Mafia")){
+				mafiaMembers.add(playerInfo.get(i).getName());
+			}
+		}
 	}
 	
 	/**

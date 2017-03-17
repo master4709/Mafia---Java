@@ -6,7 +6,6 @@ import java.awt.Font;
 import javax.swing.JButton;
 
 public class MyButton extends JButton{
-	JButton lmao = new JButton();
 	/**
 	 * 
 	 */
@@ -17,7 +16,11 @@ public class MyButton extends JButton{
 	 *
 	 * @param text, foreground, background, font
 	 */
-	public MyButton(String text, Color foreground, Color background, Font font){
+	public MyButton(
+			String text,
+			Color foreground,
+			Color background,
+			Font font){
 		setText(text);
 		setForeground(foreground);
 		setBackground(background);

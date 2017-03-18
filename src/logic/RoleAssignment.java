@@ -135,7 +135,7 @@ public class RoleAssignment extends Debug {
 	 * in the fields assignments, assignmentsInfo, and assignmentGoals.
 	 *
 	 */
-	private void generateAssignments(List<String> roles) {
+	private void generateAssignments() {
 
 		int num;
 		Random rand = new Random();

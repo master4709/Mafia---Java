@@ -180,7 +180,7 @@ public class DayPanel{
 		//Create string of the players name and role (debug)
 		String text = playerInfo.get(i).getName()+"|"+playerInfo.get(i).getRole();
 		//Create a new button with passing the String text
-		JButton btnPlayer = new MyButton(text);
+		JButton btnPlayer = new MyButton(text,30);
 		//Location on the grid, width of the button will be from screen edge to screen edge
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position);

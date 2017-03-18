@@ -172,7 +172,7 @@ public class NightPanel{
 	 * Displays the button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		btnContinue = new MyButton("Continue");
+		btnContinue = new MyButton("Continue",40);
 		south.add(btnContinue, "cell 0 0");
 		btnContinue.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
@@ -185,7 +185,7 @@ public class NightPanel{
 	 */
 	private void displayPlayerButton(int i){
 		String text = playerInfo.get(i).getName();
-		JButton btnPlayer = new MyButton(text);
+		JButton btnPlayer = new MyButton(text,30);
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position);
 		btnPlayer.addActionListener(new ActionListener(){

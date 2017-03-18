@@ -18,11 +18,11 @@ public class MyButton extends JButton{
 	 *
 	 * @param text, foreground, background, font
 	 */
-	public MyButton(String text, Color foreground, Color background, Font font){
+	public MyButton(String text, Color foreground, Color background, int i){
 		setText(text);
 		setForeground(foreground);
 		setBackground(background);
-		setFont(new MyFont(15));
+		setFont(new MyFont(i));
 	}
 	/**
 	 * Constructor

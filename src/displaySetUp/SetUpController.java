@@ -26,12 +26,13 @@ public class SetUpController {
 	 */
 	private SetUpController(JFrame frame){
 		//Set the bounds and exit command
+		
+		pcp = new PlayerCountPanel();
+		
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		pcp = new PlayerCountPanel();
-		panelCount = pcp.getContentPane();
-		start();
-		frame.setVisible(true);
+		this.frame.setResizable(false);
+		this.frame.setVisible(true);
 	}
 	
 	public static void createInstance(JFrame frame){
@@ -50,6 +51,7 @@ public class SetUpController {
 	public void start(){
 		//Create all of the panel
 		//Sets the frame to the main screen and to visible
+		panelCount = pcp.getContentPane();
 		switchPlayerTotal();
 	}
 	

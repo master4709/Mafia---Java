@@ -16,10 +16,6 @@ public class MainController {
 	
 	private JFrame frame = new JFrame();
 	
-	//Store the size of the screen
-	private int width;
-	private int height;
-	
 	private MainPanel mp;
 	private RulePanel rp;
 	private AboutPanel ap;
@@ -32,20 +28,22 @@ public class MainController {
 	/**
 	 * initialize the frame and set the bounds
 	 */
-	private MainController(){
-		//Set the bounds and exit command
-		width = 480;
-		height = 720;
-		frame.setBounds(550, 20, width, height);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		start();
-		frame.setVisible(true);
-		frame.setResizable(false);
+	private MainController(JFrame frame){
+		
+		mp = new MainPanel();
+		rp = new RulePanel();
+		ap = new AboutPanel();
+		
+		this.frame = frame;
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setResizable(false);
+		this.frame.setVisible(true);
+
 	}
 	
-	public static void createInstance(){
+	public static void createInstance(JFrame frame){
 		if(instance==null){
-			instance = new MainController();
+			instance = new MainController(frame);
 		}
 	}
 	
@@ -63,16 +61,11 @@ public class MainController {
 	 */
 	public void start(){
 		//Create all of the panels
-		mp = new MainPanel();
-		rp = new RulePanel();
-		ap = new AboutPanel();
 		panelMain = mp.getContentPane();
 		panelRule = rp.getContentPane();
 		panelAbout = ap.getContentPane();
-		frame.getContentPane().setVisible(false);
-		//Sets the frame to the main screen and to visible
-		frame.setContentPane(panelMain);
-		panelMain.setVisible(true);
+		
+		switchMain();
 	}
 	
 	/**
@@ -107,5 +100,6 @@ public class MainController {
 	 */
 	public void switchToSetUp(){
 		SetUpController.createInstance(frame);
+		SetUpController.getInstance().start();
 	}
 }

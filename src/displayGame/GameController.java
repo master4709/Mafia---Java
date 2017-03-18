@@ -40,6 +40,8 @@ public class GameController {
 	private GameController(JFrame frame){
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setResizable(false);
+		this.frame.setVisible(true);
 	}
 	/**
 	 * This method ensures only one instance of the GameController Class can be made

@@ -101,11 +101,11 @@ public class StoryPanel {
 	}
 	
 	private void displayBottom() {
-		btnNextDay = new MyButton("Next Day");
+		btnNextDay = new MyButton("Continue");
 		south.add(btnNextDay);
 		btnNextDay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				GameController.getInstance().resetPlayers();}
+				GameController.getInstance().nextEventOrDay();}
 		});
 		
 		

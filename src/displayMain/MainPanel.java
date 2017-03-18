@@ -27,9 +27,6 @@ import net.miginfocom.swing.MigLayout;
  */
 public class MainPanel{
 	
-	private Font titleFont;
-	
-	private Color textColor;
 	private Color backgroundColor;
 	
 	private JPanel contentPane;
@@ -90,9 +87,10 @@ public class MainPanel{
 	
 	private void displayTop(){
 		//TODO img = ImageIO.read(new File("strawberry.jpg"));
+		
 		ImageIcon icon = new ImageIcon("data/pictures/mafia.png");
 		lblMan = new JLabel(icon);
-		//north.add(lblMan, "cell 0 0, alignx center");
+		north.add(lblMan, "cell 0 0, alignx center");
 	}
 
 	private void displayLeft(){
@@ -161,11 +159,9 @@ public class MainPanel{
 	}
 	
 	private void setFont(){
-		titleFont = new MyFont(50);
 	}
 	
 	private void setColor(){
-		textColor = Colors.black;
 		backgroundColor = Colors.defaultBackgroundColor;
 	}
 	

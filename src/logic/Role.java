@@ -27,15 +27,15 @@ public enum Role {
         this.roleGoal = goal;
     }
 
-    String getRoleID() {
+    public String getRoleID() {
         return roleID;
     }
 
-    String getRoleInfo() {
+    public String getRoleInfo() {
         return roleInfo;
     }
 
-    String getRoleGoal() {
+    public String getRoleGoal() {
         return roleGoal;
     }
 }

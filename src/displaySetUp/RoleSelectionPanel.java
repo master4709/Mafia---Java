@@ -57,10 +57,10 @@ public class RoleSelectionPanel {
 	 */
 	private void initialize() {
 		
-		JButton goToMain = new MyButton("Main menu", Colors.white, Colors.black, new MyFont(15));
+		JButton goToMain = new MyButton("Main menu", Colors.white, Colors.black, 15);
 		contentPane.add(goToMain);
 		
-		JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, new MyFont(15));
+		JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 15);
 		continueButton.addActionListener(e -> {
 			getTotalRoles();
 			// TODO this line should continue to/ display the game.

@@ -17,25 +17,25 @@ public enum Role {
     MAFIABOSS_GODFATHER ("Mafia- GodFather", "Hidden from the Detective", "To make the majority of the town mafia members"),
     VIGILANTE           ("Vigilante", "May kill new person each night", "Lynch all Mafia to win the game");
 
-    private final String roleName;
+    private final String roleID;
     private final String roleInfo;
     private final String roleGoal;
 
     Role(String name, String role, String goal) {
-        this.roleName = name;
+        this.roleID = name;
         this.roleInfo = role;
         this.roleGoal = goal;
     }
 
-    String getRoleName() {
-        return roleName;
+    public String getRoleID() {
+        return roleID;
     }
 
-    String getRoleInfo() {
+    public String getRoleInfo() {
         return roleInfo;
     }
 
-    String getRoleGoal() {
+    public String getRoleGoal() {
         return roleGoal;
     }
 }

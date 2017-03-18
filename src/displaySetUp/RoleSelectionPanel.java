@@ -30,8 +30,8 @@ public class RoleSelectionPanel {
     private JLabel centralLabel;
 
     private int totalPlayers;
-    private ArrayList<String> rolesSelected;
-    private ArrayList<String> playersWhoHasChosenARole;
+    private ArrayList<String> rolesSelected; //temp
+    private ArrayList<String> playersWhoHasChosenARole; //temp
     private HashMap<String, String> playersAndTheirRole;
     private ArrayList<Role> availableRoles;
     private String playerToAssign;

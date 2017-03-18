@@ -147,8 +147,8 @@ public class CheckPlayerPanel{
 	}
 	
 	private void setFont(){
-		nameFont = new MyFont(100);
-		questionFont = new MyFont(60);
+		nameFont = new MyFont(50);
+		questionFont = new MyFont(25);
 	}
 	
 	private void setColor(){

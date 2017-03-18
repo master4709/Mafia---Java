@@ -1,3 +1,4 @@
+
 package displayGame;
 
 import myJStuff.*;
@@ -180,7 +181,7 @@ public class DayPanel{
 		//Create string of the players name and role (debug)
 		String text = playerInfo.get(i).getName()+"|"+playerInfo.get(i).getRole();
 		//Create a new button with passing the String text
-		JButton btnPlayer = new MyButton(text,30);
+		JButton btnPlayer = new MyButton(text);
 		//Location on the grid, width of the button will be from screen edge to screen edge
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position);
@@ -214,8 +215,8 @@ public class DayPanel{
 	 * sets all of the fonts of the screen to new MyFonts with int size (how big the font is)
 	 */
 	private void setFont(){
-		titleFont = new MyFont(100);
-		infoFont = new MyFont(30);
+		titleFont = new MyFont(50);
+		infoFont = new MyFont(25);
 	}
 	/**
 	 * Sets all of the colors of the screen to custom Colors made in Colors class
@@ -237,5 +238,4 @@ public class DayPanel{
 	public JPanel getContentPane(){
 		return contentPane;
 	}
-
 }

@@ -27,15 +27,20 @@ public class GameController {
 	private NightPanel nd;
 	private CheckPlayerPanel cpd;
 	private StoryPanel sp;
+	private ViewAllPlayersPanel vapp;
+	private ViewPlayerPanel vpp;
 	
 	//All of the possible panels to be displayed on the frame
 	private JPanel panelDay;
 	private JPanel panelNight;
 	private JPanel panelCheck;
 	private JPanel panelStory;
-	
+	private JPanel panelViewAllPlayers;
+	private JPanel panelViewPlayer;
 	//Location inside the list of players for the night cycle
 	private int position = 0;
+	
+	private int events = 1;
 	
 	private GameController(JFrame frame){
 		this.frame = frame;
@@ -64,25 +69,36 @@ public class GameController {
 		g = new Game(playerInfo,lynchTarget);
 		cpd = new CheckPlayerPanel();
 		dd = new DayPanel(g.getPlayerInfo());
+		vapp = new ViewAllPlayersPanel(g.getPlayerInfo());
+		vpp = new ViewPlayerPanel();
 		
-		setUpScreen();
+		switchViewAllPlayers();
 	}
 	
-	public void setUpScreen(){
+	public void switchViewAllPlayers(){
 		//Hides the current content Pane
 		frame.getContentPane().setVisible(false);
-		//Sets the panelDay to the content pane from the Day Time screen
-		panelDay = dd.getContentPane();
+		//
+		panelViewAllPlayers = vapp.getContentPane();
 		//sets the frame's content pane to day screen
-		frame.setContentPane(panelDay);
+		frame.setContentPane(panelViewAllPlayers);
 		//sets the current content pane to visible
-		panelDay.setVisible(true);
+		panelViewAllPlayers.setVisible(true);
+	}
+	
+	public void switchViewPlayer(int i){
+		frame.getContentPane().setVisible(false);
+		vpp.setPlayer(g.getPlayerInfo().get(i));
+		panelViewPlayer = vpp.getContentPane();
+		frame.setContentPane(panelViewPlayer);
+		panelViewPlayer.setVisible(true);
 	}
 	
 	/**
 	 * switches the content panel to the dayCycle page
 	 */
-	public void switchDayCycle(){
+	public void switchDay(){
+		events=0;
 		System.out.println("Day Panel");
 		frame.getContentPane().setVisible(false);
 		dd = new DayPanel(g.getPlayerInfo());
@@ -95,11 +111,15 @@ public class GameController {
 	 * Also calls the game method to set the status of the day lynching to dead
 	 * @param target
 	 */
-	public void switchNightCycle(int target){
+	public void switchNightFirst(int target){
 		System.out.println("Night Panel First Time");
+		//Lynches the player who was the target during the day 
 		g.dayCycle(target);
+		//Index value for where the nightPanel is in the loop of players for selecting his/her target of the night
 		position = 0;
+		//creates the new night panel with a list of buttons of every person that is alive
 		nd = new NightPanel(g.getPlayerInfo(),g.getMafiaMember());
+		//Finds the next player in the list of players that is not dead and displays this/her CheckPlayerPanel
 		findNextPlayer();
 	}
 	
@@ -109,12 +129,17 @@ public class GameController {
 	 * set the nightPanel to the update ContentPane
 	 * update the frame with new content pane
 	 */
-	public void switchNightPlayer(){
+	public void switchNight(){
 		System.out.println("Night Panel");
+		//Sets current content pane to invisible
 		frame.getContentPane().setVisible(false);
+		//Sets the display for current player to select his/her target
 		nd.setDisplay(position);
+		//Refreshes the content pane to adjust for updates
 		panelNight = nd.getContentPane();
+		//Sets frame to the new night content pane
 		frame.setContentPane(panelNight);
+		//Sets pane to visible
 		panelNight.setVisible(true);
 	}
 	/**
@@ -134,7 +159,7 @@ public class GameController {
 	 * @param name
 	 * @param dead
 	 */
-	public void switchStoryPanel(String name, boolean dead){
+	public void switchStory(String name, boolean dead){
 		System.out.println("Story Panel");
 		frame.getContentPane().setVisible(false);
 		sp = new StoryPanel(name,dead);
@@ -196,11 +221,14 @@ public class GameController {
 		}
 		
 	}
-	
-	public void resetPlayers(){
-		g.resetStatus();
+	/**
+	 * Checks if more than one person died each night
+	 * If yes than displays another Story Panel
+	 * If not goes to the next round and the day lynching starts
+	 */
+	public void nextEventOrDay(){
+		events++;
+		g.eventCount(events);
+		
 	}
-	
-
-	
 }

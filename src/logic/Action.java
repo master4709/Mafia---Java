@@ -24,7 +24,7 @@ public abstract class Action extends Debug{
     private int bodyguardPosition;
     private List<Player> of;
     protected HashMap<String, Integer> playersJobPosition = new HashMap<>();
-    private List<String> nightPlayer = new ArrayList<>(Arrays.asList("mafia: barman","bodyguard","mafia: hitman","mafia- godfather","doctor"));
+    private List<String> nightPlayer = new ArrayList<>(Arrays.asList("mafia: barman","bodyguard","mafia: hitman","vigilante","mafia- godfather","doctor"));
     
    
     protected void initJobPositionMap() {
@@ -47,6 +47,7 @@ public abstract class Action extends Debug{
     	case "bodyguard": bodyguard(); break;
     	case "mafia- godFather": godFather(); break;
     	case "mafia: hitman": killer("hitman"); break;
+    	case "vigilante": killer("vigilante"); break;
     	case "doctor": doctor(); break;
     	}
     }
@@ -58,7 +59,6 @@ public abstract class Action extends Debug{
         for(int j = 0; j < nightPlayer.size(); j++){
         	for(int i = 0; i < of.size() ; i++){
         		if(of.get(i).getRole().equalsIgnoreCase(nightPlayer.get(j))){
-        			$(nightPlayer.get(j));
         			doAction(nightPlayer.get(j));
         		}
         	}

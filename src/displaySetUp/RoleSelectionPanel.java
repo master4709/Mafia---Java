@@ -3,168 +3,210 @@ package displaySetUp;
 import logic.*;
 import myJStuff.*;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
+
 /**
- * 
+ *
  * @author
  *
  */
 public class RoleSelectionPanel {
 
-	private JPanel contentPane;
-	
+    private JPanel contentPane;
+    private ButtonListener buttonListener;
+    private ArrayList<JButton> playerButtons;
+    private JLabel centralLabel;
+
     private int totalPlayers;
-    private ArrayList<JSpinner> spinners;
-    private ArrayList<Role> rolesSelected;
+    private ArrayList<String> rolesSelected; //temp
+    private ArrayList<String> playersWhoHasChosenARole; //temp
+    private HashMap<String, String> playersAndTheirRole;
+    private ArrayList<Role> availableRoles;
+    private String playerToAssign;
 
-	/**
-	 * Constructor takes in num of total players
-	 */
-	public RoleSelectionPanel(int totalPlayers) {
-		
-		this.totalPlayers = totalPlayers;
-		
-		spinners = new ArrayList<>();
-		rolesSelected = new ArrayList<>();
-		contentPane = new JPanel(new MigLayout( "",
-		        "[][grow, grow][]",
-		        ""));
-		
-		initialize();
-		
-	}
-	
-	/**
-	 * Initialize contents.
-	 */
-	private void initialize() {
-		
-		JButton goToMain = new MyButton("Main menu", Colors.white, Colors.black, 15);
-		contentPane.add(goToMain);
-		
-		JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 15);
-		continueButton.addActionListener(e -> {
-			getTotalRoles();
-			// TODO this line should continue to/ display the game.
-		});
-		contentPane.add(continueButton, "wrap, right");
-		
-		JLabel selectRolesLbl = new MyLabel("Select Roles", Colors.black, new MyFont(40));
-        selectRolesLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+    /***
+     * Constructor. Specifies the initial number of total players
+     * @param totalPlayers
+     */
+    public RoleSelectionPanel(int totalPlayers) {
+
+        this.totalPlayers = totalPlayers;
+        System.out.println("Total Players: " + totalPlayers);
+
+        rolesSelected = new ArrayList<>();
+        playersWhoHasChosenARole = new ArrayList<>();
+        playersAndTheirRole = new HashMap<>();
+        availableRoles = new ArrayList<>(Arrays.asList(Role.values()));
+        contentPane = new JPanel(new MigLayout( "",
+                "[][grow, grow][]",
+                ""));
+        buttonListener = new ButtonListener();
+        playerButtons = new ArrayList<>();
+        centralLabel = new MyLabel("Enter a role for each player", Colors.black, new MyFont(30));
+
+        initialize();
+
+    }
+
+    /**
+     * Initialize contents.
+     */
+    private void initialize() {
+
+        contentPane.setBackground(Colors.black);
+
+        JButton goToMain = new MyButton("Back", Colors.white, Colors.black, 15);
+        contentPane.add(goToMain);
+
+        JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 15);
+        continueButton.addActionListener(buttonListener);
+        contentPane.add(continueButton, "wrap, right");
+
+        centralLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         Border selectRolesMargin = new EmptyBorder(10, 10, 20, 10);
-        selectRolesLbl.setBorder(new CompoundBorder(contentPane.getBorder(), selectRolesMargin));
-        contentPane.add(selectRolesLbl, "span, center, wrap");
-        
-        createRoleComponents();
-		
-	}
+        centralLabel.setBorder(new CompoundBorder(contentPane.getBorder(), selectRolesMargin));
+        contentPane.add(centralLabel, "span, center, wrap");
 
-	private void getTotalRoles() {
-		// TODO Auto-generated method stub
-		
-	}
+        createPlayerButtons();
 
-	private void createRoleComponents() {
-		
-		for (Role role : Role.values()) {
+    }
 
-            JLabel roleName = new MyLabel(role.getRoleID(), Colors.black, new MyFont(25));
-            Border roleNameMargin = new EmptyBorder(10, 10, 10, 50);
-            roleName.setBorder(new CompoundBorder(contentPane.getBorder(), roleNameMargin));
-            contentPane.add(roleName, "right");
+    /***
+     * Create ten buttons by default. Extra buttons are used to display additional roles.
+     */
+    private void createPlayerButtons() {
 
-            if (role.getRoleID().equals("Mafia: Hitman")) {
-
-                JLabel roleLimit = new MyLabel("1", Colors.black, new MyFont(20));
-                contentPane.add(roleLimit, "wrap, left");
-
-            } else {
-
-                JSpinner numRoleSpin = createSpinner(role);
-                
-                Dimension d = new Dimension(50, 30);
-                numRoleSpin.setPreferredSize(d);
-                numRoleSpin.setMinimumSize(d);
-                
-                JComponent editor = numRoleSpin.getEditor();
-                if (editor instanceof JSpinner.DefaultEditor) {
-                	JSpinner.DefaultEditor spinnerEditor = (JSpinner.DefaultEditor)editor;
-                	spinnerEditor.getTextField().setHorizontalAlignment(JTextField.CENTER);
-                }
-                
-                contentPane.add(numRoleSpin, "wrap, left");
-
+        for (int count = 0; count< 10; count++) {
+            JButton playerBtn = new MyButton("Player " + (count+1), Colors.white, Colors.grey, 30);
+            if (count >= totalPlayers) {
+                playerBtn.setVisible(false);
             }
-
+            playerButtons.add(playerBtn);
+            playerBtn.addActionListener(buttonListener);
+            contentPane.add(playerBtn, "span, pushx, grow, wrap");
         }
-		
-		
-	}
 
-	private JSpinner createSpinner(Role role) {
+    }
 
-		JSpinner numRoleSpin = new JSpinner(new SpinnerNumberModel());
-        spinners.add(numRoleSpin);
-        numRoleSpin.addChangeListener(new SpinnerListener(role));
-        
-        return numRoleSpin;
-        
-	}
-	
-	public JPanel getContentPane() {
-		return contentPane;
-	}
-	
-	private class SpinnerListener implements ChangeListener {
+    /***
+     * Change texts of existing player buttons to roles that are available for selection
+     * @param playerToAssignARoleTo
+     */
+    private void showAvailableRoles(String playerToAssignARoleTo) {
 
-        private Role associatedRole;
+        playersWhoHasChosenARole.add(playerToAssignARoleTo);
+        playerToAssign = playerToAssignARoleTo;
+        centralLabel.setText("Select a role for " + playerToAssignARoleTo);
 
-        SpinnerListener(Role role) {
-            associatedRole = role;
+        for (int count = 0; count < 10; count++) {
+            playerButtons.get(count).setText(availableRoles.get(count).getRoleID());
+            playerButtons.get(count).setEnabled(true);
+            playerButtons.get(count).setVisible(true);
+            if (inSelectedRoles(playerButtons.get(count).getText())) {
+                playerButtons.get(count).setEnabled(false);
+            }
         }
+
+    }
+
+    /***
+     * Check if the specified string is in the list of rolesSelected
+     * @param roleID
+     * @return
+     */
+    private boolean inSelectedRoles(String roleID) {
+
+        for (String role : rolesSelected) {
+            if (role.equals(roleID)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    private void assignRolesToPlayers() {
+
+        // TODO
+
+    }
+
+    /***
+     * Reset button texts to corresponding player numbers. Hide extra buttons.
+     */
+    private void resetButtonsText() {
+
+        int count = 0;
+        for (JButton playerBtn : playerButtons) {
+            if (count < totalPlayers) {
+                playerBtn.setVisible(true);
+                playerBtn.setEnabled(true);
+                playerBtn.setText("Player " + (count+1));
+                if (inPlayersWhoHasChosenARole(playerBtn.getText())) {
+                    playerBtn.setText(playerBtn.getText() + ": " + playersAndTheirRole.get(playerBtn.getText()));
+                    playerBtn.setEnabled(false);
+                }
+            } else {
+                playerBtn.setVisible(false);
+            }
+            count++;
+        }
+
+        centralLabel.setText("Enter a role for each player");
+
+    }
+
+    /***
+     * Check if the specified String of player's name is in the list of players
+     * who has chosen a role
+     * @param playerName
+     * @return
+     */
+    private boolean inPlayersWhoHasChosenARole(String playerName) {
+
+        for (String player : playersWhoHasChosenARole) {
+            if (player.equals(playerName)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public JPanel getContentPane() {
+        return contentPane;
+    }
+
+
+    private class ButtonListener implements ActionListener {
 
         @Override
-        public void stateChanged(ChangeEvent e) {
+        public void actionPerformed(ActionEvent e) {
 
-            JSpinner spinner = (JSpinner) e.getSource();
-            int value = (Integer) spinner.getValue();
-
-            if (value < 0) {
-                ((JSpinner) e.getSource()).setValue(0);
+            String btnText = ((JButton)e.getSource()).getText();
+            if (btnText.contains("Player")) {
+                showAvailableRoles(btnText);
+            } else if (btnText.equals("Continue")) {
+                // TODO proceed to the game
+            } else { // a specific role button is entered
+                rolesSelected.add(btnText);
+                playersAndTheirRole.put(playerToAssign, btnText);
+                System.out.println(rolesSelected.toString());
+                resetButtonsText();
             }
-
-            if (value >= totalPlayers) { //TODO fix
-                ((JSpinner) e.getSource()).setValue(value);
-            }
-
-        }
-
-        private int getAllSpinnerValues() {
-
-            int totalRolesSelected = 0;
-            for (JSpinner spin : spinners) {
-                totalRolesSelected += (Integer) spin.getValue();
-            }
-
-            return totalRolesSelected;
 
         }
 

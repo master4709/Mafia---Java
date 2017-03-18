@@ -206,4 +206,51 @@ public class ViewAllPlayersPanel{
 	public JPanel getContentPane(){
 		return contentPane;
 	}
+	
+	public void actionPerformed(ActionEvent e){
+		//Get the name (NOT TEXT) of the button that was pressed
+		JButton source = (JButton)e.getSource();
+        String name = source.getName();
+        
+        switch(name){
+        case "Continue":
+        	GameController.getInstance().switchDay();
+        	break;
+        case "0":
+        	GameController.getInstance().switchViewPlayer(0);
+        	break;
+        case "1":
+        	GameController.getInstance().switchViewPlayer(1);
+        	break;
+        case "2":
+        	GameController.getInstance().switchViewPlayer(2);
+        	break;
+        case "3":
+        	GameController.getInstance().switchViewPlayer(3);
+        	break;
+        case "4":
+        	GameController.getInstance().switchViewPlayer(4);
+        	break;
+        case "5":
+        	GameController.getInstance().switchViewPlayer(5);
+        	break;
+        case "6":
+        	GameController.getInstance().switchViewPlayer(6);
+        	break;
+        case "7":
+        	GameController.getInstance().switchViewPlayer(7);
+        	break;
+        case "8":
+        	GameController.getInstance().switchViewPlayer(8);
+        	break;
+        case "9":
+        	GameController.getInstance().switchViewPlayer(9);
+        	break;
+        case "10":
+        	GameController.getInstance().switchViewPlayer(10);
+        	break;
+        default:
+			break;
+		}
+	}
 }

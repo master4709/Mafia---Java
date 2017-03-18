@@ -8,7 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -31,12 +31,14 @@ public class ViewPlayerPanel{
 	private JButton btnBack;
 
 	private Player player;
+	
+	private List<String> mafiaMembers;
 
 	/**
 	 * Create the panel.
 	 */
-	public ViewPlayerPanel() {
-		
+	public ViewPlayerPanel(List<String> mafiaMembers) {
+		this.mafiaMembers = mafiaMembers;
 		setFont();
 		setColor();
 
@@ -49,12 +51,9 @@ public class ViewPlayerPanel{
 		south.setLayout(new MigLayout("", "[grow,fill]", "[]"));
 		
 		displaySouth();
-		System.out.println(backgroundColor);
 		setBackground(backgroundColor);
 	}
-	/**
-	 * Creates button needed to be pressed to go to next screen
-	 */
+	
 	private void displaySouth(){
 		//New Button using the default button presets and text Continue
 		btnBack = new MyButton("Back");

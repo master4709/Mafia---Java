@@ -118,6 +118,7 @@ public class CheckPlayerPanel implements ActionListener{
 		btnYes = new MyButton("Yes");
 		south.add(btnYes, "cell 0 0,growx");
 		btnYes.addActionListener(this);
+		btnYes.setName("Yes");
 		
 	}
 	
@@ -161,11 +162,16 @@ public class CheckPlayerPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e){
+		//Get the name (NOT TEXT) of the button that was pressed
 		JButton source = (JButton)e.getSource();
-        String text = source.getText();
-        System.out.println(text);
-        if (text.equals("Yes")){
+        String name = source.getName();
+        
+        switch(name){
+        case "Yes":
         	GameController.getInstance().switchNight();
-        }
+        	break;
+        default:
+			break;
+		}
 	}
 }

@@ -175,6 +175,7 @@ public class NightPanel implements ActionListener{
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 0 0");
 		btnContinue.addActionListener(this);
+		btnContinue.setName("Continue");
 	}
 	/**
 	 * Creates a button with the text value of a player depending on i
@@ -183,9 +184,9 @@ public class NightPanel implements ActionListener{
 	private void displayPlayerButton(int i){
 		String text = playerInfo.get(i).getName();
 		JButton btnPlayer = new MyButton(text);
-		String position = "cell 0 "+i+",growx";
-		center.add(btnPlayer, position);
+		center.add(btnPlayer, "cell 0 "+i+",growx");
 		btnPlayer.addActionListener(this);
+		btnPlayer.setName(Integer.toString(i));
 		playerButtonList.add(btnPlayer);
 	}
 	
@@ -241,40 +242,89 @@ public class NightPanel implements ActionListener{
 	 * @param mafiaMember
 	 */
 	public void setDisplay(int i){
+		//Resets the player target to -1
 		target = -1;
-		lblDetective.setText("");
-		lblMafia.setText("");
-		btnDetective.setVisible(false);
+		//Sets the labels to the current players information
 		lblName.setText(playerInfo.get(i).getName());
 		lblRole.setText(playerInfo.get(i).getRole());
 		lblInfo.setText(playerInfo.get(i).getRoleInfo());
-		for(int m=0;m<playerButtonList.size();m++){
-			playerButtonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
-		}
+		//Clears Detective Label
+		lblDetective.setText("");
+		//Clears the Mafia Label
+		lblMafia.setText("");
+		//Hides the Detective Button
+		btnDetective.setVisible(false);
+		
+		
+		//If The current player is the detective display the button to check if the target is part of the Mafia
 		if(playerInfo.get(i).getRole().contains("Detective")){
 			btnDetective.setVisible(true);
 		}
+		//if the player is part of the Mafia, display a list of all Mafia Members to the screen
 		if(playerInfo.get(i).getRole().contains("Mafia")){
 			lblMafia.setText("Mafia Members: "+ mafiaMember);
 		}
+		
 	}
 	
 	public void actionPerformed(ActionEvent e){
+		//Get the name (NOT TEXT) of the button that was pressed
 		JButton source = (JButton)e.getSource();
-        String text = source.getText();
-        System.out.println(text);
-        if (text.equals("Continue")){
-				GameController.getInstance().rotateNightPlayer(target);
-        }else{//If no other button was pressed than look through the list of player buttons
-        	//Finds the player button in the list of buttons and sets the target value to its index value
-        	//Set the background of color
-        	for(int i=0;i<playerButtonList.size();i++){
-        		playerButtonList.get(i).setBackground(Colors.defaultButtonBackgroundColor);
-        		if(text.equals(playerButtonList.get(i).getText())){
-        			playerButtonList.get(i).setBackground(selectColor);
-        			target = i;
-        		}
-        	}
-        }
-    }
+		String name = source.getName();
+		
+		if(target!=-1){
+			playerButtonList.get(target).setBackground(Colors.defaultButtonBackgroundColor);
+		}
+		switch(name){
+		case "Continue":
+			GameController.getInstance().rotateNightPlayer(target);
+			break;
+		case "0":
+			playerButtonList.get(0).setBackground(selectColor);
+			target=0;
+			break;
+		case "1":
+			playerButtonList.get(1).setBackground(selectColor);
+			target=1;
+			break;
+		case "2":
+			playerButtonList.get(2).setBackground(selectColor);
+			target=2;
+			break;
+		case "3":
+			playerButtonList.get(3).setBackground(selectColor);
+			target=3;
+			break;
+		case "4":
+			playerButtonList.get(4).setBackground(selectColor);
+			target=4;
+			break;
+		case "5":
+			playerButtonList.get(5).setBackground(selectColor);
+			target=5;
+			break;
+		case "6":
+			playerButtonList.get(6).setBackground(selectColor);
+			target=6;
+			break;
+		case "7":
+			playerButtonList.get(7).setBackground(selectColor);
+			target=7;
+			break;
+		case "8":
+			playerButtonList.get(8).setBackground(selectColor);
+			target=8;
+			break;
+		case "9":
+			playerButtonList.get(9).setBackground(selectColor);
+			target=9;
+			break;
+		case "10":
+			playerButtonList.get(10).setBackground(selectColor);
+			target=10;
+			break;
+		default:
+			break;
+		}
+	}
 }

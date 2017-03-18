@@ -70,7 +70,7 @@ public class GameController {
 		cpd = new CheckPlayerPanel();
 		dd = new DayPanel(g.getPlayerInfo());
 		vapp = new ViewAllPlayersPanel(g.getPlayerInfo());
-		vpp = new ViewPlayerPanel();
+		vpp = new ViewPlayerPanel(g.getMafiaMember());
 		
 		switchViewAllPlayers();
 	}

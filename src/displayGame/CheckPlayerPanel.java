@@ -24,7 +24,7 @@ import net.miginfocom.swing.MigLayout;
  *
  *
  */
-public class CheckPlayerPanel{
+public class CheckPlayerPanel implements ActionListener{
 
 	//All of the Color variables needed for the screen
 	//Receive values in setColor()
@@ -117,10 +117,7 @@ public class CheckPlayerPanel{
 		//to the next player in the night cycle
 		btnYes = new MyButton("Yes");
 		south.add(btnYes, "cell 0 0,growx");
-		btnYes.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			GameController.getInstance().switchNight();
-		}});
+		btnYes.addActionListener(this);
 		
 	}
 	
@@ -162,5 +159,13 @@ public class CheckPlayerPanel{
 	public JPanel getContentPane(){
 		return contentPane;
 	}
-
+	
+	public void actionPerformed(ActionEvent e){
+		JButton source = (JButton)e.getSource();
+        String text = source.getText();
+        System.out.println(text);
+        if (text.equals("Yes")){
+        	GameController.getInstance().switchNight();
+        }
+	}
 }

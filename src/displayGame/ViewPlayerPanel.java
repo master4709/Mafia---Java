@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -27,11 +26,7 @@ public class ViewPlayerPanel{
 	
 	private JPanel contentPane;
 
-	private JPanel north;
 	private JPanel south;
-	private JPanel west;
-	private JPanel east;
-	private JPanel center;
 	
 	private JButton btnBack;
 
@@ -54,7 +49,7 @@ public class ViewPlayerPanel{
 		south.setLayout(new MigLayout("", "[grow,fill]", "[]"));
 		
 		displaySouth();
-		
+		System.out.println(backgroundColor);
 		setBackground(backgroundColor);
 	}
 	/**
@@ -72,11 +67,7 @@ public class ViewPlayerPanel{
 
 	
 	private void setBackground(Color c){
-		north.setBackground(c);
 		south.setBackground(c);
-		east.setBackground(c);
-		west.setBackground(c);
-		center.setBackground(c);
 		//Creates a black border on the screen
 		contentPane.setBackground(Colors.defaultBorderColor);
 	}

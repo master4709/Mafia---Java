@@ -27,8 +27,8 @@ import net.miginfocom.swing.MigLayout;
  *
  *
  */
-public class DayPanel{
-	
+public class DayPanel implements ActionListener{
+
 	//All of the Color variables needed for the screen
 	//Receive values in setColor()
 	private Color textColor;
@@ -63,14 +63,13 @@ public class DayPanel{
 	//Pressing this button sends the user back to the main panel
 	private JButton btnHome;
 	
-	
 	//Stores all of the data of the players
 	//Does not change the date stored in it EVER
 	private List<Player> playerInfo;
 	
 	//List of buttons representing each player that is alive
 	//Pressing a button will set them as the target for the day lynching
-	private List<JButton> buttonList = new ArrayList<>();
+	private List<JButton> playerButtonList = new ArrayList<>();
 	
 	//Stores the index value for the target of the dayLynching
 	//To be used in the game class to kill the target of the day lynching
@@ -146,18 +145,7 @@ public class DayPanel{
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 1 0");
-		btnContinue.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			//Switches the screen to the NightCycle
-    			//If a target has not been selected yet, the action will not be performed
-    			
-    			if(target!=-1){
-    				//Switch to the nightCycle using the GameController
-    				GameController.getInstance().switchNightFirst(target);
-    				//Reset the status of the target to -1
-    				target = -1;
-    			}
-		}});
+		btnContinue.addActionListener(this);
 	}
 	/**
 	 * Creates all of the buttons representing each player that is alive
@@ -194,15 +182,8 @@ public class DayPanel{
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position);
 		//Add action listener 
-		btnPlayer.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			for(int m=0;m<buttonList.size();m++){
-    				buttonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
-    			}
-    			btnPlayer.setBackground(selectColor);
-    			target = i;
-		}});
-		buttonList.add(btnPlayer);
+		btnPlayer.addActionListener(this);
+		playerButtonList.add(btnPlayer);
 	}
 	
 	/**
@@ -236,7 +217,7 @@ public class DayPanel{
 	}
 	
 	public void removePlayerButton(int i){
-		center.remove(buttonList.get(target));
+		center.remove(playerButtonList.get(target));
 	}
 	
 	/**
@@ -246,4 +227,52 @@ public class DayPanel{
 	public JPanel getContentPane(){
 		return contentPane;
 	}
+	
+	private class ButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            String btnText = ((JButton)e.getSource()).getText();
+            System.out.println(btnText);
+            if (btnText.contains("Player")) {
+
+            } else if (btnText.equals("Continue")) {
+            	
+            	if(target!=-1){
+    				//Switch to the nightCycle using the GameController
+    				GameController.getInstance().switchNightFirst(target);
+    				//Reset the status of the target to -1
+    				target = -1;
+    			}
+                // TODO proceed to the game
+            } else { // a specific role button is entered
+
+            }
+
+        }
+
+    }
+	
+	public void actionPerformed(ActionEvent e){
+		JButton source = (JButton)e.getSource();
+        String text = source.getText();
+        System.out.println(text);
+        if (text.equals("Continue")){
+        	if(target!=-1){//Only if a target has been selected does the GameController switch to the next panel
+				GameController.getInstance().switchNightFirst(target);
+				target = -1;
+        	}
+        }else{//If no other button was pressed than look through the list of player buttons
+        	//Finds the player button in the list of buttons and sets the target value to its index value
+        	//Set the background of color
+        	for(int i=0;i<playerButtonList.size();i++){
+        		playerButtonList.get(i).setBackground(Colors.defaultButtonBackgroundColor);
+        		if(text.equals(playerButtonList.get(i).getText())){
+        			playerButtonList.get(i).setBackground(selectColor);
+        			target = i;
+        		}
+        	}
+        }
+    }
 }

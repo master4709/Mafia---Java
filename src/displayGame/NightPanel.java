@@ -23,7 +23,7 @@ import net.miginfocom.swing.MigLayout;
  * @author Pierce de Jong 30006609
  *
  */
-public class NightPanel{
+public class NightPanel implements ActionListener{
 	
 	
 	//All of the Color variables needed for the screen
@@ -67,7 +67,7 @@ public class NightPanel{
 	
 	private List<Player> playerInfo;
 	
-	private List<JButton> buttonList = new ArrayList<>();
+	private List<JButton> playerButtonList = new ArrayList<>();
 	private List<String> mafiaMember = new ArrayList<>();
 
 	/**
@@ -174,10 +174,7 @@ public class NightPanel{
 	private void displaySouth(){
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 0 0");
-		btnContinue.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			GameController.getInstance().rotateNightPlayer(target);
-		}});
+		btnContinue.addActionListener(this);
 	}
 	/**
 	 * Creates a button with the text value of a player depending on i
@@ -188,16 +185,8 @@ public class NightPanel{
 		JButton btnPlayer = new MyButton(text);
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position);
-		btnPlayer.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			for(int m=0;m<buttonList.size();m++){
-    				buttonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
-    			}
-    			btnPlayer.setBackground(selectColor);
-    			target = i;
-    			
-		}});
-		buttonList.add(btnPlayer);
+		btnPlayer.addActionListener(this);
+		playerButtonList.add(btnPlayer);
 	}
 	
 	/**
@@ -259,8 +248,8 @@ public class NightPanel{
 		lblName.setText(playerInfo.get(i).getName());
 		lblRole.setText(playerInfo.get(i).getRole());
 		lblInfo.setText(playerInfo.get(i).getRoleInfo());
-		for(int m=0;m<buttonList.size();m++){
-			buttonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
+		for(int m=0;m<playerButtonList.size();m++){
+			playerButtonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
 		}
 		if(playerInfo.get(i).getRole().contains("Detective")){
 			btnDetective.setVisible(true);
@@ -269,4 +258,23 @@ public class NightPanel{
 			lblMafia.setText("Mafia Members: "+ mafiaMember);
 		}
 	}
+	
+	public void actionPerformed(ActionEvent e){
+		JButton source = (JButton)e.getSource();
+        String text = source.getText();
+        System.out.println(text);
+        if (text.equals("Continue")){
+				GameController.getInstance().rotateNightPlayer(target);
+        }else{//If no other button was pressed than look through the list of player buttons
+        	//Finds the player button in the list of buttons and sets the target value to its index value
+        	//Set the background of color
+        	for(int i=0;i<playerButtonList.size();i++){
+        		playerButtonList.get(i).setBackground(Colors.defaultButtonBackgroundColor);
+        		if(text.equals(playerButtonList.get(i).getText())){
+        			playerButtonList.get(i).setBackground(selectColor);
+        			target = i;
+        		}
+        	}
+        }
+    }
 }

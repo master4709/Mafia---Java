@@ -2,10 +2,6 @@ package displayMain;
 
 import displaySetUp.SetUpController;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -42,7 +38,6 @@ public class MainController {
 		height = 720;
 		frame.setBounds(550, 20, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		start();
 		frame.setVisible(true);
 		frame.setResizable(false);
@@ -55,7 +50,12 @@ public class MainController {
 	}
 	
 	public static MainController getInstance(){
-		return instance;
+		if(instance!=null){
+			return instance;
+		}else{
+			return null;
+		}
+		
 	}
 	/**
 	 * Creates each of the need contentPanes panels
@@ -69,7 +69,7 @@ public class MainController {
 		panelMain = mp.getContentPane();
 		panelRule = rp.getContentPane();
 		panelAbout = ap.getContentPane();
-		
+		frame.getContentPane().setVisible(false);
 		//Sets the frame to the main screen and to visible
 		frame.setContentPane(panelMain);
 		panelMain.setVisible(true);

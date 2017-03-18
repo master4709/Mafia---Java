@@ -1,3 +1,4 @@
+
 package displayGame;
 
 import myJStuff.*;
@@ -237,5 +238,4 @@ public class DayPanel{
 	public JPanel getContentPane(){
 		return contentPane;
 	}
-
 }

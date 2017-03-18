@@ -92,7 +92,7 @@ public class MainPanel{
 		//TODO img = ImageIO.read(new File("strawberry.jpg"));
 		ImageIcon icon = new ImageIcon("data/pictures/mafia.png");
 		lblMan = new JLabel(icon);
-		north.add(lblMan, "cell 0 0, alignx center");
+		//north.add(lblMan, "cell 0 0, alignx center");
 	}
 
 	private void displayLeft(){

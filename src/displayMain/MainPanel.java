@@ -55,7 +55,7 @@ public class MainPanel{
 		setColor();
 		
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(2, 2, 2, 2));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		north = new JPanel();
@@ -89,10 +89,9 @@ public class MainPanel{
 	 */
 	
 	private void displayTop(){
-		//TODO img = ImageIO.read(new File("strawberry.jpg"));
 		ImageIcon icon = new ImageIcon("data/pictures/mafia.png");
 		lblMan = new JLabel(icon);
-		//north.add(lblMan, "cell 0 0, alignx center");
+		north.add(lblMan, "center");
 	}
 
 	private void displayLeft(){

@@ -156,7 +156,7 @@ public class AboutPanel{
 		textColor = Colors.white;
 		btnBackgroundColor = Colors.grey;
 		backgroundColor = Colors.black;
-		btnTxtColor = Colors.black;
+		btnTxtColor = Colors.white;
 	}
 	
 	/**

@@ -193,7 +193,7 @@ public class RulePanel{
 		textColor = Colors.white;
 		btnBackgroundColor = Colors.grey;
 		backgroundColor = Colors.black;
-		btnTxtColor = Color.black;
+		btnTxtColor = Color.white;
 	}
 	
 	/**

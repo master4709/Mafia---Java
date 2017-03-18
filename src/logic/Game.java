@@ -61,7 +61,7 @@ public class Game extends Action{
 			playerInfo.get(target).setIsDead(true);//Sets the target of the lynching to dead, So they can not be used or targeted again
 			playerInfo.get(target).setIsLynched(true);
 			if(playerInfo.get(target).getRole().contains("Hitman")){
-				//newHitman(target);
+				newHitman(target);
 			}
 		}
 	}
@@ -88,15 +88,22 @@ public class Game extends Action{
 	public void resetStatus(){
 		//Stores the position
 		int x=0;
-		for(int i=position;i<playerInfo.size();i++){
-			x=i;
+		for(int i=position;i<=playerInfo.size();i++){
+			//when i reaches the end of the player List go to the day Cycle to start the next round of play
+			if(i==playerInfo.size()){
+				$("Go to Day");
+				position = 0;
+				GameController.getInstance().switchDayCycle();
+				break;
+			}
 			//Saves the target of that night to the variable OldPlayerTarget for the 
 			playerInfo.get(i).setOldPlayerTarget(playerInfo.get(i).getPlayerTarget());
-			
-			//If the player was targeted by either Mafia or vigilante and the doctor did NOT save the player
-			if(playerInfo.get(i).isTargeted()&& !playerInfo.get(i).isHealed()){
+			//If the player has been targeted and was not healed
+			if(playerInfo.get(i).isTargeted() && !playerInfo.get(i).isHealed()){
 				//Call the story panel with a death story
 				$("This kid is dead");
+				playerInfo.get(i).setIsDead(true);
+				resetPlayer(i);
 				callStory(i,true);
 				break;
 			}
@@ -104,25 +111,31 @@ public class Game extends Action{
 			if(playerInfo.get(i).isTargeted()&& playerInfo.get(i).isHealed()){
 				//Call the story panel with a survived story
 				$("This kid is saved");
+				resetPlayer(i);
 				callStory(i,false);
 				break;
 			}
+			//If the hitman is dead, changes the bar man to the new hitman
 			if(playerInfo.get(i).isDead()&&playerInfo.get(i).getRole().contains("Hitman")){
-				//newHitman(i);
+				newHitman(i);
 			}
-			playerInfo.get(i).setIsTargeted(false);
-			playerInfo.get(i).setIsHealed(false);
-			playerInfo.get(i).setIsProtected(false);
-			playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
-			playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
+			resetPlayer(i);
 			
+			x=i+1;
 		}
-		position = x+1;
-		if(position==playerInfo.size()){
-			$("Go to Day");
-			position = 0;
-			GameController.getInstance().switchDayCycle();
-		}
+		position = x;
+		
+	}
+	/**
+	 * Resets all of the status for the player
+	 * @param i
+	 */
+	public void resetPlayer(int i){
+		playerInfo.get(i).setIsTargeted(false);
+		playerInfo.get(i).setIsHealed(false);
+		playerInfo.get(i).setIsProtected(false);
+		playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
+		playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
 	}
 	/**
 	 * Sets the status of the player to either dead or alive depending on params
@@ -133,7 +146,7 @@ public class Game extends Action{
 	private void callStory(int i, boolean dead){
 		position=i;
 		String name = playerInfo.get(i).getName();
-		playerInfo.get(i).setIsDead(dead);
+		
 		$(name + " "+ dead);
 		GameController.getInstance().switchStoryPanel(name, dead);
 	}
@@ -146,6 +159,7 @@ public class Game extends Action{
 				playerInfo.get(i).setRoleInfo(hitman.getRoleInfo());
 			}
 		}
+		playerInfo.get(k).setRole("Dead Mafia: Hitman");
 	}
 
 	/**

@@ -96,7 +96,7 @@ public class GameController {
 	 * @param target
 	 */
 	public void switchNightCycle(int target){
-		System.out.println("Night Panel");
+		System.out.println("Night Panel First Time");
 		g.dayCycle(target);
 		position = 0;
 		nd = new NightPanel(g.getPlayerInfo(),g.getMafiaMember());
@@ -110,6 +110,7 @@ public class GameController {
 	 * update the frame with new content pane
 	 */
 	public void switchNightPlayer(){
+		System.out.println("Night Panel");
 		frame.getContentPane().setVisible(false);
 		nd.setDisplay(position);
 		panelNight = nd.getContentPane();
@@ -121,6 +122,7 @@ public class GameController {
 	 * Switch the frame to the CheckPlayerPanel
 	 */
 	public void switchCheckPlayer(){
+		System.out.println("Check Player Panel");
 		frame.getContentPane().setVisible(false);
 		cpd.setPlayerName(g.getPlayerInfo().get(position).getName());
 		panelCheck = cpd.getContentPane();

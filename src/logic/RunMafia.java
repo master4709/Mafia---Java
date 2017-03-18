@@ -8,5 +8,6 @@ public class RunMafia {
 	
 	public static void main(String[] args){
 		MainController.createInstance();
+		MainController.getInstance().start();
 	}
 }

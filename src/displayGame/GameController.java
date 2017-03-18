@@ -40,7 +40,6 @@ public class GameController {
 	private GameController(JFrame frame){
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.setResizable(false);
 		this.frame.setVisible(true);
 	}
 	/**
@@ -155,15 +154,16 @@ public class GameController {
 		position++;
 		
 		//Checks if the next player is alive and the position is not out of bounds
-		if(position<g.getPlayerInfo().size()&& !g.getPlayerInfo().get(position).isDead()){
-			//If alive then switch to the CheckPlayer screen and prompt the user if they are the next player
-			switchCheckPlayer();
-		
-		//If the position is out of bounds(gone through every player)
-		//All of the night logic is then run
-		//Switches to the dayCycle screen for the next round of player
+		if(position<g.getPlayerInfo().size()){
+			//if the next player is not dead call the CheckPlayerPanel
+			if(!g.getPlayerInfo().get(position).isDead()){
+				switchCheckPlayer();
+			//else find the next player that is alive in the game
+			}else{
+				findNextPlayer();
+			}
+		//If the position in the list 
 		}else if(position==g.getPlayerInfo().size()){
-			
 			//prints every players target and their name
 			for(int m=0;m<g.getPlayerInfo().size();m++){
 				System.out.print(g.getPlayerInfo().get(m).getName()+"|"+g.getPlayerInfo().get(m).getPlayerTarget()+" ");
@@ -172,13 +172,6 @@ public class GameController {
 			
 			//Calls the actions of each player
 			g.nightAction();
-			
-			//
-			//switchDayCycle();
-		}
-		//Loops through the list of players until the 
-		else{
-			findNextPlayer();
 		}
 	}
 	/**
@@ -186,7 +179,6 @@ public class GameController {
 	 */
 	public void findNextPlayer(){
 		for(int k=position;k<g.getPlayerInfo().size();k++){
-			System.out.println(k);
 			//If the next player is not dead
 			if(!g.getPlayerInfo().get(k).isDead()){
 				position = k;
@@ -195,7 +187,12 @@ public class GameController {
 				//Stops the loop once the next alive player has been found
 				break;
 			}
+			//If there is no next player go to night actions
+			if(k==g.getPlayerInfo().size()-1){
+				g.nightAction();
+			}
 		}
+		
 	}
 	
 	public void resetPlayers(){

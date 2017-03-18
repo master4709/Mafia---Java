@@ -45,6 +45,7 @@ public class Game extends Action{
 	
 	public void mafiaMembers(){
 		for(int i =0;i<playerInfo.size();i++){
+			//$(playerInfo.get(i).getRole());
 			if(playerInfo.get(i).getRole().contains("Mafia")){
 				mafiaMembers.add(playerInfo.get(i).getName());
 			}
@@ -70,6 +71,7 @@ public class Game extends Action{
 	 * @param playerTarget
 	 */
 	public void nightAction(){
+		$("Do night logic");
 		setPlayerInfoAction(playerInfo);
 		nightActions();
 		setPlayerInfo(getPlayerInfo());
@@ -94,12 +96,14 @@ public class Game extends Action{
 			//If the player was targeted by either Mafia or vigilante and the doctor did NOT save the player
 			if(playerInfo.get(i).isTargeted()&& !playerInfo.get(i).isHealed()){
 				//Call the story panel with a death story
+				$("This kid is dead");
 				callStory(i,true);
 				break;
 			}
 			//If the player was targeted by either the Mafia or vigilante and the doctor saved the player
 			if(playerInfo.get(i).isTargeted()&& playerInfo.get(i).isHealed()){
 				//Call the story panel with a survived story
+				$("This kid is saved");
 				callStory(i,false);
 				break;
 			}

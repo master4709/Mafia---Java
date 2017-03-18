@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import displayMain.MainController;
 import net.miginfocom.swing.MigLayout;
 /**
  * This class is used to display the list of possible targets of the day lynching
@@ -59,6 +60,8 @@ public class DayPanel{
 	
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
+	//Pressing this button sends the user back to the main panel
+	private JButton btnHome;
 	
 	
 	//Stores all of the data of the players
@@ -93,7 +96,7 @@ public class DayPanel{
 		
 		south = new JPanel();
 		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[grow,fill]", "[]"));
+		south.setLayout(new MigLayout("", "[][grow,fill]", "[]"));
 		
 		west = new JPanel();
 		contentPane.add(west, BorderLayout.WEST);
@@ -133,22 +136,27 @@ public class DayPanel{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
+		//This button sends the user back to the home screen (MainPanel)
+		btnHome = new MyButton("Home");
+		//south.add(btnHome, "cell 0 0");
+		btnHome.addActionListener(new ActionListener(){
+    		public void actionPerformed(ActionEvent e){
+    			MainController.getInstance().switchMain();
+    	}});
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
-		south.add(btnContinue, "cell 0 0");
+		south.add(btnContinue, "cell 1 0");
 		btnContinue.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			//Switches the screen to the NightCycle
     			//If a target has not been selected yet, the action will not be performed
     			
-    			//if(target!=-1){
-    				//Remove the button representing the targeted player of the lynching from the screen
-    				//removePlayerButton(target);
+    			if(target!=-1){
     				//Switch to the nightCycle using the GameController
     				GameController.getInstance().switchNightCycle(target);
     				//Reset the status of the target to -1
     				target = -1;
-    			//}
+    			}
 		}});
 	}
 	/**

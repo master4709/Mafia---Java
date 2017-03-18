@@ -68,7 +68,7 @@ public class RoleSelectionPanel {
 
         contentPane.setBackground(Colors.black);
 
-        JButton goToMain = new MyButton("Main menu", Colors.white, Colors.black, 15);
+        JButton goToMain = new MyButton("Back", Colors.white, Colors.black, 15);
         contentPane.add(goToMain);
 
         JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 15);

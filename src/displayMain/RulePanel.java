@@ -22,9 +22,11 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.Dimension;
 
 /**
- * This class creates panel for Rules of Mafia game.
+ * This class creates panel for Rules of Mafia game by creating different panels and putting them together. 
+ * Each panel contains button or label or text field. The back button is assigned to the action of 
+ * going back to the main menu. 
  * 
- * @author
+ * @author Mahsa Lotfi
  *
  */
 public class RulePanel{
@@ -36,8 +38,8 @@ public class RulePanel{
 	
 	// Fonts that will be used in text field, label and button text.
 	private Font titleFont;
-	private Font buttonFont;
 	private Font textFont;
+	private int buttonFont;
 	
 	//Panel that gets set to the frame and displays the contents of this class
 	private JPanel contentPane;
@@ -105,7 +107,6 @@ public class RulePanel{
 	
 	/**
 	 * Method to display content of center panel. It will set up the text and scroll panes.
-	 * @throws  
 	 */
 	private void displayCenter(){
 		//Reading text from a file in data folder and store it as a string.
@@ -145,9 +146,9 @@ public class RulePanel{
 	 * Method to display contents of south panel. This panel contains the back button which goes back to main menu.
 	 */
 	private void displaySouth(){
-		btnBack = new MyButton("Back", btnTxtColor, btnBackgroundColor, 25);
+		btnBack = new MyButton("Back", btnTxtColor, btnBackgroundColor, buttonFont);
 		south.add(btnBack, "cell 0 0");
-		// setting an action for back button
+		// setting the action for back button
 		btnBack.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			MainController.getInstance().switchMain();
@@ -173,6 +174,7 @@ public class RulePanel{
 	private void setFont(){
 		titleFont = new MyFont(50);
 		textFont = new MyFont(25);
+		buttonFont = 25;
 	}
 	
 	/**

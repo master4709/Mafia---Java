@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 /**
  * 
- * @author
+ * @author Mahsa Lotfi
  *
  */
 public class MainController {

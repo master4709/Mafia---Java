@@ -4,19 +4,15 @@ import myJStuff.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
-import java.awt.Component;
 
 /**
  * This class creates About panel for Mafia game.
@@ -156,7 +152,7 @@ public class AboutPanel{
 		textColor = Colors.white;
 		btnBackgroundColor = Colors.grey;
 		backgroundColor = Colors.black;
-		btnTxtColor = Colors.black;
+		btnTxtColor = Colors.white;
 	}
 	
 	/**

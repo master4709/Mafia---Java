@@ -19,17 +19,7 @@ import javax.swing.JButton;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.ComponentOrientation;
-import java.awt.Cursor;
-import javax.swing.border.LineBorder;
-import java.awt.ScrollPane;
-import java.awt.Point;
-import javax.swing.border.BevelBorder;
-import javax.swing.JTextPane;
-import javax.swing.JScrollBar;
 
 /**
  * This class creates panel for Rules of Mafia game.
@@ -193,7 +183,7 @@ public class RulePanel{
 		textColor = Colors.white;
 		btnBackgroundColor = Colors.grey;
 		backgroundColor = Colors.black;
-		btnTxtColor = Color.black;
+		btnTxtColor = Color.white;
 	}
 	
 	/**

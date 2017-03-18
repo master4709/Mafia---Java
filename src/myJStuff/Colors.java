@@ -15,8 +15,8 @@ public class Colors{
 	public static final Color beige = new Color(183,166,153);
 	public static final Color blue = new Color(102,178,255);
 	public static final Color pink = new Color(255,204,255);
-	public static final Color white = new Color(250,250,250);
-	public static final Color grey = new Color(150,150,150);
+	public static final Color white = new Color(255,255,255);
+	public static final Color grey = new Color(32,28,28);
 	
 	public static final Color defaultButtonTextColor = white;
 	public static final Color defaultButtonBackgroundColor = grey;

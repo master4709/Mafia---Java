@@ -29,7 +29,6 @@ public class AboutPanel{
 	
 	// Fonts that will be used in text field, label and button text.
 	private Font titleFont;
-	private Font buttonFont;
 	private Font textFont;
 
 	//Panel that gets set to the frame and displays the contents of this class
@@ -103,7 +102,7 @@ public class AboutPanel{
 	 * Method to display contents of south panel. This panel contains the back button which goes back to main menu.
 	 */
 	private void displaySouth(){
-		btnBack = new MyButton("Back", btnTxtColor, btnBackgroundColor, buttonFont);
+		btnBack = new MyButton("Back", btnTxtColor, btnBackgroundColor, 25);
 		south.add(btnBack, "cell 0 0");
 		// setting an action for back button
 		btnBack.addActionListener(new ActionListener(){
@@ -141,7 +140,6 @@ public class AboutPanel{
 	 */
 	private void setFont(){
 		titleFont = new MyFont(50);
-		buttonFont = new MyFont(25);
 		textFont =new MyFont(25);
 	}
 	

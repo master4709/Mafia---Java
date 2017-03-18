@@ -22,7 +22,7 @@ public class MyLabel extends JLabel{
 			Font font){
 		
 		setText(text);
-		setForeground(color);
+		setForeground(new Color(250,250,250));
 		setFont(font);
 	}
 }

@@ -170,7 +170,7 @@ public class PlayerCountPanel{
 	}
 	
 	private void setFont(){
-		titleFont = new MyFont(80);
+		titleFont = new MyFont(50);
 	}
 	
 	private void setColor(){

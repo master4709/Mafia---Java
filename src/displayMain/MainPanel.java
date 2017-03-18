@@ -10,6 +10,9 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import logic.Debug;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,6 +40,7 @@ public class MainPanel{
 	private JPanel center;
 	
 	private JButton btnNewGame;
+	private JButton btnDebug;
 	private JButton btnContinueGame;
 	private JButton btnAbout;
 	private JButton btnRules;
@@ -85,11 +89,8 @@ public class MainPanel{
 	 */
 	
 	private void displayTop(){
-		JLabel lblTitle = new MyLabel("Mafia", textColor, titleFont);
-		north.add(lblTitle, "cell 0 1,alignx center");
-		
 		//TODO img = ImageIO.read(new File("strawberry.jpg"));
-		ImageIcon icon = new ImageIcon("data/pictures/man.png");
+		ImageIcon icon = new ImageIcon("data/pictures/mafia.png");
 		lblMan = new JLabel(icon);
 		north.add(lblMan, "cell 0 0, alignx center");
 	}
@@ -103,33 +104,40 @@ public class MainPanel{
 	}
 	
 	private void displayBottom(){
-		
+		btnDebug = new MyButton("Debug is " + Debug.amOn());
+		south.add(btnDebug, "cell 0 0 ,growx");
+		btnDebug.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Debug.toggle();
+				btnDebug.setText("Debug is " + Debug.amOn());
+			}
+		});
 	}
 	
 	private void displayCenter(){
 		btnNewGame = new MyButton("New Game");
-		center.add(btnNewGame, "cell 0 0,growx");
+		center.add(btnNewGame, "cell 0 1,growx");
 		btnNewGame.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			MainController.getInstance().switchToSetUp();
     	}});
 		
 		btnContinueGame = new MyButton("Continue Game");
-		center.add(btnContinueGame, "cell 0 1,growx");
+		center.add(btnContinueGame, "cell 0 2,growx");
 		btnContinueGame.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
 				
     	}});
 		
 		btnRules = new MyButton("Rules");
-		center.add(btnRules, "cell 0 2,growx");
+		center.add(btnRules, "cell 0 3,growx");
 		btnRules.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			MainController.getInstance().switchRule();
 		}});
 		
 		btnAbout = new MyButton("About");
-		center.add(btnAbout, "cell 0 3,growx");
+		center.add(btnAbout, "cell 0 4,growx");
 		btnAbout.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			MainController.getInstance().switchAbout();

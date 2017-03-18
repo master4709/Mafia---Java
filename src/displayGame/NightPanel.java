@@ -216,9 +216,9 @@ public class NightPanel{
 	}
 	
 	private void setFont(){
-		titleFont = new MyFont(100);
-		infoFont = new MyFont(20);
-		roleFont = new MyFont(40);
+		titleFont = new MyFont(50);
+		infoFont = new MyFont(25);
+		roleFont = new MyFont(25);
 	}
 	
 	private void setColor(){

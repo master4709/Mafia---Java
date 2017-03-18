@@ -26,7 +26,7 @@ public class MyButton extends JButton{
 		setText(text);
 		setForeground(foreground);
 		setBackground(background);
-		setFont(font);
+		setFont(new MyFont(15));
 	}
 	/**
 	 * Constructor
@@ -38,6 +38,6 @@ public class MyButton extends JButton{
 		setText(text);
 		setForeground(Colors.defaultButtonTextColor);
 		setBackground(Colors.defaultButtonBackgroundColor);
-		setFont(new MyFont(40));
+		setFont(new MyFont(30));
 	}
 }

@@ -57,7 +57,9 @@ public abstract class Action extends Debug{
     	//
         for(int j = 0; j < nightPlayer.size(); j++){
         	for(int i = 0; i < of.size() ; i++){
-        		if(of.get(i).getRole().equalsIgnoreCase(nightPlayer.get(j))) doAction(nightPlayer.get(j));
+        		if(of.get(i).getRole().equalsIgnoreCase(nightPlayer.get(j))){
+        			doAction(nightPlayer.get(j));
+        		}
         	}
         }
     }

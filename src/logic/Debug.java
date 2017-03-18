@@ -13,12 +13,13 @@ public abstract class Debug {
 	public static boolean debugOn = true;
 	private static Scanner voidObject;
 	
-	public static void toggleDebug(){
+	public static void toggle(){
 		debugOn = !debugOn;
 	}
 	
-	public static boolean isDebugOn(){
-		return debugOn;
+	public static String amOn(){
+		if(debugOn) return "on";
+		return "off";
 	}
 	
 	public static void $(){

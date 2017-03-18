@@ -214,8 +214,8 @@ public class DayPanel{
 	 * sets all of the fonts of the screen to new MyFonts with int size (how big the font is)
 	 */
 	private void setFont(){
-		titleFont = new MyFont(100);
-		infoFont = new MyFont(30);
+		titleFont = new MyFont(50);
+		infoFont = new MyFont(25);
 	}
 	/**
 	 * Sets all of the colors of the screen to custom Colors made in Colors class

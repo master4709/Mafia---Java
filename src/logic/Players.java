@@ -15,8 +15,7 @@ public class Players extends RoleAssignment {
 	
 	private  Scanner scan;
 	
-	//This string will store the theme of the game
-	private String playTheme;
+	private List<String> names = new ArrayList<>();
 	
 	//List of each player (class) and his/her info (name, role, target, position, etc)
 	private static List<Player> playerInfo = new ArrayList<>();
@@ -33,20 +32,7 @@ public class Players extends RoleAssignment {
 		roleOfPlayers();
 	}
 
-	
-	/**
-	 * This method calls other methods in the Players class
-	 */
-	
-	/**
-	 * This class will asks user to choose the theme of the game
-	 */
-	public void themeOfGame(){
-		scan = new Scanner(System.in);
-		$("Which theme do you want to play?(Enter 'M' for Mafia or 'W' for Werewolf): ", noln);
-		playTheme = scan.nextLine();
-	}
-	
+		
 	/**
 	 * Asks the user to input the name of each player followed by enter
 	 * Sets the play position of each player to the order then names were inputed
@@ -127,11 +113,7 @@ public class Players extends RoleAssignment {
 	}
 	
 	//getters
-	
-	public String getPlayTheme(){
-		return playTheme;
-	}
-	
+		
 	public List<Player> getPlayerInfo(){
 		return playerInfo;
 	}

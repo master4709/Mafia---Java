@@ -22,6 +22,8 @@ import java.awt.event.ActionEvent;
  *
  */
 public class StoryPanel {
+	
+	private ActionListener actionListener;
 	private Font titleFont;
 	
 	private Color textColor;
@@ -34,20 +36,18 @@ public class StoryPanel {
 	private JPanel south;
 	private JPanel center;
 	
-	private JButton btnNextDay;
+	private JButton btnContinue;
 	private String name;
 	private boolean isDead;
 	private JLabel title;
 	private JLabel text;
 	private JLabel text2;
 	
-	public StoryPanel(String str, boolean dead){
+	public StoryPanel(ActionListener actionListener){
+		this.actionListener = actionListener;
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		name = str;
-		isDead = dead;
 		initalize();
 	}
 
@@ -81,6 +81,8 @@ public class StoryPanel {
 		contentPane.add(center, BorderLayout.CENTER);
 		center.setLayout(new MigLayout("", "[grow]", "[][][][][]"));
 		
+		
+		//Put "" for all of the labels lblLocation = new MyLabel("",...);
 		//displayTop();
 		//displayLeft();
 		//displayRight();
@@ -101,14 +103,10 @@ public class StoryPanel {
 	}
 	
 	private void displayBottom() {
-		btnNextDay = new MyButton("Continue");
-		south.add(btnNextDay);
-		btnNextDay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				GameController.getInstance().nextEventOrDay();}
-		});
-		
-		
+		btnContinue = new MyButton("Continue");
+		south.add(btnContinue);
+		btnContinue.setName("Continue_StoryPanel");
+		btnContinue.addActionListener(actionListener);
 	}
 	private void displayCenter() {
 		Story s = new Story(name, isDead);
@@ -148,6 +146,11 @@ public class StoryPanel {
 	private void setColor(){
 		textColor = Colors.black;
 		backgroundColor = Colors.defaultBackgroundColor;
+	}
+	//Set all of the labels and such for the story in here
+	//Call the story class here also.
+	public void setStory(String name, boolean dead){
+		
 	}
 	
 

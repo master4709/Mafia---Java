@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import displayMain.MainController;
 import net.miginfocom.swing.MigLayout;
 /**
  * This class is used to display the list of possible targets of the day lynching
@@ -26,6 +25,8 @@ import net.miginfocom.swing.MigLayout;
  *
  */
 public class DayPanel implements ActionListener{
+	
+	private ActionListener actionListener;
 
 	//All of the Color variables needed for the screen
 	//Receive values in setColor()
@@ -58,8 +59,6 @@ public class DayPanel implements ActionListener{
 	
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
-	//Pressing this button sends the user back to the main panel
-	private JButton btnHome;
 	
 	//Stores all of the data of the players
 	//Does not change the date stored in it EVER
@@ -76,7 +75,8 @@ public class DayPanel implements ActionListener{
 	/**
 	 * Create the panel.
 	 */
-	public DayPanel(List<Player> playerInfo) {
+	public DayPanel(ActionListener actionListener,List<Player> playerInfo) {
+		this.actionListener = actionListener;
 		this.playerInfo = playerInfo;
 		target = -1;
 		
@@ -133,18 +133,11 @@ public class DayPanel implements ActionListener{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		//This button sends the user back to the home screen (MainPanel)
-		btnHome = new MyButton("Home");
-		//south.add(btnHome, "cell 0 0");
-		btnHome.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			MainController.getInstance().switchMain();
-    	}});
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 1 0");
-		btnContinue.addActionListener(this);
-		btnContinue.setName("Continue");
+		btnContinue.addActionListener(actionListener);
+		btnContinue.setName("Continue_DayPanel");
 	}
 	/**
 	 * Creates all of the buttons representing each player that is alive
@@ -213,8 +206,22 @@ public class DayPanel implements ActionListener{
 		selectColor = Colors.blue;
 	}
 	
-	public void removePlayerButton(int i){
-		center.remove(playerButtonList.get(target));
+	public void removePlayerButton(int target){
+		if(target!=-1){
+			for(int i=0;i<playerButtonList.size();i++){
+				if(target==Integer.parseInt(playerButtonList.get(i).getName())){
+					center.remove(playerButtonList.get(target));
+				}
+			}
+		}
+	}
+	
+	public void resetTarget(){
+		target = -1;
+	}
+	
+	public Integer getTarget(){
+		return target;
 	}
 	
 	/**
@@ -238,11 +245,6 @@ public class DayPanel implements ActionListener{
 		}
 		
 		switch(name){
-		case "Continue":
-			if(target!=-1){
-				GameController.getInstance().switchNightFirst(target);
-			}
-			break;
 		case "0":
 			playerButtonList.get(0).setBackground(selectColor);
 			target=0;

@@ -25,7 +25,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class NightPanel implements ActionListener{
 	
-	
+	private ActionListener actionListener;
 	//All of the Color variables needed for the screen
 	//Receive values in setColor()
 	private Color textColor;
@@ -75,7 +75,8 @@ public class NightPanel implements ActionListener{
 	 * Displays all of the needed buttons and labels etc...
 	 * @param playerInfo
 	 */
-	public NightPanel(List<Player> playerInfo, List<String> mafiaMember) {
+	public NightPanel(ActionListener actionListener, List<Player> playerInfo, List<String> mafiaMember) {
+		this.actionListener = actionListener;
 		this.playerInfo = playerInfo;
 		this.mafiaMember = mafiaMember;
 		
@@ -174,8 +175,8 @@ public class NightPanel implements ActionListener{
 	private void displaySouth(){
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 0 0");
-		btnContinue.addActionListener(this);
-		btnContinue.setName("Continue");
+		btnContinue.addActionListener(actionListener);
+		btnContinue.setName("Continue_NightPanel");
 	}
 	/**
 	 * Creates a button with the text value of a player depending on i
@@ -225,12 +226,22 @@ public class NightPanel implements ActionListener{
 		}
 	}
 	
-	public void setPlayerInfo(List<Player> pI){
-		playerInfo = pI;
-	}
-	
 	public Integer getPlayerTarget(){
 		return target;
+	}
+	
+	public void resetTarget(){
+		target = -1;
+	}
+	
+	public void removePlayerButton(int target){
+		if(target!=-1){
+			for(int i=0;i<playerButtonList.size();i++){
+				if(target==Integer.parseInt(playerButtonList.get(i).getName())){
+					center.remove(playerButtonList.get(target));
+				}
+			}
+		}
 	}
 	
 	public JPanel getContentPane(){
@@ -243,6 +254,9 @@ public class NightPanel implements ActionListener{
 	 */
 	public void setDisplay(int i){
 		//Resets the player target to -1
+		if(target!=-1){
+			playerButtonList.get(target).setBackground(Colors.defaultButtonBackgroundColor);
+		}
 		target = -1;
 		//Sets the labels to the current players information
 		lblName.setText(playerInfo.get(i).getName());
@@ -264,7 +278,6 @@ public class NightPanel implements ActionListener{
 		if(playerInfo.get(i).getRole().contains("Mafia")){
 			lblMafia.setText("Mafia Members: "+ mafiaMember);
 		}
-		
 	}
 	
 	public void actionPerformed(ActionEvent e){
@@ -272,13 +285,12 @@ public class NightPanel implements ActionListener{
 		JButton source = (JButton)e.getSource();
 		String name = source.getName();
 		
+		//Resets the background of the previously targeted player button if the current player has changed targets
 		if(target!=-1){
 			playerButtonList.get(target).setBackground(Colors.defaultButtonBackgroundColor);
 		}
+		
 		switch(name){
-		case "Continue":
-			GameController.getInstance().rotateNightPlayer(target);
-			break;
 		case "0":
 			playerButtonList.get(0).setBackground(selectColor);
 			target=0;

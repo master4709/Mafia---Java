@@ -26,8 +26,6 @@ public class Game extends Action{
 	
 	//Index value for the target of the Lyncher
 	private int lynchTarget;
-	
-	private List<Integer> event = new ArrayList<>();
 	/**
 	 * Constructor
 	 * Takes params values and stores them into local versions
@@ -70,13 +68,14 @@ public class Game extends Action{
 	 * This method takes the value from the target selection of 
 	 * @param playerTarget
 	 */
-	public void nightAction(){
+	public Integer nightAction(){
 		$("Do night logic");
-		event = new ArrayList<>();
 		setPlayerInfoAction(playerInfo);
 		nightActions();
 		setPlayerInfo(getPlayerInfo());
-		resetStatus();
+		int target = resetStatus();
+		
+		return target;
 		
 	}
 	
@@ -85,9 +84,9 @@ public class Game extends Action{
 	 * Resets all of the status for every player
 	 * Starts the loop through players at the last position 
 	 */
-	public void resetStatus(){
+	public Integer resetStatus(){
+		int target = -1;
 		for(int i=0;i<playerInfo.size();i++){
-			
 			//Saves the target of that night to the variable OldPlayerTarget for the 
 			playerInfo.get(i).setOldPlayerTarget(playerInfo.get(i).getPlayerTarget());
 			//If the player has been targeted and was not healed
@@ -96,25 +95,22 @@ public class Game extends Action{
 				$(playerInfo.get(i).getName()+" is dead");
 				playerInfo.get(i).setIsDead(true);
 				resetPlayer(i);
-				event.add(i);
-			}
-			//If the player was targeted by either the Mafia or vigilante and the doctor saved the player
-			if(playerInfo.get(i).isTargeted()&& playerInfo.get(i).isHealed()){
+				target = i;
+			}else if(playerInfo.get(i).isTargeted()&& playerInfo.get(i).isHealed()){
 				//Call the story panel with a survived story
 				$(playerInfo.get(i).getName()+" is saved");
 				resetPlayer(i);
 				playerInfo.get(i).setIsHealed(true);
-				event.add(i);
+				target = i;
+			}else{
+				resetPlayer(i);
 			}
 			//If the hitman is dead, changes the bar man to the new hitman
 			if(playerInfo.get(i).isDead()&&playerInfo.get(i).getRole().contains("Hitman")){
 				newHitman(i);
 			}
-			resetPlayer(i);
 		}
-		
-		eventCount(0);
-		
+		return target;
 	}
 	/**
 	 * Resets all of the status for the player
@@ -126,22 +122,6 @@ public class Game extends Action{
 		playerInfo.get(i).setIsProtected(false);
 		playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
 		playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
-	}
-	
-	public void eventCount(int i){
-		
-		if(event.size()>i){
-			String name = playerInfo.get(event.get(i)).getName();
-			System.out.println(name);
-			if(playerInfo.get(event.get(i)).isHealed()){
-				playerInfo.get(event.get(i)).setIsHealed(false);
-				GameController.getInstance().switchStory(name, false);
-			}else{
-				GameController.getInstance().switchStory(name, true);
-			}
-		}else{
-			GameController.getInstance().switchDay();
-		}
 	}
 	
 	private void newHitman(int k){

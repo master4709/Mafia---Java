@@ -5,7 +5,6 @@ import myJStuff.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -24,8 +23,9 @@ import net.miginfocom.swing.MigLayout;
  *
  *
  */
-public class CheckPlayerPanel implements ActionListener{
-
+public class CheckPlayerPanel{
+	
+	private ActionListener actionListener;
 	//All of the Color variables needed for the screen
 	//Receive values in setColor()
 	private Color textColor;
@@ -59,8 +59,8 @@ public class CheckPlayerPanel implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public CheckPlayerPanel() {
-		
+	public CheckPlayerPanel(ActionListener actionListener) {
+		this.actionListener = actionListener;
 		//Sets all of the needed Fonts and Colors to needed values
 		setFont();
 		setColor();
@@ -117,8 +117,8 @@ public class CheckPlayerPanel implements ActionListener{
 		//to the next player in the night cycle
 		btnYes = new MyButton("Yes");
 		south.add(btnYes, "cell 0 0,growx");
-		btnYes.addActionListener(this);
-		btnYes.setName("Yes");
+		btnYes.addActionListener(actionListener);
+		btnYes.setName("Continue_CheckPlayerPanel");
 		
 	}
 	
@@ -159,19 +159,5 @@ public class CheckPlayerPanel implements ActionListener{
 	 */
 	public JPanel getContentPane(){
 		return contentPane;
-	}
-	
-	public void actionPerformed(ActionEvent e){
-		//Get the name (NOT TEXT) of the button that was pressed
-		JButton source = (JButton)e.getSource();
-        String name = source.getName();
-        
-        switch(name){
-        case "Yes":
-        	GameController.getInstance().switchNight();
-        	break;
-        default:
-			break;
-		}
 	}
 }

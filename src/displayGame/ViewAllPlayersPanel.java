@@ -32,6 +32,9 @@ public class ViewAllPlayersPanel{
 	private Color textColor;
 	private Color backgroundColor;
 	
+	
+	private ActionListener actionListener;
+	
 	//All of the Font variables needed for the screen
 	//Receive values in setFont()
 	private Font titleFont;
@@ -67,9 +70,9 @@ public class ViewAllPlayersPanel{
 	/**
 	 * Create the panel.
 	 */
-	public ViewAllPlayersPanel(List<Player> playerInfo) {
+	public ViewAllPlayersPanel(ActionListener actionListener, List<Player> playerInfo) {
 		this.playerInfo = playerInfo;
-		
+		this.actionListener = actionListener;
 		setFont();
 		setColor();
 
@@ -124,10 +127,9 @@ public class ViewAllPlayersPanel{
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 0 0");
-		btnContinue.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			GameController.getInstance().switchDay();
-		}});
+		btnContinue.setName("Continue_ViewAllPlayersPanel");
+		btnContinue.addActionListener(actionListener);
+		
 	}
 	/**
 	 * Creates all of the buttons representing each player that is alive
@@ -213,9 +215,6 @@ public class ViewAllPlayersPanel{
         String name = source.getName();
         
         switch(name){
-        case "Continue":
-        	GameController.getInstance().switchDay();
-        	break;
         case "0":
         	GameController.getInstance().switchViewPlayer(0);
         	break;

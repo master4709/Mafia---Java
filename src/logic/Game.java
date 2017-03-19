@@ -151,15 +151,6 @@ public class Game extends Action{
 		this.playerInfo = playerInfo;
 	}
 	/**
-	 * Returns a COPY of the list of Players
-	 * This is used for printing information in the different Panels
-	 * @return
-	 */
-	public List<Player> getPlayerInfo(){
-		List<Player> x = playerInfo;
-		return x;
-	}
-	/**
 	 * Returns a COPY of the list of Mafia Members
 	 * This is used for printing in the NightPanel
 	 * @return

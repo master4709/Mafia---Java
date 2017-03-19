@@ -140,24 +140,20 @@ public class NightPanel implements ActionListener{
 	 */
 	private void displayCenter(){
 		int k=0;
-		for(int i=0;i<playerInfo.size();i++){
-			if(!playerInfo.get(i).isDead()){
-				displayPlayerButton(i);
+		for(Player player: playerInfo){
+			if(!player.isDead()){
+				displayPlayerButton(player.getPlayPosition());
 			}
-			k = i+1;
+			k = k+player.getPlayPosition();
 		}
 		
-		btnDetective = new MyButton("Confirm Target");
+		btnDetective = new MyButton("Confirm Target",30);
 		center.add(btnDetective, "cell 0 "+k+1+",alignx center");
-		btnDetective.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			if(target!=-1){
-    				btnDetective.setVisible(false);
-    				checkMafia();
-    			}
-		}});
+		btnDetective.setName("Detective");
+		btnDetective.addActionListener(actionListener);
 		btnDetective.setVisible(false);
-		lblDetective = new MyLabel("", textColor, new MyFont(40));
+		
+		lblDetective = new MyLabel("", textColor, new MyFont(25));
 		center.add(lblDetective, "cell 0 "+k+",alignx center");
 		
 	}
@@ -207,9 +203,9 @@ public class NightPanel implements ActionListener{
 	}
 	
 	private void setFont(){
-		titleFont = new MyFont(50);
-		infoFont = new MyFont(20);
-		roleFont = new MyFont(25);
+		titleFont = new MyFont(65);
+		infoFont = new MyFont(17);
+		roleFont = new MyFont(30);
 	}
 	
 	private void setColor(){
@@ -218,12 +214,13 @@ public class NightPanel implements ActionListener{
 		backgroundColor = Colors.defaultBackgroundColor;
 	}
 	
-	private void checkMafia(){
-		if(playerInfo.get(target).isMafia()){
-			lblDetective.setText("Part of the Mafia");
-		}else{
-			lblDetective.setText("Not Part of the Mafia");
-		}
+	public JButton getDetectiveButton(){
+		return btnDetective;
+	}
+	
+	public void setDetectiveMessage(String text){
+		btnDetective.setVisible(false);
+		lblDetective.setText(text);
 	}
 	
 	public Integer getPlayerTarget(){
@@ -236,8 +233,8 @@ public class NightPanel implements ActionListener{
 	
 	public void removePlayerButton(int target){
 		if(target!=-1){
-			for(int i=0;i<playerButtonList.size();i++){
-				if(target==Integer.parseInt(playerButtonList.get(i).getName())){
+			for(JButton button: playerButtonList){
+				if(target==Integer.parseInt(button.getName())){
 					center.remove(playerButtonList.get(target));
 				}
 			}

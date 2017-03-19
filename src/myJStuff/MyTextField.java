@@ -7,6 +7,7 @@ public class MyTextField extends JTextField {
 
 	public MyTextField(String string, int i) {
 		super(string, i);
+		this.setFont(new MyFont(40));
 	}
 
 	/**

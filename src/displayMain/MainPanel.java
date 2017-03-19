@@ -25,22 +25,7 @@ import net.miginfocom.swing.MigLayout;
  * @author Mahsa Lotfi
  *
  */
-public class MainPanel{
-	/**
-	 * Instance variables
-	 */
-	//background color instance variable
-	private Color backgroundColor;
-	
-	//Panel that gets set to the frame and displays the contents of this class
-	private JPanel contentPane;
-	
-	//Panels that are added to the content pane. All JObjects get added to these panels
-	private JPanel north;
-	private JPanel west;
-	private JPanel east;
-	private JPanel south;
-	private JPanel center;
+public class MainPanel extends MyPanel{
 	
 	//buttons for center panel
 	private JButton btnNewGame;	
@@ -59,39 +44,12 @@ public class MainPanel{
 	 * Create the main panel frame.
 	 */
 	public MainPanel() {
-		//setting color
-		setColor();
-		
-		//creating content pane which holds all the panels together.
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(2, 2, 2, 2));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		//creating layout for each panels
-		north = new JPanel();
-		contentPane.add(north, BorderLayout.NORTH);
-		north.setLayout(new MigLayout("", "[grow]", "[]"));
-		
-		west = new JPanel();
-		contentPane.add(west, BorderLayout.WEST);
-		
-		east = new JPanel();
-		contentPane.add(east, BorderLayout.EAST);
-		
-		south = new JPanel();
-		contentPane.add(south, BorderLayout.SOUTH);
-		
-		center = new JPanel();
-		contentPane.add(center, BorderLayout.CENTER);
-		center.setLayout(new MigLayout("", "[grow]", "[][][][][]"));
+
 		
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
 		displayCenter();
-		
-		//setting background of each panel.
-		setBackground(backgroundColor);
 	}
 
 	/**
@@ -168,29 +126,6 @@ public class MainPanel{
     			MainController.getInstance().switchAbout();
 		}});
 		
-	}
-	
-	/**
-	 * Sets all of the panels background to the passed Color
-	 * Also creates a black border around the edge of the screen
-	 * @param c
-	 */
-	private void setBackground(Color c){
-		north.setBackground(c);
-		south.setBackground(c);
-		east.setBackground(c);
-		west.setBackground(c);
-		center.setBackground(c);
-		//Creates a black border on the screen
-		contentPane.setBackground(Colors.defaultBorderColor);
-	}
-	
-	
-	/**
-	 * Method to set the background color.
-	 */
-	private void setColor(){
-		backgroundColor = Colors.defaultBackgroundColor;
 	}
 	
 	/**

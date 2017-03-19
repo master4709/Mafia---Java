@@ -1,16 +1,14 @@
 package displaySetUp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import logic.Debug;
-import myJStuff.Colors;
-import myJStuff.MyButton;
-import myJStuff.MyLabel;
-import myJStuff.MyPanel;
+import myJStuff.*;
 /**
  * This class creates the Panel for selecting how many players you want in the game
  * @author
@@ -25,10 +23,10 @@ public class InputPlayerPanel extends MyPanel{
 	private static final long serialVersionUID = 1L;
 	
 	private int numOfPlayers;
-    private ArrayList<JTextField> textFields;
+    private ArrayList<JTextField> textFields = new ArrayList<>();
 	
-	MyLabel enterPlayers = new MyLabel("Enter Player Names");
-    JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 20);
+	MyLabel enterPlayers = new MyLabel("Enter Player Names", 40);
+    JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 25);
 
 	public InputPlayerPanel(int num) {
 		this.numOfPlayers = num;
@@ -44,9 +42,9 @@ public class InputPlayerPanel extends MyPanel{
 	private void displayCenter(){
         for (int count = 0; count < numOfPlayers; count++) {
             // this sets a default text in the textField
-            JTextField playerNameInput = new JTextField("Player " + String.valueOf(count+1), 0);
+            MyTextField playerNameInput = new MyTextField("Player " + String.valueOf(count+1), 0);
             center.add(playerNameInput, "cell 0 " + count + " ,growx");
-            //textFields.add(playerNameInput);
+            textFields.add(playerNameInput);
         }
 
 	}
@@ -54,17 +52,16 @@ public class InputPlayerPanel extends MyPanel{
 	private void displaySouth(){
 		south.add(continueButton, "cell 0 2,growx");
         continueButton.addActionListener(e -> {
-            String name;
-            for (JTextField nameInput : textFields) {
-                name = nameInput.getText();
-                Debug.$(name);
+            List<String> name = new ArrayList<>();
+            for (int i = 0; i < textFields.size();i++) {
+                name.add(textFields.get(i).getText());
+                Debug.$(name, i);
             }
-			SetUpController.getInstance().switchToGame(numOfPlayers, textFields);
+			SetUpController.getInstance().switchToGame(numOfPlayers, name);
         });
 	}
 	
 	public JPanel getContentPane(){
 		return contentPane;
 	}
-
 }

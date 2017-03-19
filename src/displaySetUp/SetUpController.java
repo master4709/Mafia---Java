@@ -3,8 +3,12 @@ package displaySetUp;
 import displayGame.GameController;
 import logic.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * 
@@ -17,6 +21,7 @@ public class SetUpController {
 	
 	private Players p;
 	private PlayerCountPanel pcp;
+	private InputPlayerPanel ipp;
 	
 	private JFrame frame;
 	private JPanel panelCount;
@@ -65,10 +70,20 @@ public class SetUpController {
 	}
 	/**
 	 * This method goes to the GameController
+	 * @param textFields 
 	 */
-	public void switchToGame(int playerTotal){
-		p = new Players(playerTotal);
+	public void switchToGame(int playerTotal, List<String> name){
+		
+		p = new Players(playerTotal, name);
 		GameController.createInstance(frame);
 		GameController.getInstance().start(p.getPlayerInfo(), p.getLynchTarget());
+	}
+	
+
+	public void switchToInputPlayer(int playerTotal) {
+		frame.getContentPane().setVisible(false);
+		ipp = new InputPlayerPanel(playerTotal);
+		frame.setContentPane(ipp.getContentPane());
+		ipp.getContentPane().setVisible(true);
 	}
 }

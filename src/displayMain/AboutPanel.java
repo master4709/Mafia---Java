@@ -22,28 +22,7 @@ import javax.swing.JButton;
  * 
  *
  */
-public class AboutPanel{
-	//colors that will be used for backgrounds and texts.
-	private Color textColor;
-	private Color btnBackgroundColor;
-	private Color backgroundColor;
-	private Color btnTxtColor;
-	
-	// Fonts that will be used in text field, label and button text.
-	private Font titleFont;
-	private Font textFont;
-	private int buttonFont;
-
-	//Panel that gets set to the frame and displays the contents of this class
-	private JPanel contentPane;
-	
-	//Panels that are added to the content pane. All JObjects get added to these panels
-	private JPanel north;
-	private JPanel south;
-	private JPanel west;
-	private JPanel east;
-	private JPanel center;
-	
+public class AboutPanel extends MyPanel{
 	//north panel label
 	private JLabel lblAbout;
 	
@@ -57,40 +36,11 @@ public class AboutPanel{
 	 * Create the frame.
 	 */
 	public AboutPanel() {
-		//setting font and color
-		setFont();
-		setColor();
-		
-		//creating content pane which holds all the panels together.
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		//creating layout for each panels
-		north = new JPanel();
-		contentPane.add(north, BorderLayout.NORTH);
-		north.setLayout(new MigLayout("", "[grow,center]", "[]"));
-		
-		south = new JPanel();
-		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[]", "[]"));
-		
-		west = new JPanel();
-		contentPane.add(west, BorderLayout.WEST);
-		
-		east = new JPanel();
-		contentPane.add(east, BorderLayout.EAST);
-		
-		center = new JPanel();
-		contentPane.add(center, BorderLayout.CENTER);
-		
+
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
 		displayCenter();
-		
-		//setting background of each panel. 
-		setBackground(backgroundColor);
 	}
 	
 	/**
@@ -125,36 +75,6 @@ public class AboutPanel{
 				+ "\r\nElvin Limpin\r\nMahsa Lofti Gaskarimahalleh\r\n\r\n\r\nCopyright 2017. All Rights Reserved.");
 				
 		center.add(myTxtPane);
-	}
-	
-	/**
-	 * Method to set the background colors for each panels.
-	 */
-	private void setBackground(Color c){
-		north.setBackground(c);
-		south.setBackground(c);
-		east.setBackground(c);
-		west.setBackground(c);
-		center.setBackground(c);
-	}
-	
-	/**
-	 * Method to set the font for label, button and textField.
-	 */
-	private void setFont(){
-		titleFont = new MyFont(50);
-		textFont =new MyFont(25);
-		buttonFont = 25;
-	}
-	
-	/**
-	 * Method to set the text and background colors.
-	 */
-	private void setColor(){
-		textColor = Colors.white;
-		btnBackgroundColor = Colors.grey;
-		backgroundColor = Colors.black;
-		btnTxtColor = Colors.white;
 	}
 	
 	/**

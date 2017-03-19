@@ -48,4 +48,10 @@ public class MyButton extends JButton{
 		setBackground(Colors.defaultButtonBackgroundColor);
 		setFont(new MyFont(size));
 	}
+	public MyButton(String text, Color btnTxtColor, Color btnBackgroundColor, MyFont buttonFont) {
+		setText(text);
+		setForeground(btnTxtColor);
+		setBackground(btnBackgroundColor);
+		setFont(buttonFont);
+	}
 }

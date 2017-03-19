@@ -26,9 +26,9 @@ public class Players extends RoleAssignment {
 	//This int stores the information for the lyncher target	
 	private int lynchTargetID;
 	
-	public Players(int playerTotal){
+	public Players(int playerTotal, List<String> name){
 		super(playerTotal);
-		nameOfPlayers();
+		nameOfPlayers(name);
 		roleOfPlayers();
 	}
 
@@ -38,9 +38,9 @@ public class Players extends RoleAssignment {
 	 * Sets the play position of each player to the order then names were inputed
 	 * Sets the status of each player to be alive. As each player starts out alive in the game
 	 * Sets the inBar (The barman has stopped them from doing their action tonight) status to false for each player
+	 * @param name 
 	 */
-	public void nameOfPlayers(){
-		List<String> names = new ArrayList<>(Arrays.asList("Frodo","Gandalf","Sam","Merry","Gimli","Legolas","Aragorn","Eomer","Elrond","Theoden"));
+	public void nameOfPlayers(List<String> names){
 		for(int i =0; i<totalPlayers; i++){
 			Player p = new Player();
 			playerInfo.add(p);
@@ -54,8 +54,6 @@ public class Players extends RoleAssignment {
 			playerInfo.get(i).setIsProtected(false);
 			playerInfo.get(i).setInBar(false);
 			playerInfo.get(i).setIsLynched(false);
-			
-			
 		}		
 	}
 	

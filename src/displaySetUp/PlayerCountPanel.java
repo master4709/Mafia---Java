@@ -23,23 +23,7 @@ import net.miginfocom.swing.MigLayout;
  * 
  *
  */
-public class PlayerCountPanel{
-	
-	private Color textColor;
-	private Color backgroundColor;
-	private Color selectColor;
-	
-	private Font titleFont;
-
-	//Panel that gets set to the frame and displays the contents of this class
-	private JPanel contentPane;
-	
-	//Panels that are added to the content pane. All JObjects get added to these panels
-	private JPanel north;
-	private JPanel south;
-	private JPanel west;
-	private JPanel east;
-	private JPanel center;
+public class PlayerCountPanel extends MyPanel{
 	
 	//Labels for the north panel
 	private JLabel lblText;
@@ -57,40 +41,11 @@ public class PlayerCountPanel{
 	 * Create the frame.
 	 */
 	public PlayerCountPanel() {
-		//Sets the playerTotal to the minimum amount of players 
-		playerTotal = 5;
-		setFont();
-		setColor();
 
-		//Everything gets displayed on this panel 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		//These panels are what all JLabels, buttons etc. are added to
-		north = new JPanel();
-		contentPane.add(north, BorderLayout.NORTH);
-		north.setLayout(new MigLayout("", "[grow,center]", "[]"));
-		
-		south = new JPanel();
-		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[grow]", "[]"));
-		
-		west = new JPanel();
-		contentPane.add(west, BorderLayout.WEST);
-		
-		east = new JPanel();
-		contentPane.add(east, BorderLayout.EAST);
-		
-		center = new JPanel();
-		contentPane.add(center, BorderLayout.CENTER);
-		center.setLayout(new MigLayout("", "[grow]", "[]"));
 		
 		displayNorth();
 		displaySouth();
 		displayCenter();
-		
-		setBackground(backgroundColor);
 	}
 	
 	private void displayNorth(){
@@ -125,7 +80,7 @@ public class PlayerCountPanel{
 		btnContinue.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
     			//Switches the current panel to the game panel
-    			SetUpController.getInstance().switchToGame(playerTotal);
+    			SetUpController.getInstance().switchToInputPlayer(playerTotal);
 		}});
 		
 	}
@@ -152,31 +107,6 @@ public class PlayerCountPanel{
 		}});
 		buttonList.add(btnPlayer);
 		
-	}
-	
-	/**
-	 * Sets all of the panels background to the passed Color
-	 * Also creates a black border around the edge of the screen
-	 * @param c
-	 */
-	private void setBackground(Color c){
-		north.setBackground(c);
-		south.setBackground(c);
-		east.setBackground(c);
-		west.setBackground(c);
-		center.setBackground(c);
-		//Creates a black border on the screen
-		contentPane.setBackground(Colors.defaultBorderColor);
-	}
-	
-	private void setFont(){
-		titleFont = new MyFont(50);
-	}
-	
-	private void setColor(){
-		textColor = Colors.black;
-		backgroundColor = Colors.defaultBackgroundColor;
-		selectColor = Colors.blue;
 	}
 	
 	public JPanel getContentPane(){

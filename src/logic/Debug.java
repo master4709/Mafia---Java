@@ -1,6 +1,9 @@
 package logic;
 
+import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JTextField;
 /**
  * 
  * @author
@@ -56,5 +59,9 @@ public abstract class Debug {
 					System.out.print(part1);
 			}
 		}	
+	}
+
+	public static void $(List<String> name, int nameInput) {
+		System.out.println(name.get(nameInput));
 	}	
 }

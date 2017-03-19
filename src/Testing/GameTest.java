@@ -1,6 +1,4 @@
-package displayGame;
-
-import logic.*;
+package Testing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,17 +7,18 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-/**
- * Class GameController
- * 
- * 
- * 
- * 
- * 
- * @author Pierce de Jong 30006609
- *
- */
-public class GameController {
+
+import displayGame.*;
+import logic.Game;
+import logic.Player;
+
+public class GameTest extends GameController {
+	GameTest(){
+		super(Test.init());
+	}
+}
+
+class GameController {
 	
 	private static GameController instance = null;
 	
@@ -44,7 +43,7 @@ public class GameController {
 	//Location inside the list of players for the night cycle
 	private int position = 0;
 	
-	private GameController(JFrame frame){
+	protected GameController(JFrame frame){
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setVisible(true);
@@ -241,5 +240,4 @@ public class GameController {
         
 		}
     }
-		
 }

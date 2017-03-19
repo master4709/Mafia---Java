@@ -23,31 +23,14 @@ import net.miginfocom.swing.MigLayout;
  *
  *
  */
-public class CheckPlayerPanel{
+public class CheckPlayerPanel extends MyPanel{
 	
 	private ActionListener actionListener;
-	//All of the Color variables needed for the screen
-	//Receive values in setColor()
-	private Color textColor;
-	private Color backgroundColor;
 	
 	//All of the Font variables needed for the screen
 	//Receive values in setFont()
 	private Font nameFont;
 	private Font questionFont;
-
-	//This is the main JPanel for this class
-	//Every other JPanel gets added to this one
-	//Has a getter method to be used to display the content pane to the frame
-	private JPanel contentPane;
-			
-	//All of the panels that get displayed on the content pane
-	//Every other JObject for the content pane is displayed on one of these JPanels
-	private JPanel north;
-	private JPanel south;
-	private JPanel west;
-	private JPanel east;
-	private JPanel center;
 	
 	//Labels to be displayed on the JPanels
 	
@@ -61,37 +44,6 @@ public class CheckPlayerPanel{
 	 */
 	public CheckPlayerPanel(ActionListener actionListener) {
 		this.actionListener = actionListener;
-		//Sets all of the needed Fonts and Colors to needed values
-		setFont();
-		setColor();
-
-		//This is the pane that every other pane (north,south etc) is put on
-		contentPane = new JPanel();
-		//Creates a 5 pixel border around the entire screen
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		//Creates all panes 
-		north = new JPanel();
-		contentPane.add(north, BorderLayout.NORTH);
-		//Expands the first x position to fill the entire JPanel
-		north.setLayout(new MigLayout("", "[grow]", "[][]"));
-		
-		south = new JPanel();
-		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[grow]", "[]"));
-		
-		west = new JPanel();
-		contentPane.add(west, BorderLayout.WEST);
-		west.setLayout(new MigLayout("", "[]", "[]"));
-		
-		east = new JPanel();
-		contentPane.add(east, BorderLayout.EAST);
-		east.setLayout(new MigLayout("", "[]", "[]"));
-		
-		center = new JPanel();
-		contentPane.add(center, BorderLayout.CENTER);
-		
 		//Displays all of the JLabels, JButtons etc. to all of the JPannels
 		displayNorth();
 		displaySouth();
@@ -127,31 +79,13 @@ public class CheckPlayerPanel{
 	 * Also creates a black border around the edge of the screen
 	 * @param c
 	 */
-	private void setBackground(Color c){
-		north.setBackground(c);
-		south.setBackground(c);
-		east.setBackground(c);
-		west.setBackground(c);
-		center.setBackground(c);
-		//Creates a black border on the screen
-		contentPane.setBackground(Colors.defaultBorderColor);
-	}
+
 	/**
 	 * Sets the lblPlayer text to the current player
 	 * @param text
 	 */
 	public void setPlayerName(String text){
 		lblPlayer.setText(text+"?");
-	}
-	
-	private void setFont(){
-		nameFont = new MyFont(65);
-		questionFont = new MyFont(40);
-	}
-	
-	private void setColor(){
-		textColor = Colors.black;
-		backgroundColor = Colors.defaultBackgroundColor;
 	}
 	/**
 	 * Get the content pane

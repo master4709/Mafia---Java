@@ -24,34 +24,10 @@ import net.miginfocom.swing.MigLayout;
  * @author Pierce de Jong 30006609
  *
  */
-public class DayPanel implements ActionListener{
+public class DayPanel extends MyPanel implements ActionListener{
 	
 	private ActionListener actionListener;
 
-	//All of the Color variables needed for the screen
-	//Receive values in setColor()
-	private Color textColor;
-	private Color backgroundColor;
-	private Color selectColor;
-	
-	//All of the Font variables needed for the screen
-	//Receive values in setFont()
-	private Font titleFont;
-	private Font infoFont;
-	
-	//This is the main JPanel for this class
-	//Every other JPanel gets added to this one
-	//Has a getter method to be used to display the content pane to the frame
-	private JPanel contentPane;
-		
-	//All of the panels that get displayed on the content pane
-	//Every other JObject for the content pane is displayed on one of these JPanels
-	private JPanel north;
-	private JPanel south;
-	private JPanel west;
-	private JPanel east;
-	private JPanel center;
-	
 	//This label displays the text "Day Time"
 	private JLabel lblDayTime;
 	//This label displays the text for what to do on this screen
@@ -79,41 +55,13 @@ public class DayPanel implements ActionListener{
 		this.actionListener = actionListener;
 		this.playerInfo = playerInfo;
 		target = -1;
-		
-		setFont();
-		setColor();
 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		north = new JPanel();
-		contentPane.add(north, BorderLayout.NORTH);
-		north.setLayout(new MigLayout("", "[grow,center]", "[][grow]"));
-		
-		south = new JPanel();
-		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[][grow,fill]", "[]"));
-		
-		west = new JPanel();
-		contentPane.add(west, BorderLayout.WEST);
-		west.setLayout(new MigLayout("", "[]", "[]"));
-		
-		east = new JPanel();
-		contentPane.add(east, BorderLayout.EAST);
-		east.setLayout(new MigLayout("", "[]", "[]"));
-		
-		center = new JPanel();
-		contentPane.add(center, BorderLayout.CENTER);
-		center.setLayout(new MigLayout("", "[grow]", "[]"));
 		
 		displayNorth();
 		displaySouth();
 		displayCenter();
 		displayEast();
 		displayWest();
-		
-		setBackground(backgroundColor);
 	}
 	/**
 	 * Displays that it is Day Time and rules of the day
@@ -181,30 +129,7 @@ public class DayPanel implements ActionListener{
 	 * Also creates a black border around the edge of the screen
 	 * @param c
 	 */
-	private void setBackground(Color c){
-		north.setBackground(c);
-		south.setBackground(c);
-		east.setBackground(c);
-		west.setBackground(c);
-		center.setBackground(c);
-		//Creates a black border on the screen
-		contentPane.setBackground(Colors.defaultBorderColor);
-	}
-	/**
-	 * sets all of the fonts of the screen to new MyFonts with int size (how big the font is)
-	 */
-	private void setFont(){
-		titleFont = new MyFont(65);
-		infoFont = new MyFont(25);
-	}
-	/**
-	 * Sets all of the colors of the screen to custom Colors made in Colors class
-	 */
-	private void setColor(){
-		textColor = Colors.black;
-		backgroundColor = Colors.defaultBackgroundColor;
-		selectColor = Colors.blue;
-	}
+	
 	
 	public void removePlayerButton(int target){
 		if(target!=-1){

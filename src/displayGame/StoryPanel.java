@@ -20,20 +20,9 @@ import java.awt.event.ActionListener;
  * @author
  *
  */
-public class StoryPanel {
+public class StoryPanel extends MyPanel {
 	
 	private ActionListener actionListener;
-	private Font titleFont;
-	
-	private Color textColor;
-	private Color backgroundColor;
-	
-	private JPanel contentPane;
-	private JPanel north;
-	private JPanel west;
-	private JPanel east;
-	private JPanel south;
-	private JPanel center;
 	
 	private JButton btnContinue;
 	private String name;
@@ -57,38 +46,13 @@ public class StoryPanel {
 	
 	private void initalize() {
 		
-		setFont();
-		setColor();
-		
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		north = new JPanel();
-		contentPane.add(north, BorderLayout.NORTH);
-		
-		west = new JPanel();
-		contentPane.add(west, BorderLayout.WEST);
-		
-		east = new JPanel();
-		contentPane.add(east, BorderLayout.EAST);
-		
-		south = new JPanel();
-		contentPane.add(south, BorderLayout.SOUTH);
-		
-		center = new JPanel();
-		contentPane.add(center, BorderLayout.CENTER);
-		center.setLayout(new MigLayout("", "[grow]", "[][][][][]"));
-		
-		
 		//Put "" for all of the labels lblLocation = new MyLabel("",...);
-		//displayTop();
+		displayTop();
 		//displayLeft();
 		//displayRight();
 		//displayCenter();
 		displayBottom();
 		
-		setBackground(backgroundColor);
 	}
 	private void displayTop(){
 		title = new MyLabel("Story", textColor, titleFont);
@@ -129,24 +93,6 @@ public class StoryPanel {
 			center.add(text2, "cell 0 1");
 		}
 	}
-	private void setBackground(Color c){
-		north.setBackground(c);
-		south.setBackground(c);
-		east.setBackground(c);
-		west.setBackground(c);
-		center.setBackground(c);
-		//Creates a black border on the screen
-		contentPane.setBackground(Colors.defaultBorderColor);
-	}
-	private void setFont(){
-		titleFont = new MyFont(50);
-	}
-	
-	private void setColor(){
-		textColor = Colors.black;
-		backgroundColor = Colors.defaultBackgroundColor;
-	}
-	
 	//Call the story class here also to receive the getters for the location, event, etc....
 	//Set all of the labels and such for the story in here
 	public void setStory(String name, boolean dead){

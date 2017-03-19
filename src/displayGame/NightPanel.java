@@ -23,13 +23,9 @@ import net.miginfocom.swing.MigLayout;
  * @author Pierce de Jong 30006609
  *
  */
-public class NightPanel implements ActionListener{
+public class NightPanel extends MyPanel implements ActionListener{
 	
 	private ActionListener actionListener;
-	//All of the Color variables needed for the screen
-	//Receive values in setColor()
-	private Color textColor;
-	private Color backgroundColor;
 	private Color selectColor;
 	
 	//All of the Font variables needed for the screen
@@ -37,19 +33,6 @@ public class NightPanel implements ActionListener{
 	private Font titleFont;
 	private Font infoFont;
 	private Font roleFont;
-
-	//This is the main JPanel for this class
-	//Every other JPanel gets added to this one
-	//Has a getter method to be used to display the content pane to the frame
-	private JPanel contentPane;
-			
-	//All of the panels that get displayed on the content pane
-	//Every other JObject for the content pane is displayed on one of these JPanels
-	private JPanel north;
-	private JPanel south;
-	private JPanel west;
-	private JPanel east;
-	private JPanel center;
 	
 	
 	private JLabel lblName;
@@ -80,40 +63,12 @@ public class NightPanel implements ActionListener{
 		this.playerInfo = playerInfo;
 		this.mafiaMember = mafiaMember;
 		
-		setFont();
-		setColor();
 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		north = new JPanel();
-		contentPane.add(north, BorderLayout.NORTH);
-		north.setLayout(new MigLayout("", "[grow,center]", "[][]"));
-		
-		south = new JPanel();
-		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[grow,fill]", "[]"));
-		
-		west = new JPanel();
-		contentPane.add(west, BorderLayout.WEST);
-		west.setLayout(new MigLayout("", "[]", "[]"));
-		
-		east = new JPanel();
-		contentPane.add(east, BorderLayout.EAST);
-		east.setLayout(new MigLayout("", "[]", "[]"));
-		
-		center = new JPanel();
-		contentPane.add(center, BorderLayout.CENTER);
-		center.setLayout(new MigLayout("", "[grow]", "[]"));
 
 		displaySouth();
 		//Initializes the labels, does not fill them with anything
 		displayNorth();
 		displayCenter();
-		displayEast();
-		displayWest();
-		setBackground(backgroundColor);
 	}
 	
 	
@@ -157,14 +112,6 @@ public class NightPanel implements ActionListener{
 		center.add(lblDetective, "cell 0 "+k+",alignx center");
 		
 	}
-	
-	private void displayEast(){
-		
-	}
-	
-	private void displayWest(){
-		
-	}
 	/**
 	 * Displays the button needed to be pressed to go to next screen
 	 */
@@ -192,21 +139,6 @@ public class NightPanel implements ActionListener{
 	 * Also creates a black border around the edge of the screen
 	 * @param c
 	 */
-	private void setBackground(Color c){
-		north.setBackground(c);
-		south.setBackground(c);
-		east.setBackground(c);
-		west.setBackground(c);
-		center.setBackground(c);
-		//Creates a black border on the screen
-		contentPane.setBackground(Colors.defaultBorderColor);
-	}
-	
-	private void setFont(){
-		titleFont = new MyFont(65);
-		infoFont = new MyFont(17);
-		roleFont = new MyFont(30);
-	}
 	
 	private void setColor(){
 		selectColor = Colors.blue;

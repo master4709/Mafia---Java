@@ -59,6 +59,7 @@ public class RoleAssignment extends Debug {
 		Scanner in = new Scanner(System.in);
 		String rolesSelected;
 		List<String> choicesList = new ArrayList<>();
+		//Townie,Detective,Mafia: Hitman,Doctor,Survivor,Mafia: Barman,Vigilante,Mafia- GodFather,Lyncher,Bodyguard
 		boolean needInput = true;
 		boolean errorFound;
 		String errorMsg = "";
@@ -87,6 +88,7 @@ public class RoleAssignment extends Debug {
 			}
 
 		}
+		in.close();
 		System.out.println("\nYOUR CHOICES ARE: " + choicesList.toString());
 
 	}

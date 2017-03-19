@@ -55,7 +55,7 @@ public class RoleSelectionPanel {
                 ""));
         buttonListener = new ButtonListener();
         playerButtons = new ArrayList<>();
-        centralLabel = new MyLabel("Enter a role for each player", Colors.black, new MyFont(30));
+        centralLabel = new MyLabel("Enter a role for each player", Colors.black, 30);
 
         initialize();
 

@@ -1,19 +1,11 @@
 package displayGame;
 
 import myJStuff.*;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-
-import net.miginfocom.swing.MigLayout;
 
 /**
  * @author Pierce de Jong 30006609
@@ -24,16 +16,9 @@ import net.miginfocom.swing.MigLayout;
  *
  */
 public class CheckPlayerPanel extends MyPanel{
-	
-	private ActionListener actionListener;
-	
-	//All of the Font variables needed for the screen
-	//Receive values in setFont()
-	private Font nameFont;
-	private Font questionFont;
+
 	
 	//Labels to be displayed on the JPanels
-	
 	private JLabel lblAreYouReally;//Displays text "Are you Really"
 	private JLabel lblPlayer;////Displays the current player's name to the screen
 	
@@ -55,10 +40,10 @@ public class CheckPlayerPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 		
-		lblAreYouReally = new MyLabel("Are You Really", textColor, questionFont);
+		lblAreYouReally = new MyLabel("Are You Really", textColor, roleFont);
 		north.add(lblAreYouReally, "cell 0 0,alignx center");
 		
-		lblPlayer = new MyLabel("", textColor, nameFont);
+		lblPlayer = new MyLabel("", textColor, titleFont);
 		north.add(lblPlayer, "cell 0 1,alignx center");
 	}
 	/**
@@ -73,12 +58,6 @@ public class CheckPlayerPanel extends MyPanel{
 		btnYes.setName("Continue_CheckPlayerPanel");
 		
 	}
-	
-	/**
-	 * Sets all of the panels background to the passed Color
-	 * Also creates a black border around the edge of the screen
-	 * @param c
-	 */
 
 	/**
 	 * Sets the lblPlayer text to the current player

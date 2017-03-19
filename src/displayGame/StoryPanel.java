@@ -1,11 +1,8 @@
 package displayGame;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
 
 import myJStuff.*;
-import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -21,8 +18,6 @@ import java.awt.event.ActionListener;
  *
  */
 public class StoryPanel extends MyPanel {
-	
-	private ActionListener actionListener;
 	
 	private JButton btnContinue;
 	private String name;

@@ -4,7 +4,7 @@ import displayGame.GameController;
 
 public class GameTest {
 	public static void run(){
-		GameController test = new GameController(Test.init());
-		test.start(Test.makeInfo(), Test.getLynchTargetID());
+		GameController.createInstance(Test.init());
+		GameController.getInstance().start(Test.makeInfo(), Test.getLynchTargetID());
 	}
 }

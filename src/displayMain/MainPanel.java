@@ -1,24 +1,13 @@
 package displayMain;
 
 import myJStuff.*;
-
+import logic.Debug;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import logic.Debug;
-
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
-
-
-import net.miginfocom.swing.MigLayout;
 /**
  * This class creates panel for Main menu of Mafia game by creating different panels and putting them together. 
  * Each panel contains buttons or labels. Each button is assigned to an action.

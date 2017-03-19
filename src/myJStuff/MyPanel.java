@@ -3,7 +3,7 @@ package myJStuff;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,17 +11,16 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
 public abstract class MyPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	protected ActionListener actionListener;
+	
 	protected Color textColor;
 	protected Color backgroundColor;
 	protected Color selectColor;
 	protected Color btnTxtColor;
 	protected Color btnBackgroundColor;
 	
-	protected Font titleFont;
+	
 	
 	//Panels that are added to the content pane. All JObjects get added to these panels
 	protected JPanel contentPane = new JPanel();
@@ -31,10 +30,11 @@ public abstract class MyPanel {
 	protected JPanel east;
 	protected JPanel center;
 	
-	protected MyFont buttonFont;
-	protected MyFont textFont;
-	protected MyFont infoFont;
-	protected MyFont roleFont;
+	protected int titleFont;
+	protected int buttonFont;
+	protected int textFont;
+	protected int infoFont;
+	protected int roleFont;
 	
 	public MyPanel(){
 		setFont();
@@ -67,11 +67,11 @@ public abstract class MyPanel {
 	}
 	
 	private void setFont(){
-		titleFont = new MyFont(50);
-		textFont =new MyFont(25);
-		buttonFont = new MyFont(25);
-		infoFont = new MyFont(25);
-		roleFont = new MyFont(35);
+		titleFont = 65;
+		textFont = 25;
+		buttonFont = 30;
+		infoFont = 25;
+		roleFont = 40;
 	}
 	
 	private void setColor(){
@@ -80,7 +80,6 @@ public abstract class MyPanel {
 		selectColor = Colors.blue;
 		btnTxtColor = Colors.defaultButtonTextColor;
 		btnBackgroundColor = Colors.defaultButtonBackgroundColor;
-		selectColor = Colors.blue;
 	}
 	
 	public void setBackground(Color black){

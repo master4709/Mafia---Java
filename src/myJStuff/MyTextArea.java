@@ -20,11 +20,11 @@ public class MyTextArea extends JTextArea{
 			String text,
 			Color textColor,
 			Color backgroundColor,
-			Font font){
+			int font){
 		
 		setText(text);
 		setForeground(textColor);
 		setBackground(backgroundColor);
-		setFont(font);
+		setFont(new MyFont(font));
 	}
 }

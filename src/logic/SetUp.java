@@ -2,32 +2,23 @@ package logic;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 /**
  * Author: Mahsa Lotfi Gaskarimahalleh, UCID#10072013
  * 
  *This class will stores the number, name and role of each player
 */
-public class Players extends RoleAssignment {
-	
-	private  Scanner scan;
-	
-	private List<String> names = new ArrayList<>();
+public class SetUp extends RoleAssignment {
 	
 	//List of each player (class) and his/her info (name, role, target, position, etc)
 	private static List<Player> playerInfo = new ArrayList<>();
-		
-	//List of mafia members
-	private List<String> mafiaMembers = new ArrayList<>();
 	
 	//This int stores the information for the lyncher target	
 	private int lynchTargetID;
 	
-	public Players(int playerTotal, List<String> name){
-		super(playerTotal);
+	public SetUp( List<String> name){
+		super(name.size());
 		nameOfPlayers(name);
 		roleOfPlayers();
 	}
@@ -41,7 +32,7 @@ public class Players extends RoleAssignment {
 	 * @param name 
 	 */
 	public void nameOfPlayers(List<String> names){
-		for(int i =0; i<totalPlayers; i++){
+		for(int i =0; i<names.size(); i++){
 			Player p = new Player();
 			playerInfo.add(p);
 			playerInfo.get(i).setName(names.get(i));
@@ -87,11 +78,7 @@ public class Players extends RoleAssignment {
 			
 			}else{
 				playerInfo.get(i).setIsMafia(false);
-			}
-			if(playerInfo.get(i).getRole().contains("Mafia")){
-				//This is a list of the names, used at night to display the ALL Mafia members to other Mafia members
-				mafiaMembers.add(playerInfo.get(i).getName());				
-			}			
+			}		
 		}		
 	}
 			
@@ -105,19 +92,9 @@ public class Players extends RoleAssignment {
 		lynchTargetID = i;
 	}
 	
-	//setter for playerInfo
-	public void setPlayerInfo(List<Player> info){
-		playerInfo = info;
-	}
-	
-	//getters
-		
+	//getters	
 	public List<Player> getPlayerInfo(){
 		return playerInfo;
-	}
-	
-	public List<String> getMafiaMembers(){
-		return mafiaMembers;
 	}
 	
 	public int getLynchTarget(){

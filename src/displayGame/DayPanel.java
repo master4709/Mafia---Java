@@ -4,9 +4,6 @@ package displayGame;
 import myJStuff.*;
 import logic.*;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -15,9 +12,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import net.miginfocom.swing.MigLayout;
 /**
  * This class is used to display the list of possible targets of the day lynching
  * 
@@ -25,29 +19,21 @@ import net.miginfocom.swing.MigLayout;
  *
  */
 public class DayPanel extends MyPanel implements ActionListener{
-	
-	private ActionListener actionListener;
-
 	//This label displays the text "Day Time"
 	private JLabel lblDayTime;
 	//This label displays the text for what to do on this screen
 	private JLabel lblDiscription;
-	
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
-	
 	//Stores all of the data of the players
 	//Does not change the date stored in it EVER
 	private List<Player> playerInfo;
-	
 	//List of buttons representing each player that is alive
 	//Pressing a button will set them as the target for the day lynching
 	private List<JButton> playerButtonList = new ArrayList<>();
-	
 	//Stores the index value for the target of the dayLynching
 	//To be used in the game class to kill the target of the day lynching
 	private int target;
-
 	/**
 	 * Create the panel.
 	 */

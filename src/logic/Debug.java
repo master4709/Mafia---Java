@@ -2,8 +2,6 @@ package logic;
 
 import java.util.List;
 import java.util.Scanner;
-
-import javax.swing.JTextField;
 /**
  * 
  * @author

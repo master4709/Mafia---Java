@@ -14,7 +14,7 @@ public class MyFont extends Font{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public MyFont(int size, String ...str) {
+	public MyFont(int size) {
 		super("Georgia", Font.PLAIN, size);
 		try{
 			Font mafiaType = super.createFont(Font.TRUETYPE_FONT, getClass().getResource("../../data/Cinzel-Regular.ttf").openStream());

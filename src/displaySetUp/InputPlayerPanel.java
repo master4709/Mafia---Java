@@ -17,11 +17,6 @@ import myJStuff.*;
  */
 public class InputPlayerPanel extends MyPanel{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private int numOfPlayers;
     private ArrayList<JTextField> textFields = new ArrayList<>();
 	
@@ -57,7 +52,7 @@ public class InputPlayerPanel extends MyPanel{
                 name.add(textFields.get(i).getText());
                 Debug.$(name, i);
             }
-			SetUpController.getInstance().switchToGame(numOfPlayers, name);
+			SetUpController.getInstance().switchToGame(name);
         });
 	}
 	

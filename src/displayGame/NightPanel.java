@@ -3,9 +3,7 @@ package displayGame;
 import myJStuff.*;
 import logic.*;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,9 +12,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import net.miginfocom.swing.MigLayout;
 
 /**
  * NightPanel
@@ -25,15 +20,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class NightPanel extends MyPanel implements ActionListener{
 	
-	private ActionListener actionListener;
 	private Color selectColor;
-	
-	//All of the Font variables needed for the screen
-	//Receive values in setFont()
-	private Font titleFont;
-	private Font infoFont;
-	private Font roleFont;
-	
 	
 	private JLabel lblName;
 	private JLabel lblRole;
@@ -108,7 +95,7 @@ public class NightPanel extends MyPanel implements ActionListener{
 		btnDetective.addActionListener(actionListener);
 		btnDetective.setVisible(false);
 		
-		lblDetective = new MyLabel("", textColor, new MyFont(25));
+		lblDetective = new MyLabel("", textColor, infoFont);
 		center.add(lblDetective, "cell 0 "+k+",alignx center");
 		
 	}
@@ -132,18 +119,6 @@ public class NightPanel extends MyPanel implements ActionListener{
 		btnPlayer.addActionListener(this);
 		btnPlayer.setName(Integer.toString(i));
 		playerButtonList.add(btnPlayer);
-	}
-	
-	/**
-	 * Sets all of the panels background to the passed Color
-	 * Also creates a black border around the edge of the screen
-	 * @param c
-	 */
-	
-	private void setColor(){
-		selectColor = Colors.blue;
-		textColor = Colors.black;
-		backgroundColor = Colors.defaultBackgroundColor;
 	}
 	
 	public JButton getDetectiveButton(){

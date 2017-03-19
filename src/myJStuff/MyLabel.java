@@ -19,18 +19,18 @@ public class MyLabel extends JLabel{
 	public MyLabel(
 			String text,
 			Color color,
-			Font font){
+			int size){
 		
 		setText(text);
 		setForeground(Colors.white);
-		setFont(font);
+		setFont(new MyFont(size));
 	}
 
 	public MyLabel(String string) {
-		this(string, Colors.white, new MyFont(25));
+		this(string, Colors.white, 25);
 	}
 
 	public MyLabel(String string, int i) {
-		this(string, Colors.white, new MyFont(i));
+		this(string, Colors.white, i);
 	}
 }

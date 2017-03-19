@@ -53,6 +53,7 @@ public class MainPanel{
 	
 	//button for south panel
 	private JButton btnDebug;
+	private MyButton btnTest;
 
 	/**
 	 * Create the main panel frame.
@@ -99,8 +100,6 @@ public class MainPanel{
 	
 	private void displayNorth(){
 
-		//TODO img = ImageIO.read(new File("strawberry.jpg"));
-		//adding image to background
 		ImageIcon icon = new ImageIcon("data/pictures/mafia.png");
 		lblMan = new JLabel(icon);
 
@@ -122,6 +121,15 @@ public class MainPanel{
 				btnDebug.setText("Debug is " + Debug.amOn());
 			}
 		});
+		
+		btnTest = new MyButton("Test Game");
+		south.add(btnTest, "cell 0 0 ,growx");
+		btnTest.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				MainController.getInstance().switchTest();
+			}
+		});	
+		;
 	}
 	
 	/**

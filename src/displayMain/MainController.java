@@ -5,6 +5,8 @@ import displaySetUp.SetUpController;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Testing.GameTest;
+
 /**
  * This class controls 3 panels which are related to the main menu. The panels are: AboutPanel, 
  * RulePanel and MainPanel. This class will be called first in RunMafia to begin the game. 
@@ -123,5 +125,11 @@ public class MainController {
 		SetUpController.createInstance(frame);
 		//creating panels for next stage of the game which is set up.
 		SetUpController.getInstance().start();
+	}
+	
+	public void switchTest(){
+		frame.getContentPane().setVisible(false);
+		frame.dispose();
+		GameTest.run();
 	}
 }

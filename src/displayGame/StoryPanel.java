@@ -15,7 +15,6 @@ import logic.Story;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 /**
  * Story Panel
  * @author
@@ -147,8 +146,9 @@ public class StoryPanel {
 		textColor = Colors.black;
 		backgroundColor = Colors.defaultBackgroundColor;
 	}
+	
+	//Call the story class here also to receive the getters for the location, event, etc....
 	//Set all of the labels and such for the story in here
-	//Call the story class here also.
 	public void setStory(String name, boolean dead){
 		
 	}

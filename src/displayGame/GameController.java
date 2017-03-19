@@ -73,11 +73,11 @@ public class GameController {
 		g = new Game(playerInfo,lynchTarget);
 		
 		cpp = new CheckPlayerPanel(listener);
-		dp = new DayPanel(listener,g.getPlayerInfo());
-		np = new NightPanel(listener,g.getPlayerInfo(),g.getMafiaMember());
+		dp = new DayPanel(listener,playerInfo);
+		np = new NightPanel(listener,playerInfo,g.getMafiaMember());
 		sp = new StoryPanel(listener);
 		
-		vapp = new ViewAllPlayersPanel(listener,g.getPlayerInfo());
+		vapp = new ViewAllPlayersPanel(listener,playerInfo);
 		vpp = new ViewPlayerPanel(g.getMafiaMember());
 		
 		switchDay();
@@ -162,7 +162,6 @@ public class GameController {
 		np.removePlayerButton(target);
 		//Sets the 
 		position = 0;
-		findNextPlayer();
 	}
 	/**
 	 * Calls the night Action method in the game class and odes all of the logic for each player each night
@@ -172,6 +171,7 @@ public class GameController {
 		//If someone was saved or killed this night sets event to their index value
 		//Set to -1 if no one was saved or killed that night
 		int target = g.nightAction();
+		//If there was a target this night
 		if(target!=-1){
 			//If the player was killed that night remove the player button from both the 
 			if(!g.getPlayerInfo().get(target).isHealed()){
@@ -180,14 +180,21 @@ public class GameController {
 			}else{
 				g.getPlayerInfo().get(target).setIsHealed(false);
 			}
+			//Switches to the story panel to make a story about what happened to the player
 			String name = g.getPlayerInfo().get(target).getName();
 			boolean dead = !g.getPlayerInfo().get(target).isHealed();
 			switchStory(name,dead);
 		}else{
+			//Skip the story panel and go to the next day.
 			switchDay();
 		}
 	}
-	
+	/**
+	 * Finds the next player who is alive in the list of players
+	 * Uses recursion and a global variable called position to loop through the list of players
+	 * If the player is alive displays the CHeckPLayer Panel, if not finds the next player
+	 * Once the position has gone beyond the index of playerInfo, calls the nightAction method
+	 */
 	private void findNextPlayer(){
 		//If the position has not gone out of bounds
 		if(position<g.getPlayerInfo().size()){
@@ -203,43 +210,66 @@ public class GameController {
 			nightAction();
 		}
 	}
-
+	/**
+	 * This class sets the message for the detective during the night
+	 * It looks at the index value of the target of the detective
+	 * THen displays if they are art of the Mafia or not
+	 * @param target
+	 */
+	private void detective(int target){
+		//If the target of the detective player is part of the Mafia
+		//*Note* the Mafia GodFather is hidden from the detective
+		if(g.getPlayerInfo().get(target).isMafia()){
+			np.setDetectiveMessage("Part of the Mafia");
+		}else{
+			np.setDetectiveMessage("Not part of the Mafia");
+		}
+	}
+	/**
+	 * This class is the ActionListenr for all of the buttons in the displayGame Package
+	 * When a button is pressed, the name String of the button is stored as a local variable
+	 * A switch statement is used to compare the name with other string values to find the correct button
+	 */
 	public class Listener implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e){
 			//Gets the name (NOT TEXT) of the button that was pressed
 			JButton source = (JButton)e.getSource();
 			String name = source.getName();
-			System.out.println(name);
-			//Finds the button that was pressed and does te needed commands
+			//Finds the button that was pressed and does the needed commands
 			switch(name){
 			case "Continue_ViewAllPlayersPanel":
 				switchDay(); 
 				break;
 			case "Continue_DayPanel":
-				int target = dp.getTarget();
-				if(target!=-1){
-					dayLynch(target);
-					switchCheckPlayer(); 
+				int target = dp.getTarget();//Gets the target of the Day panel (THe person voted out and lynched before night)
+				if(target!=-1){//Makes sure a target has been chosen for the day 
+					dayLynch(target);//Lynches the target of the day
+					findNextPlayer();//Finds the first person in the list of players that is alive and displays his/her night screen
 				}
 				break;
 			case "Continue_CheckPlayerPanel":
 				switchNight();
 				break;
 			case "Continue_NightPanel":
-				int tar = np.getPlayerTarget();
-				g.setPlayerTarget(position, tar);
+				int target2 = np.getPlayerTarget();
+				g.setPlayerTarget(position, target2);
 				position++;
 				findNextPlayer();
 				break;
 			case "Continue_StoryPanel":
 				switchDay();
 				break;
+			case "Detective":
+				int target3 = np.getPlayerTarget();
+				if(target3!=-1){
+					detective(target3);
+				}
+				break;
 			default:
 				break;
 			}
         
 		}
-    }
-		
+    }	
 }

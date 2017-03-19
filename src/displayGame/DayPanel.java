@@ -144,11 +144,11 @@ public class DayPanel implements ActionListener{
 	 */
 	private void displayCenter(){
 		//Loop through the list of players
-		for(int i=0;i<playerInfo.size();i++){
+		for(Player player: playerInfo){
 			//If the player is NOT dead
-			if(!playerInfo.get(i).isDead()){
+			if(!player.isDead()){
 				//create a button of that player
-				displayPlayerButton(i);
+				displayPlayerButton(player.getPlayPosition());
 			}
 		}
 	}
@@ -194,7 +194,7 @@ public class DayPanel implements ActionListener{
 	 * sets all of the fonts of the screen to new MyFonts with int size (how big the font is)
 	 */
 	private void setFont(){
-		titleFont = new MyFont(50);
+		titleFont = new MyFont(65);
 		infoFont = new MyFont(25);
 	}
 	/**
@@ -208,8 +208,8 @@ public class DayPanel implements ActionListener{
 	
 	public void removePlayerButton(int target){
 		if(target!=-1){
-			for(int i=0;i<playerButtonList.size();i++){
-				if(target==Integer.parseInt(playerButtonList.get(i).getName())){
+			for(JButton button: playerButtonList){
+				if(target==Integer.parseInt(button.getName())){
 					center.remove(playerButtonList.get(target));
 				}
 			}

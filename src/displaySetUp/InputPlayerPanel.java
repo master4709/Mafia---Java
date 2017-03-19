@@ -54,7 +54,6 @@ public class InputPlayerPanel extends MyPanel{
                 	name.add(text);
                 }
             }
-			SetUpController.getInstance().switchToGame(name);
             if(name.size() <numOfPlayers) name = autoPopulate(name);
             Debug.$(name);
 			SetUpController.getInstance().switchToGame(name);

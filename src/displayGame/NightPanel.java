@@ -3,7 +3,6 @@ package displayGame;
 import myJStuff.*;
 import logic.*;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,8 +18,6 @@ import javax.swing.JPanel;
  *
  */
 public class NightPanel extends MyPanel implements ActionListener{
-	
-	private Color selectColor;
 	
 	private JLabel lblName;
 	private JLabel lblRole;

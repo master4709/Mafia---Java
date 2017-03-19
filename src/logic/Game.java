@@ -159,5 +159,10 @@ public class Game extends Action{
 		List<String> x = mafiaMembers;
 		return x;
 	}
+	
+	public List<Player> getPlayerInfo(){
+		List<Player> x = playerInfo;
+		return x;
+	}
 
 }

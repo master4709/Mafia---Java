@@ -72,14 +72,13 @@ public class GameController {
 	
 	public void start(List<Player> playerInfo, int lynchTarget){
 		g = new Game(playerInfo,lynchTarget);
-		
 		cpp = new CheckPlayerPanel(listener);
-		dp = new DayPanel(listener,playerInfo);
-		np = new NightPanel(listener,playerInfo,g.getMafiaMember());
+		dp = new DayPanel(listener,g.getPlayerInfo());
+		np = new NightPanel(listener,g.getPlayerInfo(),g.getMafiaMember());
 		sp = new StoryPanel(listener);
 		
-		vapp = new ViewAllPlayersPanel(listener,playerInfo);
-		vpp = new ViewPlayerPanel(g.getMafiaMember());
+		vapp = new ViewAllPlayersPanel(listener,g.getPlayerInfo());
+		//vpp = new ViewPlayerPanel(g.getMafiaMember());
 		
 		switchDay();
 	}
@@ -272,5 +271,5 @@ public class GameController {
 			}
         
 		}
-    }	
+    }
 }

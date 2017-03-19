@@ -17,7 +17,7 @@ public class SetUpController {
 	
 	private static SetUpController instance = null;
 	
-	private SetUp p;
+	private SetUp setUp;
 	private PlayerCountPanel pcp;
 	private InputPlayerPanel ipp;
 	
@@ -71,10 +71,9 @@ public class SetUpController {
 	 * @param textFields 
 	 */
 	public void switchToGame(List<String> name){
-		
-		p = new SetUp(name);
+		setUp = new SetUp(name);
 		GameController.createInstance(frame);
-		GameController.getInstance().start(p.getPlayerInfo(), p.getLynchTarget());
+		GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget());
 	}
 	
 

@@ -40,7 +40,7 @@ public class RoleAssignment extends Debug {
 		for (Role role : Role.values()) {
 			System.out.print(role.getRoleID() + " | ");
 		} System.out.println();
-
+		
 		System.out.print("Enter the roles that you wish to include in the game separated by a comma: ");
 
 		getChoices();

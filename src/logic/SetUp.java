@@ -12,14 +12,15 @@ import java.util.Random;
 public class SetUp extends RoleAssignment {
 	
 	//List of each player (class) and his/her info (name, role, target, position, etc)
-	private static List<Player> playerInfo = new ArrayList<>();
-	
+	private List<Player> playerInfo = new ArrayList<>();
+	private List<String> names = new ArrayList<>();
 	//This int stores the information for the lyncher target	
 	private int lynchTargetID;
 	
-	public SetUp( List<String> name){
-		super(name.size());
-		nameOfPlayers(name);
+	public SetUp( List<String> names){
+		super(names.size());
+		this.names = names;
+		nameOfPlayers();
 		roleOfPlayers();
 	}
 
@@ -31,7 +32,7 @@ public class SetUp extends RoleAssignment {
 	 * Sets the inBar (The barman has stopped them from doing their action tonight) status to false for each player
 	 * @param name 
 	 */
-	public void nameOfPlayers(List<String> names){
+	public void nameOfPlayers(){
 		for(int i =0; i<names.size(); i++){
 			Player p = new Player();
 			playerInfo.add(p);
@@ -60,7 +61,7 @@ public class SetUp extends RoleAssignment {
 		List<String> rolesInfo = getRolesInfo();
 		List<String> Goals = getGoals();
 		//Loops through all of the players and assigns them a Role, Info and Goal
-		for(int i=0; i<totalPlayers; i++){
+		for(int i=0; i<names.size(); i++){
 			playerInfo.get(i).setRole(roles.get(i));			
 			playerInfo.get(i).setRoleInfo(rolesInfo.get(i));
 			playerInfo.get(i).setGoal(Goals.get(i));

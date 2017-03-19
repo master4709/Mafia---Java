@@ -1,16 +1,10 @@
 package logic;
-/**
- * Author: Mahsa Lotfi Gaskarimahalleh, UCID#10072013
- */
+
 
 /**
  * This class stores the data of each player
- * 
- * 
+ * Author: Mahsa Lotfi Gaskarimahalleh, UCID#10072013
  */
-
-
-
 public class Player {
 	
 	private int playPosition;

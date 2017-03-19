@@ -1,21 +1,22 @@
 package displaySetUp;
 
-import logic.*;
-import myJStuff.*;
+import logic.Role;
+import myJStuff.Colors;
+import myJStuff.MyButton;
+import myJStuff.MyLabel;
+import net.miginfocom.swing.MigLayout;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-
-import net.miginfocom.swing.MigLayout;
+import java.util.List;
 
 /**
  *
@@ -28,8 +29,9 @@ public class RoleSelectionPanel {
     private ButtonListener buttonListener;
     private ArrayList<JButton> playerButtons;
     private JLabel centralLabel;
+    private JButton continueButton;
 
-    private int totalPlayers;
+    private List<String> playerNames = new ArrayList<>();
     private ArrayList<String> rolesSelected; //temp
     private ArrayList<String> playersWhoHasChosenARole; //temp
     private HashMap<String, String> playersAndTheirRole;
@@ -39,12 +41,12 @@ public class RoleSelectionPanel {
 
     /***
      * Constructor. Specifies the initial number of total players
-     * @param totalPlayers
+     * @param playerNames
      */
-    public RoleSelectionPanel(int totalPlayers) {
+    public RoleSelectionPanel(List<String> playerNames) {
 
-        this.totalPlayers = totalPlayers;
-        System.out.println("Total Players: " + totalPlayers);
+        this.playerNames = playerNames;
+        System.out.println("Total Players: " + playerNames.size());
 
         rolesSelected = new ArrayList<>();
         playersWhoHasChosenARole = new ArrayList<>();
@@ -56,6 +58,7 @@ public class RoleSelectionPanel {
         buttonListener = new ButtonListener();
         playerButtons = new ArrayList<>();
         centralLabel = new MyLabel("Enter a role for each player", Colors.black, 30);
+        continueButton = new MyButton("Continue", Colors.white, Colors.black, 15);
 
         initialize();
 
@@ -71,9 +74,9 @@ public class RoleSelectionPanel {
         JButton goToMain = new MyButton("Back", Colors.white, Colors.black, 15);
         contentPane.add(goToMain);
 
-        JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 15);
         continueButton.addActionListener(buttonListener);
         contentPane.add(continueButton, "wrap, right");
+        continueButton.setVisible(false);
 
         centralLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         Border selectRolesMargin = new EmptyBorder(10, 10, 20, 10);
@@ -91,7 +94,7 @@ public class RoleSelectionPanel {
 
         for (int count = 0; count< 10; count++) {
             JButton playerBtn = new MyButton("Player " + (count+1), Colors.white, Colors.grey, 30);
-            if (count >= totalPlayers) {
+            if (count >= playerNames.size()) {
                 playerBtn.setVisible(false);
             }
             playerButtons.add(playerBtn);
@@ -151,7 +154,7 @@ public class RoleSelectionPanel {
 
         int count = 0;
         for (JButton playerBtn : playerButtons) {
-            if (count < totalPlayers) {
+            if (count < playerNames.size()) {
                 playerBtn.setVisible(true);
                 playerBtn.setEnabled(true);
                 playerBtn.setText("Player " + (count+1));
@@ -200,12 +203,15 @@ public class RoleSelectionPanel {
             if (btnText.contains("Player")) {
                 showAvailableRoles(btnText);
             } else if (btnText.equals("Continue")) {
-                // TODO proceed to the game
+                // TODO assign roles, proceed to the game
             } else { // a specific role button is entered
                 rolesSelected.add(btnText);
                 playersAndTheirRole.put(playerToAssign, btnText);
                 System.out.println(rolesSelected.toString());
                 resetButtonsText();
+                if (rolesSelected.size() == playerNames.size()) {
+                    continueButton.setVisible(true);
+                }
             }
 
         }

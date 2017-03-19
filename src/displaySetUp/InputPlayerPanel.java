@@ -1,14 +1,11 @@
 package displaySetUp;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import logic.Debug;
 import myJStuff.*;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * This class creates the Panel for selecting how many players you want in the game
  * @author
@@ -56,7 +53,7 @@ public class InputPlayerPanel extends MyPanel{
             }
             if(name.size() <numOfPlayers) name = autoPopulate(name);
             Debug.$(name);
-			SetUpController.getInstance().switchToGame(name);
+			SetUpController.getInstance().switchToRoleSelection(name);
         });
 	}
 	

@@ -1,12 +1,10 @@
 package displaySetUp;
 
 import displayGame.GameController;
-import logic.*;
+import logic.SetUp;
 
+import javax.swing.*;
 import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * 
@@ -68,7 +66,7 @@ public class SetUpController {
 	}
 	/**
 	 * This method goes to the GameController
-	 * @param textFields 
+	 * @param name
 	 */
 	public void switchToGame(List<String> name){
 		setUp = new SetUp(name);
@@ -82,5 +80,12 @@ public class SetUpController {
 		ipp = new InputPlayerPanel(playerTotal);
 		frame.setContentPane(ipp.getContentPane());
 		ipp.getContentPane().setVisible(true);
+	}
+
+	public void switchToRoleSelection(List<String> names) {
+		frame.getContentPane().setVisible(false);
+		RoleSelectionPanel rsp = new RoleSelectionPanel(names);
+		frame.setContentPane(rsp.getContentPane());
+		rsp.getContentPane().setVisible(true);
 	}
 }

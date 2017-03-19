@@ -44,7 +44,7 @@ public class GameController {
 	//Location inside the list of players for the night cycle
 	private int position = 0;
 	
-	private GameController(JFrame frame){
+	public GameController(JFrame frame){
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setVisible(true);

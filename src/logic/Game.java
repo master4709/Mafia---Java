@@ -43,7 +43,7 @@ public class Game extends Action{
 	
 	public void mafiaMembers(){
 		for(int i =0;i<playerInfo.size();i++){
-			//$(playerInfo.get(i).getRole());
+			$(playerInfo.get(i).getRole());
 			if(playerInfo.get(i).getRole().contains("Mafia")){
 				mafiaMembers.add(playerInfo.get(i).getName());
 			}

@@ -49,13 +49,25 @@ public class InputPlayerPanel extends MyPanel{
         continueButton.addActionListener(e -> {
             List<String> name = new ArrayList<>();
             for (int i = 0; i < textFields.size();i++) {
-                name.add(textFields.get(i).getText());
-                Debug.$(name, i);
+            	String text = textFields.get(i).getText();
+                if(!text.isEmpty()){
+                	name.add(text);
+                }
             }
+			SetUpController.getInstance().switchToGame(name);
+            if(name.size() <numOfPlayers) name = autoPopulate(name);
+            Debug.$(name);
 			SetUpController.getInstance().switchToGame(name);
         });
 	}
 	
+	private List<String> autoPopulate(List<String> name) {
+		for(int i = name.size() + 1; i < numOfPlayers + 1; i++){
+			name.add("player_" + i);
+		}
+		return name;
+	}
+
 	public JPanel getContentPane(){
 		return contentPane;
 	}

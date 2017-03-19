@@ -60,6 +60,10 @@ public abstract class Debug {
 	}
 
 	public static void $(List<String> name, int nameInput) {
-		System.out.println(name.get(nameInput));
+		if(debugOn) System.out.println(name.get(nameInput));
+	}
+
+	public static void $(List<String> name) {
+		if(debugOn) for(String n: name) System.out.println(n);
 	}	
 }

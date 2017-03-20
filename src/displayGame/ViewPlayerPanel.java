@@ -17,9 +17,6 @@ import javax.swing.JPanel;
 public class ViewPlayerPanel extends MyPanel{
 	
 	private JButton btnBack;
-
-	private Player player;
-	
 	private List<String> mafiaMembers;
 	
 	private JLabel role;
@@ -45,7 +42,9 @@ public class ViewPlayerPanel extends MyPanel{
 		name = new MyLabel("",20);
 		north.add(name, "cell 0 1");
 	}
-	
+	/**
+	 * 
+	 */
 	private void displaySouth(){
 		//Create Button using the default button presets and text Continue
 		
@@ -63,12 +62,10 @@ public class ViewPlayerPanel extends MyPanel{
 	}
 	//sets the players characteristics
 	public void setPlayer(Player player){
-		this.player = player;
 		
 		role.setText(player.getRole());
 		name.setText(player.getName());
 		roleInfo.setText(player.getRoleInfo());
-		goal.setText(player.getGoal());
 	}
 	
 	

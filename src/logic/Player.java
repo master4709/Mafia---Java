@@ -16,7 +16,6 @@ public class Player {
 	private String name;//name of the player
 	private String role;//role of the player
 	private String roleInfo;//info for each role which is instruction related to the role
-	private String goal;//the goal of each role
 	private boolean isMafia;//true if the person is mafia member
 	private boolean isDead;//true if the player is dead
 	private boolean isHealed;//true if the player is healed
@@ -63,9 +62,7 @@ public class Player {
 	public void setInBar(boolean isBar) {
 		this.inBar = isBar;
 	}
-	public void setGoal(String goal) {
-		this.goal = goal;
-	}
+	
 	public void setIsLynched(boolean isLynched) {
 		this.isLynched = isLynched;
 	}
@@ -107,9 +104,6 @@ public class Player {
 	}
 	public boolean inBar() {
 		return inBar;
-	}
-	public String getGoal() {
-		return goal;
 	}
 	public boolean islynched() {
 		return isLynched;

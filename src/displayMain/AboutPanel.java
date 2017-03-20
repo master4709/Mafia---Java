@@ -2,7 +2,6 @@ package displayMain;
 
 import myJStuff.*;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
@@ -12,13 +11,13 @@ import javax.swing.JButton;
 
 /**
  * This class creates About panel for Mafia game by creating different panels and putting them together. 
- * Each panel contains button or label or text field. The back button is assigned to the action of 
- * going back to the main menu. 
- * @author Mahsa Lotfi
- * 
- *
+ * Each panel contains button or label or text field. 
+ * @author Mahsa Lotfi 10072013
  */
 public class AboutPanel extends MyPanel{
+	/**
+	 * Instance variables.
+	 */	
 	//north panel label
 	private JLabel lblAbout;
 	
@@ -29,7 +28,9 @@ public class AboutPanel extends MyPanel{
 	private MyTextArea myTxtPane;
 
 	/**
-	 * Create the frame.
+	 * Constructor with one argument of ActionListener actionListener.
+	 * This constructor will initialize the actionListener and call other methods of this class for display.
+	 * @param actionListener
 	 */
 	public AboutPanel(ActionListener actionListener) {
 		this.actionListener = actionListener;
@@ -75,6 +76,7 @@ public class AboutPanel extends MyPanel{
 	
 	/**
 	 * Getter method for the content pane.
+	 * @return contentPane
 	 */
 	public JPanel getContentPane(){
 		return contentPane;

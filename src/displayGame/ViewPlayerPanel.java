@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
  *
@@ -20,6 +21,8 @@ public class ViewPlayerPanel extends MyPanel{
 	private Player player;
 	
 	private List<String> mafiaMembers;
+	
+	private JLabel role;
 
 	/**
 	 * Create the panel.
@@ -28,11 +31,18 @@ public class ViewPlayerPanel extends MyPanel{
 		this.actionListener = actionListener;
 		this.mafiaMembers = mafiaMembers;
 		
+		displayNorth();
 		displaySouth();
+	}
+	
+	private void displayNorth(){
+		role = new MyLabel("",20);
+		north.add(role,"cell 0 1");
 	}
 	
 	private void displaySouth(){
 		//Create Button using the default button presets and text Continue
+		
 		btnBack = new MyButton("Back");
 		south.add(btnBack, "cell 0 0,alignx center");
 		btnBack.setName("Back_ViewPlayerPanel");
@@ -41,6 +51,9 @@ public class ViewPlayerPanel extends MyPanel{
 	
 	public void setPlayer(Player player){
 		this.player = player;
+		
+		role.setText(player.getRole());
+		//need name and goal, and role info for the player
 	}
 	
 	

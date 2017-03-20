@@ -1,5 +1,8 @@
 package myJStuff;
 
+/**
+ * @author Elvin Limpin 30018832
+ */
 
 import javax.swing.JTextField;
 

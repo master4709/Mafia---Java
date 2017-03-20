@@ -32,9 +32,9 @@ public class MainPanel extends MyPanel{
 	/**
 	 * Create the main panel frame.
 	 */
-	public MainPanel() {
+	public MainPanel(ActionListener actionListener) {
 
-		
+		this.actionListener = actionListener;
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
@@ -71,12 +71,8 @@ public class MainPanel extends MyPanel{
 		
 		btnTest = new MyButton("Test Game");
 		south.add(btnTest, "cell 0 0 ,growx");
-		btnTest.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				MainController.getInstance().switchTest();
-			}
-		});	
-		;
+		btnTest.addActionListener(actionListener);
+		btnTest.setName("Test_MainPanel");
 	}
 	
 	/**
@@ -85,37 +81,30 @@ public class MainPanel extends MyPanel{
 	private void displayCenter(){
 		btnNewGame = new MyButton("New Game");
 		center.add(btnNewGame, "cell 0 1,growx");
-		// setting the action for new game button
-		btnNewGame.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			MainController.getInstance().switchToSetUp();
-    	}});
+		btnNewGame.addActionListener(actionListener);
+		btnNewGame.setName("NewGame_MainPanel");
+		
 		
 		btnContinueGame = new MyButton("Continue Game");
 		center.add(btnContinueGame, "cell 0 2,growx");
 		// setting the action for continue game button
-		btnContinueGame.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-				
-    	}});
+		btnContinueGame.addActionListener(actionListener);
+		btnContinueGame.setName("ContinueGame_MainPanel");
 		
 		btnRules = new MyButton("Rules");
 		center.add(btnRules, "cell 0 3,growx");
-		// setting the action for Rules button
-		btnRules.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			MainController.getInstance().switchRule();
-		}});
+		btnRules.addActionListener(actionListener);
+		btnRules.setName("Rule_MainPanel");
 		
 		btnAbout = new MyButton("About");
 		center.add(btnAbout, "cell 0 4,growx");
 		// setting the action for about button
-		btnAbout.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			MainController.getInstance().switchAbout();
-		}});
+		btnAbout.addActionListener(actionListener);
+		btnAbout.setName("About_MainPanel");
 		
 	}
+	
+	
 	
 	/**
 	 * Getter method for the content pane.

@@ -11,10 +11,22 @@ import logic.Debug;
 import logic.Player;
 import logic.Role;
 
-public abstract class Test extends Debug {
+/**
+ * This class contains functions that facilitate the testing
+ * for the game witout having to go through the role assignment
+ * process
+ * @author Elvin Limpin 30018832
+ *
+ */
+
+public abstract class TestingTools extends Debug {
 	private static List<String> mafiaMembers = new ArrayList<>();
 	private static int lynchTargetID;
 		
+		/**
+		 * creates a JFrame to facilitate the GUI
+		 * @return the Jframe
+		 */
 		public static JFrame init(){
 			int width;
 			int height;
@@ -30,8 +42,13 @@ public abstract class Test extends Debug {
 			return frame;
 		}
 		
+		/**
+		 * Creates information for the players to facilitate
+		 * testing
+		 * @return List<Player> containing finalized roles
+		 */
 		public static List<Player> makeInfo() {
-			int totalPlayers = 10;
+			int totalPlayers = 6;
 			List<Player> playerInfo = initialInfo(totalPlayers);
 			List<String> assignments = new ArrayList<>();
 			List<String> assignmentsInfo = new ArrayList<>();
@@ -54,7 +71,15 @@ public abstract class Test extends Debug {
 			return setNewInfo(assignments, assignmentsInfo,assignmentsGoals, playerInfo, totalPlayers);
 		}
 		
-		
+		/**
+		 * matches the roles and the other attributes of the player
+		 * @param assignments
+		 * @param assignmentsInfo
+		 * @param assignmentsGoals
+		 * @param playerInfo
+		 * @param totalPlayers
+		 * @return List<Player> containing the player 
+		 */
 		private static List<Player> setNewInfo(List<String> assignments, List<String> assignmentsInfo,
 				List<String> assignmentsGoals, List<Player> playerInfo, int totalPlayers) {
 			
@@ -90,7 +115,12 @@ public abstract class Test extends Debug {
 			return playerInfo;		
 			
 		}
-
+		
+		/**
+		 * Finds a randomized target for the lyncher
+		 * @param playerInfo
+		 * @param totalPlayers
+		 */
 		public static void lynchTarget(List<Player> playerInfo, int totalPlayers){
 			List<Player> possibleTargets = playerInfo;
 			int i = new Random().nextInt(totalPlayers-1);
@@ -100,6 +130,11 @@ public abstract class Test extends Debug {
 			lynchTargetID = i;
 		}
 
+		/**
+		 *  Initalizes the player information
+		 * @param totalPlayers
+		 * @return List<Player> names for the players
+		 */
 		private static List<Player> initialInfo(int totalPlayers){
 			List<Player> playerInfo = new ArrayList<>();
 			List<String> names = new ArrayList<>(Arrays.asList(
@@ -121,6 +156,10 @@ public abstract class Test extends Debug {
 			return playerInfo;
 		}
 		
+		/**
+		 * Getter for the lynch target
+		 * @return the location of the lynch target
+		 */
 		public static int getLynchTargetID(){
 			return lynchTargetID;
 		}

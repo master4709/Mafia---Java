@@ -46,12 +46,6 @@ public class StoryPanel extends MyPanel {
 		title = new MyLabel("Story", textColor, titleFont);
 		north.add(title);
 	}
-	private void displayLeft(){
-		
-	}
-	private void displayRight(){
-		
-	}
 	
 	private void displayBottom() {
 		btnContinue = new MyButton("Continue");
@@ -84,7 +78,9 @@ public class StoryPanel extends MyPanel {
 	//Call the story class here also to receive the getters for the location, event, etc....
 	//Set all of the labels and such for the story in here
 	public void setStory(String name, boolean dead){
-		
+		Story s = new Story(name,dead);
+		String location = s.getLocation();
+		//lblLocation.settext("");
 	}
 	
 

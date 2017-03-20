@@ -31,8 +31,8 @@ public class AboutPanel extends MyPanel{
 	/**
 	 * Create the frame.
 	 */
-	public AboutPanel() {
-
+	public AboutPanel(ActionListener actionListener) {
+		this.actionListener = actionListener;
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
@@ -54,10 +54,9 @@ public class AboutPanel extends MyPanel{
 		btnBack = new MyButton("Back", btnTxtColor, btnBackgroundColor, buttonFont);
 		south.add(btnBack, "cell 0 0");
 		// setting an action for back button
-		btnBack.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			MainController.getInstance().switchMain();
-		}});
+		btnBack.addActionListener(actionListener);
+		btnBack.setName("Back_AboutPanel");
+		
 		
 	}
 	
@@ -72,6 +71,7 @@ public class AboutPanel extends MyPanel{
 				
 		center.add(myTxtPane);
 	}
+	
 	
 	/**
 	 * Getter method for the content pane.

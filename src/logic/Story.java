@@ -27,10 +27,6 @@ public class Story {
 		name = str;
 		isDead = dead;
 	}
-	
-	public Story (String str){
-		name = str;
-	}
 	//method to extract information from text files
 	public void information() {
 		//file names
@@ -48,24 +44,21 @@ public class Story {
 	    	for (int i = 0; i < 10; i++) {
 	    		stories.add(stories2[i]);
 	    	}
+	    	
+	    	
 	    
 	    	inputStream.close();
 	    	
+	    	
+	    	/**
+	    	 * Put this in a method called locationScanner
+	    	 * Do this for all three scanners
+	    	 */
 	        Scanner inputStream2 = new Scanner (new File(fileName2));
-	        
-	        String location = "";
-	        //reads in all info until it's read everything in the text file
-	        //stores it as a string
-	        while (inputStream2.hasNextLine() == true) {
-	        	location += inputStream2.nextLine();
+	        while(inputStream2.hasNextLine()){
+	    		String line = inputStream2.nextLine();
+	    		locations.add(line);
 	        }
-	        //splits the string at semicolons
-	    	String[] locations2 = location.split(";");
-	    	//stores in locations ArrayList
-	    	for (int j = 0; j < 10; j++) {
-	    		locations.add(locations2[j]);
-	    	}
-	   
 	        inputStream2.close();
 	        
 	        Scanner inputStream3 = new Scanner (new File(fileName3));
@@ -120,6 +113,18 @@ public class Story {
 	    initalize[3] = "Location: " + initalize[1].toString();
 	    initalize[4] = "Here's what happened...\n" + initalize[0].toString();
 	    return initalize;
+	}	
+	
+	public String getLocation(){
+		int rand = new Random().nextInt(locations.size());
+		return locations.get(rand);
 	}
-
+	
+	public String getEvent(){
+		if(isDead){
+			return "dead";
+		}else{
+			return "saved";
+		}
+	}
 }

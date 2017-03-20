@@ -2,10 +2,15 @@ package displayMain;
 
 import displaySetUp.SetUpController;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Testing.GameTest;
+
 
 /**
  * This class controls 3 panels which are related to the main menu. The panels are: AboutPanel, 
@@ -26,6 +31,7 @@ public class MainController {
 	private MainPanel mp;
 	private RulePanel rp;
 	private AboutPanel ap;
+	private Listener listener;
 	
 	//All of the possible panels to be displayed on the frame
 	private JPanel panelMain;
@@ -37,17 +43,17 @@ public class MainController {
 	 * This constructor will initialize the frame and set the bounds.
 	 */
 	private MainController(JFrame frame){
-		
-		mp = new MainPanel();
-		rp = new RulePanel();
-		ap = new AboutPanel();
+
+		listener = new Listener();
+		mp = new MainPanel(listener);
+		rp = new RulePanel(listener);
+		ap = new AboutPanel(listener);
 		
 		//setting up the frame 
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setResizable(false);
 		this.frame.setVisible(true);
-
 	}
 	
 	/**
@@ -101,7 +107,7 @@ public class MainController {
 	public void switchRule(){
 		//Sets current content panel to hidden
 		frame.getContentPane().setVisible(false);
-		//Sets the content panel to the About page 
+		//Sets the content panel to the Rule page 
 		frame.setContentPane(panelRule);
 		//Sets current content panel to visible
 		panelRule.setVisible(true);
@@ -112,7 +118,7 @@ public class MainController {
 	public void switchMain(){
 		//Sets current content panel to hidden
 		frame.getContentPane().setVisible(false);
-		//Sets the content panel to the About page 
+		//Sets the content panel to the Main page 
 		frame.setContentPane(panelMain);
 		//Sets current content panel to visible
 		panelMain.setVisible(true);
@@ -132,4 +138,45 @@ public class MainController {
 		frame.dispose();
 		GameTest.run();
 	}
+	
+	
+	/**
+	 * This class is the ActionListenr for all of the buttons in the displayGame Package
+	 * When a button is pressed, the name String of the button is stored as a local variable
+	 * A switch statement is used to compare the name with other string values to find the correct button
+	 */
+	public class Listener implements ActionListener{
+		
+		public void actionPerformed(ActionEvent e){
+			//Gets the name (NOT TEXT) of the button that was pressed
+			JButton source = (JButton)e.getSource();
+			String name = source.getName();
+			//Finds the button that was pressed and does the needed commands
+			switch(name){
+			case "Back_RulePanel":
+				switchMain(); 
+				break;
+			case "Back_AboutPanel":
+				switchMain(); 
+				break;
+			case "NewGame_MainPanel":
+				switchToSetUp();
+				break;
+			case "ContinueGame_MainPanel":
+				//switchToSetUp();
+				break;
+			case "Rule_MainPanel":
+				switchRule();
+				break;
+			case "About_MainPanel":
+				switchAbout();
+				break;
+			case "Test_MainPanel":
+				switchTest();
+			default:
+				break;
+			}
+        
+		}
+    }
 }

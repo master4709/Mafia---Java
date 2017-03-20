@@ -13,11 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
  * This class creates the Panel for selecting how many players you want in the game
- * @author
+ * @author Elvin Limpin 30018832
  * 
  *
  */
-public class PlayerCountPanel extends MyPanel{
+public class PlayerCountPanel extends MyPanel implements ActionListener{
 	
 	//Labels for the north panel
 	private JLabel lblText;
@@ -107,4 +107,8 @@ public class PlayerCountPanel extends MyPanel{
 		return contentPane;
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub	
+	}
 }

@@ -1,7 +1,6 @@
 package displaySetUp;
 
 import displayGame.GameController;
-import logic.SetUp;
 import myJStuff.Colors;
 
 import javax.swing.*;
@@ -18,11 +17,9 @@ import java.util.List;
 public class SetUpController {
 	
 	private static SetUpController instance = null;
-	
-	private SetUp setUp;
-	private PlayerCountPanel pcp;
-	private PlayerNamePanel ipp;
-	private RoleSelectionPanel rsp;
+
+    private PlayerCountPanel pcp;
+    private RoleSelectionPanel rsp;
 	private ButtonListener buttonListener;
 	private JFrame frame;
 	private JPanel panelCount;
@@ -78,15 +75,15 @@ public class SetUpController {
 	 * @param name
 	 */
 	public void switchToGame(List<String> name){
-		setUp = new SetUp(name);
+//		TODO SetUp setUp = new SetUp(name, rsp.getRolesSelected());
 		GameController.createInstance(frame);
-		GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
+//		TODO GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
 	}
 	
 
 	public void switchToPlayerName(int playerTotal) {
 		frame.getContentPane().setVisible(false);
-		ipp = new PlayerNamePanel(playerTotal);
+        PlayerNamePanel ipp = new PlayerNamePanel(playerTotal);
 		frame.setContentPane(ipp.getContentPane());
 		ipp.getContentPane().setVisible(true);
 	}

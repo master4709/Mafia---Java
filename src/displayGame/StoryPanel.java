@@ -10,17 +10,25 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 /**
  * Story Panel
- * @author
+ * @author: Ronelle Bakima
+ * 30005568
  *
  */
 public class StoryPanel extends MyPanel {
 	
 	private JButton btnContinue;
-	private String name;
-	private boolean isDead;
-	private JLabel title;
-	private JLabel text;
-	private JLabel text2;
+	private JLabel name;
+	
+	private JLabel story;
+	private JLabel location;
+	private JLabel causeOfDeath;
+	private JLabel event;
+	
+	private JLabel line_name;
+	private JLabel line_location;
+	private JLabel line_story;
+	private JLabel line_event;
+	private JLabel line_cause;
 	
 	public StoryPanel(ActionListener actionListener){
 		this.actionListener = actionListener;
@@ -38,13 +46,25 @@ public class StoryPanel extends MyPanel {
 		displayTop();
 		//displayLeft();
 		//displayRight();
-		//displayCenter();
+		displayCenter();
 		displayBottom();
 		
 	}
+	private void displayLeft() {
+		
+	}
+	private void displayRight() {
+		
+	}
 	private void displayTop(){
-		title = new MyLabel("Story", textColor, titleFont);
-		north.add(title);
+		name = new MyLabel("", 20);
+		north.add(name);
+		location = new MyLabel("",20);
+		north.add(location, "cell 0 1");
+		line_location = new MyLabel("Location: ", textColor, textFont);
+		center.add(line_location, "cell 0 2");
+		
+		
 	}
 	
 	private void displayBottom() {
@@ -54,33 +74,32 @@ public class StoryPanel extends MyPanel {
 		btnContinue.addActionListener(actionListener);
 	}
 	private void displayCenter() {
-		Story s = new Story(name, isDead);
-		s.information();
-		String[] initalize = s.initialScenario();
-		for (int i = 0; i < initalize.length; i++){
-			text.setText(initalize[i].toString());
-		}
-		center.add(text, "cell 0 0");
-		if(isDead == true){
-			String[] dead = s.dead();
-			for (int i = 0; i < dead.length; i++){
-				text2.setText(dead[i].toString());
-			}
-			center.add(text2, "cell 0 1");
-		}else if (isDead == false){
-			String[] healed = s.healed();
-			for (int i = 0; i < healed.length; i++){
-				text2.setText(healed[i].toString());
-			}
-			center.add(text2, "cell 0 1");
-		}
+		story = new MyLabel("", 20);
+		center.add(story, "cell 0 2");
+		event = new MyLabel("", 20);
+		center.add(event, "cell 0 3");
+		//line_name = new MyLabel("Name: ", textColor, textFont);
+		//center.add(line_name);
+		//center.add(name);
+		
+		//line_story = new MyLabel("Here's what happened...", textColor, textFont);
+		//center.add(line_story);
+		//center.add(event);
+		
+		
+		
 	}
+
 	//Call the story class here also to receive the getters for the location, event, etc....
 	//Set all of the labels and such for the story in here
-	public void setStory(String name, boolean dead){
-		Story s = new Story(name,dead);
-		//String location = s.getLocation();
-		//lblLocation.settext("");
+	public void setStory(String str, boolean dead){
+		Story s = new Story(str, dead);
+		s.information();;
+		story.setText(s.getStory());
+		location.setText(s.getLocation());
+		//causeOfDeath.setText(s.getCause());
+		event.setText(s.getEvent());
+		name.setText(s.getName());
 	}
 	
 

@@ -79,7 +79,7 @@ public class StoryPanel extends MyPanel {
 	//Set all of the labels and such for the story in here
 	public void setStory(String name, boolean dead){
 		Story s = new Story(name,dead);
-		String location = s.getLocation();
+		//String location = s.getLocation();
 		//lblLocation.settext("");
 	}
 	

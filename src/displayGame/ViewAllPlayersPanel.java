@@ -4,7 +4,6 @@ package displayGame;
 import myJStuff.*;
 import logic.*;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
@@ -14,12 +13,10 @@ import javax.swing.JPanel;
 /**
  * This class is used to display the list of possible targets of the day lynching
  * 
- * @author Pierce de Jong 30006609
- *
- *
- *
+ * @author 
+
  */
-public class ViewAllPlayersPanel extends MyPanel implements ActionListener{
+public class ViewAllPlayersPanel extends MyPanel{
 	//This label displays the text "Day Time"
 	private JLabel lblDayTime;
 	//This label displays the text for what to do on this screen
@@ -83,18 +80,11 @@ public class ViewAllPlayersPanel extends MyPanel implements ActionListener{
 		String text = playerInfo.get(i).getName();
 		//Create a new button with passing the String text
 		JButton btnPlayer = new MyButton(text);
-		btnPlayer.setName(Integer.toString(i));
+		btnPlayer.setName("Select_"+Integer.toString(i));
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position); 
-		btnPlayer.addActionListener(this);//Add action listener
+		btnPlayer.addActionListener(actionListener);//Add action listener
 	}
-	
-	/**
-	 * Sets all of the panels background to the passed Color
-	 * Also creates a black border around the edge of the screen
-	 * @param c
-	 */
-	
 	
 	/**
 	 * Returns the contentPane with everything added to it
@@ -102,49 +92,5 @@ public class ViewAllPlayersPanel extends MyPanel implements ActionListener{
 	 */
 	public JPanel getContentPane(){
 		return contentPane;
-	}
-	
-	public void actionPerformed(ActionEvent e){
-		//Get the name (NOT TEXT) of the button that was pressed
-		JButton source = (JButton)e.getSource();
-        String name = source.getName();
-        
-        switch(name){
-        case "0":
-        	GameController.getInstance().switchViewPlayer(0);
-        	break;
-        case "1":
-        	GameController.getInstance().switchViewPlayer(1);
-        	break;
-        case "2":
-        	GameController.getInstance().switchViewPlayer(2);
-        	break;
-        case "3":
-        	GameController.getInstance().switchViewPlayer(3);
-        	break;
-        case "4":
-        	GameController.getInstance().switchViewPlayer(4);
-        	break;
-        case "5":
-        	GameController.getInstance().switchViewPlayer(5);
-        	break;
-        case "6":
-        	GameController.getInstance().switchViewPlayer(6);
-        	break;
-        case "7":
-        	GameController.getInstance().switchViewPlayer(7);
-        	break;
-        case "8":
-        	GameController.getInstance().switchViewPlayer(8);
-        	break;
-        case "9":
-        	GameController.getInstance().switchViewPlayer(9);
-        	break;
-        case "10":
-        	GameController.getInstance().switchViewPlayer(10);
-        	break;
-        default:
-			break;
-		}
 	}
 }

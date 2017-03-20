@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * This class creates the Panel for selecting how many players you want in the game
+ * This class creates the Panel for selecting how many
+ * players you want in the game. This preceeds the
+ * PlayerNamePanel and supercedes the Main Panel
  * @author Elvin Limpin 30018832
  * 
  *
@@ -27,7 +29,10 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	
 	private List<JButton> buttonList = new ArrayList<>();
 
-	//Needs ActionListener actionListener as an argument once the SetUpController has a 
+	/**
+	 * Constructor initalizes the view and creates an actionListener
+	 * @param actionListener
+	 */
 	public PlayerCountPanel(ActionListener actionListener) {
 		this.actionListener = actionListener;
 		displayNorth();

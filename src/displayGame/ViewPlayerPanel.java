@@ -68,7 +68,6 @@ public class ViewPlayerPanel extends MyPanel{
 		role.setText(player.getRole());
 		name.setText(player.getName());
 		roleInfo.setText(player.getRoleInfo());
-		goal.setText(player.getGoal());
 	}
 	
 	

@@ -9,9 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 /**
- * This class creates panel for Main menu of Mafia game by creating different panels and putting them together. 
+ * This class creates panel for Main menu of Mafia game by creating 
+ * different panels and putting them together. 
  * Each panel contains buttons or labels. Each button is assigned to an action.
  * @author Mahsa Lotfi 10072013
+ * 
  */
 public class MainPanel extends MyPanel{
 	/**
@@ -32,7 +34,8 @@ public class MainPanel extends MyPanel{
 	
 	/**
 	 * Constructor with one argument of ActionListener actionListener.
-	 * This constructor will initialize the actionListener and call other methods of this class for display.
+	 * This constructor will initialize the actionListener and call 
+	 * other methods of this class for display.
 	 * @param actionListener
 	 */
 	
@@ -60,7 +63,8 @@ public class MainPanel extends MyPanel{
 
 	
 	/**
-	 * Method to display contents of south panel. This panel contains the debug button and a button for testing.
+	 * Method to display contents of south panel. This panel contains 
+	 * the debug button and a button for testing.
 	 */
 	private void displaySouth(){
 		btnDebug = new MyButton("Debug is " + Debug.amOn());

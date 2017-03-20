@@ -13,9 +13,11 @@ import Testing.GameTest;
 
 
 /**
- * This class controls 3 panels which are related to the main menu. The panels are: AboutPanel, 
- * RulePanel and MainPanel. This class will be called first in RunMafia to begin the game. 
+ * This class controls 3 panels which are related to the main menu. 
+ * The panels are: AboutPanel, RulePanel and MainPanel. 
+ * This class will be called first in RunMafia to begin the game. 
  * @author Mahsa Lotfi 10072013
+ * 
  */
 
 public class MainController {
@@ -58,7 +60,8 @@ public class MainController {
 	}
 	
 	/**
-	 * This method will change the static instance variable of this class from null to a new object of 
+	 * This method will change the static instance variable 
+	 * of this class from null to a new object of 
 	 * MainController with determined frame.
 	 * It will ensures only one instance of the GameController Class can be made
 	 * @param frame

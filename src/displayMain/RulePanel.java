@@ -17,10 +17,10 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.Dimension;
 
 /**
- * This class creates panel for Rules of Mafia game by creating different panels and putting them together. 
- * Each panel contains button or label or text field. The back button is assigned to the action of 
- * going back to the main menu. 
- * 
+ * This class creates panel for Rules of Mafia game by creating 
+ * different panels and putting them together. 
+ * Each panel contains button or label or text field. 
+ * The back button is assigned to the action of going back to the main menu.  
  * @author Mahsa Lotfi 10072013
  *
  */
@@ -43,7 +43,8 @@ public class RulePanel extends MyPanel{
 	
 	/**
 	 * Constructor with one argument of ActionListener actionListener.
-	 * This constructor will initialize the actionListener and call other methods of this class for display.
+	 * This constructor will initialize the actionListener and call 
+	 * other methods of this class for display.
 	 * @param actionListener
 	 */
 	public RulePanel(ActionListener actionListener) {
@@ -92,7 +93,8 @@ public class RulePanel extends MyPanel{
 	}
 	
 	/**
-	 * Method to display contents of south panel. This panel contains the back button which goes back to main menu.
+	 * Method to display contents of south panel. This panel contains 
+	 * the back button which goes back to main menu.
 	 */
 	private void displaySouth(){
 		btnBack = new MyButton("Back");

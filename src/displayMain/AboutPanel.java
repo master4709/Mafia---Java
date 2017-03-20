@@ -10,9 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 
 /**
- * This class creates About panel for Mafia game by creating different panels and putting them together. 
+ * This class creates About panel for Mafia game by creating 
+ * different panels and putting them together. 
  * Each panel contains button or label or text field. 
  * @author Mahsa Lotfi 10072013
+ * 
  */
 public class AboutPanel extends MyPanel{
 	/**
@@ -29,7 +31,8 @@ public class AboutPanel extends MyPanel{
 
 	/**
 	 * Constructor with one argument of ActionListener actionListener.
-	 * This constructor will initialize the actionListener and call other methods of this class for display.
+	 * This constructor will initialize the actionListener and call 
+	 * other methods of this class for display.
 	 * @param actionListener
 	 */
 	public AboutPanel(ActionListener actionListener) {
@@ -49,7 +52,8 @@ public class AboutPanel extends MyPanel{
 	}
 	
 	/**
-	 * Method to display contents of south panel. This panel contains the back button which goes back to main menu.
+	 * Method to display contents of south panel. This panel contains 
+	 * the back button which goes back to main menu.
 	 */
 	private void displaySouth(){
 		btnBack = new MyButton("Back", btnTxtColor, btnBackgroundColor, buttonFont);

@@ -2,7 +2,8 @@
 	
 	
 	import java.util.ArrayList;
-	import java.util.List;
+import java.util.Collections;
+import java.util.List;
 	import java.util.Random;
 	/**
 	 * This class will create a list to store all the information about each player. 
@@ -23,7 +24,8 @@
 			super(names.size());
 			System.out.println("Set up constructor");
 			this.names = names;
-			this.roles = rolesSelected; 
+			Collections.shuffle(rolesSelected);
+			this.roles = rolesSelected;
 			nameOfPlayers();
 			roleOfPlayers();
 		}

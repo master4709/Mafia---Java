@@ -158,25 +158,30 @@ public class Game extends Action{
 	 * @return x (List of Mafia Members)
 	 */
 	public List<String> getMafiaMember(){
-		List<String> x = mafiaMembers;
-		return x;
+		List<String> clone = new ArrayList<String>(mafiaMembers);
+		return clone;
 	}
 	/**
 	 * Returns a list of players
 	 * @return x (List of Players)
 	 */
 	public List<Player> getPlayerInfo(){
-		List<Player> x = playerInfo;
-		return x;
+		List<Player> clone = new ArrayList<Player>(playerInfo);
+		return clone;
 	}
 	/**
 	 * Returns a player
 	 * @param i
 	 * @return player
 	 */
-	public Player getPlayer(int i){
+	private Player getPlayer(int i){
 		Player player = playerInfo.get(i);
 		return player;
+	}
+	
+	public Player getPlayerCopy(int i){
+		//Player player = new Player(playerInfo.get(i));
+		return playerInfo.get(i);
 	}
 
 }

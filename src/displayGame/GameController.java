@@ -72,7 +72,7 @@ public class GameController {
 		}
 	}
 	
-	public void start(List<Player> playerInfo, int lynchTarget){
+	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		g = new Game(playerInfo,lynchTarget);
 		cpp = new CheckPlayerPanel(listener);
 		dp = new DayPanel(listener,g.getPlayerInfo());
@@ -81,7 +81,7 @@ public class GameController {
 		
 		vapp = new ViewAllPlayersPanel(listener,g.getPlayerInfo());
 		vpp = new ViewPlayerPanel(listener,g.getMafiaMember());
-		this.test = false;
+		this.test = test;
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
 			switchDay();
 		}else{

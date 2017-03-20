@@ -71,7 +71,7 @@ public class SetUpController {
 	public void switchToGame(List<String> name){
 		setUp = new SetUp(name);
 		GameController.createInstance(frame);
-		GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget());
+		GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
 	}
 	
 

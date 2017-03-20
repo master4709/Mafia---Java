@@ -9,12 +9,16 @@ import javax.swing.JTextArea;
  *
  */
 public class MyTextArea extends JTextArea{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Default constructor
+	 * @param text
+	 * @param textColor
+	 * @param backgroundColor
+	 * @param font
+	 */
 	public MyTextArea(
 			String text,
 			Color textColor,

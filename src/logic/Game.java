@@ -69,12 +69,10 @@ public class Game extends Action{
 	public Integer nightAction(){
 		$("Do night logic");
 		setPlayerInfoAction(playerInfo);
-		nightActions();
+		nightActionLoop();
 		setPlayerInfo(getPlayerInfo());
 		int target = resetStatus();
-		
 		return target;
-		
 	}
 	
 	

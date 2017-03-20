@@ -76,12 +76,12 @@ public class SetUp extends RoleAssignment {
 			$("Setting role of players");
 			chosenRoles = getChosenRoles();
 			Collections.shuffle(chosenRoles);
-			System.out.println(roles);
+			System.out.println(chosenRoles.toString());
 			
 			//Loops through all of the players and assigns them a Role.
 			for(int i=0; i<names.size(); i++){
 				System.out.println(playerInfo);
-				playerInfo.get(i).setRole(roles.get(i));			
+				playerInfo.get(i).setRole(chosenRoles.get(i).getRoleID());			
 				
 				playerInfo.get(i).setRoleInfo(chosenRoles.get(i).getRoleInfo());
 				System.out.println(roles.get(i) + ": "+ chosenRoles.get(i).getRoleInfo());

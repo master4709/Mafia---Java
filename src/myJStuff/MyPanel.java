@@ -1,5 +1,10 @@
 package myJStuff;
 
+/**
+ * The template for panels. A MigLayout is used
+ * 
+ * @author Elvin Limpin 30018832
+ */
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,8 +17,11 @@ import net.miginfocom.swing.MigLayout;
 
 public abstract class MyPanel {
 
+	
 	protected ActionListener actionListener;
 	
+	// the following fields are inherited by Panels.
+	// they might be overriden
 	protected Color textColor;
 	protected Color backgroundColor;
 	protected Color selectColor;
@@ -36,7 +44,12 @@ public abstract class MyPanel {
 	protected int roleFont;
 	protected int infoFont;
 	
+	/**
+	 * This default constructor sets up the layout for the GUI
+	 * 
+	 */
 	public MyPanel(){
+		
 		setFont();
 		setColor();
 
@@ -63,9 +76,11 @@ public abstract class MyPanel {
 		contentPane.add(center, BorderLayout.CENTER);
 		center.setLayout(new MigLayout("", "[grow]", "[]"));
 		
+		//Once panels are set, background color is then set
 		setBackground(Colors.black);
 	}
 	
+	// Default sizes for certain font templates
 	private void setFont(){
 		titleFont = 65;
 		textFont = 25;
@@ -74,6 +89,7 @@ public abstract class MyPanel {
 		roleFont = 40;
 	}
 	
+	// Defaullt colors for certain components
 	private void setColor(){
 		textColor = Colors.black;
 		backgroundColor = Colors.defaultBackgroundColor;
@@ -82,6 +98,7 @@ public abstract class MyPanel {
 		btnBackgroundColor = Colors.defaultButtonBackgroundColor;
 	}
 	
+	// Ensure the background color for all panels are black
 	public void setBackground(Color black){
 		north.setBackground(Colors.black);
 		south.setBackground(Colors.black);

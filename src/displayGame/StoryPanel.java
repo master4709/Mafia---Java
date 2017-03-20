@@ -28,9 +28,6 @@ public class StoryPanel extends MyPanel {
 	
 	public StoryPanel(ActionListener actionListener){
 		this.actionListener = actionListener;
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		initalize();
 	}
 
@@ -52,12 +49,6 @@ public class StoryPanel extends MyPanel {
 	private void displayTop(){
 		title = new MyLabel("Story", textColor, titleFont);
 		north.add(title);
-	}
-	private void displayLeft(){
-		
-	}
-	private void displayRight(){
-		
 	}
 	
 	private void displayBottom() {

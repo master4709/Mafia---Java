@@ -5,14 +5,21 @@ package myJStuff;
  * 
  */
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.JLabel;
+
+/**
+ * Default layout for labels
+ * @author Elvin Limpin 30018832
+ *
+ */
 
 public class MyLabel extends JLabel{
 	
 	/**
-	 * 
+	 * These constructors have a flexible set of parameters
+	 * to ensure that any instance would follow default values
+	 * if not specified
 	 */
 	private static final long serialVersionUID = 1L;
 

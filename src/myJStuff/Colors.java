@@ -1,7 +1,8 @@
 package myJStuff;
 
 /**
- * 
+ * Default colors
+ * @author Elvin Limpin
  */
 import java.awt.Color;
 

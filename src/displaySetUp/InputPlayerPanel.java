@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * This class creates the Panel for selecting how many players you want in the game
- * @author
+ * @author Elvin Limpin 30018832
  * 
  *
  */
 public class InputPlayerPanel extends MyPanel{
 	
 	private int numOfPlayers;
+	
+	//
     private ArrayList<JTextField> textFields = new ArrayList<>();
 	
 	MyLabel enterPlayers = new MyLabel("Enter Player Names", 40);

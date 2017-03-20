@@ -1,7 +1,6 @@
 package myJStuff;
 
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.JTextArea;
 /**
@@ -23,8 +22,10 @@ public class MyTextArea extends JTextArea{
 			int font){
 		
 		setText(text);
-		setForeground(textColor);
+		setForeground(Colors.white);
 		setBackground(backgroundColor);
 		setFont(new MyFont(font));
 	}
+	
+	
 }

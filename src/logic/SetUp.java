@@ -1,129 +1,169 @@
-package logic;
-	
-	
+package displaySetUp;
+
+import displayGame.GameController;
+import logic.SetUp;
+import myJStuff.Colors;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import java.util.Collections;
-import java.util.List;
-
-import java.util.Random;
 /**
- * This class will create a list to store all the information about each player.  
- * Author: Mahsa Lotfi 10072013 
- */	
-public class SetUp extends RoleAssignment {
-		
-		//List of each player (class) and his/her info (name, role, target, position, etc)
-		private List<Player> playerInfo = new ArrayList<>();
-		private List<String> names = new ArrayList<>();
-		//This int stores the information for the lyncher target	
-		private int lynchTargetID;
-		private ArrayList<String> roles;
-		
-		/**
-		 * Constructor with 2 arguments. It will initialize names and roles of the 
-		 * players and create a list which has all the info of players in it.
-		 * @param List<String> names, name of players.
-		 * @param ArrayList<String> roleSelected, roles that are selected by players.
-		 */	
-		public SetUp( List<String> names, ArrayList<String> rolesSelected){
-			super(names.size());
-			System.out.println("Set up constructor");
-			this.names = names;
-			Collections.shuffle(rolesSelected);
-			this.roles = rolesSelected;
-			nameOfPlayers();
-			roleOfPlayers();
-		}
+ * 
+ * @author 
+ *
+ */
+public class SetUpController {
 	
-			
-		/**
-		 * This method will add the information of each player to the playerInfo list.
-		 * Sets the play position of each player to the order then names were inputed.
-		 * Sets player target and keep the record of old player target.
-		 * Sets the status of each player to be alive.
-		 * Sets the status of targeted, healed or protected to be false.
-		 * Sets the inBar (The barman has stopped them from doing their action tonight) status 
-		 * to false for each player.
-		 * 
-		 */
-		public void nameOfPlayers(){
-			for(int i =0; i<names.size(); i++){
-				Player p = new Player();
-				playerInfo.add(p);
-				playerInfo.get(i).setName(names.get(i));
-				playerInfo.get(i).setPlayPosition(i);
-				playerInfo.get(i).setPlayerTarget(-1);
-				playerInfo.get(i).setIsDead(false);
-				playerInfo.get(i).setIsHealed(false);
-				playerInfo.get(i).setIsTargeted(false);
-				playerInfo.get(i).setIsProtected(false);
-				playerInfo.get(i).setInBar(false);
-				playerInfo.get(i).setIsLynched(false);
-			}		
+	private static SetUpController instance = null;
+
+    private PlayerCountPanel pcp;
+    private RoleSelectionPanel rsp;
+	private ButtonListener buttonListener;
+	private JFrame frame;
+	private JPanel panelCount;
+
+	private List<String> playerNames;
+
+	/**
+	 * initialize the frame and set the bounds
+	 */
+	private SetUpController(JFrame frame){
+		//Set the bounds and exit command
+
+		buttonListener = new ButtonListener();
+		pcp = new PlayerCountPanel(buttonListener);
+		playerNames = new ArrayList<>();
+		
+		this.frame = frame;
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setResizable(false);
+		this.frame.setVisible(true);
+	}
+	
+	public static void createInstance(JFrame frame){
+		if(instance==null){
+			instance = new SetUpController(frame);
 		}
-		
-		
-		/**
-		 * This method will sets the roles to each player and store it into the playerInfo list.
-		 * If the role contains Mafia, sets the isMafia variable to true 
-		 * If the player is Lyncher, then it will set a target for it.
-		 */
-		public void roleOfPlayers(){
-			$("Setting role of players");
-			//playerAssignment(List<String> chosenRolesString);
-			System.out.println(roles);
-			
-			//Loops through all of the players and assigns them a Role.
-			for(int i=0; i<names.size(); i++){
-				System.out.println(playerInfo);
-				playerInfo.get(i).setRole(roles.get(i));			
-				
-				
-				//If the player is Lyncher then set a target for it.
-				if(playerInfo.get(i).getRole().contains("Lynch")) {
-					lynchTarget();
-					playerInfo.get(i).setRoleInfo("Lynch "+ playerInfo.get(lynchTargetID).getName()+ " to win the game");
-				}
-				
-				//If the String role of the player contains the word "Mafia:"
-				if(playerInfo.get(i).getRole().contains("Mafia:")){
-					//This boolean is for the detective checking if the target is part of the Mafia
-					//GodFather is not included, as he is hidden from the detective
-					playerInfo.get(i).setIsMafia(true);
-				
-				}else{
-					playerInfo.get(i).setIsMafia(false);
-				}		
-			}		
-		}
-		
-		/**
-		 * Finds a random target for the lyncher
-		 */		
-		
-		public void lynchTarget(){
-			List<Player> possibleTargets = playerInfo;
-			int i = new Random().nextInt(totalPlayers-1);
-			while(possibleTargets.get(i).getRole() == "Lyncher") {
-				i = new Random().nextInt(totalPlayers-1);			
+	}
+	
+	public static SetUpController getInstance(){
+		return instance;
+	}
+	/**
+	 * Creates each of the need contentPanes panels
+	 * Set current panel to the Main and sets it to visible 
+	 */
+	public void start(){
+		//Create all of the panel
+		//Sets the frame to the main screen and to visible
+		panelCount = pcp.getContentPane();
+		switchPlayerTotal();
+	}
+	
+	/**
+	 * switches the content panel to the main page 
+	 */
+	public void switchPlayerTotal(){
+		frame.getContentPane().setVisible(false);
+		frame.setContentPane(panelCount);
+		panelCount.setVisible(true);
+	}
+	/**
+	 * This method goes to the GameController
+	 * @param name
+	 */
+	public void switchToGame(List<String> name){
+		SetUp setUp = new SetUp(name, rsp.getRolesSelected());
+		GameController.createInstance(frame);
+		GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
+	}
+	
+
+	public void switchToPlayerName(int playerTotal) {
+		frame.getContentPane().setVisible(false);
+        PlayerNamePanel ipp = new PlayerNamePanel(playerTotal);
+		frame.setContentPane(ipp.getContentPane());
+		ipp.getContentPane().setVisible(true);
+	}
+
+	public void switchToRoleSelection(List<String> names) {
+		playerNames = names;
+		frame.getContentPane().setVisible(false);
+		rsp = new RoleSelectionPanel(names);
+		frame.setContentPane(rsp.getContentPane());
+		rsp.getContentPane().setVisible(true);
+	}
+
+	public void addListener(JButton button) {
+		button.addActionListener(buttonListener);
+	}
+
+	private class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			String btnText = ((JButton)e.getSource()).getText();
+			if (btnText.equals("Continue ")) {
+				switchToGame(playerNames);
+			} else if (btnText.equals("Continue")) {
+				switchToPlayerName(pcp.getPlayerTotal());
 			}
-			lynchTargetID = i;
+			else if (btnText.equals("Reset")){
+
+				rsp.clearRolesSelected();
+				for (JButton roleButton : rsp.getRoleButtons()) {
+					roleButton.setEnabled(true);
+					roleButton.setBackground(Colors.grey);
+				}
+				rsp.getAssignTownies().setEnabled(true);
+				rsp.getContinueButton().setVisible(false);
+				rsp.getPlayersLeft().setText(String.valueOf(playerNames.size()));
+
+			} else if (btnText.equals("Assign the rest as Townie")){
+
+				final int initialSize = rsp.getRolesSelected().size();
+				for (int i = 0; i < playerNames.size() - initialSize; i++) {
+					rsp.getRolesSelected().add("Townie");
+				}
+				System.out.println(rsp.getRolesSelected().toString());
+
+				for (JButton roleButton : rsp.getRoleButtons()) {
+					roleButton.setEnabled(false);
+				}
+				rsp.getPlayersLeft().setText("0");
+				((JButton) e.getSource()).setEnabled(false);
+				rsp.getContinueButton().setVisible(true);
+
+
+			} else { // a specific role button is entered
+				rsp.getRolesSelected().add(btnText);
+				final int rolesSelectedSize = rsp.getRolesSelected().size();
+				final int playerNamesSize = playerNames.size();
+
+				((JButton) e.getSource()).setBackground(Colors.white);
+				((JButton) e.getSource()).setEnabled(false);
+				rsp.getPlayersLeft().setText(String.valueOf(
+						(playerNamesSize - rolesSelectedSize < 0) ? 0 : playerNamesSize - rolesSelectedSize
+				));
+
+				System.out.println(rsp.getRolesSelected().toString());
+
+				if (playerNamesSize == rolesSelectedSize) {
+					rsp.getContinueButton().setVisible(true);
+					rsp.getAssignTownies().setEnabled(false);
+					for (JButton roleButton : rsp.getRoleButtons()) {
+						roleButton.setEnabled(false);
+					}
+				} else {
+					rsp.getContinueButton().setVisible(false);
+				}
+			}
+
 		}
-		
-		/**
-		 * Getter method for playerInfo list.
-		 */	
-		public List<Player> getPlayerInfo(){
-			return playerInfo;
-		}
-		
-		/**
-		 * Getter method for lynchTargetID.
-		 */
-		public int getLynchTarget(){
-			return lynchTargetID;
-		}
+
+	}
 }

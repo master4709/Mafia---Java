@@ -17,7 +17,7 @@ public class SetUpController {
 	
 	private SetUp setUp;
 	private PlayerCountPanel pcp;
-	private InputPlayerPanel ipp;
+	private PlayerNamePanel ipp;
 	
 	private JFrame frame;
 	private JPanel panelCount;
@@ -77,7 +77,7 @@ public class SetUpController {
 
 	public void switchToInputPlayer(int playerTotal) {
 		frame.getContentPane().setVisible(false);
-		ipp = new InputPlayerPanel(playerTotal);
+		ipp = new PlayerNamePanel(playerTotal);
 		frame.setContentPane(ipp.getContentPane());
 		ipp.getContentPane().setVisible(true);
 	}

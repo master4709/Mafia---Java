@@ -12,7 +12,7 @@ import java.util.List;
  * 
  *
  */
-public class InputPlayerPanel extends MyPanel{
+public class PlayerNamePanel extends MyPanel{
 	
 	private int numOfPlayers;
 	
@@ -22,7 +22,7 @@ public class InputPlayerPanel extends MyPanel{
 	MyLabel enterPlayers = new MyLabel("Enter Player Names", 40);
     JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 25);
 
-	public InputPlayerPanel(int num) {
+	public PlayerNamePanel(int num) {
 		this.numOfPlayers = num;
 		displayNorth();
 		displayCenter();

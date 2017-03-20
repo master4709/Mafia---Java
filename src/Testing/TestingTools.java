@@ -1,3 +1,4 @@
+
 package Testing;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public abstract class TestingTools extends Debug {
 		 * @return List<Player> containing finalized roles
 		 */
 		public static List<Player> makeInfo() {
-			int totalPlayers = 6;
+			int totalPlayers = 10;
 			List<Player> playerInfo = initialInfo(totalPlayers);
 			List<String> assignments = new ArrayList<>();
 			List<String> assignmentsInfo = new ArrayList<>();
@@ -138,7 +139,8 @@ public abstract class TestingTools extends Debug {
 		private static List<Player> initialInfo(int totalPlayers){
 			List<Player> playerInfo = new ArrayList<>();
 			List<String> names = new ArrayList<>(Arrays.asList(
-					"Frodo","Gandalf","Sam","Merry","Gimli","Legolas","Aragorn","Eomer","Elrond","Theoden"));
+					"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
+					"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Frodo"));
 			for(int i =0; i<totalPlayers; i++){
 				Player p = new Player();
 				playerInfo.add(p);

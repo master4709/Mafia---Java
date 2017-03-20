@@ -113,4 +113,3 @@ public class MainPanel extends MyPanel{
 		return contentPane;
 	}
 }
-

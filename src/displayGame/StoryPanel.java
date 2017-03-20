@@ -1,11 +1,7 @@
 package displayGame;
 
-import java.awt.BorderLayout;
-
 import myJStuff.*;
-
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import logic.Story;
 
@@ -82,7 +78,9 @@ public class StoryPanel extends MyPanel {
 	//Call the story class here also to receive the getters for the location, event, etc....
 	//Set all of the labels and such for the story in here
 	public void setStory(String name, boolean dead){
-		
+		Story s = new Story(name,dead);
+		String location = s.getLocation();
+		//lblLocation.settext("");
 	}
 	
 

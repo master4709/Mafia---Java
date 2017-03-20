@@ -100,7 +100,7 @@ public class DayPanel extends MyPanel implements ActionListener{
 	 */
 	private void displayPlayerButton(int i){
 		//Create string of the players name and role (debug)
-		String text = playerInfo.get(i).getName()+"|"+playerInfo.get(i).getRole();
+		String text = playerInfo.get(i).getName();
 		JButton btnPlayer = new MyButton(text);//Create a new button with passing the String text
 		btnPlayer.setName(Integer.toString(i));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel

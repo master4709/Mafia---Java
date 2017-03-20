@@ -12,7 +12,8 @@ public class GameTest {
 	boolean checkPlayer = true;
 	
 	public static void run(){
+
 		GameController.createInstance(TestingTools.init());
-		GameController.getInstance().start(TestingTools.makeInfo(), TestingTools.getLynchTargetID(), true);
+		GameController.getInstance().start(TestingTools.makeInfo(), TestingTools.getLynchTargetID(), false);
 	}
 }

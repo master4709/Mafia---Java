@@ -1,1 +1,3 @@
-Stabbed;Shot;Poisoned;Choked;Strangled;Beat Up;Stoned;Mutilated;Suffocated;Kidnapped
+Stabbed
+Shot
+Poisoned;Choked;Strangled;Beat Up;Stoned;Mutilated;Suffocated;Kidnapped

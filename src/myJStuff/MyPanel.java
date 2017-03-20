@@ -77,7 +77,7 @@ public abstract class MyPanel {
 		center.setLayout(new MigLayout("", "[grow]", "[]"));
 		
 		//Once panels are set, background color is then set
-		setBackground(Colors.black);
+		setBackground();
 	}
 	
 	// Default sizes for certain font templates
@@ -99,7 +99,7 @@ public abstract class MyPanel {
 	}
 	
 	// Ensure the background color for all panels are black
-	public void setBackground(Color black){
+	public void setBackground(){
 		north.setBackground(Colors.black);
 		south.setBackground(Colors.black);
 		east.setBackground(Colors.black);

@@ -32,7 +32,6 @@ public class CheckPlayerPanel extends MyPanel{
 		//Displays all of the JLabels, JButtons etc. to all of the JPannels
 		displayNorth();
 		displaySouth();
-		setBackground(backgroundColor);
 	}
 	/**
 	 * Displays all of the JLabels for the north panel

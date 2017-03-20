@@ -24,7 +24,8 @@ public abstract class Action extends Debug{
     private int bodyguardPosition;
     private List<Player> of;
     protected HashMap<String, Integer> playersJobPosition = new HashMap<>();
-    private List<String> nightPlayer = new ArrayList<>(Arrays.asList("mafia: barman","bodyguard","mafia: hitman","vigilante","mafia- godfather","doctor"));
+    private List<String> nightPlayer = new ArrayList<>(
+    		Arrays.asList("mafia: barman","bodyguard","mafia: hitman","vigilante","mafia- godfather","doctor"));
     
    
     protected void initJobPositionMap() {
@@ -53,9 +54,8 @@ public abstract class Action extends Debug{
     }
     
     //This will be called in the Game class
-    protected void nightActions(){
+    protected void nightActionLoop(){
     	// If such players exist, their actions will be implemented
-    	//
         for(int j = 0; j < nightPlayer.size(); j++){
         	for(int i = 0; i < of.size() ; i++){
         		if(of.get(i).getRole().equalsIgnoreCase(nightPlayer.get(j))){

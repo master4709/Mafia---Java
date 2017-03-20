@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 /**
- * Author: Mahsa Lotfi Gaskarimahalleh, UCID#10072013
+ * This class will create a list to store all the information about each player. 
  * 
- *This class will stores the number, name and role of each player
-*/
+ * Author: Mahsa Lotfi 10072013
+ * 
+ */
 public class SetUp extends RoleAssignment {
 	
 	//List of each player (class) and his/her info (name, role, target, position, etc)
@@ -56,16 +57,17 @@ public class SetUp extends RoleAssignment {
 	 * If the role contains Mafia, sets the isMafia variable to true 
 	 */
 	public void roleOfPlayers(){
-		playerAssignment();
-		List<String> roles = getRoles();
-		List<String> rolesInfo = getRolesInfo();
-		List<String> Goals = getGoals();
+		//playerAssignment(List<String> chosenRolesString);
+		List<Role> roles = getRandomizedRoles();
+		System.out.println(roles);
+		
 		//Loops through all of the players and assigns them a Role, Info and Goal
 		for(int i=0; i<names.size(); i++){
-			playerInfo.get(i).setRole(roles.get(i));			
-			playerInfo.get(i).setRoleInfo(rolesInfo.get(i));
-			playerInfo.get(i).setGoal(Goals.get(i));
+			System.out.println(playerInfo);
+			playerInfo.get(i).setRole(roles.get(i).getRoleID());			
 			
+			
+			//If the player is Lyncher then set a target for it.
 			if(playerInfo.get(i).getRole().contains("Lynch")) {
 				lynchTarget();
 				playerInfo.get(i).setGoal("Lynch "+ playerInfo.get(lynchTargetID).getName()+ " to win the game");
@@ -82,8 +84,11 @@ public class SetUp extends RoleAssignment {
 			}		
 		}		
 	}
-			
-	// Finds a random target for the lyncher
+	
+	/**
+	 * Finds a random target for the lyncher
+	 */		
+	
 	public void lynchTarget(){
 		List<Player> possibleTargets = playerInfo;
 		int i = new Random().nextInt(totalPlayers-1);
@@ -93,11 +98,16 @@ public class SetUp extends RoleAssignment {
 		lynchTargetID = i;
 	}
 	
-	//getters	
+	/**
+	 * Getter method for playerInfo list.
+	 */	
 	public List<Player> getPlayerInfo(){
 		return playerInfo;
 	}
 	
+	/**
+	 * Getter method for lynchTargetID.
+	 */
 	public int getLynchTarget(){
 	return lynchTargetID;
 }

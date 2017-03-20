@@ -14,11 +14,15 @@ import javax.swing.JPanel;
 
 /**
  * NightPanel
+ * This class displays the current players name, role, goal
+ * and a list of buttons of all the players that when clicked set the target to the index value
+ * 
  * @author Pierce de Jong 30006609
  *
  */
 public class NightPanel extends MyPanel implements ActionListener{
 	
+	//Create all of the labels for the NorthPanel
 	private JLabel lblName;
 	private JLabel lblRole;
 	private JLabel lblInfo;
@@ -26,15 +30,17 @@ public class NightPanel extends MyPanel implements ActionListener{
 	private JLabel lblMafia;
 	private JLabel lblDetective;
 	
+	//JButton when pressed goes to the next screen
 	private JButton btnContinue;
+	//jButton that is only visible to detective. when pressed reveals 
 	private JButton btnDetective;
-	
 	//Current position in the list of players
 	private int target = -1;
-	
+	//List of all of the players
 	private List<Player> playerInfo;
-	
+	//List of all of the buttons representing each of the players
 	private List<JButton> playerButtonList = new ArrayList<>();
+	//List of all of the Mafia Members
 	private List<String> mafiaMember = new ArrayList<>();
 
 	/**
@@ -46,18 +52,13 @@ public class NightPanel extends MyPanel implements ActionListener{
 		this.actionListener = actionListener;
 		this.playerInfo = playerInfo;
 		this.mafiaMember = mafiaMember;
-		
-
-
+		//Create all of the needed buttons and labels and adds them to the panel
 		displaySouth();
-		//Initializes the labels, does not fill them with anything
 		displayNorth();
 		displayCenter();
 	}
-	
-	
 	/**
-	 * Display the name, role, info, and Mafia members (if applicable)
+	 * Creates the name, role, info, and mafia labels and adds them to the north Panel
 	 */
 	private void displayNorth(){
 		String text = "";
@@ -78,21 +79,24 @@ public class NightPanel extends MyPanel implements ActionListener{
 	 * Each button represents a player
 	 */
 	private void displayCenter(){
+		//The y position 
 		int k=0;
+		//Loops through the list of players
 		for(Player player: playerInfo){
-			if(!player.isDead()){
+			if(!player.isDead()){//If the player is not dead. create a button of that player
 				displayPlayerButton(player.getPlayPosition());
 			}
-			k = k+player.getPlayPosition();
+			//Add one to the y position
+			k = k+1;
 		}
-		
-		btnDetective = new MyButton("Confirm Target",30);
+		//Create the detective button
+		btnDetective = new MyButton("Confirm Target", textFont);
 		center.add(btnDetective, "cell 0 "+k+1+",alignx center");
 		btnDetective.setName("Detective");
 		btnDetective.addActionListener(actionListener);
 		btnDetective.setVisible(false);
 		
-		lblDetective = new MyLabel("", textColor, infoFont);
+		lblDetective = new MyLabel("", textColor, textFont);
 		center.add(lblDetective, "cell 0 "+k+",alignx center");
 		
 	}
@@ -101,7 +105,7 @@ public class NightPanel extends MyPanel implements ActionListener{
 	 */
 	private void displaySouth(){
 		btnContinue = new MyButton("Continue");
-		south.add(btnContinue, "cell 0 0");
+		south.add(btnContinue, "cell 0 0,alignx center");
 		btnContinue.addActionListener(actionListener);
 		btnContinue.setName("Continue_NightPanel");
 	}
@@ -110,12 +114,13 @@ public class NightPanel extends MyPanel implements ActionListener{
 	 * @param i
 	 */
 	private void displayPlayerButton(int i){
+		//Create string of the players name
 		String text = playerInfo.get(i).getName();
-		JButton btnPlayer = new MyButton(text);
-		center.add(btnPlayer, "cell 0 "+i+",growx");
-		btnPlayer.addActionListener(this);
-		btnPlayer.setName(Integer.toString(i));
-		playerButtonList.add(btnPlayer);
+		JButton btnPlayer = new MyButton(text, textFont);//Create a new button with passing the String text
+		btnPlayer.setName(Integer.toString(i));//Sets the name of the button to the index value of the player
+		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
+		btnPlayer.addActionListener(this);//Add action listener 
+		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
 	public JButton getDetectiveButton(){
@@ -139,7 +144,7 @@ public class NightPanel extends MyPanel implements ActionListener{
 		if(target!=-1){
 			for(JButton button: playerButtonList){
 				if(target==Integer.parseInt(button.getName())){
-					center.remove(playerButtonList.get(target));
+					center.remove(button);
 				}
 			}
 		}
@@ -180,7 +185,10 @@ public class NightPanel extends MyPanel implements ActionListener{
 			lblMafia.setText("Mafia Members: "+ mafiaMember);
 		}
 	}
-	
+	/**
+	 * This listens for if one of the buttons in the center panel is pressed
+	 * If it is pressed sets target to index value of button and sets the background color to selectColor
+	 */
 	public void actionPerformed(ActionEvent e){
 		//Get the name (NOT TEXT) of the button that was pressed
 		JButton source = (JButton)e.getSource();

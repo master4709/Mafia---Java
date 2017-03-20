@@ -3,8 +3,6 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
-import displayGame.GameController;
-
 /**Game Class
 	*This class runs the main logic and loop for the game
 	*This class uses the Players class to assign values for the amount of players and their names vis Player Input
@@ -144,6 +142,13 @@ public class Game extends Action{
 		playerInfo.get(position).setPlayerTarget(target);
 	}
 	/**
+	 * Sets the boolean healed for the player
+	 * @param i, b
+	 */
+	public void setHealed(int i, boolean b){
+		playerInfo.get(i).setIsHealed(b);
+	}
+	/**
 	 * Sets the list of Players to the param
 	 * @param playerInfo
 	 */
@@ -153,16 +158,28 @@ public class Game extends Action{
 	/**
 	 * Returns a COPY of the list of Mafia Members
 	 * This is used for printing in the NightPanel
-	 * @return
+	 * @return x (List of Mafia Members)
 	 */
 	public List<String> getMafiaMember(){
 		List<String> x = mafiaMembers;
 		return x;
 	}
-	
+	/**
+	 * Returns a Copy of the list of players
+	 * return x (List of Players)
+	 */
 	public List<Player> getPlayerInfo(){
 		List<Player> x = playerInfo;
 		return x;
+	}
+	/**
+	 * Returns a COPY of the selected player
+	 * @param i
+	 * @return player
+	 */
+	public Player getPlayer(int i){
+		Player player = playerInfo.get(i);
+		return player;
 	}
 
 }

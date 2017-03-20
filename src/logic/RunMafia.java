@@ -18,7 +18,7 @@ public class RunMafia {
 	
 	private static void makeFrame(){
 		int width = 480;
-		int height = 720;
+		int height = 852;
 		frame.setBounds(550, 20, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

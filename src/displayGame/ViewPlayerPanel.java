@@ -4,7 +4,6 @@ package displayGame;
 import myJStuff.*;
 import logic.*;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
@@ -16,10 +15,6 @@ import javax.swing.JPanel;
  */
 public class ViewPlayerPanel extends MyPanel{
 	
-	private JPanel contentPane;
-
-	private JPanel south;
-	
 	private JButton btnBack;
 
 	private Player player;
@@ -29,20 +24,19 @@ public class ViewPlayerPanel extends MyPanel{
 	/**
 	 * Create the panel.
 	 */
-	public ViewPlayerPanel(List<String> mafiaMembers) {
+	public ViewPlayerPanel(ActionListener actionListener, List<String> mafiaMembers) {
+		this.actionListener = actionListener;
 		this.mafiaMembers = mafiaMembers;
 		
 		displaySouth();
 	}
 	
 	private void displaySouth(){
-		//New Button using the default button presets and text Continue
+		//Create Button using the default button presets and text Continue
 		btnBack = new MyButton("Back");
-		south.add(btnBack, "cell 0 0");
-		btnBack.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			GameController.getInstance().switchViewAllPlayers();
-		}});
+		south.add(btnBack, "cell 0 0,alignx center");
+		btnBack.setName("Back_ViewPlayerPanel");
+		btnBack.addActionListener(actionListener);
 	}
 	
 	public void setPlayer(Player player){

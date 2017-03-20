@@ -35,14 +35,13 @@ public class DayPanel extends MyPanel implements ActionListener{
 	//To be used in the game class to kill the target of the day lynching
 	private int target;
 	/**
-	 * Create the panel.
+	 * Constructor
 	 */
 	public DayPanel(ActionListener actionListener,List<Player> playerInfo) {
 		this.actionListener = actionListener;
 		this.playerInfo = playerInfo;
 		target = -1;
-
-		
+		//Create all of the labels and buttons etc needed for the Panel
 		displayNorth();
 		displaySouth();
 		displayCenter();
@@ -103,34 +102,35 @@ public class DayPanel extends MyPanel implements ActionListener{
 		//Create string of the players name and role (debug)
 		String text = playerInfo.get(i).getName()+"|"+playerInfo.get(i).getRole();
 		JButton btnPlayer = new MyButton(text);//Create a new button with passing the String text
-		btnPlayer.setName(Integer.toString(i));
-		String position = "cell 0 "+i+",growx";
-		center.add(btnPlayer, position);
+		btnPlayer.setName(Integer.toString(i));//Sets the name of the button to the index value of the player
+		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(this);//Add action listener 
-		playerButtonList.add(btnPlayer);
+		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
 	/**
-	 * Sets all of the panels background to the passed Color
-	 * Also creates a black border around the edge of the screen
-	 * @param c
+	 * Removes the button of the the target
+	 * @param target
 	 */
-	
-	
 	public void removePlayerButton(int target){
-		if(target!=-1){
-			for(JButton button: playerButtonList){
-				if(target==Integer.parseInt(button.getName())){
-					center.remove(playerButtonList.get(target));
+		if(target!=-1){//Error handling, Must have a valid target to remove the button
+			for(JButton button: playerButtonList){//Loops through the list of player buttons
+				if(target==Integer.parseInt(button.getName())){//Finds the one with the same name as the target. THe buttons are named 0,1,2... etc
+					center.remove(button);//Remove the button from the list of buttons 
 				}
 			}
 		}
 	}
-	
+	/**
+	 * Resets the target to -1 so the panel is ready for the next Day
+	 */
 	public void resetTarget(){
 		target = -1;
 	}
-	
+	/**
+	 * Get the target for who was voted out during the day
+	 * @return int target
+	 */
 	public Integer getTarget(){
 		return target;
 	}
@@ -142,9 +142,10 @@ public class DayPanel extends MyPanel implements ActionListener{
 	public JPanel getContentPane(){
 		return contentPane;
 	}
-	
-
-	
+	/**
+	 * This listens for if one of the buttons in the center panel is pressed
+	 * If it is pressed sets target to index value of button and sets the background color to selectColor
+	 */
 	public void actionPerformed(ActionEvent e){
 		//Get the name (NOT TEXT) of the button that was pressed
 		JButton source = (JButton)e.getSource();
@@ -154,7 +155,9 @@ public class DayPanel extends MyPanel implements ActionListener{
 		if(target!=-1){
 			playerButtonList.get(target).setBackground(Colors.defaultButtonBackgroundColor);
 		}
-		
+		//Finds the button that was pressed
+		//Sets the background of the button to the select Color
+		//Sets the target for the day lynching to the index value of the button
 		switch(name){
 		case "0":
 			playerButtonList.get(0).setBackground(selectColor);

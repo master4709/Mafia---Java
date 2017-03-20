@@ -33,8 +33,8 @@ public abstract class MyPanel {
 	protected int titleFont;
 	protected int buttonFont;
 	protected int textFont;
-	protected int infoFont;
 	protected int roleFont;
+	protected int infoFont;
 	
 	public MyPanel(){
 		setFont();
@@ -69,8 +69,8 @@ public abstract class MyPanel {
 	private void setFont(){
 		titleFont = 65;
 		textFont = 25;
+		infoFont = 20;
 		buttonFont = 30;
-		infoFont = 25;
 		roleFont = 40;
 	}
 	

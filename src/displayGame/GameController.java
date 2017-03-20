@@ -43,6 +43,8 @@ public class GameController {
 	private JPanel panelViewPlayer;
 	//Location inside the list of players for the night cycle
 	private int position = 0;
+	//Boolean for if the game is in test mode
+	private boolean test;
 	
 	//Must be private. so only one instance can be made
 	private GameController(JFrame frame){
@@ -78,24 +80,23 @@ public class GameController {
 		sp = new StoryPanel(listener);
 		
 		vapp = new ViewAllPlayersPanel(listener,g.getPlayerInfo());
-		//vpp = new ViewPlayerPanel(g.getMafiaMember());
+		vpp = new ViewPlayerPanel(listener,g.getMafiaMember());
+		this.test = false;
+		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
+			switchDay();
+		}else{
+			switchViewAllPlayers();
+		}
 		
-		switchDay();
 	}
 	
 	public void switchViewAllPlayers(){
-		//Hides the current content Pane
-		frame.getContentPane().setVisible(false);
-		//
 		panelViewAllPlayers = vapp.getContentPane();
-		//sets the frame's content pane to day screen
-		frame.setContentPane(panelViewAllPlayers);
-		//sets the current content pane to visible
-		panelViewAllPlayers.setVisible(true);
+		switchPanel(panelViewAllPlayers);
 	}
 	
 	public void switchViewPlayer(int i){
-		vpp.setPlayer(g.getPlayerInfo().get(i));
+		vpp.setPlayer(g.getPlayer(i));
 		panelViewPlayer = vpp.getContentPane();
 		switchPanel(panelViewPlayer);
 	}
@@ -129,7 +130,7 @@ public class GameController {
 	 */
 	public void switchCheckPlayer(){
 		System.out.println("Check Player Panel");
-		cpp.setPlayerName(g.getPlayerInfo().get(position).getName());
+		cpp.setPlayerName(g.getPlayer(position).getName());
 		panelCheck = cpp.getContentPane();
 		switchPanel(panelCheck);
 	}
@@ -160,7 +161,7 @@ public class GameController {
 		g.dayCycle(target);
 		dp.removePlayerButton(target);
 		np.removePlayerButton(target);
-		//Sets the 
+		//Sets the index value for the night back to zero
 		position = 0;
 	}
 	/**
@@ -173,16 +174,17 @@ public class GameController {
 		int target = g.nightAction();
 		//If there was a target this night
 		if(target!=-1){
-			//If the player was killed that night remove the player button from both the 
-			if(!g.getPlayerInfo().get(target).isHealed()){
+			boolean dead;
+			String name = g.getPlayer(target).getName();
+			//If the player was killed that night remove the player button from both the Day and Night Panel
+			if(!g.getPlayer(target).isHealed()){
 				dp.removePlayerButton(target);
 				np.removePlayerButton(target);
-			}else{
-				g.getPlayerInfo().get(target).setIsHealed(false);
+				dead = true;
+			}else{//Else
+				g.setHealed(target,false);
+				dead = false;
 			}
-			//Switches to the story panel to make a story about what happened to the player
-			String name = g.getPlayerInfo().get(target).getName();
-			boolean dead = !g.getPlayerInfo().get(target).isHealed();
 			switchStory(name,dead);
 		}else{
 			//Skip the story panel and go to the next day.
@@ -199,11 +201,15 @@ public class GameController {
 		//If the position has not gone out of bounds
 		if(position<g.getPlayerInfo().size()){
 			//If the player is dead, find the next one
-			if(g.getPlayerInfo().get(position).isDead()){
+			if(g.getPlayer(position).isDead()){
 				position++;
 				findNextPlayer();
 			}else{//If not, display the checkPlayerPanel for the next player in the list	
-				switchCheckPlayer();
+				if(test){//If the game is in test mode, skips the check player panel
+					switchNight();
+				}else{
+					switchCheckPlayer();
+				}
 			}
 		//If the position has gone past the list of players, do the night actions of the players and 
 		}else if(position==g.getPlayerInfo().size()){
@@ -219,7 +225,7 @@ public class GameController {
 	private void detective(int target){
 		//If the target of the detective player is part of the Mafia
 		//*Note* the Mafia GodFather is hidden from the detective
-		if(g.getPlayerInfo().get(target).isMafia()){
+		if(g.getPlayer(target).isMafia()){
 			np.setDetectiveMessage("Part of the Mafia");
 		}else{
 			np.setDetectiveMessage("Not part of the Mafia");
@@ -259,6 +265,9 @@ public class GameController {
 				break;
 			case "Continue_StoryPanel":
 				switchDay();
+				break;
+			case "Back_ViewPlayerPanel":
+				switchViewAllPlayers();
 				break;
 			case "Detective":
 				int target3 = np.getPlayerTarget();

@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  *
  *
  */
-public class ViewAllPlayersPanel extends MyPanel{
+public class ViewAllPlayersPanel extends MyPanel implements ActionListener{
 	//This label displays the text "Day Time"
 	private JLabel lblDayTime;
 	//This label displays the text for what to do on this screen
@@ -48,7 +48,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 		north.add(lblDayTime, "flowy,cell 0 0");
 		
 		String text = "Click a Player to view Role";
-		lblDiscription = new MyLabel(text, textColor, infoFont);
+		lblDiscription = new MyLabel(text, textColor, textFont);
 		north.add(lblDiscription, "cell 0 1,");
 	
 	}
@@ -57,8 +57,8 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 */
 	private void displaySouth(){
 		//New Button using the default button presets and text Continue
-		btnContinue = new MyButton("Continue");
-		south.add(btnContinue, "cell 0 0");
+		btnContinue = new MyButton("Start Game");
+		south.add(btnContinue, "cell 0 0, alignx center");
 		btnContinue.setName("Continue_ViewAllPlayersPanel");
 		btnContinue.addActionListener(actionListener);
 		
@@ -69,32 +69,24 @@ public class ViewAllPlayersPanel extends MyPanel{
 	private void displayCenter(){
 		//Loop through the list of players
 		for(int i=0;i<playerInfo.size();i++){
-			//If the player is NOT dead
-			if(!playerInfo.get(i).isDead()){
-				//create a button of that player
-				displayPlayerButton(i);
-			}
+			//create a button of that player
+			displayPlayerButton(i);
 		}
 	}
 
 	/**
 	 * Creates a button for a player when called in displayCenter()
-	 * 
-	 * @param i - index value of player and location on center grid y value
+	 * @param i - 
 	 */
 	private void displayPlayerButton(int i){
 		//Create string of the players name
 		String text = playerInfo.get(i).getName();
 		//Create a new button with passing the String text
 		JButton btnPlayer = new MyButton(text);
-		//Location on the grid, width of the button will be from screen edge to screen edge
+		btnPlayer.setName(Integer.toString(i));
 		String position = "cell 0 "+i+",growx";
-		center.add(btnPlayer, position);
-		//Add action listener 
-		btnPlayer.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			GameController.getInstance().switchViewPlayer(i);
-		}});
+		center.add(btnPlayer, position); 
+		btnPlayer.addActionListener(this);//Add action listener
 	}
 	
 	/**

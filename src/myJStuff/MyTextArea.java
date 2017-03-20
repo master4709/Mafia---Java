@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import javax.swing.JTextArea;
 /**
- * 
- * @author Pierce de Jong 30006609
+ * Default instance for a text area
+ * @author Elvin Limpin 30018832
  *
  */
 public class MyTextArea extends JTextArea{

@@ -22,9 +22,11 @@ public class RunMafia extends Debug {
 	private static void makeFrame(){
 		int width = 480;
 		int height = 852;
-		Image image = new ImageIcon("../../data/icon.png").getImage();
+		ImageIcon image = new ImageIcon("../../data/pictures/icon.png");
 		try {
-			frame.setIconImage(image);
+			frame.setIconImage(image.getImage());
+
+			$("Frame is made!");
 		} catch(Exception e){ $("Image not found.");}
 
 		frame.setBounds(550, 20, width, height);

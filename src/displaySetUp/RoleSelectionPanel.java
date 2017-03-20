@@ -39,16 +39,15 @@ public class RoleSelectionPanel {
      */
     public RoleSelectionPanel(List<String> playerNames) {
 
-        this.playerNames = playerNames;
+        this.playerNames = new ArrayList<>(playerNames);
         System.out.println("Total Players: " + playerNames.size());
 
-        playerNames = new ArrayList<>();
         rolesSelected = new ArrayList<>();
         availableRoles = new ArrayList<>(Arrays.asList(Role.values()));
         contentPane = new JPanel(new MigLayout( "",
                 "[][grow, grow][]",
                 ""));
-        playersLeft = new MyLabel(String.valueOf(playerNames.size()), Colors.black, 20);
+        playersLeft = new MyLabel(String.valueOf(this.playerNames.size()), Colors.black, 20);
         continueButton = new MyButton("Continue ", Colors.white, Colors.black, 15);
         assignTownies = new MyButton("Assign the rest as Townie", Colors.white, Colors.grey, 15);
         roleButtons = new ArrayList<>();

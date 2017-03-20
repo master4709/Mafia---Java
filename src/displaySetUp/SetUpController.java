@@ -110,7 +110,7 @@ public class SetUpController {
 
 			String btnText = ((JButton)e.getSource()).getText();
 			if (btnText.equals("Continue ")) {
-				SetUpController.getInstance().switchToGame(playerNames);
+				switchToGame(playerNames);
 			} else if (btnText.equals("Continue")) {
 				switchToPlayerName(pcp.getPlayerTotal());
 			}
@@ -127,7 +127,17 @@ public class SetUpController {
 
 			} else if (btnText.equals("Assign the rest as Townie")){
 
-				// TODO
+				final int initialSize = rsp.getRolesSelected().size();
+				for (int i = 0; i < playerNames.size() - initialSize; i++) {
+					rsp.getRolesSelected().add("Townie");
+				}
+				System.out.println(rsp.getRolesSelected().toString());
+
+				for (JButton roleButton : rsp.getRoleButtons()) {
+					roleButton.setEnabled(false);
+				}
+				rsp.getPlayersLeft().setText("0");
+				((JButton) e.getSource()).setEnabled(false);
 
 
 			} else { // a specific role button is entered

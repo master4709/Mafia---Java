@@ -45,6 +45,8 @@ public class GameController {
 	private int position = 0;
 	//Boolean for if the game is in test mode
 	private boolean test;
+	//Location of the current target for both the day lynching and every night player
+	private int target = -1;
 	
 	//Must be private. so only one instance can be made
 	private GameController(JFrame frame){
@@ -102,14 +104,20 @@ public class GameController {
 		
 	}
 	/**
-	 * Switch to the V
+	 * Switch to the ViewAllPlayers JPanel
 	 */
 	public void switchViewAllPlayers(){
+		//Refresh the JPanel
 		panelViewAllPlayers = vapp.getContentPane();
+		//Set the frame to the new JPanel content pane
 		switchPanel(panelViewAllPlayers);
 	}
-	
+	/**
+	 * Switch to the ViewPlayer JPanel and display the current plays information
+	 * @param i - the index value for which player to show
+	 */
 	public void switchViewPlayer(int i){
+		//Updates the ViewPlayer screen with the player
 		vpp.setPlayer(g.getPlayer(i));
 		panelViewPlayer = vpp.getContentPane();
 		switchPanel(panelViewPlayer);
@@ -267,9 +275,9 @@ public class GameController {
 				switchDay(); 
 				break;
 			case "Continue_DayPanel":
-				int target = dp.getTarget();//Gets the target of the Day panel (THe person voted out and lynched before night)
-				if(target!=-1){//Makes sure a target has been chosen for the day 
-					dayLynch(target);//Lynches the target of the day
+				int t = dp.getTarget();//Gets the target of the Day panel (THe person voted out and lynched before night)
+				if(t!=-1){//Makes sure a target has been chosen for the day 
+					dayLynch(t);//Lynches the target of the day
 					findNextPlayer();//Finds the first person in the list of players that is alive and displays his/her night screen
 				}
 				break;
@@ -295,6 +303,16 @@ public class GameController {
 				}
 				break;
 			default:
+				//Gets the index value of the button that was pressed in its respective lists
+				char c = name.charAt(name.length() -1);
+				int i = Character.getNumericValue(c);
+				if(name.contains("Select")){
+					switchViewPlayer(i);
+				}else if(name.contains("Day")){
+					target = i;
+				}else if(name.contains("Night")){
+					target = i;
+				}
 				break;
 			}
         

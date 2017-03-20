@@ -138,6 +138,7 @@ public class SetUpController {
 				}
 				rsp.getPlayersLeft().setText("0");
 				((JButton) e.getSource()).setEnabled(false);
+				rsp.getContinueButton().setVisible(true);
 
 
 			} else { // a specific role button is entered

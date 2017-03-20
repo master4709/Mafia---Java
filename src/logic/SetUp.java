@@ -33,11 +33,7 @@ public class SetUp extends RoleAssignment {
 			System.out.println("Set up constructor");
 			this.names = names;
 			Collections.shuffle(rolesSelected);
-
-			this.roles = rolesSelected; 
-
 			this.roles = rolesSelected;
-
 			nameOfPlayers();
 			roleOfPlayers();
 		}

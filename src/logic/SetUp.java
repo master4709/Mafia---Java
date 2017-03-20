@@ -85,7 +85,7 @@ public class SetUp extends RoleAssignment {
 				//If the player is Lyncher then set a target for it.
 				if(playerInfo.get(i).getRole().contains("Lynch")) {
 					lynchTarget();
-					playerInfo.get(i).setGoal("Lynch "+ playerInfo.get(lynchTargetID).getName()+ " to win the game");
+					playerInfo.get(i).setRoleInfo("Lynch "+ playerInfo.get(lynchTargetID).getName()+ " to win the game");
 				}
 				
 				//If the String role of the player contains the word "Mafia:"

@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  * @author Pierce de Jong 30006609
  *
  */
-public class GameController {
+public class GameController extends Debug{
 	
 	private static GameController instance = null;
 	
@@ -127,7 +127,7 @@ public class GameController {
 	 * switches the content panel to the dayCycle page
 	 */
 	public void switchDay(){
-		System.out.println("Day Panel");
+		$("Day Panel");
 		target = -1;
 		panelDay = dp.getContentPane();
 		switchPanel(panelDay);
@@ -139,7 +139,7 @@ public class GameController {
 	 * Set the frame to new updated panelNight content pane 
 	 */
 	public void switchNight(){
-		System.out.println("Night Panel");
+		$("Night Panel");
 		np.setDisplay(position);//Sets the display for current player to select his/her target
 		panelNight = np.getContentPane();//Refreshes the content pane to adjust for updates
 		switchPanel(panelNight);
@@ -149,7 +149,7 @@ public class GameController {
 	 * Switch the frame to the CheckPlayerPanel
 	 */
 	public void switchCheckPlayer(){
-		System.out.println("Check Player Panel");
+		$("Check Player Panel");
 		cpp.setPlayerName(g.getPlayer(position).getName());
 		panelCheck = cpp.getContentPane();
 		switchPanel(panelCheck);
@@ -160,7 +160,7 @@ public class GameController {
 	 * @param dead - Boolean if the player is dead or alive
 	 */
 	public void switchStory(String name, boolean dead){
-		System.out.println("Story Panel");
+		$("Story Panel");
 		sp.setStory(name,dead);
 		panelStory = sp.getContentPane(); 
 		switchPanel(panelStory);

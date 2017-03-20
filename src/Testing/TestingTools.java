@@ -34,7 +34,7 @@ public abstract class TestingTools extends Debug {
 			JFrame frame = new JFrame();
 			
 			width = 480;
-			height = 720;
+			height = 850;
 			frame.setBounds(550, 20, width, height);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setResizable(false);

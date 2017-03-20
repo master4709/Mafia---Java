@@ -161,7 +161,7 @@ public class NightPanel extends MyPanel implements ActionListener{
 	public void setDisplay(int i){
 		//Resets the player target to -1
 		if(target!=-1){
-			playerButtonList.get(target).setBackground(Colors.defaultButtonBackgroundColor);
+			playerButtonList.get(target).setBackground(btnBackgroundColor);
 		}
 		target = -1;
 		//Sets the labels to the current players information

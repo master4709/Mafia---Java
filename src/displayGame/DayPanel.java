@@ -45,8 +45,6 @@ public class DayPanel extends MyPanel implements ActionListener{
 		displayNorth();
 		displaySouth();
 		displayCenter();
-		displayEast();
-		displayWest();
 	}
 	/**
 	 * Displays that it is Day Time and rules of the day
@@ -84,14 +82,6 @@ public class DayPanel extends MyPanel implements ActionListener{
 				displayPlayerButton(player.getPlayPosition());
 			}
 		}
-	}
-	
-	private void displayEast(){
-		
-	}
-	
-	private void displayWest(){
-		
 	}
 	/**
 	 * Creates a button for a player when called in displayCenter()
@@ -153,7 +143,7 @@ public class DayPanel extends MyPanel implements ActionListener{
 		
 		//Resets the background of the previously targeted player button if the current player has changed targets
 		if(target!=-1){
-			playerButtonList.get(target).setBackground(Colors.defaultButtonBackgroundColor);
+			playerButtonList.get(target).setBackground(btnBackgroundColor);
 		}
 		//Finds the button that was pressed
 		//Sets the background of the button to the select Color

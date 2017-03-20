@@ -55,7 +55,10 @@ public class GameController {
 		listener = new Listener();
 	}
 	/**
-	 * This method ensures only one instance of the GameController Class can be made
+	 * This method will change the static instance variable 
+	 * of this class from null to a new object of 
+	 * GameController with determined frame.
+	 * It will ensures only one instance of the GameController Class can be made
 	 * @param frame
 	 */
 	public static void createInstance(JFrame frame){
@@ -63,7 +66,10 @@ public class GameController {
 			instance = new GameController(frame);
 		}
 	}
-	
+	/**
+	 * Returns the instance of GameController if one is made
+	 * @return instance
+	 */
 	public static GameController getInstance(){
 		if(instance!=null){
 			return instance;
@@ -71,7 +77,12 @@ public class GameController {
 			return null;
 		}
 	}
-	
+	/**
+	 * Initializes all of the Panels and Game Class with:
+	 * @param playerInfo - list of all of the players, stored in a list of Player classes
+	 * @param lynchTarget - index value of the target for the lyncher player, -1 if no lyncher player
+	 * @param test - if true, bypasses specific screens, (ViewAllPlayersPanel and CheckPlayerPanel)
+	 */
 	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		g = new Game(playerInfo,lynchTarget);
 		cpp = new CheckPlayerPanel(listener);
@@ -81,6 +92,7 @@ public class GameController {
 		
 		vapp = new ViewAllPlayersPanel(listener,g.getPlayerInfo());
 		vpp = new ViewPlayerPanel(listener,g.getMafiaMember());
+		
 		this.test = test;
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
 			switchDay();
@@ -89,7 +101,9 @@ public class GameController {
 		}
 		
 	}
-	
+	/**
+	 * Switch to the V
+	 */
 	public void switchViewAllPlayers(){
 		panelViewAllPlayers = vapp.getContentPane();
 		switchPanel(panelViewAllPlayers);
@@ -113,10 +127,8 @@ public class GameController {
 
 	
 	/**
-	 * Updates the north panel of the Night Panel text with the information of the next player
-	 * Hide the current view
-	 * set the nightPanel to the update ContentPane
-	 * update the frame with new content pane
+	 * Updates Night Panel text with the information of the next player
+	 * Set the frame to new updated panelNight content pane 
 	 */
 	public void switchNight(){
 		System.out.println("Night Panel");
@@ -136,8 +148,8 @@ public class GameController {
 	}
 	/**
 	 * Switches the frame to the Story Panel to display the death or savior of a player
-	 * @param name
-	 * @param dead
+	 * @param name - String of the players name
+	 * @param dead - Boolean if the player is dead or alive
 	 */
 	public void switchStory(String name, boolean dead){
 		System.out.println("Story Panel");
@@ -145,7 +157,13 @@ public class GameController {
 		panelStory = sp.getContentPane(); 
 		switchPanel(panelStory);
 	}
-	
+	/**
+	 * Switches the frame to the passed JPanel
+	 * Sets current content pane to invisible
+	 * Sets the frame to the new JPanel
+	 * Sets new contnet pane to visible
+	 * @param panel
+	 */
 	private void switchPanel(JPanel panel){
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panel);
@@ -186,6 +204,7 @@ public class GameController {
 				dead = false;
 			}
 			switchStory(name,dead);
+			//switchDay();
 		}else{
 			//Skip the story panel and go to the next day.
 			switchDay();
@@ -236,7 +255,7 @@ public class GameController {
 	 * When a button is pressed, the name String of the button is stored as a local variable
 	 * A switch statement is used to compare the name with other string values to find the correct button
 	 */
-	public class Listener implements ActionListener{
+	private class Listener implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e){
 			//Gets the name (NOT TEXT) of the button that was pressed

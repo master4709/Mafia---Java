@@ -76,9 +76,9 @@ public class SetUpController {
 	 * @param name
 	 */
 	public void switchToGame(List<String> name){
-//		TODO		SetUp setUp = new SetUp(name, rsp.getRolesSelected());
+		SetUp setUp = new SetUp(name, rsp.getRolesSelected());
 		GameController.createInstance(frame);
-//		TODO GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
+		GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
 	}
 	
 

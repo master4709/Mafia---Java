@@ -73,8 +73,8 @@ public class RoleAssignment extends Debug {
 
 	}
 
-	protected List<Role> getChosenRoles() {
-		return chosenRoles;
+	protected List<Role> getRandomizedRoles() {
+		return randomizedRoles;
 	}
 
 }

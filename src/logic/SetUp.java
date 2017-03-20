@@ -31,7 +31,6 @@ public class SetUp extends RoleAssignment {
 		 */	
 		public SetUp( List<String> names, ArrayList<String> rolesSelected){
 			super(names.size());
-			System.out.println("Set up constructor");
 			this.names = names;
 			this.roles = rolesSelected;
 			playerAssignment(rolesSelected);
@@ -76,7 +75,6 @@ public class SetUp extends RoleAssignment {
 			$("Setting role of players");
 			chosenRoles = getChosenRoles();
 			Collections.shuffle(chosenRoles);
-			System.out.println(chosenRoles.toString());
 			
 			//Loops through all of the players and assigns them a Role.
 			for(int i=0; i<names.size(); i++){
@@ -84,7 +82,6 @@ public class SetUp extends RoleAssignment {
 				playerInfo.get(i).setRole(chosenRoles.get(i).getRoleID());			
 				
 				playerInfo.get(i).setRoleInfo(chosenRoles.get(i).getRoleInfo());
-				System.out.println(roles.get(i) + ": "+ chosenRoles.get(i).getRoleInfo());
 				
 				//If the player is Lyncher then set a target for it.
 				if(playerInfo.get(i).getRole().contains("Lynch")) {

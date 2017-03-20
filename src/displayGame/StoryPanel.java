@@ -42,28 +42,19 @@ public class StoryPanel extends MyPanel {
 	
 	private void initalize() {
 		
-		//Put "" for all of the labels lblLocation = new MyLabel("",...);
 		displayTop();
-		//displayLeft();
-		//displayRight();
 		displayCenter();
 		displayBottom();
 		
-	}
-	private void displayLeft() {
-		
-	}
-	private void displayRight() {
-		
-	}
 	private void displayTop(){
+		line_name = new MyLabel("Name: ", textColor, textFont);
+		center.add(line_name);
 		name = new MyLabel("", 20);
 		north.add(name);
-		location = new MyLabel("",20);
-		north.add(location, "cell 0 1");
 		line_location = new MyLabel("Location: ", textColor, textFont);
-		center.add(line_location, "cell 0 2");
-		
+		center.add(line_location);
+		location = new MyLabel("",20);
+		north.add(location);
 		
 	}
 	
@@ -74,20 +65,12 @@ public class StoryPanel extends MyPanel {
 		btnContinue.addActionListener(actionListener);
 	}
 	private void displayCenter() {
+		line_story = new MyLabel("Here's what happened...", textColor, textFont);
+		center.add(line_story);
 		story = new MyLabel("", 20);
-		center.add(story, "cell 0 2");
-		event = new MyLabel("", 20);
-		center.add(event, "cell 0 3");
-		//line_name = new MyLabel("Name: ", textColor, textFont);
-		//center.add(line_name);
-		//center.add(name);
-		
-		//line_story = new MyLabel("Here's what happened...", textColor, textFont);
-		//center.add(line_story);
-		//center.add(event);
-		
-		
-		
+		center.add(story);
+		//event = new MyLabel("", 20);
+		//center.add(event);	
 	}
 
 	//Call the story class here also to receive the getters for the location, event, etc....

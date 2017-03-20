@@ -2,8 +2,12 @@ package displaySetUp;
 
 import displayGame.GameController;
 import logic.SetUp;
+import myJStuff.Colors;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,9 +22,12 @@ public class SetUpController {
 	private SetUp setUp;
 	private PlayerCountPanel pcp;
 	private PlayerNamePanel ipp;
-	
+	private RoleSelectionPanel rsp;
+	private ButtonListener buttonListener;
 	private JFrame frame;
 	private JPanel panelCount;
+
+	private List<String> playerNames;
 
 	/**
 	 * initialize the frame and set the bounds
@@ -29,6 +36,8 @@ public class SetUpController {
 		//Set the bounds and exit command
 		
 		pcp = new PlayerCountPanel();
+		buttonListener = new ButtonListener();
+		playerNames = new ArrayList<>();
 		
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,9 +92,66 @@ public class SetUpController {
 	}
 
 	public void switchToRoleSelection(List<String> names) {
+		playerNames = names;
 		frame.getContentPane().setVisible(false);
-		RoleSelectionPanel rsp = new RoleSelectionPanel(names);
+		rsp = new RoleSelectionPanel(names);
 		frame.setContentPane(rsp.getContentPane());
 		rsp.getContentPane().setVisible(true);
+	}
+
+	public void addListener(JButton button) {
+		button.addActionListener(buttonListener);
+	}
+
+	private class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			String btnText = ((JButton)e.getSource()).getText();
+			if (btnText.equals("Continue")) {
+				SetUpController.getInstance().switchToGame(playerNames);
+			} else if (btnText.equals("Reset")){
+
+				rsp.clearRolesSelected();
+				for (JButton roleButton : rsp.getRoleButtons()) {
+					roleButton.setEnabled(true);
+					roleButton.setBackground(Colors.grey);
+				}
+				rsp.getAssignTownies().setEnabled(true);
+				rsp.getContinueButton().setVisible(false);
+				rsp.getPlayersLeft().setText(String.valueOf(playerNames.size()));
+
+			} else if (btnText.equals("Assign the rest as Townie")){
+
+				// TODO
+
+
+			} else { // a specific role button is entered
+				rsp.getRolesSelected().add(btnText);
+				final int rolesSelectedSize = rsp.getRolesSelected().size();
+				final int playerNamesSize = playerNames.size();
+
+				((JButton) e.getSource()).setBackground(Colors.white);
+				((JButton) e.getSource()).setEnabled(false);
+				rsp.getPlayersLeft().setText(String.valueOf(
+						(playerNamesSize - rolesSelectedSize < 0) ? 0 : playerNamesSize - rolesSelectedSize
+				));
+
+				System.out.println(rsp.getRolesSelected().toString());
+
+				if (playerNamesSize == rolesSelectedSize) {
+					rsp.getContinueButton().setVisible(true);
+					rsp.getAssignTownies().setEnabled(false);
+					for (JButton roleButton : rsp.getRoleButtons()) {
+						roleButton.setEnabled(false);
+					}
+				} else {
+					rsp.getContinueButton().setVisible(false);
+				}
+			}
+
+		}
+
 	}
 }

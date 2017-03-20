@@ -1,11 +1,7 @@
 package displayGame;
 
-import java.awt.BorderLayout;
-
 import myJStuff.*;
-
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import logic.Story;
 
@@ -28,9 +24,6 @@ public class StoryPanel extends MyPanel {
 	
 	public StoryPanel(ActionListener actionListener){
 		this.actionListener = actionListener;
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		initalize();
 	}
 

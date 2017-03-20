@@ -72,15 +72,13 @@ public class SetUp extends RoleAssignment {
 		 * If the player is Lyncher, then it will set a target for it.
 		 */
 		public void roleOfPlayers(){
-			$("Setting role of players");
+			//shuffle roles to be assigned to each player
 			chosenRoles = getChosenRoles();
 			Collections.shuffle(chosenRoles);
 			
 			//Loops through all of the players and assigns them a Role.
-			for(int i=0; i<names.size(); i++){
-				System.out.println(playerInfo);
-				playerInfo.get(i).setRole(chosenRoles.get(i).getRoleID());			
-				
+			for(int i=0; i<names.size(); i++){				
+				playerInfo.get(i).setRole(chosenRoles.get(i).getRoleID());					
 				playerInfo.get(i).setRoleInfo(chosenRoles.get(i).getRoleInfo());
 				
 				//If the player is Lyncher then set a target for it.

@@ -18,8 +18,10 @@ import java.util.List;
 public class SetUpController {
 	
 	private static SetUpController instance = null;
+	private SetUp setUp;
 
     private PlayerCountPanel pcp;
+    private PlayerNamePanel pnp;
     private RoleSelectionPanel rsp;
 	private ButtonListener buttonListener;
 	private JFrame frame;
@@ -76,7 +78,7 @@ public class SetUpController {
 	 * @param name
 	 */
 	public void switchToGame(List<String> name){
-		SetUp setUp = new SetUp(name, rsp.getRolesSelected());
+		setUp = new SetUp(name, rsp.getRolesSelected());
 		GameController.createInstance(frame);
 		GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
 	}
@@ -84,9 +86,9 @@ public class SetUpController {
 
 	public void switchToPlayerName(int playerTotal) {
 		frame.getContentPane().setVisible(false);
-        PlayerNamePanel ipp = new PlayerNamePanel(playerTotal);
-		frame.setContentPane(ipp.getContentPane());
-		ipp.getContentPane().setVisible(true);
+        pnp = new PlayerNamePanel(playerTotal);
+		frame.setContentPane(pnp.getContentPane());
+        pnp.getContentPane().setVisible(true);
 	}
 
 	public void switchToRoleSelection(List<String> names) {

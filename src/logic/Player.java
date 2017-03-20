@@ -24,7 +24,31 @@ public class Player {
 	private boolean inBar;//If true the player cannot do anything that night.
 	private boolean isLynched;//true if the player is lynched.
 	
+	/**
+	 * Default Constructor
+	 */
 	
+	/**
+	 * Copy constructor
+	 */
+	public Player(Player p){
+		this.name = p.getName();
+		this.role = p.getRole();
+		this.roleInfo = p.getRoleInfo();
+		this.isMafia = p.isMafia();
+		this.isDead = p.isDead();
+		this.isHealed = p.isHealed();
+		this.isTargeted = p.isTargeted();
+		this.isProtected = p.isProtected();
+		this.isLynched = p.islynched();
+		this.playPosition = p.getPlayPosition();
+		this.playerTarget = p.getPlayerTarget();
+	}
+	
+	//Default constructor is blank
+	public Player() {
+	}
+
 	/**
 	 * Setter methods.
 	 */

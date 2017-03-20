@@ -92,7 +92,6 @@ public abstract class TestingTools extends Debug {
 			for(int i=0; i<totalPlayers; i++){
 				playerInfo.get(i).setRole(roles.get(i));			
 				playerInfo.get(i).setRoleInfo(rolesInfo.get(i));
-				playerInfo.get(i).setGoal(Goals.get(i));
 				
 				if(playerInfo.get(i).getRole().contains("Lynch")) {
 					lynchTarget(playerInfo, totalPlayers);
@@ -147,7 +146,6 @@ public abstract class TestingTools extends Debug {
 				playerInfo.get(i).setName(names.get(i));
 				playerInfo.get(i).setPlayPosition(i);
 				playerInfo.get(i).setPlayerTarget(-1);
-				playerInfo.get(i).setOldPlayerTarget(-1);
 				playerInfo.get(i).setIsDead(false);
 				playerInfo.get(i).setIsHealed(false);
 				playerInfo.get(i).setIsTargeted(false);

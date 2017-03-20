@@ -180,8 +180,8 @@ public class Game extends Action{
 	}
 	
 	public Player getPlayerCopy(int i){
-		//Player player = new Player(playerInfo.get(i));
-		return playerInfo.get(i);
+		Player player = new Player(playerInfo.get(i));
+		return player;
 	}
 
 }

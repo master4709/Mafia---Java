@@ -12,7 +12,6 @@ public class RoleAssignment extends Debug {
 	protected int totalPlayers;
 
 	private List<Role> chosenRoles = new ArrayList<>();
-	private List<Role> randomizedRoles = new ArrayList<>();
 
 	/**
 	 * Class Constructor Specifies the initial number of total players,
@@ -36,7 +35,6 @@ public class RoleAssignment extends Debug {
 		for (String role : chosenRolesString) {
 			this.chosenRoles.add(findRoleByID(role));
 		}
-		randomizeRoles();
 
 	}
 
@@ -51,30 +49,8 @@ public class RoleAssignment extends Debug {
 
 	}
 
-	/**
-	 * Generates a randomized order of chosenRoles and store corresponding values
-	 * in the fields assignments, assignmentsInfo, and assignmentGoals.
-	 *
-	 */
-	private void randomizeRoles() {
-
-		int num;
-		Random rand = new Random();
-		Role select;
-
-		for (int i = 0; i < totalPlayers; i++) {
-
-			num = rand.nextInt(totalPlayers-i);
-			select = chosenRoles.get(num);
-			chosenRoles.remove(num);
-			randomizedRoles.add(select);
-
-		}
-
-	}
-
-	protected List<Role> getRandomizedRoles() {
-		return randomizedRoles;
+	protected List<Role> getChosenRoles() {
+		return chosenRoles;
 	}
 
 }

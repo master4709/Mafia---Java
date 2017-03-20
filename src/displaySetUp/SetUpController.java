@@ -84,7 +84,7 @@ public class SetUpController {
 	}
 	
 
-	public void switchToInputPlayer(int playerTotal) {
+	public void switchToPlayerName(int playerTotal) {
 		frame.getContentPane().setVisible(false);
 		ipp = new PlayerNamePanel(playerTotal);
 		frame.setContentPane(ipp.getContentPane());
@@ -109,9 +109,12 @@ public class SetUpController {
 		public void actionPerformed(ActionEvent e) {
 
 			String btnText = ((JButton)e.getSource()).getText();
-			if (btnText.equals("Continue")) {
+			if (btnText.equals("Continue ")) {
 				SetUpController.getInstance().switchToGame(playerNames);
-			} else if (btnText.equals("Reset")){
+			} else if (btnText.equals("Continue")) {
+				switchToPlayerName(pcp.getPlayerTotal());
+			}
+			else if (btnText.equals("Reset")){
 
 				rsp.clearRolesSelected();
 				for (JButton roleButton : rsp.getRoleButtons()) {

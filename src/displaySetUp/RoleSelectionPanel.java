@@ -49,7 +49,7 @@ public class RoleSelectionPanel {
                 "[][grow, grow][]",
                 ""));
         playersLeft = new MyLabel(String.valueOf(playerNames.size()), Colors.black, 20);
-        continueButton = new MyButton("Continue", Colors.white, Colors.black, 15);
+        continueButton = new MyButton("Continue ", Colors.white, Colors.black, 15);
         assignTownies = new MyButton("Assign the rest as Townie", Colors.white, Colors.grey, 15);
         roleButtons = new ArrayList<>();
 

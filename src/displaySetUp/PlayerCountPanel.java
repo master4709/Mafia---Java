@@ -1,15 +1,14 @@
 package displaySetUp;
 
-import myJStuff.*;
+import myJStuff.MyButton;
+import myJStuff.MyLabel;
+import myJStuff.MyPanel;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 /**
  * This class creates the Panel for selecting how many players you want in the game
  * @author Elvin Limpin 30018832
@@ -58,7 +57,7 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 		//Add the button to the south panel, button will fill width of screen 
 		south.add(btnContinue, "cell 0 0,growx");
 		//Add action listener for when the button is pressed
-		btnContinue.addActionListener(this);
+		btnContinue.addActionListener(actionListener);
 		
 	}
 	/**

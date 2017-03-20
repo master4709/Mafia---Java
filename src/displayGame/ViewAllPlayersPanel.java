@@ -25,12 +25,12 @@ public class ViewAllPlayersPanel extends MyPanel{
 	private JButton btnContinue;
 	//Stores all of the data of the players
 	//Does not change the date stored in it EVER
-	private List<Player> playerInfo;
+	private List<String> playerNames;
 	/**
 	 * Create the panel.
 	 */
-	public ViewAllPlayersPanel(ActionListener actionListener, List<Player> playerInfo) {
-		this.playerInfo = playerInfo;
+	public ViewAllPlayersPanel(ActionListener actionListener, List<String> playerNames) {
+		this.playerNames = playerNames;
 		this.actionListener = actionListener;
 		
 		displayNorth();
@@ -64,9 +64,8 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 * Creates all of the buttons representing each player that is alive
 	 */
 	private void displayCenter(){
-		//Loop through the list of players
-		for(int i=0;i<playerInfo.size();i++){
-			//create a button of that player
+		//Loops through the list of players adn create a button for each player
+		for(int i =0;i<playerNames.size();i++){
 			displayPlayerButton(i);
 		}
 	}
@@ -77,7 +76,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 */
 	private void displayPlayerButton(int i){
 		//Create string of the players name
-		String text = playerInfo.get(i).getName();
+		String text = playerNames.get(i);
 		//Create a new button with passing the String text
 		JButton btnPlayer = new MyButton(text);
 		btnPlayer.setName("Select_"+Integer.toString(i));

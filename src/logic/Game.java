@@ -22,6 +22,8 @@ public class Game extends Action{
 	//List of each player (class) and his/her info (name, role, target, position, etc)
 	private List<Player> playerInfo = new ArrayList<>();
 	
+	private List<String> names = new ArrayList<>();
+	
 	//Index value for the target of the Lyncher
 	private int lynchTarget;
 	/**
@@ -36,15 +38,26 @@ public class Game extends Action{
 		this.lynchTarget = lynchTarget;
 		this.playerInfo = playerInfo;
 		mafiaMembers();
+		playerNames();
 	}
 	
-	
+	/**
+	 * Creates a list of all of the Mafia Members
+	 */
 	private void mafiaMembers(){
 		for(int i =0;i<playerInfo.size();i++){
 			$(getPlayer(i).getRole());
 			if(getPlayer(i).getRole().contains("Mafia")){
 				mafiaMembers.add(getPlayer(i).getName());
 			}
+		}
+	}
+	/**
+	 * Creates a list of all of the player names
+	 */
+	private void playerNames(){
+		for(Player player: playerInfo){
+			names.add(player.getName());
 		}
 	}
 	
@@ -118,16 +131,23 @@ public class Game extends Action{
 		getPlayer(i).setInBar(false);//Removes any player that may have been in the bar out
 		getPlayer(i).setPlayerTarget(-1);//Resets the target for each player
 	}
-	
+	/**
+	 * If the hitman has been killed, the barman will become the new hitman
+	 * @param k - index value of the location of hitman
+	 */
 	private void newHitman(int k){
+		//Loop through the list of players
 		for(int i=0;i<playerInfo.size();i++){
+			//Finds the barman
 			if(getPlayer(i).getRole().contains("Barman")){
+				//Sets the Barman to the role and role inforamtion of the hitman
 				Player hitman = playerInfo.get(k);
 				getPlayer(i).setRole(hitman.getRole());
 				getPlayer(i).setRoleInfo(hitman.getRoleInfo());
 			}
 		}
-		playerInfo.get(k).setRole("Dead Mafia: Hitman");
+		//Sets the dead Mafia Hitman's role to dead
+		playerInfo.get(k).setRole("Dead Mafia");
 	}
 
 	/**
@@ -182,6 +202,10 @@ public class Game extends Action{
 	public Player getPlayerCopy(int i){
 		//Player player = new Player(playerInfo.get(i));
 		return playerInfo.get(i);
+	}
+	
+	public List<String> getPlayerNames(){
+		return names;
 	}
 
 }

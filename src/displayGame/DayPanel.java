@@ -26,7 +26,7 @@ public class DayPanel extends MyPanel{
 	private JButton btnContinue;
 	//Stores all of the data of the players
 	//Does not change the date stored in it EVER
-	private List<Player> playerInfo;
+	private List<String> playerNames;
 	//List of buttons representing each player that is alive
 	//Pressing a button will set them as the target for the day lynching
 	private List<JButton> playerButtonList = new ArrayList<>();
@@ -35,9 +35,9 @@ public class DayPanel extends MyPanel{
 	/**
 	 * Constructor
 	 */
-	public DayPanel(ActionListener actionListener,List<Player> playerInfo, boolean test) {
+	public DayPanel(ActionListener actionListener,List<String> playerNames, boolean test) {
 		this.actionListener = actionListener;
-		this.playerInfo = playerInfo;
+		this.playerNames = playerNames;
 		this.test=test;
 		//Create all of the labels and buttons etc needed for the Panel
 		displayNorth();
@@ -73,12 +73,9 @@ public class DayPanel extends MyPanel{
 	 */
 	private void displayCenter(){
 		//Loop through the list of players
-		for(Player player: playerInfo){
-			//If the player is NOT dead
-			if(!player.isDead()){
-				//create a button of that player
-				displayPlayerButton(player.getPlayPosition());
-			}
+		//Loops through the list of players adn create a button for each player
+		for(int i =0;i<playerNames.size();i++){
+			displayPlayerButton(i);
 		}
 	}
 	/**
@@ -88,8 +85,8 @@ public class DayPanel extends MyPanel{
 	 */
 	private void displayPlayerButton(int i){
 		//Create string of the players name and role (debug)
-		String text = playerInfo.get(i).getName();
-		if(test) {text = text+" | "+playerInfo.get(i).getRole();}
+		String text = playerNames.get(i);
+		//if(test) {text = text+" | "+playerInfo.get(i).getRole();}
 		JButton btnPlayer = new MyButton(text);//Create a new button with passing the String text
 		btnPlayer.setName("Day_"+Integer.toString(i));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel

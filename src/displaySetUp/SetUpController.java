@@ -34,9 +34,9 @@ public class SetUpController {
 	 */
 	private SetUpController(JFrame frame){
 		//Set the bounds and exit command
-		
-		pcp = new PlayerCountPanel();
+
 		buttonListener = new ButtonListener();
+		pcp = new PlayerCountPanel(buttonListener);
 		playerNames = new ArrayList<>();
 		
 		this.frame = frame;

@@ -3,7 +3,6 @@ package displayGame;
 import myJStuff.*;
 import logic.*;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ import javax.swing.JPanel;
  * @author Pierce de Jong 30006609
  *
  */
-public class NightPanel extends MyPanel implements ActionListener{
+public class NightPanel extends MyPanel{
 	
 	//Create all of the labels for the NorthPanel
 	private JLabel lblName;
@@ -34,8 +33,6 @@ public class NightPanel extends MyPanel implements ActionListener{
 	private JButton btnContinue;
 	//jButton that is only visible to detective. when pressed reveals 
 	private JButton btnDetective;
-	//Current position in the list of players
-	private int target = -1;
 	//List of all of the players
 	private List<Player> playerInfo;
 	//List of all of the buttons representing each of the players
@@ -117,9 +114,9 @@ public class NightPanel extends MyPanel implements ActionListener{
 		//Create string of the players name
 		String text = playerInfo.get(i).getName();
 		JButton btnPlayer = new MyButton(text, textFont);//Create a new button with passing the String text
-		btnPlayer.setName(Integer.toString(i));//Sets the name of the button to the index value of the player
+		btnPlayer.setName("Night_"+Integer.toString(i));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
-		btnPlayer.addActionListener(this);//Add action listener 
+		btnPlayer.addActionListener(actionListener);//Add action listener 
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
@@ -132,20 +129,22 @@ public class NightPanel extends MyPanel implements ActionListener{
 		lblDetective.setText(text);
 	}
 	
-	public Integer getPlayerTarget(){
-		return target;
-	}
-	
-	public void resetTarget(){
-		target = -1;
-	}
-	
 	public void removePlayerButton(int target){
-		if(target!=-1){
-			for(JButton button: playerButtonList){
-				if(target==Integer.parseInt(button.getName())){
-					center.remove(button);
+		if(target!=-1){//Error handling, Must have a valid target to remove the button
+			for(JButton button: playerButtonList){//Loops through the list of player buttons
+				if(button.getName().contains(Integer.toString(target))){//Finds the one with the same name as the target. THe buttons are named 0,1,2... etc
+					center.remove(button);//Remove the button from the list of buttons 
 				}
+			}
+		}
+	}
+	
+	public void setButtonSelected(int previous,int target){
+		for(JButton button: playerButtonList){
+			if(button.getName().contains(Integer.toString(target))){
+				button.setBackground(selectColor);
+			}else if(button.getName().contains(Integer.toString(previous))){
+				button.setBackground(btnBackgroundColor);
 			}
 		}
 	}
@@ -160,10 +159,9 @@ public class NightPanel extends MyPanel implements ActionListener{
 	 */
 	public void setDisplay(int i){
 		//Resets the player target to -1
-		if(target!=-1){
-			playerButtonList.get(target).setBackground(btnBackgroundColor);
+		for(JButton button:playerButtonList){
+			button.setBackground(btnBackgroundColor);
 		}
-		target = -1;
 		//Sets the labels to the current players information
 		lblName.setText(playerInfo.get(i).getName());
 		lblRole.setText(playerInfo.get(i).getRole());
@@ -183,69 +181,6 @@ public class NightPanel extends MyPanel implements ActionListener{
 		//if the player is part of the Mafia, display a list of all Mafia Members to the screen
 		if(playerInfo.get(i).getRole().contains("Mafia")){
 			lblMafia.setText("Mafia Members: "+ mafiaMember);
-		}
-	}
-	/**
-	 * This listens for if one of the buttons in the center panel is pressed
-	 * If it is pressed sets target to index value of button and sets the background color to selectColor
-	 */
-	public void actionPerformed(ActionEvent e){
-		//Get the name (NOT TEXT) of the button that was pressed
-		JButton source = (JButton)e.getSource();
-		String name = source.getName();
-		
-		//Resets the background of the previously targeted player button if the current player has changed targets
-		if(target!=-1){
-			playerButtonList.get(target).setBackground(Colors.defaultButtonBackgroundColor);
-		}
-		
-		switch(name){
-		case "0":
-			playerButtonList.get(0).setBackground(selectColor);
-			target=0;
-			break;
-		case "1":
-			playerButtonList.get(1).setBackground(selectColor);
-			target=1;
-			break;
-		case "2":
-			playerButtonList.get(2).setBackground(selectColor);
-			target=2;
-			break;
-		case "3":
-			playerButtonList.get(3).setBackground(selectColor);
-			target=3;
-			break;
-		case "4":
-			playerButtonList.get(4).setBackground(selectColor);
-			target=4;
-			break;
-		case "5":
-			playerButtonList.get(5).setBackground(selectColor);
-			target=5;
-			break;
-		case "6":
-			playerButtonList.get(6).setBackground(selectColor);
-			target=6;
-			break;
-		case "7":
-			playerButtonList.get(7).setBackground(selectColor);
-			target=7;
-			break;
-		case "8":
-			playerButtonList.get(8).setBackground(selectColor);
-			target=8;
-			break;
-		case "9":
-			playerButtonList.get(9).setBackground(selectColor);
-			target=9;
-			break;
-		case "10":
-			playerButtonList.get(10).setBackground(selectColor);
-			target=10;
-			break;
-		default:
-			break;
 		}
 	}
 }

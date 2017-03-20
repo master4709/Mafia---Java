@@ -4,7 +4,6 @@ package displayGame;
 import myJStuff.*;
 import logic.*;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ import javax.swing.JPanel;
  * @author Pierce de Jong 30006609
  *
  */
-public class DayPanel extends MyPanel implements ActionListener{
+public class DayPanel extends MyPanel{
 	//This label displays the text "Day Time"
 	private JLabel lblDayTime;
 	//This label displays the text for what to do on this screen
@@ -31,16 +30,15 @@ public class DayPanel extends MyPanel implements ActionListener{
 	//List of buttons representing each player that is alive
 	//Pressing a button will set them as the target for the day lynching
 	private List<JButton> playerButtonList = new ArrayList<>();
-	//Stores the index value for the target of the dayLynching
-	//To be used in the game class to kill the target of the day lynching
-	private int target;
+	//If the game is in test mode
+	private boolean test;
 	/**
 	 * Constructor
 	 */
-	public DayPanel(ActionListener actionListener,List<Player> playerInfo) {
+	public DayPanel(ActionListener actionListener,List<Player> playerInfo, boolean test) {
 		this.actionListener = actionListener;
 		this.playerInfo = playerInfo;
-		target = -1;
+		this.test=test;
 		//Create all of the labels and buttons etc needed for the Panel
 		displayNorth();
 		displaySouth();
@@ -91,10 +89,11 @@ public class DayPanel extends MyPanel implements ActionListener{
 	private void displayPlayerButton(int i){
 		//Create string of the players name and role (debug)
 		String text = playerInfo.get(i).getName();
+		if(test) {text = text+" | "+playerInfo.get(i).getRole();}
 		JButton btnPlayer = new MyButton(text);//Create a new button with passing the String text
-		btnPlayer.setName(Integer.toString(i));//Sets the name of the button to the index value of the player
+		btnPlayer.setName("Day_"+Integer.toString(i));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
-		btnPlayer.addActionListener(this);//Add action listener 
+		btnPlayer.addActionListener(actionListener);//Add action listener 
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
@@ -105,25 +104,27 @@ public class DayPanel extends MyPanel implements ActionListener{
 	public void removePlayerButton(int target){
 		if(target!=-1){//Error handling, Must have a valid target to remove the button
 			for(JButton button: playerButtonList){//Loops through the list of player buttons
-				if(target==Integer.parseInt(button.getName())){//Finds the one with the same name as the target. THe buttons are named 0,1,2... etc
+				if(button.getName().contains(Integer.toString(target))){//Finds the one with the same name as the target. THe buttons are named 0,1,2... etc
 					center.remove(button);//Remove the button from the list of buttons 
 				}
 			}
 		}
 	}
 	/**
-	 * Resets the target to -1 so the panel is ready for the next Day
+	 * 
+	 * @param previous
+	 * @param target
 	 */
-	public void resetTarget(){
-		target = -1;
+	public void setButtonSelected(int previous,int target){
+		for(JButton button: playerButtonList){
+			if(button.getName().contains(Integer.toString(target))){
+				button.setBackground(selectColor);
+			}else if(button.getName().contains(Integer.toString(previous))){
+				button.setBackground(btnBackgroundColor);
+			}
+		}
 	}
-	/**
-	 * Get the target for who was voted out during the day
-	 * @return int target
-	 */
-	public Integer getTarget(){
-		return target;
-	}
+
 	
 	/**
 	 * Returns the contentPane with everything added to it
@@ -131,70 +132,5 @@ public class DayPanel extends MyPanel implements ActionListener{
 	 */
 	public JPanel getContentPane(){
 		return contentPane;
-	}
-	/**
-	 * This listens for if one of the buttons in the center panel is pressed
-	 * If it is pressed sets target to index value of button and sets the background color to selectColor
-	 */
-	public void actionPerformed(ActionEvent e){
-		//Get the name (NOT TEXT) of the button that was pressed
-		JButton source = (JButton)e.getSource();
-		String name = source.getName();
-		
-		//Resets the background of the previously targeted player button if the current player has changed targets
-		if(target!=-1){
-			playerButtonList.get(target).setBackground(btnBackgroundColor);
-		}
-		//Finds the button that was pressed
-		//Sets the background of the button to the select Color
-		//Sets the target for the day lynching to the index value of the button
-		switch(name){
-		case "0":
-			playerButtonList.get(0).setBackground(selectColor);
-			target=0;
-			break;
-		case "1":
-			playerButtonList.get(1).setBackground(selectColor);
-			target=1;
-			break;
-		case "2":
-			playerButtonList.get(2).setBackground(selectColor);
-			target=2;
-			break;
-		case "3":
-			playerButtonList.get(3).setBackground(selectColor);
-			target=3;
-			break;
-		case "4":
-			playerButtonList.get(4).setBackground(selectColor);
-			target=4;
-			break;
-		case "5":
-			playerButtonList.get(5).setBackground(selectColor);
-			target=5;
-			break;
-		case "6":
-			playerButtonList.get(6).setBackground(selectColor);
-			target=6;
-			break;
-		case "7":
-			playerButtonList.get(7).setBackground(selectColor);
-			target=7;
-			break;
-		case "8":
-			playerButtonList.get(8).setBackground(selectColor);
-			target=8;
-			break;
-		case "9":
-			playerButtonList.get(9).setBackground(selectColor);
-			target=9;
-			break;
-		case "10":
-			playerButtonList.get(10).setBackground(selectColor);
-			target=10;
-			break;
-		default:
-			break;
-		}
 	}
 }

@@ -22,7 +22,7 @@ import logic.Role;
 
 public abstract class TestingTools extends Debug {
 	private static List<String> mafiaMembers = new ArrayList<>();
-	private static int lynchTargetID;
+	private static int lynchTargetID = -1;
 		
 		/**
 		 * creates a JFrame to facilitate the GUI
@@ -48,8 +48,8 @@ public abstract class TestingTools extends Debug {
 		 * testing
 		 * @return List<Player> containing finalized roles
 		 */
-		public static List<Player> makeInfo() {
-			int totalPlayers = 10;
+		public static List<Player> makeInfo(int total) {
+			int totalPlayers = total;
 			List<Player> playerInfo = initialInfo(totalPlayers);
 			List<String> assignments = new ArrayList<>();
 			List<String> assignmentsInfo = new ArrayList<>();
@@ -96,7 +96,7 @@ public abstract class TestingTools extends Debug {
 				
 				if(playerInfo.get(i).getRole().contains("Lynch")) {
 					lynchTarget(playerInfo, totalPlayers);
-					playerInfo.get(i).setGoal("Lynch "+ playerInfo.get(lynchTargetID).getName()+ " to win the game");
+					playerInfo.get(i).setRoleInfo("Lynch "+ playerInfo.get(lynchTargetID).getName()+ " to win the game");
 				}
 				
 				//If the String role of the player contains the word "Mafia:"

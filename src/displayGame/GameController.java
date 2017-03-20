@@ -88,7 +88,7 @@ public class GameController {
 	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		g = new Game(playerInfo,lynchTarget);
 		cpp = new CheckPlayerPanel(listener);
-		dp = new DayPanel(listener,g.getPlayerInfo());
+		dp = new DayPanel(listener,g.getPlayerInfo(),test);
 		np = new NightPanel(listener,g.getPlayerInfo(),g.getMafiaMember());
 		sp = new StoryPanel(listener);
 		
@@ -128,7 +128,7 @@ public class GameController {
 	 */
 	public void switchDay(){
 		System.out.println("Day Panel");
-		dp.resetTarget();
+		target = -1;
 		panelDay = dp.getContentPane();
 		switchPanel(panelDay);
 	}
@@ -182,7 +182,7 @@ public class GameController {
 	 * Removes that players button for both the day and night panels
 	 * @param target
 	 */
-	private void dayLynch(int target){
+	private void dayLynch(){
 		//Lynches the player who was the target during the day 
 		g.dayCycle(target);
 		dp.removePlayerButton(target);
@@ -212,9 +212,7 @@ public class GameController {
 				dead = false;
 			}
 			switchStory(name,dead);
-			//switchDay();
-		}else{
-			//Skip the story panel and go to the next day.
+		}else{//Skip the story panel and go to the next day.
 			switchDay();
 		}
 	}
@@ -225,10 +223,12 @@ public class GameController {
 	 * Once the position has gone beyond the index of playerInfo, calls the nightAction method
 	 */
 	private void findNextPlayer(){
+		target = -1;
 		//If the position has not gone out of bounds
 		if(position<g.getPlayerInfo().size()){
 			//If the player is dead, find the next one
 			if(g.getPlayer(position).isDead()){
+				g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
 				position++;
 				findNextPlayer();
 			}else{//If not, display the checkPlayerPanel for the next player in the list	
@@ -249,7 +249,7 @@ public class GameController {
 	 * THen displays if they are art of the Mafia or not
 	 * @param target
 	 */
-	private void detective(int target){
+	private void detective(){
 		//If the target of the detective player is part of the Mafia
 		//*Note* the Mafia GodFather is hidden from the detective
 		if(g.getPlayer(target).isMafia()){
@@ -272,50 +272,40 @@ public class GameController {
 			//Finds the button that was pressed and does the needed commands
 			switch(name){
 			case "Continue_ViewAllPlayersPanel":
-				switchDay(); 
-				break;
+				switchDay(); break;
 			case "Continue_DayPanel":
-				int t = dp.getTarget();//Gets the target of the Day panel (THe person voted out and lynched before night)
-				if(t!=-1){//Makes sure a target has been chosen for the day 
-					dayLynch(t);//Lynches the target of the day
+				if(target!=-1){//Makes sure a target has been chosen for the day 
+					dayLynch();//Lynches the target of the day
 					findNextPlayer();//Finds the first person in the list of players that is alive and displays his/her night screen
-				}
-				break;
+				} break;
 			case "Continue_CheckPlayerPanel":
-				switchNight();
-				break;
+				switchNight(); break;
 			case "Continue_NightPanel":
-				int target2 = np.getPlayerTarget();
-				g.setPlayerTarget(position, target2);
-				position++;
-				findNextPlayer();
-				break;
+				g.setPlayerTarget(position, target);//Set the target of the player who just finished his/her night round
+				position++;//Moves to the net player in the list and checks if that player is dead or alive
+				findNextPlayer(); break;
 			case "Continue_StoryPanel":
-				switchDay();
-				break;
+				switchDay(); break;
 			case "Back_ViewPlayerPanel":
-				switchViewAllPlayers();
-				break;
+				switchViewAllPlayers(); break;
 			case "Detective":
-				int target3 = np.getPlayerTarget();
-				if(target3!=-1){
-					detective(target3);
-				}
-				break;
-			default:
+				if(target!=-1){//Only if the detective has selected a target will the button be pressed
+					detective();//Reveals the team of the target of the detective
+				} break;
+			default://If the button pressed was not a continue or back button
 				//Gets the index value of the button that was pressed in its respective lists
 				char c = name.charAt(name.length() -1);
 				int i = Character.getNumericValue(c);
-				if(name.contains("Select")){
+				if(name.contains("Select")){//If the button press came from the ViewAllPlayersPanel
 					switchViewPlayer(i);
-				}else if(name.contains("Day")){
+				}else if(name.contains("Day")){//If the press came from the DayPanel
+					dp.setButtonSelected(target,i);//Set the pressed button to select color and reverts the previous one to 
 					target = i;
-				}else if(name.contains("Night")){
+				}else if(name.contains("Night")){//If the press came from the NightPanel
+					np.setButtonSelected(target, i);
 					target = i;
-				}
-				break;
-			}
-        
+				} break;
+			} 
 		}
     }
 }

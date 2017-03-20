@@ -1,17 +1,17 @@
 package displaySetUp;
 
-import myJStuff.MyButton;
-import myJStuff.MyLabel;
-import myJStuff.MyPanel;
-
-import javax.swing.*;
-
-import logic.Debug;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import myJStuff.MyButton;
+import myJStuff.MyLabel;
+import myJStuff.MyPanel;
 /**
  * This class creates the Panel for selecting how many
  * players you want in the game. This preceeds the
@@ -95,7 +95,7 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton)e.getSource();
 		String name = source.getName();
-		Debug.$(name);
+		System.out.println(name);
 		if(playerTotal!=-1){
 			buttonList.get(playerTotal-5).setBackground(btnBackgroundColor);
 		}

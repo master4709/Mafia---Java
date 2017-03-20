@@ -46,7 +46,7 @@ public class Game extends Action{
 	 */
 	private void mafiaMembers(){
 		for(int i =0;i<playerInfo.size();i++){
-			$(getPlayer(i).getRole());
+			System.out.println(getPlayer(i).getRole());
 			if(getPlayer(i).getRole().contains("Mafia")){
 				mafiaMembers.add(getPlayer(i).getName());
 			}
@@ -66,7 +66,7 @@ public class Game extends Action{
 	 */
 	public void dayCycle(int target){
 		if(target!=-1){
-			$(playerInfo.get(target).getName()+" has been lynched");
+			System.out.println(playerInfo.get(target).getName()+" has been lynched");
 			playerInfo.get(target).setIsDead(true);//Sets the target of the lynching to dead, So they can not be used or targeted again
 			playerInfo.get(target).setIsLynched(true);
 			if(playerInfo.get(target).getRole().contains("Hitman")){
@@ -80,7 +80,7 @@ public class Game extends Action{
 	 * @param playerTarget
 	 */
 	public Integer nightAction(){
-		$("Do night logic");
+		System.out.println("Do night logic");
 		setPlayerInfoAction(playerInfo);
 		nightActionLoop();
 		setPlayerInfo(getPlayerInfo());
@@ -99,7 +99,7 @@ public class Game extends Action{
 			//If the player has been targeted and was NOT healed
 			if(getPlayer(i).isTargeted() && !getPlayer(i).isHealed()){
 				//Call the story panel with a death story
-				$(getPlayer(i).getName()+" is dead");
+				System.out.println(getPlayer(i).getName()+" is dead");
 				getPlayer(i).setIsDead(true);
 				resetPlayer(i);
 				target = i;
@@ -109,7 +109,7 @@ public class Game extends Action{
 				}
 			}else if(getPlayer(i).isTargeted()&& getPlayer(i).isHealed()){
 				//Call the story panel with a survived story
-				$(getPlayer(i).getName()+" is saved");
+				System.out.println(getPlayer(i).getName()+" is saved");
 				resetPlayer(i);
 				getPlayer(i).setIsHealed(true);
 				target = i;

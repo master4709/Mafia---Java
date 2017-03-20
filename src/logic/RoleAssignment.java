@@ -7,7 +7,7 @@ import java.util.*;
  *
  * Players will each have a unique role.
  */
-public class RoleAssignment extends Debug {
+public class RoleAssignment {
 
 	protected int totalPlayers;
 

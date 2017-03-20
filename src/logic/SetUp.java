@@ -4,10 +4,6 @@ package logic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import java.util.Collections;
-import java.util.List;
-
 import java.util.Random;
 /**
  * This class will create a list to store all the information about each player.  

@@ -9,7 +9,7 @@ import displayMain.MainController;
  * This class runs the entire game
  * @authors Team 18: Christilyn, Elvin, Masha, Pierce, Ronelle 
  */
-public class RunMafia extends Debug {
+public class RunMafia {
 	
 	public static JFrame frame = new JFrame();
 	
@@ -26,8 +26,7 @@ public class RunMafia extends Debug {
 		try {
 			frame.setIconImage(image.getImage());
 
-			$("Frame is made!");
-		} catch(Exception e){ $("Image not found.");}
+		} catch(Exception e){ System.out.println("Image not found.");}
 
 		frame.setBounds(550, 20, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

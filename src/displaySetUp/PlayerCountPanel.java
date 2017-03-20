@@ -1,6 +1,5 @@
 package displaySetUp;
 
-import displayMain.MainController;
 import myJStuff.*;
 
 import java.awt.event.ActionEvent;
@@ -24,28 +23,21 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	private JLabel lblText2;
 	
 	private JButton btnContinue;
-	private JButton btnBack;
 	
-	private int playerMinimum = 5;
-	private int playerTotal;
+	private int playerTotal = -1;
 	
 	private List<JButton> buttonList = new ArrayList<>();
 
-	/**
-	 * Create the frame.
-	 */
-	public PlayerCountPanel() {
-
-		
+	//Needs ActionListener actionListener as an argument once the SetUpController has a 
+	public PlayerCountPanel(ActionListener actionListener) {
+		this.actionListener = actionListener;
 		displayNorth();
 		displaySouth();
 		displayCenter();
 	}
 	
 	private void displayNorth(){
-		//Create the label and pass it text color and font
 		lblText = new MyLabel("How Many", textColor, titleFont);
-		//Add the label to the north panel at grid box 0,0 centering the text in the middle of the box
 		north.add(lblText, "cell 0 0,alignx center");
 		
 		lblText2 = new MyLabel("Players?", textColor, titleFont);
@@ -53,29 +45,20 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	}
 
 	private void displayCenter(){
-		//Loops to creat a button for each amount of players aloud 
-		for(int i=playerMinimum;i<11;i++){
+		//Loops to create a button for each amount of players aloud 
+		for(int i=5;i<=10;i++){
 			//Create each button at location i
 			displayPlayerButton(i);
 		}
 	}
 	private void displaySouth(){
-		btnBack = new MyButton("Back");
-		//south.add(btnBack, "cell 0 0");
-		btnBack.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			MainController.getInstance().switchMain();
-		}});
 		//Create the button and pass it values for text, foreground and background color, and font
 		btnContinue = new MyButton("Continue");
+		btnContinue.setName("Continue_PlayerCountPanel");
 		//Add the button to the south panel, button will fill width of screen 
 		south.add(btnContinue, "cell 0 0,growx");
 		//Add action listener for when the button is pressed
-		btnContinue.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			//Switches the current panel to the game panel
-    			SetUpController.getInstance().switchToInputPlayer(playerTotal);
-		}});
+		btnContinue.addActionListener(this);
 		
 	}
 	/**
@@ -87,20 +70,14 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	private void displayPlayerButton(int i){
 		JButton btnPlayer = new MyButton(Integer.toString(i));
 		center.add(btnPlayer, "cell 0 "+i+",growx");
-		
-		btnPlayer.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			//Sets background of all colors to default
-    			for(int m=0;m<buttonList.size();m++){
-    				buttonList.get(m).setBackground(Colors.defaultButtonBackgroundColor);
-    			}
-    			//Sets color of the current button to blue when pressed 
-    			btnPlayer.setBackground(selectColor);
-    			//Sets player total to value of button text
-    			playerTotal = i;
-		}});
+		btnPlayer.setName(Integer.toString(i));
+		btnPlayer.addActionListener(this);
 		buttonList.add(btnPlayer);
 		
+	}
+	
+	public Integer getPlayerTotal(){
+		return playerTotal;
 	}
 	
 	public JPanel getContentPane(){
@@ -109,6 +86,39 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub	
+		JButton source = (JButton)e.getSource();
+		String name = source.getName();
+		System.out.println(name);
+		if(playerTotal!=-1){
+			buttonList.get(playerTotal-5).setBackground(btnBackgroundColor);
+		}
+		//Needs the other switch statements.
+		switch(name){
+		case "5":
+			playerTotal = 5;
+			buttonList.get(0).setBackground(selectColor);
+			break;
+		case "6":
+			playerTotal = 6;
+			buttonList.get(1).setBackground(selectColor);
+			break;
+		case "7":
+			playerTotal = 7;
+			buttonList.get(2).setBackground(selectColor);
+			break;
+		case "8":
+			playerTotal = 8;
+			buttonList.get(3).setBackground(selectColor);
+			break;
+		case "9":
+			playerTotal = 9;
+			buttonList.get(4).setBackground(selectColor);
+			break;
+		case "10":
+			playerTotal = 10;
+			buttonList.get(5).setBackground(selectColor);
+			break;
+		
+		}
 	}
 }

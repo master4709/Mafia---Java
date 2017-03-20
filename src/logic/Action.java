@@ -24,14 +24,25 @@ public abstract class Action extends Debug{
     private int bodyguardPosition;
     private List<Player> of;
     protected HashMap<String, Integer> playersJobPosition = new HashMap<>();
+    
+    //These are the characters tat are active at night
     private List<String> nightPlayer = new ArrayList<>(
     		Arrays.asList("mafia: barman","bodyguard","mafia: hitman","vigilante","mafia- godfather","doctor"));
     
-   
+   /**
+    * Creates a position map to set location location for
+    * the Players that are active at night
+    */
     protected void initJobPositionMap() {
         for (Player player : of) {
             playersJobPosition.put(player.getRole(), player.getPlayPosition());
         }
+    }
+    
+    //initalizes the methods field values in Action
+    protected void setPlayerInfoAction(List<Player> playerInfo){
+    	of = playerInfo;
+    	initJobPositionMap();
     }
     
     // Searches for the position of the target
@@ -41,7 +52,11 @@ public abstract class Action extends Debug{
         return target;
     }
     
-    // Calls the appropriate action
+    /**
+     * Calls the appropriate functions per role of the player
+     * to modify their properties
+     * @param role
+     */
     protected void doAction(String role){
     	switch(role){
     	case "mafia: barman": barman(); break;
@@ -66,14 +81,6 @@ public abstract class Action extends Debug{
     }
     
     //Modifying the properties of the players//
-    
-    
-    //sets all the players
-    protected void setPlayerInfoAction(List<Player> playerInfo){
-    	
-    	of = playerInfo;
-    	initJobPositionMap();
-    }
     
     protected void barman(){
         int position = playersJobPosition.get("Mafia: Barman");
@@ -139,9 +146,5 @@ public abstract class Action extends Debug{
         //Do nothing
         if(target(position) !=-1 && !of.get(position).inBar()) ;
         	// TODO
-    }
-
-    public List<Player> getPlayerInfo(){
-    	return of;
     }
 }

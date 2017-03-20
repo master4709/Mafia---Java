@@ -42,8 +42,8 @@ public class RulePanel extends MyPanel{
 	/**
 	 * Create the frame.
 	 */
-	public RulePanel() {
-		
+	public RulePanel(ActionListener actionListener) {
+		this.actionListener = actionListener;
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
@@ -83,7 +83,7 @@ public class RulePanel extends MyPanel{
 	 * Method to display content of north panel, which is label.
 	 */
 	private void displayNorth(){
-		lblAbout = new MyLabel("Rules", textColor, titleFont);
+		lblAbout = new MyLabel("Rules", titleFont);
 		north.add(lblAbout, "flowx,cell 0 0");
 	}
 	
@@ -91,16 +91,15 @@ public class RulePanel extends MyPanel{
 	 * Method to display contents of south panel. This panel contains the back button which goes back to main menu.
 	 */
 	private void displaySouth(){
-		btnBack = new MyButton("Back", btnTxtColor, btnBackgroundColor, buttonFont);
-		south.add(btnBack, "cell 0 0");
-		// setting the action for back button
-		btnBack.addActionListener(new ActionListener(){
-    		public void actionPerformed(ActionEvent e){
-    			MainController.getInstance().switchMain();
-    			
-		}});
+		btnBack = new MyButton("Back");
+		south.add(btnBack, "cell 1 0");
+		btnBack.addActionListener(actionListener);
+		btnBack.setName("Back_RulePanel");
 		
+			
 	}
+	
+	
 	
 	/**
 	 * Getter method for the content pane.

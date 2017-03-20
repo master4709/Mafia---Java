@@ -1,6 +1,7 @@
 package displaySetUp;
 
 import displayGame.GameController;
+import logic.SetUp;
 import myJStuff.Colors;
 
 import javax.swing.*;
@@ -75,7 +76,7 @@ public class SetUpController {
 	 * @param name
 	 */
 	public void switchToGame(List<String> name){
-//		TODO SetUp setUp = new SetUp(name, rsp.getRolesSelected());
+//		TODO	SetUp setUp = new SetUp(name, rsp.getRolesSelected());
 		GameController.createInstance(frame);
 //		TODO GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
 	}

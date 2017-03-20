@@ -5,6 +5,9 @@ import myJStuff.MyLabel;
 import myJStuff.MyPanel;
 
 import javax.swing.*;
+
+import logic.Debug;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -92,7 +95,7 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton)e.getSource();
 		String name = source.getName();
-		System.out.println(name);
+		Debug.$(name);
 		if(playerTotal!=-1){
 			buttonList.get(playerTotal-5).setBackground(btnBackgroundColor);
 		}

@@ -1,15 +1,19 @@
-	package logic;
+package logic;
 	
 	
-	import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-	import java.util.Random;
-	/**
-	 * This class will create a list to store all the information about each player.  
-	 * Author: Mahsa Lotfi 10072013 
-	 */
-	public class SetUp extends RoleAssignment {
+
+import java.util.Collections;
+import java.util.List;
+
+import java.util.Random;
+/**
+ * This class will create a list to store all the information about each player.  
+ * Author: Mahsa Lotfi 10072013 
+ */	
+public class SetUp extends RoleAssignment {
 		
 		//List of each player (class) and his/her info (name, role, target, position, etc)
 		private List<Player> playerInfo = new ArrayList<>();
@@ -29,7 +33,11 @@ import java.util.List;
 			System.out.println("Set up constructor");
 			this.names = names;
 			Collections.shuffle(rolesSelected);
+
+			this.roles = rolesSelected; 
+
 			this.roles = rolesSelected;
+
 			nameOfPlayers();
 			roleOfPlayers();
 		}
@@ -52,7 +60,6 @@ import java.util.List;
 				playerInfo.get(i).setName(names.get(i));
 				playerInfo.get(i).setPlayPosition(i);
 				playerInfo.get(i).setPlayerTarget(-1);
-				playerInfo.get(i).setOldPlayerTarget(-1);
 				playerInfo.get(i).setIsDead(false);
 				playerInfo.get(i).setIsHealed(false);
 				playerInfo.get(i).setIsTargeted(false);
@@ -121,6 +128,6 @@ import java.util.List;
 		 * Getter method for lynchTargetID.
 		 */
 		public int getLynchTarget(){
-		return lynchTargetID;
-	}
-	}
+			return lynchTargetID;
+		}
+}

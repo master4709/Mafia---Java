@@ -34,7 +34,7 @@ public class NightPanel extends MyPanel{
 	//jButton that is only visible to detective. when pressed reveals 
 	private JButton btnDetective;
 	//List of all of the players
-	private List<Player> playerInfo;
+	private List<String> playerNames;
 	//List of all of the buttons representing each of the players
 	private List<JButton> playerButtonList = new ArrayList<>();
 	//List of all of the Mafia Members
@@ -45,9 +45,9 @@ public class NightPanel extends MyPanel{
 	 * Displays all of the needed buttons and labels etc...
 	 * @param playerInfo
 	 */
-	public NightPanel(ActionListener actionListener, List<Player> playerInfo, List<String> mafiaMember) {
+	public NightPanel(ActionListener actionListener, List<String> playerNames, List<String> mafiaMember) {
 		this.actionListener = actionListener;
-		this.playerInfo = playerInfo;
+		this.playerNames = playerNames;
 		this.mafiaMember = mafiaMember;
 		//Create all of the needed buttons and labels and adds them to the panel
 		displaySouth();
@@ -78,11 +78,9 @@ public class NightPanel extends MyPanel{
 	private void displayCenter(){
 		//The y position 
 		int k=0;
-		//Loops through the list of players
-		for(Player player: playerInfo){
-			if(!player.isDead()){//If the player is not dead. create a button of that player
-				displayPlayerButton(player.getPlayPosition());
-			}
+		//Loops through the list of players adn create a button for each player
+		for(int i =0;i<playerNames.size();i++){
+				displayPlayerButton(i);
 			//Add one to the y position
 			k = k+1;
 		}
@@ -112,7 +110,7 @@ public class NightPanel extends MyPanel{
 	 */
 	private void displayPlayerButton(int i){
 		//Create string of the players name
-		String text = playerInfo.get(i).getName();
+		String text = playerNames.get(i);
 		JButton btnPlayer = new MyButton(text, textFont);//Create a new button with passing the String text
 		btnPlayer.setName("Night_"+Integer.toString(i));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
@@ -157,15 +155,15 @@ public class NightPanel extends MyPanel{
 	 * @param i, position in list of current player
 	 * @param mafiaMember
 	 */
-	public void setDisplay(int i){
+	public void setDisplay(Player player){
 		//Resets the player target to -1
 		for(JButton button:playerButtonList){
 			button.setBackground(btnBackgroundColor);
 		}
 		//Sets the labels to the current players information
-		lblName.setText(playerInfo.get(i).getName());
-		lblRole.setText(playerInfo.get(i).getRole());
-		lblInfo.setText(playerInfo.get(i).getRoleInfo());
+		lblName.setText(player.getName());
+		lblRole.setText(player.getRole());
+		lblInfo.setText(player.getRoleInfo());
 		//Clears Detective Label
 		lblDetective.setText("");
 		//Clears the Mafia Label
@@ -175,11 +173,11 @@ public class NightPanel extends MyPanel{
 		
 		
 		//If The current player is the detective display the button to check if the target is part of the Mafia
-		if(playerInfo.get(i).getRole().contains("Detective")){
+		if(player.getRole().contains("Detective")){
 			btnDetective.setVisible(true);
 		}
 		//if the player is part of the Mafia, display a list of all Mafia Members to the screen
-		if(playerInfo.get(i).getRole().contains("Mafia")){
+		if(player.getRole().contains("Mafia")){
 			lblMafia.setText("Mafia Members: "+ mafiaMember);
 		}
 	}

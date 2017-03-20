@@ -45,7 +45,7 @@ public class StoryPanel extends MyPanel {
 		displayTop();
 		displayCenter();
 		displayBottom();
-		
+	}
 	private void displayTop(){
 		line_name = new MyLabel("Name: ", textColor, textFont);
 		center.add(line_name);

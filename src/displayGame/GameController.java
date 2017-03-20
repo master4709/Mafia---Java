@@ -88,11 +88,11 @@ public class GameController extends Debug{
 	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		g = new Game(playerInfo,lynchTarget);
 		cpp = new CheckPlayerPanel(listener);
-		dp = new DayPanel(listener,g.getPlayerInfo(),test);
-		np = new NightPanel(listener,g.getPlayerInfo(),g.getMafiaMember());
+		dp = new DayPanel(listener,g.getPlayerNames(),test);
+		np = new NightPanel(listener,g.getPlayerNames(),g.getMafiaMember());
 		sp = new StoryPanel(listener);
 		
-		vapp = new ViewAllPlayersPanel(listener,g.getPlayerInfo());
+		vapp = new ViewAllPlayersPanel(listener,g.getPlayerNames());
 		vpp = new ViewPlayerPanel(listener,g.getMafiaMember());
 		
 		this.test = test;
@@ -140,7 +140,7 @@ public class GameController extends Debug{
 	 */
 	public void switchNight(){
 		$("Night Panel");
-		np.setDisplay(position);//Sets the display for current player to select his/her target
+		np.setDisplay(g.getPlayerCopy(position));//Sets the display for current player to select his/her target
 		panelNight = np.getContentPane();//Refreshes the content pane to adjust for updates
 		switchPanel(panelNight);
 	}

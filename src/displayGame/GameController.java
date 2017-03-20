@@ -12,17 +12,17 @@ import javax.swing.JPanel;
 /**
  * Class GameController
  * 
- * 
- * 
+ * This class controls all of the panels and switching for the main game part
+ * I
  * 
  * 
  * @author Pierce de Jong 30006609
  *
  */
 public class GameController extends Debug{
-	
+	//Ensures only one instance of GameController is created
 	private static GameController instance = null;
-	
+	//JFrame reference 
 	private JFrame frame;
 	
 	private Game g;

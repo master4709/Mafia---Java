@@ -118,7 +118,7 @@ public class GameController extends Debug{
 	 */
 	public void switchViewPlayer(int i){
 		//Updates the ViewPlayer screen with the player
-		vpp.setPlayer(g.getPlayer(i));
+		vpp.setPlayer(g.getPlayerCopy(i));
 		panelViewPlayer = vpp.getContentPane();
 		switchPanel(panelViewPlayer);
 	}
@@ -150,7 +150,7 @@ public class GameController extends Debug{
 	 */
 	public void switchCheckPlayer(){
 		$("Check Player Panel");
-		cpp.setPlayerName(g.getPlayer(position).getName());
+		cpp.setPlayerName(g.getPlayerCopy(position).getName());
 		panelCheck = cpp.getContentPane();
 		switchPanel(panelCheck);
 	}
@@ -201,9 +201,9 @@ public class GameController extends Debug{
 		//If there was a target this night
 		if(target!=-1){
 			boolean dead;
-			String name = g.getPlayer(target).getName();
+			String name = g.getPlayerCopy(target).getName();
 			//If the player was killed that night remove the player button from both the Day and Night Panel
-			if(!g.getPlayer(target).isHealed()){
+			if(!g.getPlayerCopy(target).isHealed()){
 				dp.removePlayerButton(target);
 				np.removePlayerButton(target);
 				dead = true;
@@ -227,7 +227,7 @@ public class GameController extends Debug{
 		//If the position has not gone out of bounds
 		if(position<g.getPlayerInfo().size()){
 			//If the player is dead, find the next one
-			if(g.getPlayer(position).isDead()){
+			if(g.getPlayerCopy(position).isDead()){
 				g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
 				position++;
 				findNextPlayer();
@@ -252,7 +252,7 @@ public class GameController extends Debug{
 	private void detective(){
 		//If the target of the detective player is part of the Mafia
 		//*Note* the Mafia GodFather is hidden from the detective
-		if(g.getPlayer(target).isMafia()){
+		if(g.getPlayerCopy(target).isMafia()){
 			np.setDetectiveMessage("Part of the Mafia");
 		}else{
 			np.setDetectiveMessage("Not part of the Mafia");

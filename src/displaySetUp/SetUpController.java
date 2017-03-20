@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * 
- * @author 
+ * @author Christilyn Arjona, 30033435
  *
  */
 public class SetUpController {
@@ -29,11 +29,12 @@ public class SetUpController {
 
 	private List<String> playerNames;
 
-	/**
-	 * initialize the frame and set the bounds
-	 */
+    /***
+     * Initializes the setup frame
+     *
+     * @param frame frame
+     */
 	private SetUpController(JFrame frame){
-		//Set the bounds and exit command
 
 		buttonListener = new ButtonListener();
 		pcp = new PlayerCountPanel(buttonListener);
@@ -43,47 +44,62 @@ public class SetUpController {
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setResizable(false);
 		this.frame.setVisible(true);
+
 	}
-	
+
+    /***
+     * Create instance of SetUpController
+     *
+     * @param frame setup frame
+     */
 	public static void createInstance(JFrame frame){
 		if(instance==null){
 			instance = new SetUpController(frame);
 		}
 	}
-	
+
+    /***
+     * Returns instanc of SetUpController
+     *
+     * @return instance
+     */
 	public static SetUpController getInstance(){
 		return instance;
 	}
-	/**
-	 * Creates each of the need contentPanes panels
-	 * Set current panel to the Main and sets it to visible 
-	 */
+
+    /***
+     * Create panel for selecting number of total players
+     * @see #switchPlayerTotal()
+     */
 	public void start(){
-		//Create all of the panel
-		//Sets the frame to the main screen and to visible
 		panelCount = pcp.getContentPane();
 		switchPlayerTotal();
 	}
-	
-	/**
-	 * switches the content panel to the main page 
-	 */
+
+    /***
+     * Switch frame content to PlayerCountPanel created in start()
+     * @see #start()
+     */
 	public void switchPlayerTotal(){
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panelCount);
 		panelCount.setVisible(true);
 	}
 	/**
-	 * This method goes to the GameController
-	 * @param name
+	 * Creates instance of the SetUp class and creates instance of a GameController
+	 * @param name A list of type String for the player names
 	 */
 	public void switchToGame(List<String> name){
 		setUp = new SetUp(name, rsp.getRolesSelected());
 		GameController.createInstance(frame);
 		GameController.getInstance().start(setUp.getPlayerInfo(), setUp.getLynchTarget() , false);
 	}
-	
 
+
+    /***
+     * Create a panel for inputting the name of players and display that panel to existing frame
+     * @param playerTotal initial number of players
+     */
 	public void switchToPlayerName(int playerTotal) {
 		frame.getContentPane().setVisible(false);
         pnp = new PlayerNamePanel(playerTotal);
@@ -91,6 +107,10 @@ public class SetUpController {
         pnp.getContentPane().setVisible(true);
 	}
 
+    /***
+     * Create a panel for selecting roles to include in the game and display that panel to existing frame
+     * @param names A list of type string for the player names
+     */
 	public void switchToRoleSelection(List<String> names) {
 		playerNames = names;
 		frame.getContentPane().setVisible(false);
@@ -99,10 +119,19 @@ public class SetUpController {
 		rsp.getContentPane().setVisible(true);
 	}
 
+    /***
+     * Method to be used by all setup panels.
+     * Adds the buttonListener to the specified JButton.
+     *
+     * @param button A button to add a listener to
+     */
 	public void addListener(JButton button) {
 		button.addActionListener(buttonListener);
 	}
 
+    /***
+     * ButtonListener to be used by setup panels
+     */
 	private class ButtonListener implements ActionListener {
 
 		@Override

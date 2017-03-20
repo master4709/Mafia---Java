@@ -18,13 +18,11 @@ public class Story {
 	private ArrayList<String> locations = new ArrayList<String>();
 	private ArrayList<String> causeOfDeath = new ArrayList<String>();
 	//instance variable for the name of the current target
-	private boolean isDead;
 	private String name;
 	
 	//constructor for story object. Create a story object with a string as a parameter
-	public Story (String str, boolean dead) {
+	public Story (String str) {
 		name = str;
-		isDead = dead;
 	}
 	//calls scanner methods
 	public void information() {
@@ -77,6 +75,9 @@ public class Story {
 	    	System.out.println("File not found");
 	    }
 	}
+	/**
+	 * getters for variables
+	 */
 	public String getName() {
 		return name;
 	}
@@ -92,12 +93,5 @@ public class Story {
 		int rand = new Random().nextInt(causeOfDeath.size());
 		return causeOfDeath.get(rand);
 	}
-	public String getEvent(){
-		if(isDead) {
-			return "They were killed by the mafia.";
-		}
-		else {
-			return "They were healed by the doctor.";
-		}
-	}
+	
 }

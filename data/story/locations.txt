@@ -1,3 +1,10 @@
 The Alley
 The Lake
-The Restaurant;Downtown;The City Park;The Bus Station;The Dock;The Underground Parking Garage;The Graveyard;The Motel
+The Restaurant
+Downtown
+The City Park
+The Bus Station
+The Dock
+The Underground Parking Garage
+The Graveyard
+The Motel

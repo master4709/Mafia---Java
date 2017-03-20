@@ -1,5 +1,7 @@
 package displayGame;
 
+import logic.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -7,23 +9,20 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import logic.Game;
-import logic.Player;
 /**
  * Class GameController
  * 
- * 
- * 
+ * This class controls all of the panels and switching for the main game part
+ * I
  * 
  * 
  * @author Pierce de Jong 30006609
  *
  */
-public class GameController{
-	
+public class GameController {
+	//Ensures only one instance of GameController is created
 	private static GameController instance = null;
-	
+	//JFrame reference 
 	private JFrame frame;
 	
 	private Game g;

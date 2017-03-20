@@ -12,9 +12,7 @@ public class RoleAssignment extends Debug {
 	protected int totalPlayers;
 
 	private List<Role> chosenRoles = new ArrayList<>();
-	private List<String> assignments = new ArrayList<>();
-	private List<String> assignmentsInfo = new ArrayList<>();
-	private List<String> assignmentsGoals = new ArrayList<>();
+	private List<Role> randomizedRoles = new ArrayList<>();
 
 	/**
 	 * Class Constructor Specifies the initial number of total players,
@@ -148,34 +146,14 @@ public class RoleAssignment extends Debug {
 			num = rand.nextInt(totalPlayers-i);
 			select = chosenRoles.get(num);
 			chosenRoles.remove(num);
-			assignments.add(select.getRoleID());
-			assignmentsInfo.add(select.getRoleInfo());
-			assignmentsGoals.add(select.getRoleGoal());
+			randomizedRoles.add(select);
 
 		}
-		System.out.println("(temp) RANDOMIZED ROLES: " + assignments.toString());
 
 	}
 
-	/**
-	 * @return randomized order of specified roles
-	 */
-	protected List<String> getRoles() {
-		return assignments;
-	}
-
-	/**
-	 * @return list of info about each role in assignments in corresponding order
-	 */
-	protected List<String> getRolesInfo() {
-		return assignmentsInfo;
-	}
-
-	/**
-	 * @return list of the role's goal in assignments in corresponding order
-	 */
-	protected List<String> getGoals() {
-		return assignmentsGoals;
+	protected List<Role> getChosenRoles() {
+		return chosenRoles;
 	}
 
 }

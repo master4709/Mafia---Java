@@ -13,7 +13,8 @@ import myJStuff.MyLabel;
 import myJStuff.MyPanel;
 import myJStuff.MyTextField;
 /**
- * This class creates the Panel for selecting how many players you want in the game
+ * This class creates the Panel for selecting how many
+ * players you want in the game
  * @author Elvin Limpin 30018832
  * 
  *
@@ -65,6 +66,8 @@ public class PlayerNamePanel extends MyPanel{
         });
 	}
 	
+	//If there are not enough names, this method automatically
+	//Populates the names
 	private List<String> autoPopulate(List<String> name) {
 		for(int i = name.size() + 1; i < numOfPlayers + 1; i++){
 			name.add("player_" + i);

@@ -14,8 +14,8 @@ import myJStuff.MyLabel;
 import myJStuff.MyPanel;
 /**
  * This class creates the Panel for selecting how many
- * players you want in the game. This preceeds the
- * PlayerNamePanel and supercedes the Main Panel
+ * players you want in the game. This precedes the
+ * PlayerNamePanel and supersedes the Main Panel
  * @author Elvin Limpin 30018832
  * 
  *

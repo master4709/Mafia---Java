@@ -12,7 +12,7 @@ public class GameTest {
 	private static int playerTotal = 8;
 	
 	public static void run(){
-
+		// For parameters hanged, edit Testing Tools
 		GameController.createInstance(TestingTools.init());
 		GameController.getInstance().start(TestingTools.makeInfo(playerTotal), TestingTools.getLynchTargetID(), true);
 	}

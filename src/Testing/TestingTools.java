@@ -140,7 +140,7 @@ public abstract class TestingTools extends Debug {
 			List<Player> playerInfo = new ArrayList<>();
 			List<String> names = new ArrayList<>(Arrays.asList(
 					"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
-					"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Frodo"));
+					"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
 			for(int i =0; i<totalPlayers; i++){
 				Player p = new Player();
 				playerInfo.add(p);

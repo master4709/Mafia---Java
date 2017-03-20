@@ -23,6 +23,9 @@ public class ViewPlayerPanel extends MyPanel{
 	private List<String> mafiaMembers;
 	
 	private JLabel role;
+	private JLabel name;
+	private JLabel roleInfo;
+	private JLabel goal;
 
 	/**
 	 * Create the panel.
@@ -33,11 +36,14 @@ public class ViewPlayerPanel extends MyPanel{
 		
 		displayNorth();
 		displaySouth();
+		displayCenter();
 	}
-	
+	//displays role and name of player
 	private void displayNorth(){
 		role = new MyLabel("",20);
-		north.add(role,"cell 0 1");
+		north.add(role, "cell 0 2");
+		name = new MyLabel("",20);
+		north.add(name, "cell 0 1");
 	}
 	
 	private void displaySouth(){
@@ -48,12 +54,21 @@ public class ViewPlayerPanel extends MyPanel{
 		btnBack.setName("Back_ViewPlayerPanel");
 		btnBack.addActionListener(actionListener);
 	}
-	
+	//displays role info and goal of the player
+	private void displayCenter() {
+		roleInfo = new MyLabel("", 20);
+		center.add(roleInfo, "cell 0 1");
+		goal = new MyLabel("",20);
+		center.add(goal, "cell 0 2");
+	}
+	//sets the players characteristics
 	public void setPlayer(Player player){
 		this.player = player;
 		
 		role.setText(player.getRole());
-		//need name and goal, and role info for the player
+		name.setText(player.getName());
+		roleInfo.setText(player.getRoleInfo());
+		goal.setText(player.getGoal());
 	}
 	
 	

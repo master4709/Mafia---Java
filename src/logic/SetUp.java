@@ -6,10 +6,8 @@ import java.util.Collections;
 import java.util.List;
 	import java.util.Random;
 	/**
-	 * This class will create a list to store all the information about each player. 
-	 * 
-	 * Author: Mahsa Lotfi 10072013
-	 * 
+	 * This class will create a list to store all the information about each player.  
+	 * Author: Mahsa Lotfi 10072013 
 	 */
 	public class SetUp extends RoleAssignment {
 		
@@ -20,6 +18,12 @@ import java.util.List;
 		private int lynchTargetID;
 		private ArrayList<String> roles;
 		
+		/**
+		 * Constructor with 2 arguments. It will initialize names and roles of the 
+		 * players and create a list which has all the info of players in it.
+		 * @param List<String> names, name of players.
+		 * @param ArrayList<String> roleSelected, roles that are selected by players.
+		 */	
 		public SetUp( List<String> names, ArrayList<String> rolesSelected){
 			super(names.size());
 			System.out.println("Set up constructor");
@@ -32,11 +36,14 @@ import java.util.List;
 	
 			
 		/**
-		 * Asks the user to input the name of each player followed by enter
-		 * Sets the play position of each player to the order then names were inputed
-		 * Sets the status of each player to be alive. As each player starts out alive in the game
-		 * Sets the inBar (The barman has stopped them from doing their action tonight) status to false for each player
-		 * @param name 
+		 * This method will add the information of each player to the playerInfo list.
+		 * Sets the play position of each player to the order then names were inputed.
+		 * Sets player target and keep the record of old player target.
+		 * Sets the status of each player to be alive.
+		 * Sets the status of targeted, healed or protected to be false.
+		 * Sets the inBar (The barman has stopped them from doing their action tonight) status 
+		 * to false for each player.
+		 * 
 		 */
 		public void nameOfPlayers(){
 			for(int i =0; i<names.size(); i++){
@@ -57,16 +64,16 @@ import java.util.List;
 		
 		
 		/**
-		 * Creates a new Instance of the RoleAssignment class
-		 * Assigns a role, role info and a goal to each player
+		 * This method will sets the roles to each player and store it into the playerInfo list.
 		 * If the role contains Mafia, sets the isMafia variable to true 
+		 * If the player is Lyncher, then it will set a target for it.
 		 */
 		public void roleOfPlayers(){
 			$("Setting role of players");
 			//playerAssignment(List<String> chosenRolesString);
 			System.out.println(roles);
 			
-			//Loops through all of the players and assigns them a Role, Info and Goal
+			//Loops through all of the players and assigns them a Role.
 			for(int i=0; i<names.size(); i++){
 				System.out.println(playerInfo);
 				playerInfo.get(i).setRole(roles.get(i));			

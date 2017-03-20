@@ -39,11 +39,11 @@ public class Game extends Action{
 	}
 	
 	
-	public void mafiaMembers(){
+	private void mafiaMembers(){
 		for(int i =0;i<playerInfo.size();i++){
-			$(playerInfo.get(i).getRole());
-			if(playerInfo.get(i).getRole().contains("Mafia")){
-				mafiaMembers.add(playerInfo.get(i).getName());
+			$(getPlayer(i).getRole());
+			if(getPlayer(i).getRole().contains("Mafia")){
+				mafiaMembers.add(getPlayer(i).getName());
 			}
 		}
 	}
@@ -82,31 +82,30 @@ public class Game extends Action{
 	 * Resets all of the status for every player
 	 * Starts the loop through players at the last position 
 	 */
-	public Integer resetStatus(){
+	private Integer resetStatus(){
 		int target = -1;
 		for(int i=0;i<playerInfo.size();i++){
-			//Saves the target of that night to the variable OldPlayerTarget for the 
-			playerInfo.get(i).setOldPlayerTarget(playerInfo.get(i).getPlayerTarget());
-			//If the player has been targeted and was not healed
-			if(playerInfo.get(i).isTargeted() && !playerInfo.get(i).isHealed()){
+			//If the player has been targeted and was NOT healed
+			if(getPlayer(i).isTargeted() && !getPlayer(i).isHealed()){
 				//Call the story panel with a death story
-				$(playerInfo.get(i).getName()+" is dead");
-				playerInfo.get(i).setIsDead(true);
+				$(getPlayer(i).getName()+" is dead");
+				getPlayer(i).setIsDead(true);
 				resetPlayer(i);
 				target = i;
-			}else if(playerInfo.get(i).isTargeted()&& playerInfo.get(i).isHealed()){
+				//If the hitman is dead, changes the bar man to the new hitman
+				if(getPlayer(i).getRole().contains("Hitman")){
+					newHitman(i);
+				}
+			}else if(getPlayer(i).isTargeted()&& getPlayer(i).isHealed()){
 				//Call the story panel with a survived story
-				$(playerInfo.get(i).getName()+" is saved");
+				$(getPlayer(i).getName()+" is saved");
 				resetPlayer(i);
-				playerInfo.get(i).setIsHealed(true);
+				getPlayer(i).setIsHealed(true);
 				target = i;
 			}else{
 				resetPlayer(i);
 			}
-			//If the hitman is dead, changes the bar man to the new hitman
-			if(playerInfo.get(i).isDead()&&playerInfo.get(i).getRole().contains("Hitman")){
-				newHitman(i);
-			}
+			
 		}
 		return target;
 	}
@@ -114,20 +113,20 @@ public class Game extends Action{
 	 * Resets all of the status for the player
 	 * @param i
 	 */
-	public void resetPlayer(int i){
-		playerInfo.get(i).setIsTargeted(false);
-		playerInfo.get(i).setIsHealed(false);
-		playerInfo.get(i).setIsProtected(false);
-		playerInfo.get(i).setInBar(false);//Removes any player that may have been in the bar out
-		playerInfo.get(i).setPlayerTarget(-1);//Resets the target for each player
+	private void resetPlayer(int i){
+		getPlayer(i).setIsTargeted(false);
+		getPlayer(i).setIsHealed(false);
+		getPlayer(i).setIsProtected(false);
+		getPlayer(i).setInBar(false);//Removes any player that may have been in the bar out
+		getPlayer(i).setPlayerTarget(-1);//Resets the target for each player
 	}
 	
 	private void newHitman(int k){
 		for(int i=0;i<playerInfo.size();i++){
-			if(playerInfo.get(i).getRole().contains("Barman")){
+			if(getPlayer(i).getRole().contains("Barman")){
 				Player hitman = playerInfo.get(k);
-				playerInfo.get(i).setRole(hitman.getRole());
-				playerInfo.get(i).setRoleInfo(hitman.getRoleInfo());
+				getPlayer(i).setRole(hitman.getRole());
+				getPlayer(i).setRoleInfo(hitman.getRoleInfo());
 			}
 		}
 		playerInfo.get(k).setRole("Dead Mafia: Hitman");
@@ -146,7 +145,7 @@ public class Game extends Action{
 	 * @param i, b
 	 */
 	public void setHealed(int i, boolean b){
-		playerInfo.get(i).setIsHealed(b);
+		getPlayer(i).setIsHealed(b);
 	}
 	/**
 	 * Sets the list of Players to the param
@@ -156,7 +155,7 @@ public class Game extends Action{
 		this.playerInfo = playerInfo;
 	}
 	/**
-	 * Returns a COPY of the list of Mafia Members
+	 * Returns a list of Mafia Members
 	 * This is used for printing in the NightPanel
 	 * @return x (List of Mafia Members)
 	 */
@@ -165,15 +164,15 @@ public class Game extends Action{
 		return x;
 	}
 	/**
-	 * Returns a Copy of the list of players
-	 * return x (List of Players)
+	 * Returns a list of players
+	 * @return x (List of Players)
 	 */
 	public List<Player> getPlayerInfo(){
 		List<Player> x = playerInfo;
 		return x;
 	}
 	/**
-	 * Returns a COPY of the selected player
+	 * Returns a player
 	 * @param i
 	 * @return player
 	 */

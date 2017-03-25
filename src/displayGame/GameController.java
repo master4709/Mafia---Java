@@ -87,8 +87,8 @@ public class GameController {
 	 */
 	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		g = new Game(playerInfo,lynchTarget);
-		cpp = new CheckPlayerPanel(listener);
 		dp = new DayPanel(listener,g.getPlayerNames(),test);
+		cpp = new CheckPlayerPanel(listener);
 		np = new NightPanel(listener,g.getPlayerNames(),g.getMafiaMember());
 		sp = new StoryPanel(listener);
 		

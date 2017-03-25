@@ -28,7 +28,8 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	
 	private JButton btnContinue;
 	
-	private int playerTotal = -1;
+	//Default player total is 5
+	private int playerTotal = 5;
 	
 	private List<JButton> buttonList = new ArrayList<>();
 

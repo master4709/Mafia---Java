@@ -63,7 +63,7 @@ public class RoleSelectionPanel {
 
         contentPane.setBackground(Colors.black);
 
-        JLabel title = new MyLabel("Select a role for each player", Colors.black, 30);
+        JLabel title = new MyLabel("Select possible player roles", Colors.black, 30);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         contentPane.add(title, "span, center, wrap");
 

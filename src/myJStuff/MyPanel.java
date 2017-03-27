@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -52,6 +54,7 @@ public abstract class MyPanel {
 		
 		setFont();
 		setColor();
+		setTheme();
 
 		//Everything gets displayed on this panel 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -107,5 +110,18 @@ public abstract class MyPanel {
 		center.setBackground(Colors.black);
 		//Creates a black border on the screen
 		contentPane.setBackground(Colors.black);
+	}
+	
+	public void setTheme(){
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+		   System.out.println("Not Found");
+		}
 	}
 }

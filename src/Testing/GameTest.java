@@ -9,11 +9,11 @@ import displayGame.GameController;
 
 public class GameTest {
 	
-	private static int playerTotal = 8;
+	private static int playerTotal = 5;
 	
 	public static void run(){
 
 		GameController.createInstance(TestingTools.init());
-		GameController.getInstance().start(TestingTools.makeInfo(playerTotal), TestingTools.getLynchTargetID(), true);
+		GameController.getInstance().start(TestingTools.makeInfo(playerTotal), TestingTools.getLynchTargetID(), false);
 	}
 }

@@ -3,7 +3,7 @@ package logic;
 import java.util.List;
 import java.util.Scanner;
 /**
- * 
+ * make a singleton
  * @author
  *
  */

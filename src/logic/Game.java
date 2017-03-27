@@ -21,7 +21,7 @@ public class Game extends Action{
 	
 	//List of each player (class) and his/her info (name, role, target, position, etc)
 	private List<Player> playerInfo = new ArrayList<>();
-	
+	//List of all of the player names, used in the Panles to display all of the player buttons
 	private List<String> names = new ArrayList<>();
 	
 	//Index value for the target of the Lyncher
@@ -65,11 +65,11 @@ public class Game extends Action{
 	 * This method will kill one player each day, depending on who the players vote out.
 	 */
 	public void dayCycle(int target){
-		if(target!=-1){
+		if(target!=-1){//Error handling
 			$(playerInfo.get(target).getName()+" has been lynched");
 			playerInfo.get(target).setIsDead(true);//Sets the target of the lynching to dead, So they can not be used or targeted again
-			playerInfo.get(target).setIsLynched(true);
-			if(playerInfo.get(target).getRole().contains("Hitman")){
+			playerInfo.get(target).setIsLynched(true);//Sets the target of the lynching to lynched, this is for when checking how the player died
+			if(playerInfo.get(target).getRole().contains("Hitman")){//If the hitman died, turn the barman into the hitman
 				newHitman(target);
 			}
 		}
@@ -198,12 +198,19 @@ public class Game extends Action{
 		Player player = playerInfo.get(i);
 		return player;
 	}
-	
+	/**
+	 * Returns a copy of the current player
+	 * @param i
+	 * @return
+	 */
 	public Player getPlayerCopy(int i){
 		Player player = new Player(playerInfo.get(i));
 		return player;
 	}
-	
+	/**
+	 * Returns the list of player names for the JPanles
+	 * @return
+	 */
 	public List<String> getPlayerNames(){
 		return names;
 	}

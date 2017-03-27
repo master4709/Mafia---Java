@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  * @author Pierce de Jong 30006609
  *
  */
-public class GameController extends Debug{
+public class GameController {
 	//Ensures only one instance of GameController is created
 	private static GameController instance = null;
 	//JFrame reference 
@@ -86,8 +86,8 @@ public class GameController extends Debug{
 	 */
 	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		g = new Game(playerInfo,lynchTarget);
-		cpp = new CheckPlayerPanel(listener);
 		dp = new DayPanel(listener,g.getPlayerNames(),test);
+		cpp = new CheckPlayerPanel(listener);
 		np = new NightPanel(listener,g.getPlayerNames(),g.getMafiaMember());
 		sp = new StoryPanel(listener);
 		
@@ -126,7 +126,7 @@ public class GameController extends Debug{
 	 * switches the content panel to the dayCycle page
 	 */
 	public void switchDay(){
-		$("Day Panel");
+		System.out.println("Day Panel");
 		target = -1;
 		panelDay = dp.getContentPane();
 		switchPanel(panelDay);
@@ -138,7 +138,7 @@ public class GameController extends Debug{
 	 * Set the frame to new updated panelNight content pane 
 	 */
 	public void switchNight(){
-		$("Night Panel");
+		System.out.println("Night Panel");
 		np.setDisplay(g.getPlayerCopy(position));//Sets the display for current player to select his/her target
 		panelNight = np.getContentPane();//Refreshes the content pane to adjust for updates
 		switchPanel(panelNight);
@@ -148,7 +148,7 @@ public class GameController extends Debug{
 	 * Switch the frame to the CheckPlayerPanel
 	 */
 	public void switchCheckPlayer(){
-		$("Check Player Panel");
+		System.out.println("Check Player Panel");
 		cpp.setPlayerName(g.getPlayerCopy(position).getName());
 		panelCheck = cpp.getContentPane();
 		switchPanel(panelCheck);
@@ -159,7 +159,7 @@ public class GameController extends Debug{
 	 * @param dead - Boolean if the player is dead or alive
 	 */
 	public void switchStory(String name, boolean dead){
-		$("Story Panel");
+		System.out.println("Story Panel");
 		sp.setStory(name,dead);
 		panelStory = sp.getContentPane(); 
 		switchPanel(panelStory);

@@ -8,7 +8,6 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
-import logic.Debug;
 import logic.Player;
 import logic.Role;
 
@@ -20,7 +19,7 @@ import logic.Role;
  *
  */
 
-public abstract class TestingTools extends Debug {
+public abstract class TestingTools {
 	private static List<String> mafiaMembers = new ArrayList<>();
 	private static int lynchTargetID = -1;
 		
@@ -67,7 +66,7 @@ public abstract class TestingTools extends Debug {
 				assignmentsInfo.add(select.getRoleInfo());
 				assignmentsGoals.add(select.getRoleGoal());
 			}
-			$("(temp) RANDOMIZED ROLES: " + assignments.toString());
+			System.out.println("(temp) RANDOMIZED ROLES: " + assignments.toString());
 			
 			return setNewInfo(assignments, assignmentsInfo,assignmentsGoals, playerInfo, totalPlayers);
 		}

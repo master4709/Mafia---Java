@@ -21,7 +21,6 @@ public class CheckPlayerPanel extends MyPanel{
 	//Labels to be displayed on the JPanels
 	private JLabel lblAreYouReally;//Displays text "Are you Really"
 	private JLabel lblPlayer;////Displays the current player's name to the screen
-	
 	private JButton btnYes;//Button pressed to go to next screen
 	
 	/**
@@ -39,7 +38,7 @@ public class CheckPlayerPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 		
-		lblAreYouReally = new MyLabel("Are You Really", textColor, roleFont);
+		lblAreYouReally = new MyLabel("Pass device to:", textColor, roleFont);
 		north.add(lblAreYouReally, "cell 0 0,alignx center");
 		
 		lblPlayer = new MyLabel("", textColor, titleFont);
@@ -51,7 +50,7 @@ public class CheckPlayerPanel extends MyPanel{
 	private void displaySouth(){
 		//This button displays the text yes and when pressed goes to the GameController and switches the contentPane
 		//to the next player in the night cycle
-		btnYes = new MyButton("Yes",45);
+		btnYes = new MyButton("That's me",45);
 		south.add(btnYes, "cell 0 0,growx");
 		btnYes.addActionListener(actionListener);
 		btnYes.setName("Continue_CheckPlayerPanel");
@@ -63,7 +62,7 @@ public class CheckPlayerPanel extends MyPanel{
 	 * @param text
 	 */
 	public void setPlayerName(String text){
-		lblPlayer.setText(text+"?");
+		lblPlayer.setText(text);
 	}
 	/**
 	 * Get the content pane

@@ -20,8 +20,9 @@ import javax.swing.JPanel;
 public class DayPanel extends MyPanel{
 	//This label displays the text "Day Time"
 	private JLabel lblDayTime;
-	//This label displays the text for what to do on this screen
-	private JLabel lblDiscription;
+	//These labels display the text for what to do on this screen
+	private JLabel lblDescription1;
+	private JLabel lblDescription2;
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
 	//Stores all of the data of the players
@@ -51,11 +52,13 @@ public class DayPanel extends MyPanel{
 		lblDayTime = new MyLabel("Day Time", textColor, titleFont);
 		north.add(lblDayTime, "flowy,cell 0 0");
 		
-		String text = "One player must be voted out each day.";// There must be a 50% majority to lynch him/her";
-		lblDiscription = new MyLabel(text, textColor, infoFont);
-		//lblDiscription.setWrapStyleWord(true);
-		//lblDiscription.setLineWrap(true);
-		north.add(lblDiscription, "cell 0 1,");
+		String text1 = "Talk among yourselves to choose who to lynch";// There must be a 50% majority to lynch him/her";
+		lblDescription1 = new MyLabel(text1, textColor, infoFont);
+		north.add(lblDescription1, "cell 0 1,");
+		
+		String text2 = "Select him/her once there is a majority vote";// There must be a 50% majority to lynch him/her";
+		lblDescription2 = new MyLabel(text2, textColor, infoFont);
+		north.add(lblDescription2, "cell 0 2,");
 	
 	}
 	/**

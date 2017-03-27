@@ -1,13 +1,14 @@
 package displayMain;
 
-import myJStuff.*;
-import logic.Debug;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import myJStuff.MyButton;
+import myJStuff.MyPanel;
 /**
  * This class creates panel for Main menu of Mafia game by creating 
  * different panels and putting them together. 
@@ -67,15 +68,6 @@ public class MainPanel extends MyPanel{
 	 * the debug button and a button for testing.
 	 */
 	private void displaySouth(){
-		btnDebug = new MyButton("Debug is " + Debug.amOn());
-		south.add(btnDebug, "cell 0 0 ,growx");
-		// setting the action for the button
-		btnDebug.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Debug.toggle();
-				btnDebug.setText("Debug is " + Debug.amOn());
-			}
-		});
 		
 		btnTest = new MyButton("Test Game");
 		south.add(btnTest, "cell 0 0 ,growx");

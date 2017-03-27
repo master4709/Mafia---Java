@@ -18,7 +18,7 @@ import java.util.List;
  ***  For the Hash Map  ***
  *  Key-Value: Role-PositionIndex
  */
-public abstract class Action extends Debug{
+public abstract class Action {
 
 	// Instance variables
     private int bodyguardPosition;

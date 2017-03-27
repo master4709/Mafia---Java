@@ -1,13 +1,20 @@
 package displaySetUp;
 
-import logic.Debug;
-import myJStuff.*;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import myJStuff.Colors;
+import myJStuff.MyButton;
+import myJStuff.MyLabel;
+import myJStuff.MyPanel;
+import myJStuff.MyTextField;
 /**
- * This class creates the Panel for selecting how many players you want in the game
+ * This class creates the Panel for selecting how many
+ * players you want in the game
  * @author Elvin Limpin 30018832
  * 
  *
@@ -54,11 +61,13 @@ public class PlayerNamePanel extends MyPanel{
                 }
             }
             if(name.size() <numOfPlayers) name = autoPopulate(name);
-            Debug.$(name);
+            System.out.println(name);
 			SetUpController.getInstance().switchToRoleSelection(name);
         });
 	}
 	
+	//If there are not enough names, this method automatically
+	//Populates the names
 	private List<String> autoPopulate(List<String> name) {
 		for(int i = name.size() + 1; i < numOfPlayers + 1; i++){
 			name.add("player_" + i);

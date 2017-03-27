@@ -36,7 +36,7 @@ public class AboutPanel extends MyPanel{
 	 * @param actionListener
 	 */
 	public AboutPanel(ActionListener actionListener) {
-		this.actionListener = actionListener;
+		this.packageListener = actionListener;
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
@@ -59,7 +59,7 @@ public class AboutPanel extends MyPanel{
 		btnBack = new MyButton("Back", btnTxtColor, btnBackgroundColor, buttonFont);
 		south.add(btnBack, "cell 0 0");
 		// setting an action for back button
-		btnBack.addActionListener(actionListener);
+		btnBack.addActionListener(packageListener);
 		btnBack.setName("Back_AboutPanel");
 		
 		

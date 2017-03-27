@@ -45,8 +45,8 @@ public class NightPanel extends MyPanel{
 	 * Displays all of the needed buttons and labels etc...
 	 * @param playerInfo
 	 */
-	public NightPanel(ActionListener actionListener, List<String> playerNames, List<String> mafiaMember) {
-		this.actionListener = actionListener;
+	public NightPanel(ActionListener packageListener, List<String> playerNames, List<String> mafiaMember) {
+		this.packageListener = packageListener;
 		this.playerNames = playerNames;
 		this.mafiaMember = mafiaMember;
 		//Create all of the needed buttons and labels and adds them to the panel
@@ -88,7 +88,7 @@ public class NightPanel extends MyPanel{
 		btnDetective = new MyButton("Confirm Target", textFont);
 		center.add(btnDetective, "cell 0 "+k+1+",alignx center");
 		btnDetective.setName("Detective");
-		btnDetective.addActionListener(actionListener);
+		btnDetective.addActionListener(packageListener);
 		btnDetective.setVisible(false);
 		
 		lblDetective = new MyLabel("", textColor, textFont);
@@ -101,7 +101,7 @@ public class NightPanel extends MyPanel{
 	private void displaySouth(){
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 0 0,alignx center");
-		btnContinue.addActionListener(actionListener);
+		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_NightPanel");
 	}
 	/**
@@ -114,7 +114,7 @@ public class NightPanel extends MyPanel{
 		JButton btnPlayer = new MyButton(text, textFont);//Create a new button with passing the String text
 		btnPlayer.setName("Night_"+Integer.toString(i));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
-		btnPlayer.addActionListener(actionListener);//Add action listener 
+		btnPlayer.addActionListener(packageListener);//Add action listener 
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	

@@ -32,7 +32,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 */
 	public ViewAllPlayersPanel(ActionListener actionListener, List<String> playerNames) {
 		this.playerNames = playerNames;
-		this.actionListener = actionListener;
+		this.packageListener = actionListener;
 		
 		displayNorth();
 		displaySouth();
@@ -62,7 +62,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 		btnContinue = new MyButton("Start Game");
 		south.add(btnContinue, "cell 0 0, alignx center");
 		btnContinue.setName("Continue_ViewAllPlayersPanel");
-		btnContinue.addActionListener(actionListener);
+		btnContinue.addActionListener(packageListener);
 		
 	}
 	/**
@@ -87,7 +87,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 		btnPlayer.setName("Select_"+Integer.toString(i));
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position); 
-		btnPlayer.addActionListener(actionListener);//Add action listener
+		btnPlayer.addActionListener(packageListener);//Add action listener
 	}
 	
 	/**

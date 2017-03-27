@@ -38,7 +38,7 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	 * @param actionListener
 	 */
 	public PlayerCountPanel(ActionListener actionListener) {
-		this.actionListener = actionListener;
+		this.packageListener = actionListener;
 		displayNorth();
 		displaySouth();
 		displayCenter();
@@ -66,7 +66,7 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 		//Add the button to the south panel, button will fill width of screen 
 		south.add(btnContinue, "cell 0 0,growx");
 		//Add action listener for when the button is pressed
-		btnContinue.addActionListener(actionListener);
+		btnContinue.addActionListener(packageListener);
 		
 	}
 	/**

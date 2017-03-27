@@ -36,8 +36,8 @@ public class DayPanel extends MyPanel{
 	/**
 	 * Constructor
 	 */
-	public DayPanel(ActionListener actionListener,List<String> playerNames, boolean test) {
-		this.actionListener = actionListener;
+	public DayPanel(ActionListener packageListener,List<String> playerNames, boolean test) {
+		this.packageListener = packageListener;
 		this.playerNames = playerNames;
 		this.test=test;
 		//Create all of the labels and buttons etc needed for the Panel
@@ -68,7 +68,7 @@ public class DayPanel extends MyPanel{
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 1 0");
-		btnContinue.addActionListener(actionListener);
+		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_DayPanel");
 	}
 	/**
@@ -93,7 +93,7 @@ public class DayPanel extends MyPanel{
 		JButton btnPlayer = new MyButton(text);//Create a new button with passing the String text
 		btnPlayer.setName("Day_"+Integer.toString(i));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
-		btnPlayer.addActionListener(actionListener);//Add action listener 
+		btnPlayer.addActionListener(packageListener);//Add action listener 
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	

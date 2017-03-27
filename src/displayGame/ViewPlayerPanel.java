@@ -28,7 +28,7 @@ public class ViewPlayerPanel extends MyPanel{
 	 * Create the panel.
 	 */
 	public ViewPlayerPanel(ActionListener actionListener, List<String> mafiaMembers) {
-		this.actionListener = actionListener;
+		this.packageListener = actionListener;
 		this.mafiaMembers = mafiaMembers;
 		
 		displayNorth();
@@ -51,7 +51,7 @@ public class ViewPlayerPanel extends MyPanel{
 		btnBack = new MyButton("Back");
 		south.add(btnBack, "cell 0 0,alignx center");
 		btnBack.setName("Back_ViewPlayerPanel");
-		btnBack.addActionListener(actionListener);
+		btnBack.addActionListener(packageListener);
 	}
 	//displays role info and goal of the player
 	private void displayCenter() {

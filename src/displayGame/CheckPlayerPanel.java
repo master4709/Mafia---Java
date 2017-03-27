@@ -17,7 +17,6 @@ import javax.swing.JPanel;
  */
 public class CheckPlayerPanel extends MyPanel{
 
-	
 	//Labels to be displayed on the JPanels
 	private JLabel lblAreYouReally;//Displays text "Are you Really"
 	private JLabel lblPlayer;////Displays the current player's name to the screen
@@ -26,8 +25,8 @@ public class CheckPlayerPanel extends MyPanel{
 	/**
 	 * Create the frame.
 	 */
-	public CheckPlayerPanel(ActionListener actionListener) {
-		this.actionListener = actionListener;
+	public CheckPlayerPanel(ActionListener packageListener) {
+		this.packageListener = packageListener;
 		//Displays all of the JLabels, JButtons etc. to all of the JPannels
 		displayNorth();
 		displaySouth();
@@ -52,7 +51,7 @@ public class CheckPlayerPanel extends MyPanel{
 		//to the next player in the night cycle
 		btnYes = new MyButton("That's me",45);
 		south.add(btnYes, "cell 0 0,growx");
-		btnYes.addActionListener(actionListener);
+		btnYes.addActionListener(packageListener);
 		btnYes.setName("Continue_CheckPlayerPanel");
 		
 	}

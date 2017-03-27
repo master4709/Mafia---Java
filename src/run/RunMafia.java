@@ -1,4 +1,4 @@
-package logic;
+package run;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;

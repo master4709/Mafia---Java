@@ -42,7 +42,7 @@ public class MainPanel extends MyPanel{
 	
 	public MainPanel(ActionListener actionListener) {
 
-		this.actionListener = actionListener;
+		this.packageListener = actionListener;
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
@@ -71,7 +71,7 @@ public class MainPanel extends MyPanel{
 		
 		btnTest = new MyButton("Test Game");
 		south.add(btnTest, "cell 0 0 ,growx");
-		btnTest.addActionListener(actionListener);
+		btnTest.addActionListener(packageListener);
 		btnTest.setName("Test_MainPanel");
 	}
 	
@@ -81,25 +81,25 @@ public class MainPanel extends MyPanel{
 	private void displayCenter(){
 		btnNewGame = new MyButton("New Game");
 		center.add(btnNewGame, "cell 0 1,growx");
-		btnNewGame.addActionListener(actionListener);
+		btnNewGame.addActionListener(packageListener);
 		btnNewGame.setName("NewGame_MainPanel");
 		
 		
 		btnContinueGame = new MyButton("Continue Game");
 		center.add(btnContinueGame, "cell 0 2,growx");
 		// setting the action for continue game button
-		btnContinueGame.addActionListener(actionListener);
+		btnContinueGame.addActionListener(packageListener);
 		btnContinueGame.setName("ContinueGame_MainPanel");
 		
 		btnRules = new MyButton("Rules");
 		center.add(btnRules, "cell 0 3,growx");
-		btnRules.addActionListener(actionListener);
+		btnRules.addActionListener(packageListener);
 		btnRules.setName("Rule_MainPanel");
 		
 		btnAbout = new MyButton("About");
 		center.add(btnAbout, "cell 0 4,growx");
 		// setting the action for about button
-		btnAbout.addActionListener(actionListener);
+		btnAbout.addActionListener(packageListener);
 		btnAbout.setName("About_MainPanel");
 		
 	}

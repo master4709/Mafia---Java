@@ -18,11 +18,11 @@ import javax.swing.JPanel;
  * @author Pierce de Jong 30006609
  *
  */
-public class GameController {
-	//Ensures only one instance of GameController is created
-	private static GameController instance = null;
+public class GameController implements ActionListener{
 	//JFrame reference 
 	private JFrame frame; 
+	
+	private ActionListener globalListener;
 	
 	private Game g;
 	private DayPanel dp;
@@ -31,7 +31,6 @@ public class GameController {
 	private StoryPanel sp;
 	private ViewAllPlayersPanel vapp;
 	private ViewPlayerPanel vpp;
-	private Listener listener;
 	
 	//All of the possible panels to be displayed on the frame
 	private JPanel panelDay;
@@ -48,35 +47,11 @@ public class GameController {
 	private int target = -1;
 	
 	//Must be private. so only one instance can be made
-	private GameController(JFrame frame){
+	public GameController(JFrame frame, ActionListener globalListener){
 		this.frame = frame;
+		this.globalListener = globalListener;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setVisible(true);
-		
-		listener = new Listener();
-	}
-	/**
-	 * This method will change the static instance variable 
-	 * of this class from null to a new object of 
-	 * GameController with determined frame.
-	 * It will ensures only one instance of the GameController Class can be made
-	 * @param frame
-	 */
-	public static void createInstance(JFrame frame){
-		if(instance==null){
-			instance = new GameController(frame);
-		}
-	}
-	/**
-	 * Returns the instance of GameController if one is made
-	 * @return instance
-	 */
-	public static GameController getInstance(){
-		if(instance!=null){
-			return instance;
-		}else{
-			return null;
-		}
 	}
 	/**
 	 * Initializes all of the Panels and Game Class with:
@@ -86,13 +61,13 @@ public class GameController {
 	 */
 	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		g = new Game(playerInfo,lynchTarget);
-		dp = new DayPanel(listener,g.getPlayerNames(),test);
-		cpp = new CheckPlayerPanel(listener);
-		np = new NightPanel(listener,g.getPlayerNames(),g.getMafiaMember());
-		sp = new StoryPanel(listener);
+		dp = new DayPanel(this,g.getPlayerNames(),test);
+		cpp = new CheckPlayerPanel(this);
+		np = new NightPanel(this,g.getPlayerNames(),g.getMafiaMember());
+		sp = new StoryPanel(this);
 		
-		vapp = new ViewAllPlayersPanel(listener,g.getPlayerNames());
-		vpp = new ViewPlayerPanel(listener,g.getMafiaMember());
+		vapp = new ViewAllPlayersPanel(this,g.getPlayerNames());
+		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
 		
 		this.test = test;
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
@@ -126,7 +101,6 @@ public class GameController {
 	 * switches the content panel to the dayCycle page
 	 */
 	public void switchDay(){
-		System.out.println("Day Panel");
 		target = -1;
 		panelDay = dp.getContentPane();
 		switchPanel(panelDay);
@@ -138,7 +112,6 @@ public class GameController {
 	 * Set the frame to new updated panelNight content pane 
 	 */
 	public void switchNight(){
-		System.out.println("Night Panel");
 		np.setDisplay(g.getPlayerCopy(position));//Sets the display for current player to select his/her target
 		panelNight = np.getContentPane();//Refreshes the content pane to adjust for updates
 		switchPanel(panelNight);
@@ -148,7 +121,6 @@ public class GameController {
 	 * Switch the frame to the CheckPlayerPanel
 	 */
 	public void switchCheckPlayer(){
-		System.out.println("Check Player Panel");
 		cpp.setPlayerName(g.getPlayerCopy(position).getName());
 		panelCheck = cpp.getContentPane();
 		switchPanel(panelCheck);
@@ -172,6 +144,7 @@ public class GameController {
 	 * @param panel
 	 */
 	private void switchPanel(JPanel panel){
+		System.out.println(panel.getName());
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);
@@ -262,49 +235,46 @@ public class GameController {
 	 * When a button is pressed, the name String of the button is stored as a local variable
 	 * A switch statement is used to compare the name with other string values to find the correct button
 	 */
-	private class Listener implements ActionListener{
-		
-		public void actionPerformed(ActionEvent e){
-			//Gets the name (NOT TEXT) of the button that was pressed
-			JButton source = (JButton)e.getSource();
-			String name = source.getName();
-			//Finds the button that was pressed and does the needed commands
-			switch(name){
-			case "Continue_ViewAllPlayersPanel":
-				switchDay(); break;
-			case "Continue_DayPanel":
-				if(target!=-1){//Makes sure a target has been chosen for the day 
-					dayLynch();//Lynches the target of the day
-					findNextPlayer();//Finds the first person in the list of players that is alive and displays his/her night screen
-				} break;
-			case "Continue_CheckPlayerPanel":
-				switchNight(); break;
-			case "Continue_NightPanel":
-				g.setPlayerTarget(position, target);//Set the target of the player who just finished his/her night round
-				position++;//Moves to the net player in the list and checks if that player is dead or alive
-				findNextPlayer(); break;
-			case "Continue_StoryPanel":
-				switchDay(); break;
-			case "Back_ViewPlayerPanel":
-				switchViewAllPlayers(); break;
-			case "Detective":
-				if(target!=-1){//Only if the detective has selected a target will the button be pressed
-					detective();//Reveals the team of the target of the detective
-				} break;
-			default://If the button pressed was not a continue or back button
-				//Gets the index value of the button that was pressed in its respective lists
-				char c = name.charAt(name.length() -1);
-				int i = Character.getNumericValue(c);
-				if(name.contains("Select")){//If the button press came from the ViewAllPlayersPanel
-					switchViewPlayer(i);
-				}else if(name.contains("Day")){//If the press came from the DayPanel
-					dp.setButtonSelected(target,i);//Set the pressed button to select color and reverts the previous one to 
-					target = i;
-				}else if(name.contains("Night")){//If the press came from the NightPanel
-					np.setButtonSelected(target, i);
-					target = i;
-				} break;
-			} 
-		}
+	public void actionPerformed(ActionEvent e){
+		//Gets the name (NOT TEXT) of the button that was pressed
+		JButton source = (JButton)e.getSource();
+		String name = source.getName();
+		//Finds the button that was pressed and does the needed commands
+		switch(name){
+		case "Continue_ViewAllPlayersPanel":
+			switchDay(); break;
+		case "Continue_DayPanel":
+			if(target!=-1){//Makes sure a target has been chosen for the day 
+				dayLynch();//Lynches the target of the day
+				findNextPlayer();//Finds the first person in the list of players that is alive and displays his/her night screen
+			} break;
+		case "Continue_CheckPlayerPanel":
+			switchNight(); break;
+		case "Continue_NightPanel":
+			g.setPlayerTarget(position, target);//Set the target of the player who just finished his/her night round
+			position++;//Moves to the net player in the list and checks if that player is dead or alive
+			findNextPlayer(); break;
+		case "Continue_StoryPanel":
+			switchDay(); break;
+		case "Back_ViewPlayerPanel":
+			switchViewAllPlayers(); break;
+		case "Detective":
+			if(target!=-1){//Only if the detective has selected a target will the button be pressed
+				detective();//Reveals the team of the target of the detective
+			} break;
+		default://If the button pressed was not a continue or back button
+			//Gets the index value of the button that was pressed in its respective lists
+			char c = name.charAt(name.length() -1);
+			int i = Character.getNumericValue(c);
+			if(name.contains("Select")){//If the button press came from the ViewAllPlayersPanel
+				switchViewPlayer(i);
+			}else if(name.contains("Day")){//If the press came from the DayPanel
+				dp.setButtonSelected(target,i);//Set the pressed button to select color and reverts the previous one to 
+				target = i;
+			}else if(name.contains("Night")){//If the press came from the NightPanel
+				np.setButtonSelected(target, i);
+				target = i;
+			} break;
+		} 
     }
 }

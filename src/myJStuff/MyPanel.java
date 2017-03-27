@@ -20,7 +20,7 @@ import net.miginfocom.swing.MigLayout;
 public abstract class MyPanel {
 
 	
-	protected ActionListener actionListener;
+	protected ActionListener packageListener;
 	
 	// the following fields are inherited by Panels.
 	// they might be overriden

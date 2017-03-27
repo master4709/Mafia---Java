@@ -48,7 +48,7 @@ public class RulePanel extends MyPanel{
 	 * @param actionListener
 	 */
 	public RulePanel(ActionListener actionListener) {
-		this.actionListener = actionListener;
+		this.packageListener = actionListener;
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
@@ -99,7 +99,7 @@ public class RulePanel extends MyPanel{
 	private void displaySouth(){
 		btnBack = new MyButton("Back");
 		south.add(btnBack, "cell 1 0");
-		btnBack.addActionListener(actionListener);
+		btnBack.addActionListener(packageListener);
 		btnBack.setName("Back_RulePanel");			
 	}
 		

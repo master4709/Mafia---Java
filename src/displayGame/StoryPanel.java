@@ -31,7 +31,7 @@ public class StoryPanel extends MyPanel {
 	//private JScrollPane scrollPane;
 	
 	public StoryPanel(ActionListener actionListener){
-		this.actionListener = actionListener;
+		this.packageListener = actionListener;
 		initalize();
 	}
 
@@ -76,7 +76,7 @@ public class StoryPanel extends MyPanel {
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue);
 		btnContinue.setName("Continue_StoryPanel");
-		btnContinue.addActionListener(actionListener);
+		btnContinue.addActionListener(packageListener);
 	}
 	/**
 	 * displays the story and whether they lived or died in

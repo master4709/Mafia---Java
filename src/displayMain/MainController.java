@@ -15,43 +15,40 @@ import Testing.GameTest;
 /**
  * This class controls 3 panels which are related to the main menu. 
  * The panels are: AboutPanel, RulePanel and MainPanel. 
- * This class will be called first in RunMafia to begin the game. 
+ * This class will be called first in Controller to begin the game. 
  * @author Mahsa Lotfi 10072013
  * 
  */
 
-public class MainController {
+public class MainController implements ActionListener {
 	/**
 	 * Instance variables
 	 */
-	private static MainController instance = null;
 	
-	private JFrame frame = new JFrame();
+	private ActionListener globalListener;
+	//JFrame reference 
+	private JFrame frame;
 	
 	private MainPanel mp;
 	private RulePanel rp;
 	private AboutPanel ap;
-	
-	private Listener listener;
+	private SetUpController suc;
 	
 	//All of the possible panels to be displayed on the frame
 	private JPanel panelMain;
 	private JPanel panelRule;
-	private JPanel panelAbout;
+	private JPanel panelAbout;	
 	
 	/**
-	 * Constructor with one argument of JFrame frame.
-	 * This constructor will initialize the frame and set the bounds.
-	 * Must be private, so only one instance can be made
+	 * Constructor with two arguments.
+	 * This constructor will initialize the frame and actionListener
+	 *  and set the bounds.
+	 * @param frame 
+	 * @param globalListener
 	 */
-	private MainController(JFrame frame){
-
-		listener = new Listener();
-		
-		mp = new MainPanel(listener);
-		rp = new RulePanel(listener);
-		ap = new AboutPanel(listener);
-		
+	public MainController(JFrame frame, ActionListener globalListener){
+		//listener = new Listener();
+		this.globalListener = globalListener;		
 		//setting up the frame 
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,85 +56,57 @@ public class MainController {
 		this.frame.setVisible(true);
 	}
 	
-	/**
-	 * This method will change the static instance variable 
-	 * of this class from null to a new object of 
-	 * MainController with determined frame.
-	 * It will ensures only one instance of the GameController Class can be made
-	 * @param frame
-	 */
-	public static void createInstance(JFrame frame){
-		if(instance==null){
-			instance = new MainController(frame);
-		}
-	}
+	
 	
 	/**
-	 * Accesor method which will return instance of MainController class.
-	 * @return instance
-	 */
-	public static MainController getInstance(){
-		if(instance!=null){
-			return instance;
-		}else{
-			return null;
-		}		
-	}
-	
-	/**
-	 * Creates each of the needed contentPanes panels
-	 * Set current panel to the Main and sets it to visible 
+	 * Initialize all the panels.
 	 */
 	public void start(){
-		//Create all of the panels. The Main menu and the ones that are included in Main menu
-		panelMain = mp.getContentPane();
-		panelRule = rp.getContentPane();
-		panelAbout = ap.getContentPane();
-		
+		mp = new MainPanel(this);
+		rp = new RulePanel(this);
+		ap = new AboutPanel(this);
+					
 		switchMain();
 	}
 	
 	/**
-	 * switches the content panel to the about page. This method will be called for action listener. 
+	 * switches the content panel to the about page. 
+	 * This method will be called in actionPerformed method. 
 	 */
 	public void switchAbout(){
-		//Sets current content panel to hidden
-		frame.getContentPane().setVisible(false);
-		//Sets the content panel to the About page 
-		frame.setContentPane(panelAbout);
-		//Sets current content panel to visible
-		panelAbout.setVisible(true);
+		//Refresh the JPanel
+		panelAbout = ap.getContentPane();
+		//Set the frame to the new JPanel content panel
+		switchPanel(panelAbout);
 	}
 	/**
-	 * switches the content panel to the rule page. This method will be called for action listener. 
+	 * switches the content panel to the rule page. 
+	 * This method will be called in actionPerformed method.
 	 */
 	public void switchRule(){
-		//Sets current content panel to hidden
-		frame.getContentPane().setVisible(false);
-		//Sets the content panel to the Rule page 
-		frame.setContentPane(panelRule);
-		//Sets current content panel to visible
-		panelRule.setVisible(true);
+		//Refresh the JPanel
+		panelRule = rp.getContentPane();
+		//Set the frame to the new JPanel content panel
+		switchPanel(panelRule);
 	}
 	/**
-	 * switches the content panel to the main menu. This method will be called for action listener.
+	 * switches the content panel to the main menu.
+	 * This method will be called in actionPerformed method.
 	 */
 	public void switchMain(){
-		//Sets current content panel to hidden
-		frame.getContentPane().setVisible(false);
-		//Sets the content panel to the Main page 
-		frame.setContentPane(panelMain);
-		//Sets current content panel to visible
-		panelMain.setVisible(true);
+		//Refresh the JPanel
+		panelMain = mp.getContentPane();
+		//Set the frame to the new JPanel content panel
+		switchPanel(panelMain);
 	}
 	/**
 	 * This method will switch the contentPanel by calling the SetUpController. 
+	 * This method will be called in actionPerformed method.
 	 */
 	public void switchToSetUp(){
-		//creating instance object in SetUpController
-		SetUpController.createInstance(frame);
-		//creating panels for next stage of the game which is set up.
-		SetUpController.getInstance().start();
+		suc = new SetUpController(frame,this);
+		suc.start();
+		
 	}
 	
 	/**
@@ -149,43 +118,55 @@ public class MainController {
 		GameTest.run();
 	}
 	
+	/**
+	 * Switches the frame to the passed JPanel
+	 * Sets current content pane to invisible
+	 * Sets the frame to the new JPanel
+	 * Sets new contnet pane to visible
+	 * @param panel
+	 */
+	private void switchPanel(JPanel panel){
+		//System.out.println(panel.getName());
+		frame.getContentPane().setVisible(false);
+		frame.setContentPane(panel);
+		frame.getContentPane().setVisible(true);
+	}
+	
 	
 	/**
-	 * This class is the ActionListenr for all of the buttons in the displayMain Package
+	 * This method will assign an action to each button in the displayMain Package
 	 * When a button is pressed, the name String of the button is stored as a local variable
 	 * A switch statement is used to compare the name with other string values to find the correct button
 	 */
-	public class Listener implements ActionListener{
-		
-		public void actionPerformed(ActionEvent e){
-			//Gets the name (NOT TEXT) of the button that was pressed
-			JButton source = (JButton)e.getSource();
-			String name = source.getName();
-			//Finds the button that was pressed and does the needed commands
-			switch(name){
-			case "Back_RulePanel":
-				switchMain(); 
-				break;
-			case "Back_AboutPanel":
-				switchMain(); 
-				break;
-			case "NewGame_MainPanel":
-				switchToSetUp();
-				break;
-			case "ContinueGame_MainPanel":
-				break;
-			case "Rule_MainPanel":
-				switchRule();
-				break;
-			case "About_MainPanel":
-				switchAbout();
-				break;
-			case "Test_MainPanel":
-				switchTest();
-			default:
-				break;
-			}
-        
+	public void actionPerformed(ActionEvent e){
+		//Gets the name (NOT TEXT) of the button that was pressed
+		JButton source = (JButton)e.getSource();
+		String name = source.getName();
+		//Finds the button that was pressed and does the needed commands
+		switch(name){
+		case "Back_RulePanel":
+			switchMain(); 
+			break;
+		case "Back_AboutPanel":
+			switchMain(); 
+			break;
+		case "NewGame_MainPanel":
+			switchToSetUp();
+			break;
+		case "ContinueGame_MainPanel":
+			break;
+		case "Rule_MainPanel":
+			switchRule();
+			break;
+		case "About_MainPanel":
+			switchAbout();
+			break;
+		case "Test_MainPanel":
+			switchTest();
+		default:
+			break;
 		}
-    }
+       
+	}
+    
 }

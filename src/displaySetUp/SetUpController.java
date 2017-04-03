@@ -1,6 +1,7 @@
 package displaySetUp;
 
 import displayGame.GameController;
+import logic.Player;
 import logic.SetUp;
 import myJStuff.Colors;
 
@@ -33,14 +34,17 @@ public class SetUpController implements ActionListener{
      * @param frame frame
      */
 	public SetUpController(JFrame frame, ActionListener globalListener){
-		pcp = new PlayerCountPanel(this);
-		playerNames = new ArrayList<>();
 		
 		this.globalListener = globalListener;
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setResizable(false);
 		this.frame.setVisible(true);
+		
+		pcp = new PlayerCountPanel(this);
+
+		panelCount = pcp.getContentPane();
+		playerNames = new ArrayList<>();
 
 	}
 
@@ -49,7 +53,6 @@ public class SetUpController implements ActionListener{
      * @see #switchPlayerTotal()
      */
 	public void start(){
-		panelCount = pcp.getContentPane();
 		switchPlayerTotal();
 	}
 
@@ -73,6 +76,14 @@ public class SetUpController implements ActionListener{
 		frame.setContentPane(pnp.getContentPane());
         pnp.getContentPane().setVisible(true);
 	}
+	
+	public List<Player> getPlayerInfo(){
+		return setUp.getPlayerInfo();
+	}
+	
+	public int getLynchTarget(){
+		return setUp.getLynchTarget();
+	}
 
     /***
      * Create a panel for selecting roles to include in the game and display that panel to existing frame
@@ -81,7 +92,6 @@ public class SetUpController implements ActionListener{
 	public void switchToRoleSelection(List<String> names) {
 		playerNames = names;
 		frame.getContentPane().setVisible(false);
-		rsp = new RoleSelectionPanel(names);
 		frame.setContentPane(rsp.getContentPane());
 		rsp.getContentPane().setVisible(true);
 	}

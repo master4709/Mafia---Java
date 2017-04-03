@@ -37,8 +37,8 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	 * Constructor initalizes the view and creates an actionListener
 	 * @param actionListener
 	 */
-	public PlayerCountPanel(ActionListener actionListener) {
-		this.packageListener = actionListener;
+	public PlayerCountPanel(ActionListener packageListener) {
+		this.packageListener = packageListener;
 		displayNorth();
 		displaySouth();
 		displayCenter();

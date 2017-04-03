@@ -51,7 +51,7 @@ public class Controller implements ActionListener{
 			mc.start();
 			break;
 		case"Continue_RoleSelectionPanel":
-			//gc.start(playerInfo, lynchTarget, test);
+			gc.start(suc.getPlayerInfo(), suc.getLynchTarget());
 			break;
 		case"Testing_MainPanel":
 			TestingTools t = new TestingTools();

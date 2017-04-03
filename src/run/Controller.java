@@ -37,11 +37,6 @@ public class Controller implements ActionListener{
 		frame.setBounds(550, 20, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	
-	
-	
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -49,7 +44,14 @@ public class Controller implements ActionListener{
 		String name = source.getName();
 		
 		switch(name){
-		case"":
+		case"NewGame_MainPanel":
+			suc.start();
+			break;
+		case"Home_DayPanel":
+			mc.start();
+			break;
+		case"Continue_RoleSelectionPanel":
+			//gc.start(playerInfo, lynchTarget, test);
 			break;
 		default:
 			break;

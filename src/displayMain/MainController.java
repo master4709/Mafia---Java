@@ -66,47 +66,7 @@ public class MainController implements ActionListener {
 		rp = new RulePanel(this);
 		ap = new AboutPanel(this);
 					
-		switchMain();
-	}
-	
-	/**
-	 * switches the content panel to the about page. 
-	 * This method will be called in actionPerformed method. 
-	 */
-	public void switchAbout(){
-		//Refresh the JPanel
-		panelAbout = ap.getContentPane();
-		//Set the frame to the new JPanel content panel
-		switchPanel(panelAbout);
-	}
-	/**
-	 * switches the content panel to the rule page. 
-	 * This method will be called in actionPerformed method.
-	 */
-	public void switchRule(){
-		//Refresh the JPanel
-		panelRule = rp.getContentPane();
-		//Set the frame to the new JPanel content panel
-		switchPanel(panelRule);
-	}
-	/**
-	 * switches the content panel to the main menu.
-	 * This method will be called in actionPerformed method.
-	 */
-	public void switchMain(){
-		//Refresh the JPanel
-		panelMain = mp.getContentPane();
-		//Set the frame to the new JPanel content panel
 		switchPanel(panelMain);
-	}
-	/**
-	 * This method will switch the contentPanel by calling the SetUpController. 
-	 * This method will be called in actionPerformed method.
-	 */
-	public void switchToSetUp(){
-		suc = new SetUpController(frame,this);
-		suc.start();
-		
 	}
 	
 	/**
@@ -145,21 +105,16 @@ public class MainController implements ActionListener {
 		//Finds the button that was pressed and does the needed commands
 		switch(name){
 		case "Back_RulePanel":
-			switchMain(); 
+			switchPanel(panelMain); 
 			break;
 		case "Back_AboutPanel":
-			switchMain(); 
-			break;
-		case "NewGame_MainPanel":
-			switchToSetUp();
-			break;
-		case "ContinueGame_MainPanel":
+			switchPanel(panelMain); 
 			break;
 		case "Rule_MainPanel":
-			switchRule();
+			switchPanel(panelRule); 
 			break;
 		case "About_MainPanel":
-			switchAbout();
+			switchPanel(panelAbout); 
 			break;
 		case "Test_MainPanel":
 			switchTest();

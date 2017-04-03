@@ -16,8 +16,8 @@ public abstract class Mafia extends Player {
 	 * @param position
 	 * @param role
 	 */
-	public Mafia(String name, int position, Role role) {
-		super(name, position, role);
+	public Mafia(String name, int position) {
+		super(name, position);
 	}
 	
 	/**

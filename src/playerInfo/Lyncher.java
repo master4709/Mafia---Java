@@ -5,7 +5,7 @@ package playerInfo;
  * @author nestr
  *
  */
-public class Town extends Player {
+public class Lyncher extends Player {
 
 	/**
 	 * Used for inheriting different town subclasses
@@ -13,7 +13,7 @@ public class Town extends Player {
 	 * @param position
 	 * @param role
 	 */
-	public Town(String name, int position) {
+	public Lyncher(String name, int position) {
 		super(name, position);
 	}
 	
@@ -21,13 +21,12 @@ public class Town extends Player {
 	 * Copy constructor
 	 * @param t
 	 */
-	public Town(Town t){
-		super(t);
+	public Lyncher(Lyncher l){
+		super(l);
 	}
 
 	/**
-	 * By default, Town Players do not have any night actions.
-	 * This might be overriden by subclasses of Town
+	 * The lyncher does not do anything at night
 	 */
 	@Override
 	public int doAction(Player p) {
@@ -36,7 +35,7 @@ public class Town extends Player {
 	}
 	
 	public String toString() {
-		return "Townie";
+		return "Lyncher";
 	}
 
 	/**
@@ -63,8 +62,8 @@ public class Town extends Player {
 	 */
 	@Override
 	public String getRoleGoal() {
-		// TODO Auto-generated method stub
-		return "Lynch all Mafia to win the game";
+		// TODO lynch target
+		return "Lynch "+ getLynchTarget() + " to win the game solo";
 	}
 	
 }

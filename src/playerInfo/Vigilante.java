@@ -15,8 +15,8 @@ public class Vigilante extends Town{
 	 * @param position
 	 * @param role
 	 */
-	public Vigilante(String name, int position, Role role) {
-		super(name, position, role);
+	public Vigilante(String name, int position) {
+		super(name, position);
 	}
 	
 	/**
@@ -41,7 +41,36 @@ public class Vigilante extends Town{
 	
 	@Override
 	public String toString() {
-		return "Town Vigilante";
+		return "Vigilante";
 	}
+	
+	/**
+	 * returns the role name
+	 */
+	@Override
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return this.toString();
+	}
+
+	/**
+	 * returns the role information
+	 * for directions
+	 */
+	@Override
+	public String getRoleInfo() {
+		// TODO Auto-generated method stub
+		return "May kill new person each night";
+	}
+
+	/**
+	 * returns the goal of the role
+	 */
+	@Override
+	public String getRoleGoal() {
+		// TODO Auto-generated method stub
+		return "Lynch all Mafia to win the game";
+	}
+	
 	
 }

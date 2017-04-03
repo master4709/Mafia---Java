@@ -29,11 +29,6 @@ public abstract class Player {
 	private int target;  	//position of target. -1 if N/A
 	private int status;
 	
-	/**
-	 * Role configuration that is accessed by the town class
-	 */
-	protected Role role;
-	
 	private boolean isLynched; 
 	
 	/**
@@ -45,6 +40,8 @@ public abstract class Player {
 	public final int HEALED = 3;
 	public final int PROTECTED = 4;
 	public final int STOPPED = 5;
+	public final int TEAMTOWN = 6;
+	public final int TEAMMAFIA  = 7;
 	
 	/**
 	 * on default, protected, or healed
@@ -57,10 +54,9 @@ public abstract class Player {
 	 * @param position
 	 * @param role
 	 */
-	public Player(String name, int position,  Role role){
+	public Player(String name, int position){
 		this.name = name;
 		this.position = position;
-		this.role = role;
 		this.target = -1;
 		this.status = 0;
 		this.isLynched = false;
@@ -81,6 +77,18 @@ public abstract class Player {
 	}
 	
 	/**
+	 * determines whether the player is the 
+	 * barman or the hitman
+	 * @param p
+	 * @return if player is part of mafia
+	 */
+	protected boolean visibleMafia(Player p){
+		if(p.getRole().contains("Mafia:")){
+			return true;
+		} return false;
+	}
+	
+	/**
 	 * Requires a copy of a player (the target) as param
 	 * Abstract method returns the changed or unchanged
 	 * position of the target player
@@ -90,6 +98,8 @@ public abstract class Player {
 	public abstract int doAction(Player p);
 	
 	public abstract String getRole();
+	public abstract String getRoleInfo();
+	public abstract String getRoleGoal();
 	
 	public void setTarget(int target){
 		this.target = target;

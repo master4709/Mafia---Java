@@ -14,8 +14,8 @@ public class Hitman extends Mafia {
 	 * @param position
 	 * @param role
 	 */
-	public Hitman(String name, int position, Role role) {
-		super(name, position, role);
+	public Hitman(String name, int position) {
+		super(name, position);
 	}
 	
 	/**
@@ -41,6 +41,35 @@ public class Hitman extends Mafia {
 	
 	@Override
 	public String toString(){
-		return "Mafia Hitman";
+		return "Mafia: Hitman";
+	}
+	
+	
+	/**
+	 * returns the role name
+	 */
+	@Override
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return this.toString();
+	}
+
+	/**
+	 * returns the role information
+	 * for directions
+	 */
+	@Override
+	public String getRoleInfo() {
+		// TODO Auto-generated method stub
+		return "May kill new person each night";
+	}
+
+	/**
+	 * returns the goal of the role
+	 */
+	@Override
+	public String getRoleGoal() {
+		// TODO Auto-generated method stub
+		return "To make the majority of the town mafia members";
 	}
 }

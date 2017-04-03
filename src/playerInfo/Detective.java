@@ -14,8 +14,8 @@ public class Detective extends Town{
 	 * @param position
 	 * @param role
 	 */
-	public Detective(String name, int position, Role role) {
-		super(name, position, role);
+	public Detective(String name, int position) {
+		super(name, position);
 	}
 	
 	/**
@@ -34,12 +34,44 @@ public class Detective extends Town{
 	@Override
 	public int doAction(Player p){
 		if(getStatus() == ACTIVE){
-			//TODO Detective
+			if(visibleMafia(p)){
+				return TEAMMAFIA;
+			} return TEAMTOWN;
 		} return p.getStatus();
 	}
 	
 	@Override
 	public String toString() {
-		return "Town Detective";
+		return "Detective";
 	}	
+	
+	/**
+	 * returns the role name
+	 */
+	@Override
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return this.toString();
+	}
+
+	/**
+	 * returns the role information
+	 * for directions
+	 */
+	@Override
+	public String getRoleInfo() {
+		// TODO Auto-generated method stub
+		return "Reveals the team for one player per night";
+	}
+
+	/**
+	 * returns the goal of the role
+	 */
+	@Override
+	public String getRoleGoal() {
+		// TODO Auto-generated method stub
+		return "Lynch all Mafia to win the game";
+	}
+	
+	
 }

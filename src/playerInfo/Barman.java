@@ -17,8 +17,8 @@ public class Barman extends Mafia {
 	 * @param position
 	 * @param role
 	 */
-	public Barman(String name, int position, Role role) {
-		super(name, position, role);
+	public Barman(String name, int position) {
+		super(name, position);
 	}
 	
 	/** 
@@ -36,13 +36,41 @@ public class Barman extends Mafia {
 	 * @param p
 	 */
 	public int doAction(Player p) {
-		if(getStatus() != ACTIVE) return p.getStatus();
-		
-		return STOPPED;
+		if(getStatus() == ACTIVE){
+			return STOPPED;
+		} return p.getStatus();
 	}
 	
 	@Override
 	public String toString(){
-		return "Mafia Barman";
+		return "Mafia: Barman";
+	}
+	
+	/**
+	 * returns the role name
+	 */
+	@Override
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return this.toString();
+	}
+
+	/**
+	 * returns the role information
+	 * for directions
+	 */
+	@Override
+	public String getRoleInfo() {
+		// TODO Auto-generated method stub
+		return "May stop the action of another player each night";
+	}
+
+	/**
+	 * returns the goal of the role
+	 */
+	@Override
+	public String getRoleGoal() {
+		// TODO Auto-generated method stub
+		return "To make the majority of the town mafia members";
 	}
 }

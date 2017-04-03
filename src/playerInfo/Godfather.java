@@ -17,8 +17,8 @@ public class Godfather extends Mafia {
 	 * @param position
 	 * @param role
 	 */
-	public Godfather(String name, int position, Role role) {
-		super(name, position, role);
+	public Godfather(String name, int position) {
+		super(name, position);
 	}
 	
 	/** 
@@ -41,6 +41,34 @@ public class Godfather extends Mafia {
 	
 	@Override
 	public String toString(){
-		return "The Godfather";
+		return "Mafia- GodFather";
+	}
+	
+	/**
+	 * returns the role name
+	 */
+	@Override
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return this.toString();
+	}
+
+	/**
+	 * returns the role information
+	 * for directions
+	 */
+	@Override
+	public String getRoleInfo() {
+		// TODO Auto-generated method stub
+		return "Hidden from the Detective";
+	}
+
+	/**
+	 * returns the goal of the role
+	 */
+	@Override
+	public String getRoleGoal() {
+		// TODO Auto-generated method stub
+		return "To make the majority of the town mafia members";
 	}
 }

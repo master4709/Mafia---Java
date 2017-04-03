@@ -14,8 +14,8 @@ public class Bodyguard extends Town{
 	 * @param position
 	 * @param role
 	 */
-	public Bodyguard(String name, int position, Role role) {
-		super(name, position, role);
+	public Bodyguard(String name, int position) {
+		super(name, position);
 	}
 	
 	/**
@@ -41,5 +41,34 @@ public class Bodyguard extends Town{
 	@Override
 	public String toString() {
 		return "Mafia Bodguard";
+	}
+	
+	
+	/**
+	 * returns the role name
+	 */
+	@Override
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return this.toString();
+	}
+
+	/**
+	 * returns the role information
+	 * for directions
+	 */
+	@Override
+	public String getRoleInfo() {
+		// TODO Auto-generated method stub
+		return "May save another person by dying in their place";
+	}
+
+	/**
+	 * returns the goal of the role
+	 */
+	@Override
+	public String getRoleGoal() {
+		// TODO Auto-generated method stub
+		return "Lynch all Mafia to win the game";
 	}
 }

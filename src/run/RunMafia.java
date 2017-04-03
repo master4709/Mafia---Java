@@ -11,19 +11,7 @@ import displayMain.MainController;
  */
 public class RunMafia {
 	
-	public static JFrame frame = new JFrame();
-	
 	public static void main(String[] args){
-		makeFrame();
-		MainController.createInstance(frame);
-		MainController.getInstance().start();
+		Controller c = new Controller();
 	}
-	
-	private static void makeFrame(){
-		int width = 480;
-		int height = 852;
-		frame.setBounds(550, 20, width, height);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-	
 }

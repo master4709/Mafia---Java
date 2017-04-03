@@ -14,11 +14,8 @@ public class Vigilante extends Town{
 	 * @param name
 	 * @param position
 	 */
-	public Vigilante(String name, int position) {
-		super(name, position, new Role(){{
-			this.setRoleName("vigilante");
-			//
-			}});
+	public Vigilante(String name, int position, Role role) {
+		super(name, position, role);
 	}
 	
 	/**
@@ -36,7 +33,7 @@ public class Vigilante extends Town{
 	@Override
 	public int doAction(Player p){
 		if(getStatus() == ACTIVE){
-			return DEAD;
+			return TARGETED;
 		}
 		return p.getStatus();
 	}

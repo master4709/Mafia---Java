@@ -13,11 +13,8 @@ public class Detective extends Town{
 	 * @param name
 	 * @param position
 	 */
-	public Detective(String name, int position) {
-		super(name, position, new Role(){{
-			this.setRoleName(this.toString());
-			//
-		}});
+	public Detective(String name, int position, Role role) {
+		super(name, position, role);
 	}
 	
 	/**

@@ -16,11 +16,8 @@ public class Barman extends Mafia {
 	 * @param name
 	 * @param position
 	 */
-	public Barman(String name, int position) {
-		super(name, position, new Role(){{
-			this.setRoleName(this.toString());
-			//
-		}});
+	public Barman(String name, int position, Role role) {
+		super(name, position, role);
 	}
 	
 	/** 
@@ -40,18 +37,11 @@ public class Barman extends Mafia {
 	public int doAction(Player p) {
 		if(getStatus() != ACTIVE) return p.getStatus();
 		
-		if(checkIfNextHitman(this.toString())){
-				return DEAD;
-		}else{
-			return STOPPED;
-		}
+		return STOPPED;
 	}
 	
 	@Override
 	public String toString(){
-		if(checkIfNextHitman("barman")){
-			return "Mafia Barman Hitman";
-		}
 		return "Mafia Barman";
 	}
 }

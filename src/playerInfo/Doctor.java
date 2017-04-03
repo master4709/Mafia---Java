@@ -13,10 +13,8 @@ public class Doctor extends Town{
 	 * @param name
 	 * @param position
 	 */
-	public Doctor(String name, int position) {
-		super(name, position, new Role(){{
-			this.setRoleName(this.toString());
-		}});
+	public Doctor(String name, int position, Role role) {
+		super(name, position, role);
 	}
 	
 	/** 
@@ -34,7 +32,7 @@ public class Doctor extends Town{
 	@Override
 	public int doAction(Player p){
 		if(getStatus() != ACTIVE){
-			if(p.getStatus() == DEAD){ 
+			if(p.getStatus() == TARGETED){ 
 				return HEALED;
 			}
 		} return p.getStatus();

@@ -39,16 +39,17 @@ public abstract class Player {
 	/**
 	 * Constants for status
 	 */
-	public final int DEFAULT = 0;
-	public final int PROTECTED = 1;
-	public final int HEALED = 2;
-	public final int STOPPED = 3;
-	public final int DEAD = 4;
+	public final int DEAD = 0;
+	public final int ALIVE = 1;
+	public final int TARGETED = 2;
+	public final int HEALED = 3;
+	public final int PROTECTED = 4;
+	public final int STOPPED = 5;
 	
 	/**
 	 * on default, protected, or healed
 	 */
-	public final int ACTIVE = 0 | 1 | 2;
+	public final int ACTIVE = 1 | 2 | 3 | 4;
 	
 	/**
 	 * Initializes default values for Player attributes
@@ -56,11 +57,7 @@ public abstract class Player {
 	 * @param position
 	 * @param role
 	 */
-	public Player(
-			String name,
-			int position, 
-			Role role){
-		
+	public Player(String name, int position,  Role role){
 		this.name = name;
 		this.position = position;
 		this.role = role;
@@ -91,37 +88,6 @@ public abstract class Player {
 	 * @return new Status of player
 	 */
 	public abstract int doAction(Player p);
-	
-	/**
-	 * If the hitman is killed, the barman becomes the
-	 * hitman if they are alive. if both the barman 
-	 * and the hitman are dead, the godfather becomes
-	 * the hitman
-	 * @return
-	 */
-	public Player becomeHitman(){
-		Player p = new Hitman(getName(), getPosition());
-		//TODO become hitman
-		return p;
-	}
-	
-	public boolean checkIfNextHitman(String barmanOrGodfather){
-		//Check if this player will be next hitman
-		
-		//for(numofPlayers){if(role = array[i]){}
-		//TODO integrate to game
-		return false;
-	}
-
-	/**
-	 * Method is used exclusively by the bodyguard to
-	 * commit a sacrifice
-	 */
-	protected void sacrifice(){
-		this.status = 4;
-	}
-	
-	// Getters and setters//
 	
 	public void setTarget(int target){
 		this.target = target;

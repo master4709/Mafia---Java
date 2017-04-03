@@ -13,10 +13,8 @@ public class Hitman extends Mafia {
 	 * @param name
 	 * @param position
 	 */
-	public Hitman(String name, int position) {
-		super(name, position, new Role(){{
-			this.setRoleName("Hitman");
-		}});
+	public Hitman(String name, int position, Role role) {
+		super(name, position, role);
 	}
 	
 	/**
@@ -35,7 +33,7 @@ public class Hitman extends Mafia {
 	@Override
 	public int doAction(Player p) {
 		if(getStatus() == ACTIVE){//not dead or stopped by barman
-			return DEAD;
+			return TARGETED;
 		}
 		return p.getStatus();
 	}

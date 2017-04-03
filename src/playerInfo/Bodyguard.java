@@ -13,10 +13,8 @@ public class Bodyguard extends Town{
 	 * @param name
 	 * @param position
 	 */
-	public Bodyguard(String name, int position) {
-		super(name, position, new Role(){{
-			this.setRoleName("Bodyguard");
-		}});
+	public Bodyguard(String name, int position, Role role) {
+		super(name, position, role);
 	}
 	
 	/**
@@ -34,11 +32,8 @@ public class Bodyguard extends Town{
 	 */
 	@Override
 	public int doAction(Player p){
-		if(getStatus() == ACTIVE){ 
-			if(p.getStatus() == DEAD){
-				sacrifice(); // :(
-				return PROTECTED;
-			}
+		if(getStatus() == ACTIVE){
+			return PROTECTED;
 		} return p.getStatus();
 	}
 	

@@ -18,18 +18,6 @@ public class Town extends Player {
 	}
 	
 	/**
-	 * Used for instantiated Town Players
-	 * @param name
-	 * @param position
-	 * @param roleName
-	 */
-	public Town(String name, int position, String roleName) {
-		super(name, position, new Role(){{
-			this.setRoleName(roleName);
-		}});
-	}
-	
-	/**
 	 * Copy constructor
 	 * @param t
 	 */

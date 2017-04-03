@@ -15,12 +15,10 @@ public class Godfather extends Mafia {
 	 * creating a Godfather role
 	 * @param name
 	 * @param position
+	 * @param role
 	 */
-	public Godfather(String name, int position) {
-		super(name, position, new Role(){{
-			this.setRoleName(this.toString());
-			//
-		}});
+	public Godfather(String name, int position, Role role) {
+		super(name, position, role);
 	}
 	
 	/** 
@@ -38,19 +36,11 @@ public class Godfather extends Mafia {
 	 * @param p
 	 */
 	public int doAction(Player p) {
-		if(getStatus() == ACTIVE){
-			if(checkIfNextHitman(this.toString())){
-				return DEAD;
-			}
-		} 
 		return p.getStatus();
 	}
 	
 	@Override
 	public String toString(){
-		if(checkIfNextHitman("godfather")){
-			return "The Godfather Hitman";
-		}
 		return "The Godfather";
 	}
 }

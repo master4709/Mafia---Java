@@ -1,4 +1,4 @@
-package PlayerInfo;
+package playerInfo;
 /**
  * Unlike the Mafia class, some Town Players are classified
  * only as town players.

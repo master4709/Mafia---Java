@@ -1,4 +1,4 @@
-package PlayerInfo;
+package playerInfo;
 /**
  * The vigilante is a town member that may kill
  * Any player at night.

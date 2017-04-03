@@ -27,7 +27,6 @@ public class Controller implements ActionListener{
 		suc = new SetUpController(frame,this);
 		gc = new GameController(frame,this);
 		
-		
 		mc.start();
 	}
 	
@@ -49,7 +48,6 @@ public class Controller implements ActionListener{
 			break;
 		case"Home_DayPanel":
 			mc.start();
-			
 			break;
 		case"Continue_RoleSelectionPanel":
 			//gc.start(playerInfo, lynchTarget, test);

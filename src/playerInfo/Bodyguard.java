@@ -1,4 +1,4 @@
-package PlayerInfo;
+package playerInfo;
 /**
  * The bodyguard is a town member that may check
  * protect a player at night by dying in their place

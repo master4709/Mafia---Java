@@ -1,4 +1,4 @@
-package PlayerInfo;
+package playerInfo;
 /**
  * The Godfather is a mafia member that
  * stays hidden from the detective

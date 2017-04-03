@@ -1,4 +1,4 @@
-package PlayerInfo;
+package playerInfo;
 /**
  * The hitman is a mafia member that may kill any player
  * at night

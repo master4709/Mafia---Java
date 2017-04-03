@@ -42,7 +42,7 @@ public class Story {
 			inputStream.close();
 		}
 		catch(FileNotFoundException e){
-	    	System.out.println("File not found");
+	    	System.out.println("File not found in location: " +fileName);
 	    }
 	}
 	//extracts info from locations.txt
@@ -57,7 +57,7 @@ public class Story {
 			inputStream.close();
 		}
 		catch(FileNotFoundException e){
-	    	System.out.println("File not found");
+	    	System.out.println("File not found in location: " +fileName);
 	    }
 	}
 	//extracts info from causeOfDeath.txt
@@ -72,7 +72,7 @@ public class Story {
 			inputStream.close();
 		}
 		catch(FileNotFoundException e){
-	    	System.out.println("File not found");
+	    	System.out.println("File not found in location: " +fileName);
 	    }
 	}
 	/**

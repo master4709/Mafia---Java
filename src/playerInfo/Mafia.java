@@ -1,4 +1,4 @@
-package PlayerInfo;
+package playerInfo;
 /**
  * The Mafia is an abstract class that
  * signifies a mafia affiliation of a player

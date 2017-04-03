@@ -1,4 +1,4 @@
-package PlayerInfo;
+package playerInfo;
 /**
  * The barman is a mafia member that may
  * stop the actions of a player at night.

@@ -1,4 +1,4 @@
-package PlayerInfo;
+package playerInfo;
 
 /**
  * Inherited by different roles as a framework to store

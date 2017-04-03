@@ -15,6 +15,7 @@ public class Barman extends Mafia {
 	 * creating a barman role
 	 * @param name
 	 * @param position
+	 * @param role
 	 */
 	public Barman(String name, int position, Role role) {
 		super(name, position, role);

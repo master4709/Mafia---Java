@@ -12,6 +12,7 @@ public class Detective extends Town{
 	 * creating a detective role
 	 * @param name
 	 * @param position
+	 * @param role
 	 */
 	public Detective(String name, int position, Role role) {
 		super(name, position, role);

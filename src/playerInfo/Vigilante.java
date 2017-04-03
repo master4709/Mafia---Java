@@ -13,6 +13,7 @@ public class Vigilante extends Town{
 	 * creating a vigilante role
 	 * @param name
 	 * @param position
+	 * @param role
 	 */
 	public Vigilante(String name, int position, Role role) {
 		super(name, position, role);

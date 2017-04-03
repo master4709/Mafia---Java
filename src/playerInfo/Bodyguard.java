@@ -12,6 +12,7 @@ public class Bodyguard extends Town{
 	 * creating a doctor role
 	 * @param name
 	 * @param position
+	 * @param role
 	 */
 	public Bodyguard(String name, int position, Role role) {
 		super(name, position, role);

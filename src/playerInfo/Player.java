@@ -12,10 +12,10 @@ package playerInfo;
  * players must be active players must be called
  * in order:
  * 1) Barman - Stops action
- * 2) Vigilante & Hitman - kills
- * 4) Doctor - heals
- * 5) Bodyguard - sacrifices self if target is not
+ * 2) Bodyguard - sacrifices self if target is not
  *			 	  healed
+ * 3) Vigilante & Hitman - kills
+ * 5) Doctor - heals
  * 
  * @author Elvin Limpin 30018832
  *

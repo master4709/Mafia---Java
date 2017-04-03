@@ -20,13 +20,15 @@ public class MainPanel extends MyPanel{
 	/**
 	 * Instance variables.
 	 */	
+	
+	private ActionListener globalListener;
 	//buttons for center panel
 	private JButton btnNewGame;	
 	private JButton btnContinueGame;
 	private JButton btnAbout;
 	private JButton btnRules;
 	
-	//Jlabel that contains background image
+	//JLabel that contains background image
 	private JLabel lblMan;
 	
 	//button for south panel
@@ -40,9 +42,10 @@ public class MainPanel extends MyPanel{
 	 * @param actionListener
 	 */
 	
-	public MainPanel(ActionListener actionListener) {
+	public MainPanel(ActionListener packageListener, ActionListener globalListener) {
 
-		this.packageListener = actionListener;
+		this.packageListener = packageListener;
+		this.globalListener = globalListener;
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();
@@ -71,8 +74,8 @@ public class MainPanel extends MyPanel{
 		
 		btnTest = new MyButton("Test Game");
 		south.add(btnTest, "cell 0 0 ,growx");
-		btnTest.addActionListener(packageListener);
-		btnTest.setName("Test_MainPanel");
+		btnTest.addActionListener(globalListener);
+		btnTest.setName("Testing_MainPanel");
 	}
 	
 	/**
@@ -81,7 +84,7 @@ public class MainPanel extends MyPanel{
 	private void displayCenter(){
 		btnNewGame = new MyButton("New Game");
 		center.add(btnNewGame, "cell 0 1,growx");
-		btnNewGame.addActionListener(packageListener);
+		btnNewGame.addActionListener(globalListener);
 		btnNewGame.setName("NewGame_MainPanel");
 		
 		

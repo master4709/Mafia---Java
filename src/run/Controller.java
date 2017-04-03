@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import displayGame.GameController;
 import displayMain.MainController;
 import displaySetUp.SetUpController;
+import testing.TestingTools;
 
 public class Controller implements ActionListener{
 	
@@ -52,6 +53,9 @@ public class Controller implements ActionListener{
 		case"Continue_RoleSelectionPanel":
 			//gc.start(playerInfo, lynchTarget, test);
 			break;
+		case"Testing_MainPanel":
+			TestingTools t = new TestingTools();
+			gc.start(t.makeInfo(8), -1);
 		default:
 			break;
 		}

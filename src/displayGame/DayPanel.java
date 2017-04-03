@@ -18,6 +18,7 @@ import javax.swing.JPanel;
  *
  */
 public class DayPanel extends MyPanel{
+	private ActionListener globalListener;
 	//This label displays the text "Day Time"
 	private JLabel lblDayTime;
 	//These labels display the text for what to do on this screen
@@ -25,14 +26,17 @@ public class DayPanel extends MyPanel{
 	private JLabel lblDescription2;
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
+	
+	private JButton btnHome;
 	//List of buttons representing each player that is alive
 	//Pressing a button will set them as the target for the day lynching
 	private List<JButton> playerButtonList = new ArrayList<>();
 	/**
 	 * Constructor
 	 */
-	public DayPanel(ActionListener packageListener) {
+	public DayPanel(ActionListener packageListener, ActionListener globalListener) {
 		this.packageListener = packageListener;
+		this.globalListener = globalListener;
 		//Create all of the labels and buttons etc needed for the Panel
 		displayNorth();
 		displaySouth();
@@ -57,6 +61,10 @@ public class DayPanel extends MyPanel{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
+		btnHome = new MyButton("Home");
+		south.add(btnHome,"cell 0 0");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home_DayPanel");
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
 		south.add(btnContinue, "cell 1 0");

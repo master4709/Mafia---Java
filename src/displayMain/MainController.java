@@ -61,7 +61,7 @@ public class MainController implements ActionListener {
 	 * Initialize all the panels.
 	 */
 	public void start(){
-		mp = new MainPanel(this);
+		mp = new MainPanel(this,globalListener);
 		rp = new RulePanel(this);
 		ap = new AboutPanel(this);
 		

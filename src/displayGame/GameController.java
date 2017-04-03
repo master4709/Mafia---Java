@@ -61,7 +61,7 @@ public class GameController implements ActionListener{
 	 */
 	public void start(List<Player> playerInfo, int lynchTarget){
 		g = new Game(playerInfo,lynchTarget);
-		dp = new DayPanel(this);
+		dp = new DayPanel(this,globalListener);
 		cpp = new CheckPlayerPanel(this);
 		np = new NightPanel(this,g.getPlayerNames(),g.getMafiaMember());
 		sp = new StoryPanel(this);

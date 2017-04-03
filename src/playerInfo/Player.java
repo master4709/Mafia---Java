@@ -89,6 +89,8 @@ public abstract class Player {
 	 */
 	public abstract int doAction(Player p);
 	
+	public abstract String getRole();
+	
 	public void setTarget(int target){
 		this.target = target;
 	}

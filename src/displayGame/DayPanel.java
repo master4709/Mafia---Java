@@ -45,29 +45,31 @@ public class DayPanel extends MyPanel{
 	 * Displays that it is Day Time and rules of the day
 	 */
 	private void displayNorth(){
+
+		btnHome = new MyButton("Home");
+		north.add(btnHome,"cell 0 0,alignx left,aligny top");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home_DayPanel");
+		
 		lblDayTime = new MyLabel("Day Time", textColor, titleFont);
-		north.add(lblDayTime, "flowy,cell 0 0");
+		north.add(lblDayTime, "flowy,cell 0 0 2 0,alignx center");
 		
 		String text1 = "Talk among yourselves to choose who to lynch";// There must be a 50% majority to lynch him/her";
 		lblDescription1 = new MyLabel(text1, textColor, infoFont);
-		north.add(lblDescription1, "cell 0 1,");
+		north.add(lblDescription1, "cell 0 1 2 1");
 		
 		String text2 = "Select him/her once there is a majority vote";// There must be a 50% majority to lynch him/her";
 		lblDescription2 = new MyLabel(text2, textColor, infoFont);
-		north.add(lblDescription2, "cell 0 2,");
+		north.add(lblDescription2, "cell 0 2 2 1");
 	
 	}
 	/**
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		btnHome = new MyButton("Home");
-		south.add(btnHome,"cell 0 0");
-		btnHome.addActionListener(globalListener);
-		btnHome.setName("Home_DayPanel");
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
-		south.add(btnContinue, "cell 1 0");
+		south.add(btnContinue, "cell 0 0, alignx center");
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_DayPanel");
 	}

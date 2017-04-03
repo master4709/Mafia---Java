@@ -142,7 +142,7 @@ public class GameController implements ActionListener{
 	 * @param panel
 	 */
 	private void switchPanel(JPanel panel){
-		System.out.println(panel.getName());
+		//System.out.println(panel.getName());
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);

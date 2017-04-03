@@ -110,6 +110,7 @@ public abstract class Player {
 		this.isLynched = lynched;
 	}
 	
+	
 	public String getName(){
 		return this.name;
 	}

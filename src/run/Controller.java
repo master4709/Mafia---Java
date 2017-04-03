@@ -49,6 +49,7 @@ public class Controller implements ActionListener{
 			break;
 		case"Home_DayPanel":
 			mc.start();
+			
 			break;
 		case"Continue_RoleSelectionPanel":
 			//gc.start(playerInfo, lynchTarget, test);

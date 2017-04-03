@@ -11,6 +11,7 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,9 @@ public class RoleSelectionPanel {
     private JLabel playersLeft;
     private JButton continueButton;
     private JButton assignTownies;
-
+    
+    private ActionListener globalListener;
+    
     private List<String> playerNames;
     private ArrayList<String> rolesSelected;
     private ArrayList<Role> availableRoles;
@@ -37,7 +40,7 @@ public class RoleSelectionPanel {
      * Constructor. Specifies a list of player names
      * @param playerNames A list of type string containing names of each player
      */
-    public RoleSelectionPanel(List<String> playerNames) {
+    public RoleSelectionPanel(ActionListener globalListener, List<String> playerNames) {
 
         this.playerNames = new ArrayList<>(playerNames);
         System.out.println("Total Players: " + playerNames.size());
@@ -88,10 +91,11 @@ public class RoleSelectionPanel {
         n.setBackground(Colors.black);
         contentPane.add(n, "span 1, grow, pushy, wrap push");
 
-        addButtonListener(continueButton);
         continueButton.setSize(new Dimension(200, 200));
         contentPane.add(continueButton, "span, pushx, pushy, grow");
         continueButton.setVisible(false);
+        continueButton.addActionListener(globalListener);
+        continueButton.setName("Continue_RoleSelectionPanel");
     }
 
     private void createRoleButtons() {

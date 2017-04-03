@@ -52,7 +52,8 @@ public class PlayerNamePanel extends MyPanel{
 	
 	private void displaySouth(){
 		south.add(continueButton, "cell 0 2,growx");
-        continueButton.addActionListener(e -> {
+        continueButton.addActionListener(packageListener);
+        	/*e -> {
             List<String> name = new ArrayList<>();
             for (int i = 0; i < textFields.size();i++) {
             	String text = textFields.get(i).getText();
@@ -62,8 +63,10 @@ public class PlayerNamePanel extends MyPanel{
             }
             if(name.size() <numOfPlayers) name = autoPopulate(name);
             System.out.println(name);
-			SetUpController.getInstance().switchToRoleSelection(name);
+		//	SetUpController.getInstance().switchToRoleSelection(name);
+		 
         });
+        */
 	}
 	
 	//If there are not enough names, this method automatically

@@ -69,26 +69,23 @@ public class GameController implements ActionListener{
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
 		
 		dp.displayCenter(g.getPlayerInfo());
-		
+
+		panelCheck = cpp.getContentPane();
 		panelNight = np.getContentPane();
 		panelDay = dp.getContentPane();
 		panelViewAllPlayers = vapp.getContentPane();
 		panelViewPlayer = vpp.getContentPane();
 		
-		this.test = test;
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
 			switchDay();
 		}else{
 			switchViewAllPlayers();
 		}
-		
 	}
 	/**
 	 * Switch to the ViewAllPlayers JPanel
 	 */
 	public void switchViewAllPlayers(){
-		//Refresh the JPanel
-		
 		//Set the frame to the new JPanel content pane
 		switchPanel(panelViewAllPlayers);
 	}
@@ -97,9 +94,7 @@ public class GameController implements ActionListener{
 	 * @param i - the index value for which player to show
 	 */
 	public void switchViewPlayer(int i){
-		//Updates the ViewPlayer screen with the player
 		vpp.setPlayer(g.getPlayerCopy(i));
-		
 		switchPanel(panelViewPlayer);
 	}
 	
@@ -118,7 +113,6 @@ public class GameController implements ActionListener{
 	 */
 	public void switchNight(){
 		np.setDisplay(g.getPlayerCopy(position));//Sets the display for current player to select his/her target
-		
 		switchPanel(panelNight);
 	}
 	/**
@@ -127,7 +121,6 @@ public class GameController implements ActionListener{
 	 */
 	public void switchCheckPlayer(){
 		cpp.setPlayerName(g.getPlayerCopy(position).getName());
-		panelCheck = cpp.getContentPane();
 		switchPanel(panelCheck);
 	}
 	/**

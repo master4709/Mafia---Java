@@ -109,8 +109,7 @@ public abstract class Player {
 	public void setLynched(boolean lynched){
 		this.isLynched = lynched;
 	}
-	
-	
+		
 	public String getName(){
 		return this.name;
 	}

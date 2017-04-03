@@ -31,8 +31,7 @@ public class SetUp extends RoleAssignment {
 			this.names = names;
 			this.roles = rolesSelected;
 			playerAssignment(rolesSelected);
-			nameOfPlayers();
-			
+			nameOfPlayers();			
 			//roleOfPlayers();
 		}
 	

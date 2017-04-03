@@ -62,8 +62,7 @@ public class Lyncher extends Player {
 	 */
 	@Override
 	public String getRoleGoal() {
-		// TODO lynch target
-		
+		// TODO lynch target		
 		return "Get them lynched to win the game solo:";
 	}
 	

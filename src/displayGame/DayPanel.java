@@ -25,25 +25,17 @@ public class DayPanel extends MyPanel{
 	private JLabel lblDescription2;
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
-	//Stores all of the data of the players
-	//Does not change the date stored in it EVER
-	private List<String> playerNames;
 	//List of buttons representing each player that is alive
 	//Pressing a button will set them as the target for the day lynching
 	private List<JButton> playerButtonList = new ArrayList<>();
-	//If the game is in test mode
-	private boolean test;
 	/**
 	 * Constructor
 	 */
-	public DayPanel(ActionListener packageListener,List<String> playerNames, boolean test) {
+	public DayPanel(ActionListener packageListener) {
 		this.packageListener = packageListener;
-		this.playerNames = playerNames;
-		this.test=test;
 		//Create all of the labels and buttons etc needed for the Panel
 		displayNorth();
 		displaySouth();
-		displayCenter();
 	}
 	/**
 	 * Displays that it is Day Time and rules of the day
@@ -74,11 +66,11 @@ public class DayPanel extends MyPanel{
 	/**
 	 * Creates all of the buttons representing each player that is alive
 	 */
-	private void displayCenter(){
+	public void displayCenter(List<Player> playerInfo){
 		//Loop through the list of players
 		//Loops through the list of players adn create a button for each player
-		for(int i =0;i<playerNames.size();i++){
-			displayPlayerButton(i);
+		for(Player p: playerInfo){
+			displayPlayerButton(p);
 		}
 	}
 	/**
@@ -86,13 +78,13 @@ public class DayPanel extends MyPanel{
 	 * 
 	 * @param i - index value of player and location on center grid y value
 	 */
-	private void displayPlayerButton(int i){
+	private void displayPlayerButton(Player p){
 		//Create string of the players name and role (debug)
-		String text = playerNames.get(i);
+		String text = p.getName();
 		//if(test) {text = text+" | "+playerInfo.get(i).getRole();}
 		JButton btnPlayer = new MyButton(text);//Create a new button with passing the String text
-		btnPlayer.setName("Day_"+Integer.toString(i));//Sets the name of the button to the index value of the player
-		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
+		btnPlayer.setName("Day_"+Integer.toString(p.getPlayPosition()));//Sets the name of the button to the index value of the player
+		center.add(btnPlayer, "cell 0 "+p.getPlayPosition()+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}

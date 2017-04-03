@@ -19,15 +19,15 @@ import logic.Role;
  *
  */
 
-public abstract class TestingTools {
-	private static List<String> mafiaMembers = new ArrayList<>();
-	private static int lynchTargetID = -1;
+public class TestingTools {
+	private List<String> mafiaMembers = new ArrayList<>();
+	private int lynchTargetID = -1;
 		
 		/**
 		 * creates a JFrame to facilitate the GUI
 		 * @return the Jframe
 		 */
-		public static JFrame init(){
+		public JFrame init(){
 			int width;
 			int height;
 			JFrame frame = new JFrame();
@@ -47,7 +47,7 @@ public abstract class TestingTools {
 		 * testing
 		 * @return List<Player> containing finalized roles
 		 */
-		public static List<Player> makeInfo(int total) {
+		public List<Player> makeInfo(int total) {
 			int totalPlayers = total;
 			List<Player> playerInfo = initialInfo(totalPlayers);
 			List<String> assignments = new ArrayList<>();
@@ -80,7 +80,7 @@ public abstract class TestingTools {
 		 * @param totalPlayers
 		 * @return List<Player> containing the player 
 		 */
-		private static List<Player> setNewInfo(List<String> assignments, List<String> assignmentsInfo,
+		private List<Player> setNewInfo(List<String> assignments, List<String> assignmentsInfo,
 				List<String> assignmentsGoals, List<Player> playerInfo, int totalPlayers) {
 			
 			List<String> roles = assignments;
@@ -120,7 +120,7 @@ public abstract class TestingTools {
 		 * @param playerInfo
 		 * @param totalPlayers
 		 */
-		public static void lynchTarget(List<Player> playerInfo, int totalPlayers){
+		public void lynchTarget(List<Player> playerInfo, int totalPlayers){
 			List<Player> possibleTargets = playerInfo;
 			int i = new Random().nextInt(totalPlayers-1);
 			while(possibleTargets.get(i).getRole() == "Lyncher") {
@@ -134,7 +134,7 @@ public abstract class TestingTools {
 		 * @param totalPlayers
 		 * @return List<Player> names for the players
 		 */
-		private static List<Player> initialInfo(int totalPlayers){
+		private List<Player> initialInfo(int totalPlayers){
 			List<Player> playerInfo = new ArrayList<>();
 			List<String> names = new ArrayList<>(Arrays.asList(
 					"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
@@ -159,7 +159,7 @@ public abstract class TestingTools {
 		 * Getter for the lynch target
 		 * @return the location of the lynch target
 		 */
-		public static int getLynchTargetID(){
+		public int getLynchTargetID(){
 			return lynchTargetID;
 		}
 }

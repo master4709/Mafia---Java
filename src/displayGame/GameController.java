@@ -59,15 +59,21 @@ public class GameController implements ActionListener{
 	 * @param lynchTarget - index value of the target for the lyncher player, -1 if no lyncher player
 	 * @param test - if true, bypasses specific screens, (ViewAllPlayersPanel and CheckPlayerPanel)
 	 */
-	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
+	public void start(List<Player> playerInfo, int lynchTarget){
 		g = new Game(playerInfo,lynchTarget);
-		dp = new DayPanel(this,g.getPlayerNames(),test);
+		dp = new DayPanel(this);
 		cpp = new CheckPlayerPanel(this);
 		np = new NightPanel(this,g.getPlayerNames(),g.getMafiaMember());
 		sp = new StoryPanel(this);
-		
 		vapp = new ViewAllPlayersPanel(this,g.getPlayerNames());
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
+		
+		dp.displayCenter(g.getPlayerInfo());
+		
+		panelNight = np.getContentPane();
+		panelDay = dp.getContentPane();
+		panelViewAllPlayers = vapp.getContentPane();
+		panelViewPlayer = vpp.getContentPane();
 		
 		this.test = test;
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
@@ -82,7 +88,7 @@ public class GameController implements ActionListener{
 	 */
 	public void switchViewAllPlayers(){
 		//Refresh the JPanel
-		panelViewAllPlayers = vapp.getContentPane();
+		
 		//Set the frame to the new JPanel content pane
 		switchPanel(panelViewAllPlayers);
 	}
@@ -93,7 +99,7 @@ public class GameController implements ActionListener{
 	public void switchViewPlayer(int i){
 		//Updates the ViewPlayer screen with the player
 		vpp.setPlayer(g.getPlayerCopy(i));
-		panelViewPlayer = vpp.getContentPane();
+		
 		switchPanel(panelViewPlayer);
 	}
 	
@@ -102,7 +108,6 @@ public class GameController implements ActionListener{
 	 */
 	public void switchDay(){
 		target = -1;
-		panelDay = dp.getContentPane();
 		switchPanel(panelDay);
 	}
 
@@ -113,7 +118,7 @@ public class GameController implements ActionListener{
 	 */
 	public void switchNight(){
 		np.setDisplay(g.getPlayerCopy(position));//Sets the display for current player to select his/her target
-		panelNight = np.getContentPane();//Refreshes the content pane to adjust for updates
+		
 		switchPanel(panelNight);
 	}
 	/**

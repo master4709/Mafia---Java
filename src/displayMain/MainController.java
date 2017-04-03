@@ -64,6 +64,10 @@ public class MainController implements ActionListener {
 		mp = new MainPanel(this);
 		rp = new RulePanel(this);
 		ap = new AboutPanel(this);
+		
+		panelMain = mp.getContentPane();
+		panelRule = rp.getContentPane();
+		panelAbout = ap.getContentPane();
 					
 		switchPanel(panelMain);
 	}

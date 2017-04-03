@@ -5,19 +5,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import playerInfo.*;
+
 /**
  * This class will create a list to store all the information about each player.  
  * Author: Mahsa Lotfi 10072013 
  */	
 public class SetUp extends RoleAssignment {
 		
-		//List of each player (class) and his/her info (name, role, target, position, etc)
-		private List<Player> playerInfo = new ArrayList<>();
-		private List<String> names = new ArrayList<>();
+		private List<String> names;
 		//This int stores the information for the lyncher target	
 		private int lynchTargetID;
-		private ArrayList<String> roles;
-		private List<Role> chosenRoles;
+		private List<String> roles;
+		List<Player> playerInfo = new ArrayList<>();
+		private final int NUMBEROFROLES = 10;
 		
 		/**
 		 * Constructor with 2 arguments. It will initialize names and roles of the 
@@ -25,13 +26,13 @@ public class SetUp extends RoleAssignment {
 		 * @param List<String> names, name of players.
 		 * @param ArrayList<String> roleSelected, roles that are selected by players.
 		 */	
-		public SetUp( List<String> names, ArrayList<String> rolesSelected){
+		public SetUp( List<String> names, List<String> rolesSelected){
 			super(names.size());
 			this.names = names;
 			this.roles = rolesSelected;
 			playerAssignment(rolesSelected);
 			nameOfPlayers();
-			roleOfPlayers();
+			//roleOfPlayers();
 		}
 	
 			
@@ -46,19 +47,30 @@ public class SetUp extends RoleAssignment {
 		 * 
 		 */
 		public void nameOfPlayers(){
+			List<Integer> positions = new ArrayList<>();
+			for(int i = 0; i < names.size(); i++) positions.add(i);
+			Collections.shuffle(positions);
+			
 			for(int i =0; i<names.size(); i++){
-				Player p = new Player();
-				playerInfo.add(p);
-				playerInfo.get(i).setName(names.get(i));
-				playerInfo.get(i).setPlayPosition(i);
-				playerInfo.get(i).setPlayerTarget(-1);
-				playerInfo.get(i).setIsDead(false);
-				playerInfo.get(i).setIsHealed(false);
-				playerInfo.get(i).setIsTargeted(false);
-				playerInfo.get(i).setIsProtected(false);
-				playerInfo.get(i).setInBar(false);
-				playerInfo.get(i).setIsLynched(false);
-			}		
+				playerInfo.add(createPlayer(roles.get(i), names.get(i), positions.get(i)));
+			}
+		}
+		
+		public Player createPlayer(String role, String name, int position){
+			switch(role){
+				case "Mafia: Barman": return new Barman(name, position);
+				case "Bodyguard": return new Bodyguard(name, position);
+				case "Detective": return new Detective(name, position);
+				case "Doctor": return new Doctor(name, position);
+				case "Mafia- Godfather": return new Godfather(name, position);
+				case "Mafia: Hitman": return new Hitman(name, position);
+				case "Lyncher": return new Lyncher(name, position);
+				case "Survivor": return new Survivor(name, position);
+				case "Town": return new Town(name, position);
+				case "Vigilante": return new Vigilante(name, position);
+				default: break;
+			}
+			return null;
 		}
 		
 		
@@ -67,7 +79,7 @@ public class SetUp extends RoleAssignment {
 		 * If the role contains Mafia, sets the isMafia variable to true 
 		 * If the player is Lyncher, then it will set a target for it.
 		 */
-		public void roleOfPlayers(){
+		/*public void roleOfPlayers(){
 			//shuffle roles to be assigned to each player
 			chosenRoles = getChosenRoles();
 			Collections.shuffle(chosenRoles);
@@ -93,7 +105,7 @@ public class SetUp extends RoleAssignment {
 					playerInfo.get(i).setIsMafia(false);
 				}		
 			}		
-		}
+		}*/
 		
 		/**
 		 * Finds a random target for the lyncher

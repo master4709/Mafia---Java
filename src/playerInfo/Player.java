@@ -95,6 +95,7 @@ public abstract class Player {
 	 * @param p
 	 * @return new Status of player
 	 */
+	
 	public abstract int doAction(Player p);
 	
 	public abstract String getRole();

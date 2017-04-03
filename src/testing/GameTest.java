@@ -1,4 +1,4 @@
-package Testing;
+package testing;
 
 /**
  * Creates a test scenario for the game module

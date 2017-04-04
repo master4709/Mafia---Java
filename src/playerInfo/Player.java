@@ -66,7 +66,7 @@ public abstract class Player {
 		this.name = name;
 		this.position = position;
 		this.target = -1;
-		this.status = 0;
+		this.status = 1;
 		this.isLynched = false;
 	}
 	

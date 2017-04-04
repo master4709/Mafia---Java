@@ -39,19 +39,12 @@ public class SetUp {
 			this.names = names;
 			this.roles = rolesSelected;
 			setAllPlayers();	
-			this.lynchTargetID = setLynchTarget(0);
+			this.lynchTargetID = setLynchTarget();
 		}
 	
 			
 		/**
-		 * This method will add the information of each player to the playerInfo list.
-		 * Sets the play position of each player to the order then names were inputed.
-		 * Sets player target and keep the record of old player target.
-		 * Sets the status of each player to be alive.
-		 * Sets the status of targeted, healed or protected to be false.
-		 * Sets the inBar (The barman has stopped them from doing their action tonight) status 
-		 * to false for each player.
-		 * 
+		 * Method shuffles the roles and matches them with the names
 		 */
 		public void setAllPlayers(){
 			Collections.shuffle(roles);
@@ -60,12 +53,27 @@ public class SetUp {
 			}
 		}
 		
-		public int setLynchTarget(int i){
+		/**
+		 * Recursively finds and sets a target for the lyncher
+		 * @param calls
+		 * @return lynchTargetID
+		 */
+		public int setLynchTarget(int... calls){
+			
+			//null calls is interpreted as 0 calls
+			int i = calls == null ? 0 : calls[0] + 1;
 			String target = roles.get(i);
-			if(target != "Lyncher") return findPosition(target);
-			return setLynchTarget(i+1);
+			
+			if(target != "Lyncher"){
+				return findPosition(target);
+			} return setLynchTarget(i);
 		}
 		
+		/**
+		 * Creates a player determined by the role
+		 * @param i (position)
+		 * @return a Player class
+		 */
 		public Player createPlayer(int i){
 			switch(roles.get(i)){
 				case "Mafia: Barman": 		return new Barman(names.get(i), i);
@@ -81,9 +89,17 @@ public class SetUp {
 				}
 		}
 		
+		/**
+		 * Finds the position of a role or the
+		 * first Townie
+		 * @param role
+		 * @return position of the player
+		 */
 		public int findPosition(String role){
 			for(Player p : playerInfo){
-				if(p.toString() == role) return p.getPosition();
+				if(p.toString() == role) {
+					return p.getPosition();
+				}
 			} return -1;
 		}
 		

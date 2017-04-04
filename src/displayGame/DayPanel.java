@@ -3,7 +3,6 @@ package displayGame;
 
 import myJStuff.*;
 import playerInfo.Player;
-import logic.*;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 /**
  * This class is used to display the list of possible targets of the day lynching
  * 

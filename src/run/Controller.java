@@ -2,6 +2,9 @@ package run;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,7 +13,6 @@ import displayGame.GameController;
 import displayMain.MainController;
 import displaySetUp.SetUpController;
 import logic.SetUp;
-import testing.TestingTools;
 
 public class Controller implements ActionListener{
 	
@@ -56,11 +58,19 @@ public class Controller implements ActionListener{
 			gc.start(up.getPlayerInfo(), up.getLynchTarget());
 			break;
 		case"Testing_MainPanel":
-			TestingTools t = new TestingTools();
-			gc.start(t.makeInfo(8), -1);
+			test();
 		default:
 			break;
 		}
 		
+	}
+	
+	private void test(){
+		List<String> names = new ArrayList<>(Arrays.asList(
+				"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
+				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
+		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Town","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
+		SetUp up = new SetUp(names,roles);
+		gc.start(up.getPlayerInfo(), up.getLynchTarget());
 	}
 }

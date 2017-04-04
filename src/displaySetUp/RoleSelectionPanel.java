@@ -10,8 +10,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * This class creates the panel for selecting roles.
@@ -20,7 +18,6 @@ import java.util.List;
  */
 public class RoleSelectionPanel extends MyPanel{
 
-    private JPanel contentPane;
     private JLabel playersLeft;
     private JButton btnContinue;
     private JButton assignTownies;

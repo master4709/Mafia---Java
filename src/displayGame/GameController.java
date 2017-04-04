@@ -41,9 +41,9 @@ public class GameController implements ActionListener{
 	private JPanel panelViewAllPlayers;
 	private JPanel panelViewPlayer;
 	//Location inside the list of players for the night cycle
-	private int position = 0;
+	private int position = -1;
 	//Boolean for if the game is in test mode
-	private boolean test;
+	private boolean test = false;
 	//Location of the current target for both the day lynching and every night player
 	private int target = -1;
 	
@@ -60,23 +60,27 @@ public class GameController implements ActionListener{
 	 * @param lynchTarget - index value of the target for the lyncher player, -1 if no lyncher player
 	 * @param test - if true, bypasses specific screens, (ViewAllPlayersPanel and CheckPlayerPanel)
 	 */
-	public void start(List<Player> playerInfo, int lynchTarget){
+	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
+		this.test = test;
+		
 		g = new Game(playerInfo,lynchTarget);
 		dp = new DayPanel(this,globalListener);
 		cpp = new CheckPlayerPanel(this);
-		np = new NightPanel(this,g.getPlayerNames(),g.getMafiaMember());
+		np = new NightPanel(this,g.getMafiaMember());
 		sp = new StoryPanel(this);
-		vapp = new ViewAllPlayersPanel(this,g.getPlayerNames());
+		vapp = new ViewAllPlayersPanel(this);
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
 		
 		dp.displayCenter(g.getPlayerInfo());
+		np.displayCenter(g.getPlayerInfo());
+		vapp.displayCenter(g.getPlayerInfo());
 
 		panelCheck = cpp.getContentPane();
 		panelNight = np.getContentPane();
 		panelDay = dp.getContentPane();
+		panelStory = sp.getContentPane(); 
 		panelViewAllPlayers = vapp.getContentPane();
 		panelViewPlayer = vpp.getContentPane();
-		
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
 			switchDay();
 		}else{
@@ -130,9 +134,7 @@ public class GameController implements ActionListener{
 	 * @param dead - Boolean if the player is dead or alive
 	 */
 	public void switchStory(String name, boolean dead){
-		System.out.println("Story Panel");
 		sp.setStory(name,dead);
-		panelStory = sp.getContentPane(); 
 		switchPanel(panelStory);
 	}
 	/**
@@ -143,23 +145,10 @@ public class GameController implements ActionListener{
 	 * @param panel
 	 */
 	private void switchPanel(JPanel panel){
-		//System.out.println(panel.getName());
+		System.out.println(panel.getName().toUpperCase());
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);
-	}
-	/**
-	 * Lynches the player who was targeted during the day
-	 * Removes that players button for both the day and night panels
-	 * @param target
-	 */
-	private void dayLynch(){
-		//Lynches the player who was the target during the day 
-		g.dayCycle(target);
-		dp.removePlayerButton(target);
-		np.removePlayerButton(target);
-		//Sets the index value for the night back to zero
-		position = 0;
 	}
 	/**
 	 * Calls the night Action method in the game class and odes all of the logic for each player each night
@@ -174,9 +163,8 @@ public class GameController implements ActionListener{
 			String name = g.getPlayerCopy(target).getName();
 			//If the player was killed that night remove the player button from both the Day and Night Panel
 			if(g.getPlayerCopy(target).getStatus()==2){
-				dp.removePlayerButton(target);
-				np.removePlayerButton(target);
 				g.setPlayerStatus(target, 0);
+				removePlayerButton(target);
 				switchStory(name,true);
 			}else if(g.getPlayerCopy(target).getStatus()==3){//Else
 				g.setPlayerStatus(target, 1);
@@ -194,24 +182,40 @@ public class GameController implements ActionListener{
 	 */
 	private void findNextPlayer(){
 		target = -1;
-		//If the position has not gone out of bounds
-		if(position<g.getPlayerInfo().size()){
-			//If the player is dead, find the next one
-			if(g.getPlayerCopy(position).getStatus()==0){
-				g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
-				position++;
-				findNextPlayer();
-			}else{//If not, display the checkPlayerPanel for the next player in the list	
-				if(test){//If the game is in test mode, skips the check player panel
-					switchNight();
-				}else{
-					switchCheckPlayer();
-				}
-			}
-		//If the position has gone past the list of players, do the night actions of the players and 
-		}else if(position==g.getPlayerInfo().size()){
+		position++;
+		position = nextPlayer(position);
+		if(position ==-1){
+			System.out.println("End of Night");
 			nightAction();
+		}else{
+			if(test){
+				switchNight();
+			}else{
+				switchCheckPlayer();
+			}
 		}
+	}
+	
+	private int nextPlayer(int position){
+		System.out.print("Finding next player: ");
+		if(position>=g.getPlayerInfo().size()){
+			System.out.println("End of list");
+			return -1;
+		}else if(g.getPlayerCopy(position).getStatus()==0){//If the player is dead, find the next one
+			System.out.println(g.getPlayerCopy(position).getName()+ " is Dead");
+			g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
+			position++;
+			nextPlayer(position);
+		}else{
+			System.out.println(g.getPlayerCopy(position).getName()+ " is alive");
+			return position;
+		}
+		return position;
+	}
+	
+	private void removePlayerButton(int target){
+		dp.removePlayerButton(target);
+		np.removePlayerButton(target);
 	}
 	/**
 	 * This class sets the message for the detective during the night
@@ -243,14 +247,14 @@ public class GameController implements ActionListener{
 			switchDay(); break;
 		case "Continue_DayPanel":
 			if(target!=-1){//Makes sure a target has been chosen for the day 
-				dayLynch();//Lynches the target of the day
+				g.dayCycle(target);
+				removePlayerButton(target);
 				findNextPlayer();//Finds the first person in the list of players that is alive and displays his/her night screen
 			} break;
 		case "Continue_CheckPlayerPanel":
 			switchNight(); break;
 		case "Continue_NightPanel":
 			g.setPlayerTarget(position, target);//Set the target of the player who just finished his/her night round
-			position++;//Moves to the net player in the list and checks if that player is dead or alive
 			findNextPlayer(); break;
 		case "Continue_StoryPanel":
 			switchDay(); break;

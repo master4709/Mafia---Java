@@ -35,6 +35,7 @@ public class Controller implements ActionListener{
 	}
 	
 	private void setBounds(){
+		//When changing theses must also change the values in setFont() in NightPanel
 		int width = 480;
 		int height = 852;
 		frame.setBounds(550, 20, width, height);
@@ -55,7 +56,7 @@ public class Controller implements ActionListener{
 			break;
 		case"Continue_RoleSelectionPanel":
 			SetUp up = new SetUp(suc.getPlayerNames(),suc.getRoles());
-			gc.start(up.getPlayerInfo(), up.getLynchTarget());
+			gc.start(up.getPlayerInfo(), up.getLynchTarget(),false);
 			break;
 		case"Testing_MainPanel":
 			test();
@@ -71,6 +72,6 @@ public class Controller implements ActionListener{
 				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Town","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
 		SetUp up = new SetUp(names,roles);
-		gc.start(up.getPlayerInfo(), up.getLynchTarget());
+		gc.start(up.getPlayerInfo(), up.getLynchTarget(),true);
 	}
 }

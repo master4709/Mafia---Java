@@ -2,9 +2,10 @@ package displayGame;
 
 import myJStuff.*;
 import playerInfo.Player;
-import logic.*;
 
 import java.awt.event.ActionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,32 +34,26 @@ public class NightPanel extends MyPanel{
 	private JButton btnContinue;
 	//jButton that is only visible to detective. when pressed reveals 
 	private JButton btnDetective;
-	//List of all of the players
-	private List<String> playerNames;
 	//List of all of the buttons representing each of the players
 	private List<JButton> playerButtonList = new ArrayList<>();
 	//List of all of the Mafia Members
-	private List<String> mafiaMember = new ArrayList<>();
 
 	/**
 	 * Create the panel and all of the sub panels
 	 * Displays all of the needed buttons and labels etc...
 	 * @param playerInfo
 	 */
-	public NightPanel(ActionListener packageListener, List<String> playerNames, List<String> mafiaMember) {
+	public NightPanel(ActionListener packageListener, List<String> mafiaMember) {
 		this.packageListener = packageListener;
-		this.playerNames = playerNames;
-		this.mafiaMember = mafiaMember;
 		contentPane.setName("Night Panel");
 		//Create all of the needed buttons and labels and adds them to the panel
 		displaySouth();
-		displayNorth();
-		displayCenter();
+		displayNorth(mafiaMember);
 	}
 	/**
 	 * Creates the name, role, info, and mafia labels and adds them to the north Panel
 	 */
-	private void displayNorth(){
+	private void displayNorth(List<String> mafiaMembers){
 		String text = "";
 		lblName = new MyLabel(text, textColor, titleFont);
 		north.add(lblName, "flowy,cell 0 0");
@@ -68,20 +63,24 @@ public class NightPanel extends MyPanel{
 		north.add(lblInfo, "cell 0 2");
 		lblGoal = new MyLabel(text, textColor, infoFont);
 		north.add(lblGoal, "cell 0 3");
-		lblMafia= new MyLabel(text, textColor, infoFont);
+		lblMafia= new MyLabel("Mafia Members: "+mafiaMembers, textColor, infoFont);
 		north.add(lblMafia, "cell 0 4");
+		lblMafia.setVisible(false);
+		setFontMafia("Mafia Members: "+mafiaMembers);
 	}
 	
 	/**
 	 * This displays all of the possible buttons that each player can press when it is his/ her turn
 	 * Each button represents a player
 	 */
-	private void displayCenter(){
+	public void displayCenter(List<Player> playerInfo){
 		//The y position 
 		int k=0;
 		//Loops through the list of players adn create a button for each player
-		for(int i =0;i<playerNames.size();i++){
-				displayPlayerButton(i);
+		for(Player p: playerInfo){
+			if(p.getStatus()!=0){
+				displayPlayerButton(p);
+			}
 			//Add one to the y position
 			k = k+1;
 		}
@@ -109,12 +108,12 @@ public class NightPanel extends MyPanel{
 	 * Creates a button with the text value of a player depending on i
 	 * @param i
 	 */
-	private void displayPlayerButton(int i){
+	private void displayPlayerButton(Player p){
 		//Create string of the players name
-		String text = playerNames.get(i);
+		String text = p.getName();
 		JButton btnPlayer = new MyButton(text, textFont);//Create a new button with passing the String text
-		btnPlayer.setName("Night_"+Integer.toString(i));//Sets the name of the button to the index value of the player
-		center.add(btnPlayer, "cell 0 "+i+",growx");//Add the button to the center panel
+		btnPlayer.setName("Night_"+Integer.toString(p.getPosition()));//Sets the name of the button to the index value of the player
+		center.add(btnPlayer, "cell 0 "+p.getPosition()+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
@@ -163,19 +162,68 @@ public class NightPanel extends MyPanel{
 		lblInfo.setText(player.getRoleInfo());
 		//Clears Detective Label
 		lblDetective.setText("");
-		//Clears the Mafia Label
-		lblMafia.setText("");
-		//Hides the Detective Button
-		btnDetective.setVisible(false);
-		
-		
 		//If The current player is the detective display the button to check if the target is part of the Mafia
 		if(player.getRole().contains("Detective")){
 			btnDetective.setVisible(true);
+		}else{
+			btnDetective.setVisible(false);
 		}
 		//if the player is part of the Mafia, display a list of all Mafia Members to the screen
 		if(player.getRole().contains("Mafia")){
-			lblMafia.setText("Mafia Members: "+ mafiaMember);
+			lblMafia.setVisible(true);
+		}else{
+			lblMafia.setVisible(false);
 		}
+		
+		setFontPlayer(player.getName());
+		setFontInfo(player.getRoleInfo());
+	}
+	
+	public void setFontPlayer(String name){
+		int font = 10;
+		
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+		int textWidth = (int)(new MyFont(font).getStringBounds(name, frc).getWidth());
+		int textHeight = (int)(new MyFont(font).getStringBounds(name, frc).getHeight());
+		
+		int screenWidth = 480;
+		int screenHeight = 850;
+		while(textWidth<screenWidth-25 && textHeight<screenHeight/11){
+			font++;
+			textWidth = (int)(new MyFont(font).getStringBounds(name, frc).getWidth());
+			textHeight = (int)(new MyFont(font).getStringBounds(name, frc).getHeight());
+		}
+		lblName.setFont(new MyFont(font));
+	}
+	
+	public void setFontInfo(String info){
+		int font = 10;
+		
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+		int textWidth = (int)(new MyFont(font).getStringBounds(info, frc).getWidth());
+		
+		int screenWidth = 480;
+		while(textWidth<screenWidth-50 && font < 25){
+			font++;
+			textWidth = (int)(new MyFont(font).getStringBounds(info, frc).getWidth());
+		}
+		lblInfo.setFont(new MyFont(font));
+	}
+	
+	public void setFontMafia(String members){
+		int font = 10;
+		
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+		int textWidth = (int)(new MyFont(font).getStringBounds(members, frc).getWidth());
+		
+		int screenWidth = 480;
+		while(textWidth<screenWidth-50 && font < 20){
+			font++;
+			textWidth = (int)(new MyFont(font).getStringBounds(members, frc).getWidth());
+		}
+		lblMafia.setFont(new MyFont(font));
 	}
 }

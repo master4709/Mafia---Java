@@ -2,6 +2,7 @@
 package displayGame;
 
 import myJStuff.*;
+import playerInfo.Player;
 
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -22,20 +23,15 @@ public class ViewAllPlayersPanel extends MyPanel{
 	private JLabel lblDescription2;
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
-	//Stores all of the data of the players
-	//Does not change the date stored in it EVER
-	private List<String> playerNames;
 	/**
 	 * Create the panel.
 	 */
-	public ViewAllPlayersPanel(ActionListener actionListener, List<String> playerNames) {
-		this.playerNames = playerNames;
+	public ViewAllPlayersPanel(ActionListener actionListener) {
 		this.packageListener = actionListener;
 		
 		contentPane.setName("ViewAllPlayers Panel");
 		displayNorth();
 		displaySouth();
-		displayCenter();
 	}
 	/**
 	 * Displays that it is Day Time and rules of the day
@@ -67,10 +63,10 @@ public class ViewAllPlayersPanel extends MyPanel{
 	/**
 	 * Creates all of the buttons representing each player that is alive
 	 */
-	private void displayCenter(){
+	public void displayCenter(List<Player> playerInfo){
 		//Loops through the list of players adn create a button for each player
-		for(int i =0;i<playerNames.size();i++){
-			displayPlayerButton(i);
+		for(Player p: playerInfo){
+			displayPlayerButton(p);
 		}
 	}
 
@@ -78,13 +74,13 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 * Creates a button for a player when called in displayCenter()
 	 * @param i - 
 	 */
-	private void displayPlayerButton(int i){
+	private void displayPlayerButton(Player p){
 		//Create string of the players name
-		String text = playerNames.get(i);
+		String text = p.getName();
 		//Create a new button with passing the String text
 		JButton btnPlayer = new MyButton(text);
-		btnPlayer.setName("Select_"+Integer.toString(i));
-		String position = "cell 0 "+i+",growx";
+		btnPlayer.setName("Select_"+Integer.toString(p.getPosition()));
+		String position = "cell 0 "+p.getPosition()+",growx";
 		center.add(btnPlayer, position); 
 		btnPlayer.addActionListener(packageListener);//Add action listener
 	}

@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import playerInfo.Player;
@@ -24,7 +25,7 @@ public class Game{
 	//List of each player (class) and his/her info (name, role, target, position, etc)
 	private List<Player> playerInfo = new ArrayList<>();
 	
-	private List<String> names = new ArrayList<>();
+	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Mafia- Godfather","Doctor"));
 	
 	//Index value for the target of the Lyncher
 	private int lynchTarget;
@@ -40,7 +41,6 @@ public class Game{
 		this.lynchTarget = lynchTarget;
 		this.playerInfo = playerInfo;
 		mafiaMembers();
-		playerNames();
 	}
 	
 	/**
@@ -52,14 +52,6 @@ public class Game{
 			if(getPlayer(i).getRole().contains("Mafia")){
 				mafiaMembers.add(getPlayer(i).getName());
 			}
-		}
-	}
-	/**
-	 * Creates a list of all of the player names
-	 */
-	private void playerNames(){
-		for(Player player: playerInfo){
-			names.add(player.getName());
 		}
 	}
 	
@@ -83,6 +75,20 @@ public class Game{
 	 */
 	public Integer nightAction(){
 		System.out.println("Do night logic");
+		
+		for(String s: nightPlayer){
+			for(Player p: playerInfo){
+				if(p.getRole().contains(s)){
+					if(p.getTarget()!=-1){
+						System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).getName());
+						setPlayerStatus(p.getTarget(),p.doAction(playerInfo.get(p.getTarget())));
+					}else{
+						System.out.println(p.toString() +" is NOT doing action as player");
+					}
+					break;
+				}
+			}
+		}
 		
 		int target = resetStatus();
 		return target;
@@ -153,9 +159,5 @@ public class Game{
 	
 	public Player getPlayerCopy(int i){
 		return playerInfo.get(i);
-	}
-	
-	public List<String> getPlayerNames(){
-		return names;
 	}
 }

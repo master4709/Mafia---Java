@@ -81,7 +81,9 @@ public class DayPanel extends MyPanel{
 		//Loop through the list of players
 		//Loops through the list of players adn create a button for each player
 		for(Player p: playerInfo){
-			displayPlayerButton(p);
+			if(p.getStatus()!=0){
+				displayPlayerButton(p);
+			}
 		}
 	}
 	/**

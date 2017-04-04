@@ -2,14 +2,13 @@
 package displayGame;
 
 import myJStuff.*;
-import logic.*;
+import playerInfo.Player;
 
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 /**
  *
  *
@@ -66,14 +65,5 @@ public class ViewPlayerPanel extends MyPanel{
 		role.setText(player.getRole());
 		name.setText(player.getName());
 		roleInfo.setText(player.getRoleInfo());
-	}
-	
-	
-	/**
-	 * Returns the contentPane with everything added to it
-	 * @return contentPane
-	 */
-	public JPanel getContentPane(){
-		return contentPane;
 	}
 }

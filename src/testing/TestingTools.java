@@ -8,7 +8,7 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
-import logic.Player;
+import playerInfo.Player;
 import logic.Role;
 
 /**

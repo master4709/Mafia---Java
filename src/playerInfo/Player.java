@@ -34,19 +34,19 @@ public abstract class Player {
 	/**
 	 * Constants for status
 	 */
-	public final int DEAD = 0;
-	public final int ALIVE = 1;
-	public final int TARGETED = 2;
-	public final int HEALED = 3;
-	public final int PROTECTED = 4;
-	public final int STOPPED = 5;
-	public final int TEAMTOWN = 6;
-	public final int TEAMMAFIA  = 7;
+	protected final int DEAD = 0;
+	protected final int ALIVE = 1;
+	protected final int TARGETED = 2;
+	protected final int HEALED = 3;
+	protected final int PROTECTED = 4;
+	protected final int STOPPED = 5;
+	protected final int TEAMTOWN = 6;
+	protected final int TEAMMAFIA  = 7;
 	
 	/**
 	 * on default, protected, or healed
 	 */
-	public final int ACTIVE = 1 | 2 | 3 | 4;
+	protected final int ACTIVE = 1 | 2 | 3 | 4;
 	
 	/**
 	 * Initializes default values for Player attributes
@@ -108,6 +108,10 @@ public abstract class Player {
 	
 	public void setLynched(boolean lynched){
 		this.isLynched = lynched;
+	}
+	
+	public void setStatus(int status){
+		this.status = status;
 	}
 		
 	public String getName(){

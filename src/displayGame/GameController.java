@@ -1,6 +1,7 @@
 package displayGame;
 
 import logic.*;
+import playerInfo.Player;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -170,18 +171,17 @@ public class GameController implements ActionListener{
 		int target = g.nightAction();
 		//If there was a target this night
 		if(target!=-1){
-			boolean dead;
 			String name = g.getPlayerCopy(target).getName();
 			//If the player was killed that night remove the player button from both the Day and Night Panel
-			if(!g.getPlayerCopy(target).isHealed()){
+			if(g.getPlayerCopy(target).getStatus()==2){
 				dp.removePlayerButton(target);
 				np.removePlayerButton(target);
-				dead = true;
-			}else{//Else
-				g.setHealed(target,false);
-				dead = false;
+				g.setPlayerStatus(target, 0);
+				switchStory(name,true);
+			}else if(g.getPlayerCopy(target).getStatus()==3){//Else
+				g.setPlayerStatus(target, 1);
+				switchStory(name,false);
 			}
-			switchStory(name,dead);
 		}else{//Skip the story panel and go to the next day.
 			switchDay();
 		}
@@ -197,7 +197,7 @@ public class GameController implements ActionListener{
 		//If the position has not gone out of bounds
 		if(position<g.getPlayerInfo().size()){
 			//If the player is dead, find the next one
-			if(g.getPlayerCopy(position).isDead()){
+			if(g.getPlayerCopy(position).getStatus()==0){
 				g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
 				position++;
 				findNextPlayer();
@@ -222,7 +222,7 @@ public class GameController implements ActionListener{
 	private void detective(){
 		//If the target of the detective player is part of the Mafia
 		//*Note* the Mafia GodFather is hidden from the detective
-		if(g.getPlayerCopy(target).isMafia()){
+		if(g.getPlayerCopy(target).getRole().contains("Mafia:")){
 			np.setDetectiveMessage("Part of the Mafia");
 		}else{
 			np.setDetectiveMessage("Not part of the Mafia");

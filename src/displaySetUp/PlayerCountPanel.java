@@ -1,17 +1,15 @@
 package displaySetUp;
 
-import java.awt.event.ActionEvent;
+import myJStuff.*;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-import myJStuff.MyButton;
-import myJStuff.MyLabel;
-import myJStuff.MyPanel;
+
 /**
  * This class creates the Panel for selecting how many
  * players you want in the game. This precedes the
@@ -20,16 +18,13 @@ import myJStuff.MyPanel;
  * 
  *
  */
-public class PlayerCountPanel extends MyPanel implements ActionListener{
+public class PlayerCountPanel extends MyPanel{
 	
 	//Labels for the north panel
 	private JLabel lblText;
 	private JLabel lblText2;
 	
 	private JButton btnContinue;
-	
-	//Default player total is 5
-	private int playerTotal = 5;
 	
 	private List<JButton> buttonList = new ArrayList<>();
 
@@ -39,6 +34,7 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	 */
 	public PlayerCountPanel(ActionListener packageListener) {
 		this.packageListener = packageListener;
+		contentPane.setName("PlayerCount Panel");
 		displayNorth();
 		displaySouth();
 		displayCenter();
@@ -54,7 +50,7 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 
 	private void displayCenter(){
 		//Loops to create a button for each amount of players aloud 
-		for(int i=5;i<=10;i++){
+		for(int i=5;i<=12;i++){
 			//Create each button at location i
 			displayPlayerButton(i);
 		}
@@ -62,7 +58,7 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	private void displaySouth(){
 		//Create the button and pass it values for text, foreground and background color, and font
 		btnContinue = new MyButton("Continue");
-		btnContinue.setName("Continue_PlayerCountPanel");
+		btnContinue.setName("Continue_PlayerCount");
 		//Add the button to the south panel, button will fill width of screen 
 		south.add(btnContinue, "cell 0 0,growx");
 		//Add action listener for when the button is pressed
@@ -78,55 +74,18 @@ public class PlayerCountPanel extends MyPanel implements ActionListener{
 	private void displayPlayerButton(int i){
 		JButton btnPlayer = new MyButton(Integer.toString(i));
 		center.add(btnPlayer, "cell 0 "+i+",growx");
-		btnPlayer.setName(Integer.toString(i));
-		btnPlayer.addActionListener(this);
+		btnPlayer.setName("PlayerCount "+Integer.toString(i));
+		btnPlayer.addActionListener(packageListener);
 		buttonList.add(btnPlayer);
-		
 	}
 	
-	public Integer getPlayerTotal(){
-		return playerTotal;
-	}
-	
-	public JPanel getContentPane(){
-		return contentPane;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton source = (JButton)e.getSource();
-		String name = source.getName();
-		System.out.println(name);
-		if(playerTotal!=-1){
-			buttonList.get(playerTotal-5).setBackground(btnBackgroundColor);
-		}
-		//Needs the other switch statements.
-		switch(name){
-		case "5":
-			playerTotal = 5;
-			buttonList.get(0).setBackground(selectColor);
-			break;
-		case "6":
-			playerTotal = 6;
-			buttonList.get(1).setBackground(selectColor);
-			break;
-		case "7":
-			playerTotal = 7;
-			buttonList.get(2).setBackground(selectColor);
-			break;
-		case "8":
-			playerTotal = 8;
-			buttonList.get(3).setBackground(selectColor);
-			break;
-		case "9":
-			playerTotal = 9;
-			buttonList.get(4).setBackground(selectColor);
-			break;
-		case "10":
-			playerTotal = 10;
-			buttonList.get(5).setBackground(selectColor);
-			break;
-		
+	public void changeButtonSelected(int position){
+		for(JButton btn: buttonList){
+			if(btn.getName().contains(Integer.toString(position))){
+				btn.setBackground(Colors.select);
+			}else{
+				btn.setBackground(Colors.defaultButtonBackgroundColor);
+			}
 		}
 	}
 }

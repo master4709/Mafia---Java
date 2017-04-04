@@ -3,6 +3,8 @@ package logic;
 import java.util.ArrayList;
 import java.util.List;
 
+import playerInfo.Player;
+
 /**Game Class
 	*This class runs the main logic and loop for the game
 	*This class uses the Players class to assign values for the amount of players and their names vis Player Input
@@ -14,7 +16,7 @@ import java.util.List;
 	*
 */
 
-public class Game extends Action{
+public class Game{
 	
 	//List of all of the Mafia members to be presented to each one every night
 	private List<String> mafiaMembers = new ArrayList<>();
@@ -66,11 +68,11 @@ public class Game extends Action{
 	 */
 	public void dayCycle(int target){
 		if(target!=-1){
-			System.out.println(playerInfo.get(target).getName()+" has been lynched");
-			playerInfo.get(target).setIsDead(true);//Sets the target of the lynching to dead, So they can not be used or targeted again
-			playerInfo.get(target).setIsLynched(true);
+			System.out.println(getPlayer(target).getName()+" has been lynched");
+			setPlayerStatus(target,0);//Sets status of player to DEAD
+			getPlayer(target).setLynched(true);
 			if(playerInfo.get(target).getRole().contains("Hitman")){
-				newHitman(target);
+				//newHitman(target);
 			}
 		}
 	}
@@ -81,9 +83,7 @@ public class Game extends Action{
 	 */
 	public Integer nightAction(){
 		System.out.println("Do night logic");
-		setPlayerInfoAction(playerInfo);
-		nightActionLoop();
-		setPlayerInfo(getPlayerInfo());
+		
 		int target = resetStatus();
 		return target;
 	}
@@ -96,58 +96,19 @@ public class Game extends Action{
 	private Integer resetStatus(){
 		int target = -1;
 		for(int i=0;i<playerInfo.size();i++){
-			//If the player has been targeted and was NOT healed
-			if(getPlayer(i).isTargeted() && !getPlayer(i).isHealed()){
-				//Call the story panel with a death story
+			//If the player has been targeted that night to be killed
+			if(getPlayer(i).getStatus()==2){
 				System.out.println(getPlayer(i).getName()+" is dead");
-				getPlayer(i).setIsDead(true);
-				resetPlayer(i);
 				target = i;
-				//If the hitman is dead, changes the bar man to the new hitman
-				if(getPlayer(i).getRole().contains("Hitman")){
-					newHitman(i);
-				}
-			}else if(getPlayer(i).isTargeted()&& getPlayer(i).isHealed()){
-				//Call the story panel with a survived story
+			}else if(getPlayer(i).getStatus()==3){
 				System.out.println(getPlayer(i).getName()+" is saved");
-				resetPlayer(i);
-				getPlayer(i).setIsHealed(true);
 				target = i;
-			}else{
-				resetPlayer(i);
+			}else if(getPlayer(i).getStatus()!=0){
+				setPlayerStatus(i,1);
 			}
 			
 		}
 		return target;
-	}
-	/**
-	 * Resets all of the status for the player
-	 * @param i
-	 */
-	private void resetPlayer(int i){
-		getPlayer(i).setIsTargeted(false);
-		getPlayer(i).setIsHealed(false);
-		getPlayer(i).setIsProtected(false);
-		getPlayer(i).setInBar(false);//Removes any player that may have been in the bar out
-		getPlayer(i).setPlayerTarget(-1);//Resets the target for each player
-	}
-	/**
-	 * If the hitman has been killed, the barman will become the new hitman
-	 * @param k - index value of the location of hitman
-	 */
-	private void newHitman(int k){
-		//Loop through the list of players
-		for(int i=0;i<playerInfo.size();i++){
-			//Finds the barman
-			if(getPlayer(i).getRole().contains("Barman")){
-				//Sets the Barman to the role and role inforamtion of the hitman
-				Player hitman = playerInfo.get(k);
-				getPlayer(i).setRole(hitman.getRole());
-				getPlayer(i).setRoleInfo(hitman.getRoleInfo());
-			}
-		}
-		//Sets the dead Mafia Hitman's role to dead
-		playerInfo.get(k).setRole("Dead Mafia");
 	}
 
 	/**
@@ -156,22 +117,13 @@ public class Game extends Action{
 	 * @param target
 	 */
 	public void setPlayerTarget(int position, int target){
-		playerInfo.get(position).setPlayerTarget(target);
+		playerInfo.get(position).setTarget(target);
 	}
-	/**
-	 * Sets the boolean healed for the player
-	 * @param i, b
-	 */
-	public void setHealed(int i, boolean b){
-		getPlayer(i).setIsHealed(b);
+
+	public void setPlayerStatus(int position, int status){
+		playerInfo.get(position).setStatus(status);
 	}
-	/**
-	 * Sets the list of Players to the param
-	 * @param playerInfo
-	 */
-	public void setPlayerInfo(List<Player> playerInfo){
-		this.playerInfo = playerInfo;
-	}
+
 	/**
 	 * Returns a list of Mafia Members
 	 * This is used for printing in the NightPanel
@@ -200,8 +152,7 @@ public class Game extends Action{
 	}
 	
 	public Player getPlayerCopy(int i){
-		Player player = new Player(playerInfo.get(i));
-		return player;
+		return playerInfo.get(i);
 	}
 	
 	public List<String> getPlayerNames(){

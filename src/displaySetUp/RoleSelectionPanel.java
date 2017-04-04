@@ -1,10 +1,7 @@
 package displaySetUp;
 
 import logic.Role;
-import myJStuff.Colors;
-import myJStuff.MyButton;
-import myJStuff.MyLabel;
-import net.miginfocom.swing.MigLayout;
+import myJStuff.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -21,16 +18,14 @@ import java.util.List;
  * @author Christilyn Arjona, 30033435
  *
  */
-public class RoleSelectionPanel {
+public class RoleSelectionPanel extends MyPanel{
 
     private JPanel contentPane;
     private JLabel playersLeft;
-    private JButton continueButton;
+    private JButton btnContinue;
     private JButton assignTownies;
     
     private ActionListener globalListener;
-    
-    private List<String> playerNames;
     private ArrayList<String> rolesSelected;
     private ArrayList<Role> availableRoles;
     private ArrayList<JButton> roleButtons;
@@ -40,22 +35,24 @@ public class RoleSelectionPanel {
      * Constructor. Specifies a list of player names
      * @param playerNames A list of type string containing names of each player
      */
-    public RoleSelectionPanel(ActionListener globalListener, List<String> playerNames) {
+    public RoleSelectionPanel(ActionListener packageListener, ActionListener globalListener) {
+    	this.packageListener = packageListener;
+    	this.globalListener = globalListener;
+    	contentPane.setName("RoleSelection Panel");
+    	
 
-        this.playerNames = new ArrayList<>(playerNames);
-        System.out.println("Total Players: " + playerNames.size());
+        //System.out.println("Total Players: " + playerNames.size());
 
-        rolesSelected = new ArrayList<>();
-        availableRoles = new ArrayList<>(Arrays.asList(Role.values()));
-        contentPane = new JPanel(new MigLayout( "",
-                "[][grow, grow][]",
-                ""));
-        playersLeft = new MyLabel(String.valueOf(this.playerNames.size()), Colors.black, 20);
-        continueButton = new MyButton("Continue ", Colors.white, Colors.black, 15);
-        assignTownies = new MyButton("Assign the rest as Townie", Colors.white, Colors.grey, 15);
-        roleButtons = new ArrayList<>();
+        //rolesSelected = new ArrayList<>();
+        //availableRoles = new ArrayList<>(Arrays.asList(Role.values()));
+        //playersLeft = new MyLabel(String.valueOf(this.playerNames.size()), Colors.black, 20);
+        //continueButton = new MyButton("Continue ", Colors.white, Colors.black, 15);
+        //assignTownies = new MyButton("Assign the rest as Townie", Colors.white, Colors.grey, 15);
+        //roleButtons = new ArrayList<>();
 
-        initialize();
+        //initialize();
+    	
+    	displaySouth();
 
     }
 
@@ -81,21 +78,21 @@ public class RoleSelectionPanel {
         createRoleButtons();
 
         JButton resetBtn = new MyButton("Reset", Colors.white, Colors.grey, 15);
-        addButtonListener(resetBtn);
         contentPane.add(resetBtn, "split 2, span, pushx, grow");
-
-        addButtonListener(assignTownies);
+        
         contentPane.add(assignTownies, "span, pushx, grow, wrap");
 
         JPanel n = new JPanel();
         n.setBackground(Colors.black);
         contentPane.add(n, "span 1, grow, pushy, wrap push");
-
-        continueButton.setSize(new Dimension(200, 200));
-        contentPane.add(continueButton, "span, pushx, pushy, grow");
-        continueButton.setVisible(false);
-        continueButton.addActionListener(globalListener);
-        continueButton.setName("Continue_RoleSelectionPanel");
+        
+    }
+    
+    private void displaySouth(){
+    	btnContinue = new MyButton("Continue",buttonFont);
+    	south.add(btnContinue,"cell 0 0,alignx center");
+    	btnContinue.setName("Continue_RoleSelection");
+    	btnContinue.addActionListener(globalListener);
     }
 
     private void createRoleButtons() {
@@ -103,20 +100,11 @@ public class RoleSelectionPanel {
         for (int count = 0; count < 10; count++) {
             if (!availableRoles.get(count).equals(Role.TOWNIE)) {
                 JButton roleBtn = new MyButton(availableRoles.get(count).getRoleID(), Colors.white, Colors.grey, 30);
-                addButtonListener(roleBtn);
                 roleButtons.add(roleBtn);
                 contentPane.add(roleBtn, "span, pushx, grow, wrap");
             }
         }
 
-    }
-    
-    private void addButtonListener(JButton button) {
-        SetUpController.getInstance().addListener(button);
-    }
-    
-    public JPanel getContentPane() {
-        return contentPane;
     }
 
     public void clearRolesSelected() {
@@ -129,10 +117,6 @@ public class RoleSelectionPanel {
     
     public JButton getAssignTownies() {
         return assignTownies;
-    }
-
-    public JButton getContinueButton() {
-        return continueButton;
     }
 
     public JLabel getPlayersLeft() {

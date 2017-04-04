@@ -124,4 +124,8 @@ public abstract class MyPanel {
 		   System.out.println("Not Found");
 		}
 	}
+	
+	public JPanel getContentPane(){
+		return contentPane;
+	}
 }

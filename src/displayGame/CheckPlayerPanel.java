@@ -27,6 +27,8 @@ public class CheckPlayerPanel extends MyPanel{
 	 */
 	public CheckPlayerPanel(ActionListener packageListener) {
 		this.packageListener = packageListener;
+		
+		contentPane.setName("CheckPlayer Panel");
 		//Displays all of the JLabels, JButtons etc. to all of the JPannels
 		displayNorth();
 		displaySouth();
@@ -55,7 +57,6 @@ public class CheckPlayerPanel extends MyPanel{
 		btnYes.setName("Continue_CheckPlayerPanel");
 		
 	}
-
 	/**
 	 * Sets the lblPlayer text to the current player
 	 * @param text
@@ -63,11 +64,5 @@ public class CheckPlayerPanel extends MyPanel{
 	public void setPlayerName(String text){
 		lblPlayer.setText(text);
 	}
-	/**
-	 * Get the content pane
-	 * @return contentPane
-	 */
-	public JPanel getContentPane(){
-		return contentPane;
-	}
+
 }

@@ -1,8 +1,5 @@
 package displayMain;
 
-import displaySetUp.SetUpController;
-import testing.GameTest;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -31,7 +28,6 @@ public class MainController implements ActionListener {
 	private MainPanel mp;
 	private RulePanel rp;
 	private AboutPanel ap;
-	private SetUpController suc;
 	
 	//All of the possible panels to be displayed on the frame
 	private JPanel panelMain;
@@ -73,15 +69,6 @@ public class MainController implements ActionListener {
 	}
 	
 	/**
-	 * This method is for testing. It will call the GameTest class. 
-	 */
-	public void switchTest(){
-		frame.getContentPane().setVisible(false);
-		frame.dispose();
-		GameTest.run();
-	}
-	
-	/**
 	 * Switches the frame to the passed JPanel
 	 * Sets current content pane to invisible
 	 * Sets the frame to the new JPanel
@@ -120,7 +107,7 @@ public class MainController implements ActionListener {
 			switchPanel(panelAbout); 
 			break;
 		case "Test_MainPanel":
-			switchTest();
+			//switchTest();
 		default:
 			break;
 		}

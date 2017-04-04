@@ -1,10 +1,10 @@
 package displaySetUp;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import myJStuff.Colors;
@@ -21,18 +21,15 @@ import myJStuff.MyTextField;
  */
 public class PlayerNamePanel extends MyPanel{
 	
-	private int numOfPlayers;
-	
 	//
     private ArrayList<JTextField> textFields = new ArrayList<>();
 	
 	MyLabel enterPlayers = new MyLabel("Enter Player Names", 40);
     JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 25);
 
-	public PlayerNamePanel(int num) {
-		this.numOfPlayers = num;
+	public PlayerNamePanel(ActionListener packageListener) {
+		this.packageListener = packageListener;
 		displayNorth();
-		displayCenter();
 		displaySouth();
 	}
 	
@@ -40,10 +37,10 @@ public class PlayerNamePanel extends MyPanel{
 		north.add(enterPlayers);
 	}
 
-	private void displayCenter(){
-        for (int count = 0; count < numOfPlayers; count++) {
+	public void displayCenter(int playerTotal){
+        for (int count = 0; count < playerTotal; count++) {
             // this sets a default text in the textField
-            MyTextField playerNameInput = new MyTextField("Player " + String.valueOf(count+1), 0);
+            JTextField playerNameInput = new MyTextField("Player " + String.valueOf(count+1), 0);
             center.add(playerNameInput, "cell 0 " + count + " ,growx");
             textFields.add(playerNameInput);
         }
@@ -51,34 +48,22 @@ public class PlayerNamePanel extends MyPanel{
 	}
 	
 	private void displaySouth(){
-		south.add(continueButton, "cell 0 2,growx");
+		south.add(continueButton, "cell 0 0,growx");
         continueButton.addActionListener(packageListener);
-        	/*e -> {
-            List<String> name = new ArrayList<>();
-            for (int i = 0; i < textFields.size();i++) {
-            	String text = textFields.get(i).getText();
-                if(!text.isEmpty()){
-                	name.add(text);
-                }
-            }
-            if(name.size() <numOfPlayers) name = autoPopulate(name);
-            System.out.println(name);
-		//	SetUpController.getInstance().switchToRoleSelection(name);
-		 
-        });
-        */
+        continueButton.setName("Continue_PlayerName");
 	}
 	
-	//If there are not enough names, this method automatically
-	//Populates the names
-	private List<String> autoPopulate(List<String> name) {
-		for(int i = name.size() + 1; i < numOfPlayers + 1; i++){
-			name.add("player_" + i);
+	/**
+	 * Returns a List of Strings of all of the player names
+	 * @return
+	 */
+	public List<String> getPlayerNames(){
+		List<String> names = new ArrayList<>();
+		
+		for(JTextField f: textFields){
+			names.add(f.getText());
 		}
-		return name;
+		return names;
 	}
 
-	public JPanel getContentPane(){
-		return contentPane;
-	}
 }

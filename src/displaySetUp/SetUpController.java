@@ -1,14 +1,8 @@
 package displaySetUp;
 
-import displayGame.GameController;
-import logic.Player;
-import logic.SetUp;
-import myJStuff.Colors;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,16 +11,21 @@ import java.util.List;
  *
  */
 public class SetUpController implements ActionListener{
-	private SetUp setUp;
-
-    private PlayerCountPanel pcp;
+	
+	private ActionListener globalListener;
+	
+	private JFrame frame;
+	
+	private PlayerCountPanel pcp;
     private PlayerNamePanel pnp;
     private RoleSelectionPanel rsp;
-	private ActionListener globalListener;
-	private JFrame frame;
+    
 	private JPanel panelCount;
-
-	private List<String> playerNames;
+	private JPanel panelName;
+	private JPanel panelRole;
+	
+	//Current amount of players selected on the panelCount
+	private int playerTotal;
 
     /***
      * Initializes the setup frame
@@ -34,67 +33,74 @@ public class SetUpController implements ActionListener{
      * @param frame frame
      */
 	public SetUpController(JFrame frame, ActionListener globalListener){
-		
 		this.globalListener = globalListener;
 		this.frame = frame;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.setResizable(false);
-		this.frame.setVisible(true);
-		
-		pcp = new PlayerCountPanel(this);
-
-		panelCount = pcp.getContentPane();
-		playerNames = new ArrayList<>();
-
 	}
 
     /***
      * Create panel for selecting number of total players
-     * @see #switchPlayerTotal()
+     * @see 
      */
 	public void start(){
-		switchPlayerTotal();
-	}
-
-    /***
-     * Switch frame content to PlayerCountPanel created in start()
-     * @see #start()
-     */
-	public void switchPlayerTotal(){
-		frame.getContentPane().setVisible(false);
-		frame.setContentPane(panelCount);
-		panelCount.setVisible(true);
-	}
-
-    /***
-     * Create a panel for inputting the name of players and display that panel to existing frame
-     * @param playerTotal initial number of players
-     */
-	public void switchToPlayerName(int playerTotal) {
-		frame.getContentPane().setVisible(false);
-        pnp = new PlayerNamePanel(playerTotal);
-		frame.setContentPane(pnp.getContentPane());
-        pnp.getContentPane().setVisible(true);
+		pcp = new PlayerCountPanel(this);
+		pnp = new PlayerNamePanel(this);
+		rsp = new RoleSelectionPanel(this,globalListener);
+		panelCount = pcp.getContentPane();
+		panelName = pnp.getContentPane();
+		panelRole = rsp.getContentPane();
+		
+		playerTotal = 5;
+		
+		switchPanel(panelCount);
+		
 	}
 	
-	public List<Player> getPlayerInfo(){
-		return setUp.getPlayerInfo();
-	}
-	
-	public int getLynchTarget(){
-		return setUp.getLynchTarget();
+	public void switchPanel(JPanel panel){
+		System.out.println(panel.getName());
+		frame.getContentPane().setVisible(false);
+		frame.setContentPane(panel);
+		frame.getContentPane().setVisible(true);
 	}
 
-    /***
-     * Create a panel for selecting roles to include in the game and display that panel to existing frame
-     * @param names A list of type string for the player names
-     */
-	public void switchToRoleSelection(List<String> names) {
-		playerNames = names;
-		frame.getContentPane().setVisible(false);
-		frame.setContentPane(rsp.getContentPane());
-		rsp.getContentPane().setVisible(true);
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton source = (JButton)e.getSource();
+		String name = source.getName();
+		
+		switch(name){
+		case"Continue_PlayerCount":
+			//Creates a list of player input fields for the amount of players selected
+			pnp.displayCenter(playerTotal);
+			switchPanel(panelName);
+			break;
+		case"Continue_PlayerName":
+			System.out.println(pnp.getPlayerNames());
+			switchPanel(panelRole);
+			break;
+		default:
+			//If the button that was pressed was in the PlayerCountPanel
+			if(name.contains("PlayerCount ")){
+				playerTotal = Integer.parseInt(name.substring(12,name.length()));//Receive the int value of the button that was pressed
+				pcp.changeButtonSelected(playerTotal);//Sets the pressed button to the selected color and all the other buttons to default colors
+			}
+			break;
+		}
 	}
+	
+	public List<String> getPlayerNames(){
+		return pnp.getPlayerNames();
+	}
+	
+	/**
+	 * This needs to return the list of roles somehow
+	 * @return
+	 */
+	public List<String> getRoles(){
+		return null;
+	}
+	
+	/*
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -154,4 +160,5 @@ public class SetUpController implements ActionListener{
 		}
 
 	}
+	*/
 }

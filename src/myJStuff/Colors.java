@@ -23,6 +23,7 @@ public class Colors{
 	public static final Color defaultButtonBackgroundColor = grey;
 	public static final Color defaultBackgroundColor = black;
 	public static final Color defaultBorderColor = grey;
+	public static final Color select = blue;
 	
 
 }

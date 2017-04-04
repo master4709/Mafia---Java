@@ -2,7 +2,6 @@
 package displayGame;
 
 import myJStuff.*;
-import logic.*;
 
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -34,6 +33,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 		this.playerNames = playerNames;
 		this.packageListener = actionListener;
 		
+		contentPane.setName("ViewAllPlayers Panel");
 		displayNorth();
 		displaySouth();
 		displayCenter();
@@ -88,13 +88,5 @@ public class ViewAllPlayersPanel extends MyPanel{
 		String position = "cell 0 "+i+",growx";
 		center.add(btnPlayer, position); 
 		btnPlayer.addActionListener(packageListener);//Add action listener
-	}
-	
-	/**
-	 * Returns the contentPane with everything added to it
-	 * @return contentPane
-	 */
-	public JPanel getContentPane(){
-		return contentPane;
 	}
 }

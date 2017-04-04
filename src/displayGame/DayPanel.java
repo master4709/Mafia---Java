@@ -2,6 +2,7 @@
 package displayGame;
 
 import myJStuff.*;
+import playerInfo.Player;
 import logic.*;
 
 import java.awt.event.ActionListener;
@@ -37,6 +38,8 @@ public class DayPanel extends MyPanel{
 	public DayPanel(ActionListener packageListener, ActionListener globalListener) {
 		this.packageListener = packageListener;
 		this.globalListener = globalListener;
+		
+		contentPane.setName("Day Panel");
 		//Create all of the labels and buttons etc needed for the Panel
 		displayNorth();
 		displaySouth();
@@ -93,8 +96,8 @@ public class DayPanel extends MyPanel{
 		String text = p.getName();
 		//if(test) {text = text+" | "+playerInfo.get(i).getRole();}
 		JButton btnPlayer = new MyButton(text);//Create a new button with passing the String text
-		btnPlayer.setName("Day_"+Integer.toString(p.getPlayPosition()));//Sets the name of the button to the index value of the player
-		center.add(btnPlayer, "cell 0 "+p.getPlayPosition()+",growx");//Add the button to the center panel
+		btnPlayer.setName("Day_"+Integer.toString(p.getPosition()));//Sets the name of the button to the index value of the player
+		center.add(btnPlayer, "cell 0 "+p.getPosition()+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
@@ -113,7 +116,6 @@ public class DayPanel extends MyPanel{
 		}
 	}
 	/**
-	 * 
 	 * @param previous
 	 * @param target
 	 */
@@ -125,14 +127,5 @@ public class DayPanel extends MyPanel{
 				button.setBackground(btnBackgroundColor);
 			}
 		}
-	}
-
-	
-	/**
-	 * Returns the contentPane with everything added to it
-	 * @return contentPane
-	 */
-	public JPanel getContentPane(){
-		return contentPane;
 	}
 }

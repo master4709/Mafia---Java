@@ -1,6 +1,7 @@
 package displayGame;
 
 import myJStuff.*;
+import playerInfo.Player;
 import logic.*;
 
 import java.awt.event.ActionListener;
@@ -49,6 +50,7 @@ public class NightPanel extends MyPanel{
 		this.packageListener = packageListener;
 		this.playerNames = playerNames;
 		this.mafiaMember = mafiaMember;
+		contentPane.setName("Night Panel");
 		//Create all of the needed buttons and labels and adds them to the panel
 		displaySouth();
 		displayNorth();
@@ -145,10 +147,6 @@ public class NightPanel extends MyPanel{
 				button.setBackground(btnBackgroundColor);
 			}
 		}
-	}
-	
-	public JPanel getContentPane(){
-		return contentPane;
 	}
 	/**
 	 * Sets the display for the new player at night

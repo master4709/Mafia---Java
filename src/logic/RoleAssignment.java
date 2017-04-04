@@ -26,11 +26,9 @@ public class RoleAssignment {
 	 * @param chosenRolesString A list of type String for the selected roles
 	 */
 	void playerAssignment(List<String> chosenRolesString){
-
 		for (String role : chosenRolesString) {
 			this.chosenRoles.add(findRoleByID(role));
 		}
-
 	}
 
 	/***

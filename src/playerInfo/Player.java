@@ -40,7 +40,15 @@ public abstract class Player {
 	protected final int HEALED = 3;
 	protected final int PROTECTED = 4;
 	protected final int STOPPED = 5;
+	
+	/**
+	 * Used by the detective to determine affiliation
+	 */
 	protected final int TEAMTOWN = 6;
+	
+	/**
+	 * Used by the detective to determine affiliation
+	 */
 	protected final int TEAMMAFIA  = 7;
 	
 	/**

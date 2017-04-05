@@ -58,15 +58,13 @@ public class SetUp {
 		 * @param calls
 		 * @return lynchTargetID
 		 */
-		public int setLynchTarget(int... calls){
-			
-			//null calls is interpreted as 0 calls
-			int i = calls == null ? 0 : calls[0] + 1;
-			String target = roles.get(i);
-			
-			if(target != "Lyncher"){
-				return findPosition(target);
-			} return setLynchTarget(i);
+		public int setLynchTarget(){
+			for(int i = 0; i < roles.size(); i++){
+				if(roles.get(i) != "Lyncher"){
+					return findPosition(roles.get(i));
+				} 
+			}
+			return -1;
 		}
 		
 		/**

@@ -91,7 +91,7 @@ public class RoleSelectionPanel extends MyPanel{
     
     private void displaySouth(){
         continueButton = new MyButton("Continue",buttonFont);
-    	south.add(continueButton,"cell 0 1,alignx center");
+    	south.add(continueButton,"cell 0 1,growx");
     	continueButton.setVisible(false);
         continueButton.setName("Continue_RoleSelectionPanel");
         continueButton.addActionListener(globalListener);

@@ -18,6 +18,17 @@ public class Doctor extends Town{
 		super(name, position);
 	}
 	
+	/**
+	 * Used for continuing saved games
+	 * @param name
+	 * @param position
+	 * @param status
+	 * @param isLynched
+	 */
+	public Doctor(String name, int position, int status, boolean isLynched){
+		super(name, position, status, isLynched);
+	}
+	
 	/** 
 	 * Copy constructor
 	 * @param d

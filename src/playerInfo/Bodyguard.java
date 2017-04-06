@@ -19,6 +19,17 @@ public class Bodyguard extends Town{
 	}
 	
 	/**
+	 * Used for continuing saved games
+	 * @param name
+	 * @param position
+	 * @param status
+	 * @param isLynched
+	 */
+	public Bodyguard(String name, int position, int status, boolean isLynched){
+		super(name, position, status, isLynched);
+	}
+	
+	/**
 	 * Copy constructor
 	 * @param b
 	 */

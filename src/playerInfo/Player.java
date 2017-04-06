@@ -71,6 +71,21 @@ public abstract class Player {
 	}
 	
 	/**
+	 * Used for loading a saved game
+	 * @param name
+	 * @param position
+	 * @param status
+	 * @param isLynched
+	 */
+	public Player(String name, int position, int status, boolean isLynched){
+		this.name = name;
+		this.position = position;
+		this.target = -1;
+		this.status = status;
+		this.isLynched = isLynched;		
+	}
+	
+	/**
 	 * Creates a clone to prevent privacy leaks
 	 * Used for doAction() and mafia players who 
 	 * switch roles

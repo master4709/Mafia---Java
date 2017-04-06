@@ -1,10 +1,5 @@
-0 true Doctor Pierce
-0 true Detective Mahsa
-1 false Lyncher -1 Christilyn
-1 false Townie Elvin
-0 false Bodyguard Ronelle
-1 false Survivor Nathaly
-1 false Mafia: Barman Nick
-1 false Vigilante Tai Lopez
-1 false Mafia: Hitman Kevin O'Leary
-1 false Mafia- GodFather Bill&Melinda Gates
+1 false Doctor Player 1
+1 false Townie Player 2
+1 false Detective Player 3
+1 false Mafia: Hitman Player 4
+0 true Mafia: Barman Player 5

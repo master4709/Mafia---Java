@@ -55,7 +55,7 @@ public class Controller implements ActionListener{
 			mc.start();
 			break;
 		case"Continue_RoleSelectionPanel":
-			SetUp up = new SetUp(suc.getPlayerNames(),suc.getRoles());
+			SetUp up = new SetUp(suc.getPlayerNames(),suc.getRoles(),true);
 			gc.start(up.getPlayerInfo(), up.getLynchTarget(),false);
 			break;
 		case"Testing_MainPanel":
@@ -71,7 +71,7 @@ public class Controller implements ActionListener{
 				"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
 				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Town","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
-		SetUp up = new SetUp(names,roles);
+		SetUp up = new SetUp(names,roles,true);
 		gc.start(up.getPlayerInfo(), 0,true);
 	}
 }

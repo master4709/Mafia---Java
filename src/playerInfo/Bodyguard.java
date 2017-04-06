@@ -44,7 +44,7 @@ public class Bodyguard extends Town{
 	 */
 	@Override
 	public int doAction(Player p){
-		if(getStatus()!=0){
+		if(getStatus()!=0 && getInBar()!=1){
 			System.out.print("ACTIVE ");
 			return 4;
 		} return p.getStatus();

@@ -46,7 +46,7 @@ public class Survivor extends Player {
 	}
 	
 	public String toString() {
-		return "Survivor";
+		return getRole()+ " " + getName();
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Survivor extends Player {
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Survivor";
 	}
 
 	/**

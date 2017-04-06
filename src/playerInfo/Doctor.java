@@ -52,7 +52,7 @@ public class Doctor extends Town{
 	
 	@Override
 	public String toString() {
-		return "Doctor";
+		return getRole()+ " " + getName();
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class Doctor extends Town{
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Doctor";
 	}
 
 	/**

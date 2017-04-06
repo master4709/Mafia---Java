@@ -47,7 +47,7 @@ public class Town extends Player {
 	}
 	
 	public String toString() {
-		return "Townie";
+		return getRole()+ " " + getName();
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class Town extends Player {
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Townie";
 	}
 
 	/**

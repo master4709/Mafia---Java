@@ -53,7 +53,7 @@ public class Hitman extends Mafia {
 	
 	@Override
 	public String toString(){
-		return "Mafia: Hitman";
+		return getRole()+ " " + getName();
 	}
 	
 	
@@ -63,7 +63,7 @@ public class Hitman extends Mafia {
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Mafia: Hitman";
 	}
 
 	/**

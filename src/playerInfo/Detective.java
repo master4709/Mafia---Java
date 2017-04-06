@@ -53,7 +53,7 @@ public class Detective extends Town{
 	
 	@Override
 	public String toString() {
-		return "Detective";
+		return getRole()+ " " + getName();
 	}	
 	
 	/**
@@ -62,7 +62,7 @@ public class Detective extends Town{
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Detective";
 	}
 
 	/**

@@ -91,7 +91,7 @@ public class MainPanel extends MyPanel{
 		btnContinueGame = new MyButton("Continue Game");
 		center.add(btnContinueGame, "cell 0 2,growx");
 		// setting the action for continue game button
-		btnContinueGame.addActionListener(packageListener);
+		btnContinueGame.addActionListener(globalListener);
 		btnContinueGame.setName("ContinueGame_MainPanel");
 		
 		btnRules = new MyButton("Rules");

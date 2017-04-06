@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import displayGame.GameController;
 import displayMain.MainController;
 import displaySetUp.SetUpController;
+import logic.LoadFile;
 import logic.SetUp;
 
 public class Controller implements ActionListener{
@@ -51,11 +52,16 @@ public class Controller implements ActionListener{
 		case"NewGame_MainPanel":
 			suc.start();
 			break;
+		case"ContinueGame_MainPanel":
+			LoadFile lf = new LoadFile();
+			lf.scan();
+			gc.start(lf.getPlayers(), lf.getLynchTarget(), false);
+			break;
 		case"Home_DayPanel":
 			mc.start();
 			break;
 		case"Continue_RoleSelectionPanel":
-			SetUp up = new SetUp(suc.getPlayerNames(),suc.getRoles(),true);
+			SetUp up = new SetUp(suc.getPlayerNames(),suc.getRoles());
 			gc.start(up.getPlayerInfo(), up.getLynchTarget(),false);
 			break;
 		case"Testing_MainPanel":
@@ -63,7 +69,6 @@ public class Controller implements ActionListener{
 		default:
 			break;
 		}
-		
 	}
 	
 	private void test(){
@@ -71,7 +76,7 @@ public class Controller implements ActionListener{
 				"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
 				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Town","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
-		SetUp up = new SetUp(names,roles,true);
+		SetUp up = new SetUp(names,roles);
 		gc.start(up.getPlayerInfo(), 0,true);
 	}
 }

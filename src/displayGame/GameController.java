@@ -145,7 +145,7 @@ public class GameController implements ActionListener{
 	 * @param panel
 	 */
 	private void switchPanel(JPanel panel){
-		System.out.println(panel.getName().toUpperCase());
+		//System.out.println(panel.getName().toUpperCase());
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);
@@ -233,7 +233,7 @@ public class GameController implements ActionListener{
 		}
 	}
 	/**
-	 * This class is the ActionListenr for all of the buttons in the displayGame Package
+	 * This is the ActionListenr for all of the buttons in the displayGame Package
 	 * When a button is pressed, the name String of the button is stored as a local variable
 	 * A switch statement is used to compare the name with other string values to find the correct button
 	 */

@@ -1,1 +1,8 @@
-Hi
+1 false Mafia: Hitman Pierce
+1 false Bodyguard Mahsa
+1 false Doctor Elvin
+1 false Detective Ronelle
+1 false Mafia: Barman Harry
+1 false Townie Ron
+1 false Survivor Tom
+1 false Lyncher 3 Hermione

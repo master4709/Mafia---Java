@@ -21,6 +21,17 @@ public class Godfather extends Mafia {
 		super(name, position);
 	}
 	
+	/**
+	 * Used for continuing saved games
+	 * @param name
+	 * @param position
+	 * @param status
+	 * @param isLynched
+	 */
+	public Godfather(String name, int position, int status, boolean isLynched){
+		super(name, position, status, isLynched);
+	}
+	
 	/** 
 	 * Copy constructor
 	 * @param b

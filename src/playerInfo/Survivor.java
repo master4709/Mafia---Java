@@ -18,6 +18,17 @@ public class Survivor extends Player {
 	}
 	
 	/**
+	 * Used for continuing saved games
+	 * @param name
+	 * @param position
+	 * @param status
+	 * @param isLynched
+	 */
+	public Survivor(String name, int position, int status, boolean isLynched){
+		super(name, position, status, isLynched);
+	}
+	
+	/**
 	 * Copy constructor
 	 * @param t
 	 */

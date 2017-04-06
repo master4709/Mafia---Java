@@ -47,9 +47,10 @@ public class Barman extends Mafia {
 	 * @param p
 	 */
 	public int doAction(Player p) {
-		if(getStatus() == ACTIVE){
-			return STOPPED;
-		} return p.getStatus();
+		if(getStatus()!=0){//If Barman is not dead
+			return 1;//Player in bar
+		}
+		return 0;//Not in bar
 	}
 	
 	@Override

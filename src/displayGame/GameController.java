@@ -25,6 +25,8 @@ public class GameController implements ActionListener{
 	
 	private ActionListener globalListener;
 	
+	private SaveFile sf;
+	
 	private Game g;
 	private DayPanel dp;
 	private NightPanel np;
@@ -71,6 +73,8 @@ public class GameController implements ActionListener{
 		vapp = new ViewAllPlayersPanel(this,globalListener);
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
 		
+		sf = new SaveFile();
+		
 		dp.displayCenter(g.getPlayerInfo());
 		np.displayCenter(g.getPlayerInfo());
 		vapp.displayCenter(g.getPlayerInfo());
@@ -108,6 +112,7 @@ public class GameController implements ActionListener{
 	 */
 	public void switchDay(){
 		target = -1;
+		sf.save(g.getPlayerInfo(), g.getLynchTarget());
 		String win = g.checkWinner();
 		if(win.contains("None")){
 			switchPanel(panelDay);
@@ -210,12 +215,12 @@ public class GameController implements ActionListener{
 			System.out.println("End of list");
 			return -1;
 		}else if(g.getPlayerCopy(position).getStatus()==0){//If the player is dead, find the next one
-			System.out.println(g.getPlayerCopy(position).getName()+ " is Dead");
+			System.out.println(g.getPlayerCopy(position).getName().toUpperCase()+ " is Dead");
 			g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
 			position++;
 			return nextPlayer(position);
 		}else{
-			System.out.println(g.getPlayerCopy(position).getName()+ " is alive");
+			System.out.println(g.getPlayerCopy(position).getName().toUpperCase()+ " is alive");
 			return position;
 		}
 	}

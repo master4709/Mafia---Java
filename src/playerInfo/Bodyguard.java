@@ -44,14 +44,15 @@ public class Bodyguard extends Town{
 	 */
 	@Override
 	public int doAction(Player p){
-		if(getStatus() == ACTIVE){
-			return PROTECTED;
+		if(getStatus()!=0){
+			System.out.print("ACTIVE ");
+			return 4;
 		} return p.getStatus();
 	}
 	
 	@Override
 	public String toString() {
-		return "Mafia Bodguard";
+		return "Bodyguard";
 	}
 	
 	

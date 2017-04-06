@@ -76,15 +76,19 @@ public class Game{
 	public Integer nightAction(){
 		System.out.println("Do night logic");
 		
-		for(String s: nightPlayer){
+		for(String role: nightPlayer){
 			for(Player p: playerInfo){
-				if(p.getRole().contains(s)){
+				if(p.getRole().contains(role)){
 					if(p.getTarget()!=-1){
-						System.out.println(p.toString()+" "+p.getName() +" is doing action against player "+getPlayer(p.getTarget()).getName());
-						System.out.println(p.doAction(playerInfo.get(p.getTarget())));
-						setPlayerStatus(p.getTarget(),p.doAction(playerInfo.get(p.getTarget())));
+						if(getPlayer(p.getTarget()).getStatus()==4){
+							setPlayerStatus(getPlayer("Bodyguard").getPosition(),p.doAction(getPlayer("Bodyguard")));
+							System.out.println(p.toString()+" "+p.getName().toUpperCase() +" is doing action against player "+getPlayer("Bodyguard").getName().toUpperCase()+" "+getPlayer("Bodyguard").getRole());
+						}else{
+							setPlayerStatus(p.getTarget(),p.doAction(getPlayer(p.getTarget())));
+							System.out.println(p.toString()+" "+p.getName().toUpperCase() +" is doing action against player "+getPlayer(p.getTarget()).getName().toUpperCase());
+						}
 					}else{
-						System.out.println(p.toString()+" "+p.getName() +" is NOT doing action");
+						System.out.println(p.toString()+" "+p.getName().toUpperCase() +" is NOT doing action");
 					}
 					break;
 				}
@@ -122,10 +126,12 @@ public class Game{
 		int mafiaTotal = 0;
 		int townTotal = -1;
 		for(Player p: playerInfo){
-			if(p.getRole().contains("Mafia")){
-				mafiaTotal++;
-			}else{
-				townTotal++;
+			if(p.getStatus()!=0){
+				if(p.getRole().contains("Mafia")){
+					mafiaTotal++;
+				}else{
+					townTotal++;
+				}
 			}
 		}
 		if(mafiaTotal>townTotal){
@@ -194,5 +200,9 @@ public class Game{
 	
 	public Player getPlayerCopy(int i){
 		return playerInfo.get(i);
+	}
+	
+	public int getLynchTarget(){
+		return lynchTarget;
 	}
 }

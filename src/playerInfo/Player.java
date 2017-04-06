@@ -28,6 +28,7 @@ public abstract class Player {
 	private int position;
 	private int target;  	//position of target. -1 if N/A
 	private int status;
+	private int inBar; //0 not in bar, 1 in bar
 	
 	private boolean isLynched; 
 	
@@ -39,7 +40,6 @@ public abstract class Player {
 	protected final int TARGETED = 2;
 	protected final int HEALED = 3;
 	protected final int PROTECTED = 4;
-	protected final int STOPPED = 5;
 	
 	/**
 	 * Used by the detective to determine affiliation
@@ -66,6 +66,7 @@ public abstract class Player {
 		this.name = name;
 		this.position = position;
 		this.target = -1;
+		this.inBar = 0;
 		this.status = 1;
 		this.isLynched = false;
 	}
@@ -81,6 +82,7 @@ public abstract class Player {
 		this.name = name;
 		this.position = position;
 		this.target = -1;
+		this.inBar = 0;
 		this.status = status;
 		this.isLynched = isLynched;		
 	}
@@ -136,6 +138,10 @@ public abstract class Player {
 	public void setStatus(int status){
 		this.status = status;
 	}
+	
+	public void setInBar(int inBar){
+		this.inBar = inBar;
+	}
 		
 	public String getName(){
 		return this.name;
@@ -151,6 +157,10 @@ public abstract class Player {
 	
 	public int getStatus(){
 		return this.status;
+	}
+	
+	public int getInBar(){
+		return inBar;
 	}
 	
 	public boolean wasLynched(){

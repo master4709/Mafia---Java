@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 
  */
 public class ViewAllPlayersPanel extends MyPanel{
+	
+	private ActionListener globalListener;
 	//This label displays the text "Day Time"
 	private JLabel lblDayTime;
 	//These labels display the text for what to do on this screen
@@ -23,11 +25,13 @@ public class ViewAllPlayersPanel extends MyPanel{
 	private JLabel lblDescription2;
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
+	private JButton btnHome;
 	/**
 	 * Create the panel.
 	 */
-	public ViewAllPlayersPanel(ActionListener actionListener) {
+	public ViewAllPlayersPanel(ActionListener actionListener, ActionListener globalListener) {
 		this.packageListener = actionListener;
+		this.globalListener = globalListener;
 		
 		contentPane.setName("ViewAllPlayers Panel");
 		displayNorth();
@@ -37,6 +41,12 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 * Displays that it is Day Time and rules of the day
 	 */
 	private void displayNorth(){
+		
+		btnHome = new MyButton("Home",buttonFont);
+		north.add(btnHome,"cell 0 0,alignx left,aligny top");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home");
+		
 		lblDayTime = new MyLabel("View Roles", textColor, titleFont);
 		north.add(lblDayTime, "flowy,cell 0 0");
 		

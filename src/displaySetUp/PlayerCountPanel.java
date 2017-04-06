@@ -6,8 +6,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 
 /**
@@ -20,11 +22,14 @@ import javax.swing.JLabel;
  */
 public class PlayerCountPanel extends MyPanel{
 	
+	private ActionListener globalListener;
+	
 	//Labels for the north panel
 	private JLabel lblText;
 	private JLabel lblText2;
 	
 	private JButton btnContinue;
+	private JButton btnHome;
 	
 	private List<JButton> buttonList = new ArrayList<>();
 
@@ -32,8 +37,9 @@ public class PlayerCountPanel extends MyPanel{
 	 * Constructor initalizes the view and creates an actionListener
 	 * @param actionListener
 	 */
-	public PlayerCountPanel(ActionListener packageListener) {
+	public PlayerCountPanel(ActionListener packageListener, ActionListener globalListener) {
 		this.packageListener = packageListener;
+		this.globalListener = globalListener;
 		contentPane.setName("PlayerCount Panel");
 		displayNorth();
 		displaySouth();
@@ -41,10 +47,16 @@ public class PlayerCountPanel extends MyPanel{
 	}
 	
 	private void displayNorth(){
-		lblText = new MyLabel("How Many", textColor, titleFont);
-		north.add(lblText, "cell 0 0,alignx center");
+		btnHome = new MyButton("Home",buttonFont);
+		north.add(btnHome,"cell 0 0,alignx left,aligny top");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home");
+		btnHome.setBorder(emptyBorder);
 		
-		lblText2 = new MyLabel("Players?", textColor, titleFont);
+		lblText = new MyLabel("How Many", textColor, titleFont);
+		north.add(lblText, "cell 0 0,alignx left");
+		
+		lblText2 = new MyLabel("  Players?", textColor, titleFont);
 		north.add(lblText2, "cell 0 1,alignx center");
 	}
 

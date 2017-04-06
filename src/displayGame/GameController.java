@@ -68,7 +68,7 @@ public class GameController implements ActionListener{
 		cpp = new CheckPlayerPanel(this);
 		np = new NightPanel(this,g.getMafiaMember());
 		sp = new StoryPanel(this);
-		vapp = new ViewAllPlayersPanel(this);
+		vapp = new ViewAllPlayersPanel(this,globalListener);
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
 		
 		dp.displayCenter(g.getPlayerInfo());
@@ -108,7 +108,14 @@ public class GameController implements ActionListener{
 	 */
 	public void switchDay(){
 		target = -1;
-		switchPanel(panelDay);
+		String win = g.checkWinner();
+		if(win.contains("None")){
+			switchPanel(panelDay);
+		}else{
+			frame.dispose();
+			System.out.println(win+" HAS WON THE GAME BOIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS");
+			dp.setContinueButtonVisible(false);
+		}
 	}
 
 	

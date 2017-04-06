@@ -80,10 +80,11 @@ public class Game{
 			for(Player p: playerInfo){
 				if(p.getRole().contains(s)){
 					if(p.getTarget()!=-1){
-						System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).getName());
+						System.out.println(p.toString()+" "+p.getName() +" is doing action against player "+getPlayer(p.getTarget()).getName());
+						System.out.println(p.doAction(playerInfo.get(p.getTarget())));
 						setPlayerStatus(p.getTarget(),p.doAction(playerInfo.get(p.getTarget())));
 					}else{
-						System.out.println(p.toString() +" is NOT doing action as player");
+						System.out.println(p.toString()+" "+p.getName() +" is NOT doing action");
 					}
 					break;
 				}
@@ -115,6 +116,29 @@ public class Game{
 			
 		}
 		return target;
+	}
+	
+	public String checkWinner(){
+		int mafiaTotal = 0;
+		int townTotal = -1;
+		for(Player p: playerInfo){
+			if(p.getRole().contains("Mafia")){
+				mafiaTotal++;
+			}else{
+				townTotal++;
+			}
+		}
+		if(mafiaTotal>townTotal){
+			return "Mafia";
+		}else if(mafiaTotal==0){
+			return "Town";
+		}else if(lynchTarget!=-1 && getPlayer(lynchTarget).wasLynched()){
+			return "Lyncher";
+		}else if(townTotal==1 && getPlayer("Survivor").getStatus()!=0){
+			return "Survivor";
+		}else{
+			return "None";
+		}
 	}
 
 	/**
@@ -154,6 +178,17 @@ public class Game{
 	 */
 	private Player getPlayer(int i){
 		Player player = playerInfo.get(i);
+		return player;
+	}
+	
+	private Player getPlayer(String s){
+		Player player = null;
+		for(Player p: playerInfo){
+			if(p.getRole().contains(s)){
+				player = p;
+				break;
+			}
+		}
 		return player;
 	}
 	

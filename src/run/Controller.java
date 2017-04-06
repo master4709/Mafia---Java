@@ -57,7 +57,7 @@ public class Controller implements ActionListener{
 			lf.scan();
 			gc.start(lf.getPlayers(), lf.getLynchTarget(), false);
 			break;
-		case"Home_DayPanel":
+		case"Home":
 			mc.start();
 			break;
 		case"Continue_RoleSelectionPanel":
@@ -77,6 +77,6 @@ public class Controller implements ActionListener{
 				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Town","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
 		SetUp up = new SetUp(names,roles);
-		gc.start(up.getPlayerInfo(), 0,true);
+		gc.start(up.getPlayerInfo(), -1,true);
 	}
 }

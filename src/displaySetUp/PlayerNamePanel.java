@@ -5,13 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import myJStuff.Colors;
-import myJStuff.MyButton;
-import myJStuff.MyLabel;
-import myJStuff.MyPanel;
-import myJStuff.MyTextField;
+import myJStuff.*;
 /**
  * This class creates the Panel for selecting how many
  * players you want in the game
@@ -21,20 +18,31 @@ import myJStuff.MyTextField;
  */
 public class PlayerNamePanel extends MyPanel{
 	
-	//
+	private ActionListener globalListener;
+	
     private ArrayList<JTextField> textFields = new ArrayList<>();
 	
-	MyLabel enterPlayers = new MyLabel("Enter Player Names", 40);
-    JButton continueButton = new MyButton("Continue", Colors.white, Colors.black, 25);
+	JLabel lblEnterPlayers;
+	
+    JButton btnContinue;
+    JButton btnHome;
 
-	public PlayerNamePanel(ActionListener packageListener) {
+	public PlayerNamePanel(ActionListener packageListener, ActionListener globalListener) {
 		this.packageListener = packageListener;
+		this.globalListener = globalListener;
 		displayNorth();
 		displaySouth();
 	}
 	
 	private void displayNorth(){
-		north.add(enterPlayers);
+		btnHome = new MyButton("Home",buttonFont);
+		north.add(btnHome,"cell 0 0,alignx left,aligny top");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home");
+		btnHome.setBorder(emptyBorder);
+		
+		lblEnterPlayers = new MyLabel("Enter Player Names", roleFont);
+		north.add(lblEnterPlayers);
 	}
 
 	public void displayCenter(int playerTotal){
@@ -48,9 +56,10 @@ public class PlayerNamePanel extends MyPanel{
 	}
 	
 	private void displaySouth(){
-		south.add(continueButton, "cell 0 0,growx");
-        continueButton.addActionListener(packageListener);
-        continueButton.setName("Continue_PlayerName");
+		btnContinue = new MyButton("Continue", buttonFont);
+		south.add(btnContinue, "cell 0 0,growx");
+        btnContinue.addActionListener(packageListener);
+        btnContinue.setName("Continue_PlayerName");
 	}
 	
 	/**

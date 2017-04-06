@@ -47,10 +47,10 @@ public class DayPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 
-		btnHome = new MyButton("Home");
+		btnHome = new MyButton("Home",buttonFont);
 		north.add(btnHome,"cell 0 0,alignx left,aligny top");
 		btnHome.addActionListener(globalListener);
-		btnHome.setName("Home_DayPanel");
+		btnHome.setName("Home");
 		
 		lblDayTime = new MyLabel("Day Time", textColor, titleFont);
 		north.add(lblDayTime, "flowy,cell 0 0 2 0,alignx center");
@@ -127,5 +127,9 @@ public class DayPanel extends MyPanel{
 				button.setBackground(btnBackgroundColor);
 			}
 		}
+	}
+	
+	public void setContinueButtonVisible(boolean bool){
+		btnContinue.setVisible(bool);
 	}
 }

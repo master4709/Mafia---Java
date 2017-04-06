@@ -79,8 +79,7 @@ public abstract class MyPanel {
 		contentPane.add(center, BorderLayout.CENTER);
 		center.setLayout(new MigLayout("", "[grow]", "[]"));
 		
-		//Once panels are set, background color is then set
-		setBackground();
+		setBackground(Colors.black);
 	}
 	
 	// Default sizes for certain font templates
@@ -102,14 +101,14 @@ public abstract class MyPanel {
 	}
 	
 	// Ensure the background color for all panels are black
-	public void setBackground(){
-		north.setBackground(Colors.black);
-		south.setBackground(Colors.black);
-		east.setBackground(Colors.black);
-		west.setBackground(Colors.black);
-		center.setBackground(Colors.black);
+	public void setBackground(Color c){
+		north.setBackground(c);
+		south.setBackground(c);
+		east.setBackground(c);
+		west.setBackground(c);
+		center.setBackground(c);
 		//Creates a black border on the screen
-		contentPane.setBackground(Colors.black);
+		contentPane.setBackground(c);
 	}
 	
 	public void setTheme(){

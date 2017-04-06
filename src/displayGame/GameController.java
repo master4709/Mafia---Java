@@ -177,7 +177,7 @@ public class GameController implements ActionListener{
 	/**
 	 * Finds the next player who is alive in the list of players
 	 * Uses recursion and a global variable called position to loop through the list of players
-	 * If the player is alive displays the CHeckPLayer Panel, if not finds the next player
+	 * If the player is alive displays the CheckPLayer Panel, if not finds the next player
 	 * Once the position has gone beyond the index of playerInfo, calls the nightAction method
 	 */
 	private void findNextPlayer(){
@@ -198,19 +198,19 @@ public class GameController implements ActionListener{
 	
 	private int nextPlayer(int position){
 		System.out.print("Finding next player: ");
-		if(position>=g.getPlayerInfo().size()){
+		
+		if(position>=g.getPlayerInfo().size()){//If position is at the end of the list
 			System.out.println("End of list");
 			return -1;
 		}else if(g.getPlayerCopy(position).getStatus()==0){//If the player is dead, find the next one
 			System.out.println(g.getPlayerCopy(position).getName()+ " is Dead");
 			g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
 			position++;
-			nextPlayer(position);
+			return nextPlayer(position);
 		}else{
 			System.out.println(g.getPlayerCopy(position).getName()+ " is alive");
 			return position;
 		}
-		return position;
 	}
 	
 	private void removePlayerButton(int target){

@@ -72,6 +72,6 @@ public class Controller implements ActionListener{
 				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Town","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
 		SetUp up = new SetUp(names,roles);
-		gc.start(up.getPlayerInfo(), up.getLynchTarget(),true);
+		gc.start(up.getPlayerInfo(), 0,true);
 	}
 }

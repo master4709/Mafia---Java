@@ -190,6 +190,8 @@ public class NightPanel extends MyPanel{
 		int screenWidth = 480;
 		int screenHeight = 850;
 		while(textWidth<screenWidth-25 && textHeight<screenHeight/11){
+			
+			
 			font++;
 			textWidth = (int)(new MyFont(font).getStringBounds(name, frc).getWidth());
 			textHeight = (int)(new MyFont(font).getStringBounds(name, frc).getHeight());

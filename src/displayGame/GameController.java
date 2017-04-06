@@ -65,7 +65,7 @@ public class GameController implements ActionListener{
 	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		this.test = test;
 		
-		g = new Game(playerInfo,lynchTarget);
+		g = new Game(playerInfo,lynchTarget,test);
 		dp = new DayPanel(this,globalListener);
 		cpp = new CheckPlayerPanel(this);
 		np = new NightPanel(this,g.getMafiaMember());
@@ -75,6 +75,7 @@ public class GameController implements ActionListener{
 		
 		sf = new SaveFile();
 		
+		//Creates the buttons of all of the players in the game
 		dp.displayCenter(g.getPlayerInfo());
 		np.displayCenter(g.getPlayerInfo());
 		vapp.displayCenter(g.getPlayerInfo());

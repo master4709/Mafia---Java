@@ -55,7 +55,7 @@ public class Barman extends Mafia {
 	
 	@Override
 	public String toString(){
-		return "Mafia: Barman";
+		return getRole()+ " " + getName();
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class Barman extends Mafia {
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Mafia: Barman";
 	}
 
 	/**

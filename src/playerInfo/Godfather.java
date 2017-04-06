@@ -52,7 +52,7 @@ public class Godfather extends Mafia {
 	
 	@Override
 	public String toString(){
-		return "Mafia- GodFather";
+		return getRole()+ " " + getName();
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class Godfather extends Mafia {
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Mafia- GodFather";
 	}
 
 	/**

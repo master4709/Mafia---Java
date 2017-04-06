@@ -46,7 +46,7 @@ public class Lyncher extends Player {
 	}
 	
 	public String toString() {
-		return "Lyncher";
+		return getRole()+ " " + getName();
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Lyncher extends Player {
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Lyncher";
 	}
 
 	/**

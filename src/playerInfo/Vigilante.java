@@ -52,7 +52,7 @@ public class Vigilante extends Town{
 	
 	@Override
 	public String toString() {
-		return "Vigilante";
+		return getRole()+ " " + getName();
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class Vigilante extends Town{
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return this.toString();
+		return "Vigilante";
 	}
 
 	/**

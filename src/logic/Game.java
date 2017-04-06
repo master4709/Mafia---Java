@@ -25,6 +25,10 @@ public class Game{
 	//List of each player (class) and his/her info (name, role, target, position, etc)
 	private List<Player> playerInfo = new ArrayList<>();
 	
+	//List of player names that are alive at the start of the game, used for making the buttons in Day Panel and Night Panel
+	private List<String> playerNames = new ArrayList<>();
+	
+	
 	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Mafia- Godfather","Doctor"));
 	
 	//Index value for the target of the Lyncher
@@ -37,10 +41,11 @@ public class Game{
 	 * @param mafiaMembers
 	 * @param lynchTarget
 	 */
-	public Game(List<Player> playerInfo, int lynchTarget){
+	public Game(List<Player> playerInfo, int lynchTarget, boolean test){
 		this.lynchTarget = lynchTarget;
 		this.playerInfo = playerInfo;
 		mafiaMembers();
+		alivePlayers(test);
 	}
 	
 	/**
@@ -52,6 +57,19 @@ public class Game{
 			if(getPlayer(i).getRole().contains("Mafia")){
 				mafiaMembers.add(getPlayer(i).getName());
 			}
+		}
+	}
+	
+	private void alivePlayers(boolean test){
+		for(Player p: playerInfo){
+			if(p.getStatus()!=0){
+				if(test){
+					playerNames.add(p.getName()+" "+p.getRole());
+				}else{
+					playerNames.add(p.getName());
+				}
+			}
+			
 		}
 	}
 	
@@ -82,10 +100,10 @@ public class Game{
 					if(p.getTarget()!=-1){
 						if(getPlayer(p.getTarget()).getStatus()==4){
 							setPlayerStatus(getPlayer("Bodyguard").getPosition(),p.doAction(getPlayer("Bodyguard")));
-							System.out.println(p.toString()+" "+p.getName().toUpperCase() +" is doing action against player "+getPlayer("Bodyguard").getName().toUpperCase()+" "+getPlayer("Bodyguard").getRole());
+							System.out.println(p.toString() +" is doing action against player "+getPlayer("Bodyguard").toString());
 						}else{
 							setPlayerStatus(p.getTarget(),p.doAction(getPlayer(p.getTarget())));
-							System.out.println(p.toString()+" "+p.getName().toUpperCase() +" is doing action against player "+getPlayer(p.getTarget()).getName().toUpperCase());
+							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).toString());
 						}
 					}else{
 						System.out.println(p.toString()+" "+p.getName().toUpperCase() +" is NOT doing action");
@@ -204,5 +222,9 @@ public class Game{
 	
 	public int getLynchTarget(){
 		return lynchTarget;
+	}
+	
+	public List<String> getPlayerNames(){
+		return playerNames;
 	}
 }

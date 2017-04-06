@@ -12,7 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 /**
  * This class is used to display the list of possible targets of the day lynching
- * 
+ * The north Panel displays all of the JLabels needed for the Day Cycle
+ * The center panel holds all of the player buttons - Theses are used for selecting the target of the lynching
  * @author Pierce de Jong 30006609
  *
  */
@@ -32,13 +33,15 @@ public class DayPanel extends MyPanel{
 	private List<JButton> playerButtonList = new ArrayList<>();
 	/**
 	 * Constructor
+	 * @param packageListener - Used for buttons that only want to change stuff within the package
+	 * @param globalListener - Used for buttons that change the entire program from one Controller to Another, (E.g. Home buttons)
 	 */
 	public DayPanel(ActionListener packageListener, ActionListener globalListener) {
 		this.packageListener = packageListener;
 		this.globalListener = globalListener;
 		
 		contentPane.setName("Day Panel");
-		//Create all of the labels and buttons etc needed for the Panel
+		
 		displayNorth();
 		displaySouth();
 	}
@@ -78,8 +81,7 @@ public class DayPanel extends MyPanel{
 	 * Creates all of the buttons representing each player that is alive
 	 */
 	public void displayCenter(List<Player> playerInfo){
-		//Loop through the list of players
-		//Loops through the list of players adn create a button for each player
+		//Loops through the list of players and create a button for each player
 		for(Player p: playerInfo){
 			if(p.getStatus()!=0){
 				displayPlayerButton(p);

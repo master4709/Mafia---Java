@@ -1,5 +1,10 @@
-1 false Doctor Player 1
-1 false Townie Player 2
-1 false Detective Player 3
-1 false Mafia: Hitman Player 4
-0 true Mafia: Barman Player 5
+1 false Townie Pierce
+1 false Mafia: Hitman Mahsa
+1 false Mafia: Barman Christilyn
+1 false Townie Elvin
+1 false Doctor Ronelle
+1 false Vigilante Nathaly
+0 true Detective Nick
+1 false Survivor Tai
+1 false Lyncher -1 Kevin
+1 false Bodyguard Bill&Melinda

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
  * Class GameController
@@ -42,6 +43,9 @@ public class GameController implements ActionListener{
 	private JPanel panelStory;
 	private JPanel panelViewAllPlayers;
 	private JPanel panelViewPlayer;
+	private JPanel panelVictory;
+	//winner of the game
+	private JLabel winner;
 	//Location inside the list of players for the night cycle
 	private int position = -1;
 	//Boolean for if the game is in test mode
@@ -110,7 +114,7 @@ public class GameController implements ActionListener{
 	
 	/**
 	 * switches the content panel to the dayCycle page
-	 * Sets the target of the day cylce to -1 -- ensures that a player button must be pressed to continue the game 
+	 * Sets the target of the day cycle to -1 -- ensures that a player button must be pressed to continue the game 
 	 * Saves the game to the saveGame.txt document
 	 * If there was no winner, continues the cycle else goes to the win game panel
 	 */
@@ -121,9 +125,12 @@ public class GameController implements ActionListener{
 		if(win.contains("None")){
 			switchPanel(panelDay);
 		}else{
-			//wp.setWinner(win);
-			//switchPanel(winPanel);
-			System.out.println(win+" HAS WON THE GAME BOIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS");
+			VictoryPanel v = new VictoryPanel();
+			v.initialize();
+			winner.setText(win);
+			v.displayTop(winner);
+			v.setPlayerInfo(g.getPlayerInfo());
+			switchPanel(panelVictory);
 			dp.setContinueButtonVisible(false);
 		}
 	}

@@ -38,6 +38,10 @@ public class Hitman extends Mafia {
 	public Hitman(Hitman h){
 		super(h);
 	}
+	
+	public Player copy(){
+		return new Hitman(this);
+	}
 
 	/** Unique action for the hitman */
 	@Override

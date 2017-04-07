@@ -39,6 +39,10 @@ public class Barman extends Mafia {
 	public Barman(Barman b){
 		super(b);
 	}
+	
+	public Player copy(){
+		return new Barman(this);
+	}
 
 
 	@Override

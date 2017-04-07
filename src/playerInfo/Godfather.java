@@ -39,7 +39,10 @@ public class Godfather extends Mafia {
 	public Godfather(Godfather g){
 		super(g);
 	}
-
+	
+	public Player copy(){
+		return new Godfather(this);
+	}
 
 	@Override
 	/**

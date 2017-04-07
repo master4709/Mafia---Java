@@ -44,8 +44,8 @@ public class Vigilante extends Town{
 	 */
 	@Override
 	public int doAction(Player p){
-		if(getStatus() == ACTIVE){
-			return TARGETED;
+		if(getStatus()!=0 && getInBar()!=1){
+			return 2;
 		}
 		return p.getStatus();
 	}

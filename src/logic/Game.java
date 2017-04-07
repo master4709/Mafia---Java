@@ -42,7 +42,7 @@ public class Game{
 	 * @param lynchTarget
 	 */
 	public Game(List<Player> playerInfo, int lynchTarget, boolean test){
-		//this.lynchTarget = lynchTarget;
+		this.lynchTarget = lynchTarget;
 		this.playerInfo = playerInfo;
 		mafiaMembers();
 		alivePlayers(test);
@@ -106,15 +106,20 @@ public class Game{
 					if(p.getTarget()!=-1){
 						//If the player doing action was a killer, checks if the target was protected by the bodyguard
 						//If yes, targets the bodyguard instead of the target of the player
-						if(role.contains("Hitman") || role.contains("Vigilante") && getPlayer(p.getTarget()).getStatus()==4){
+						if((role.contains("Hitman") || role.contains("Vigilante")) && getPlayer(p.getTarget()).getStatus()==4){
+							System.out.println("The Bodyguard has save player: "+getPlayer(p.getTarget()).getName());
 							setPlayerStatus(getPlayer("Bodyguard").getPosition(),p.doAction(getPlayer("Bodyguard")));
 							System.out.println(p.toString() +" is doing action against player "+getPlayer("Bodyguard").toString());
+						//Changes the in Bar of the player if the current role is Barman
+						}else if(role.contains("Barman")){
+							setPlayerInBar(p.getTarget(),p.doAction(getPlayer(p.getTarget())));
+							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).getName());
 						}else{//Targets that player
 							setPlayerStatus(p.getTarget(),p.doAction(getPlayer(p.getTarget())));
-							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).toString());
+							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).getName());
 						}
 					}else{
-						System.out.println(p.toString()+" "+p.getName().toUpperCase() +" is NOT doing action");
+						System.out.println(p.toString()+" is NOT doing action");
 					}
 					break;
 				}
@@ -143,7 +148,7 @@ public class Game{
 			}else if(getPlayer(i).getStatus()!=0){
 				setPlayerStatus(i,1);
 			}
-			
+			setPlayerInBar(i,0);
 		}
 		return target;
 	}
@@ -159,15 +164,18 @@ public class Game{
 					townTotal++;
 				}
 			}
-		}
-		if(mafiaTotal>townTotal){
+		} if(townTotal==1 && getPlayer("Survivor").getStatus()!=0){
+			System.out.println("The Survivor was the last remaining Town emeber alive");
+			return "Survivor";
+		}else if(mafiaTotal>townTotal){
+			System.out.println("THe Mafia have a majority: "+ mafiaTotal +" | " + townTotal);
 			return "Mafia";
 		}else if(mafiaTotal==0){
+			System.out.println("The Mafia have been removed from the Town!");
 			return "Town";
 		}else if(lynchTarget!=-1 && getPlayer(lynchTarget).wasLynched()){
+			System.out.println("hHe Lyncher has lynched player: " + getPlayer(lynchTarget).getName());
 			return "Lyncher";
-		}else if(townTotal==1 && getPlayer("Survivor").getStatus()!=0){
-			return "Survivor";
 		}else{
 			return "None";
 		}
@@ -180,6 +188,10 @@ public class Game{
 	 */
 	public void setPlayerTarget(int position, int target){
 		playerInfo.get(position).setTarget(target);
+	}
+	
+	public void setPlayerInBar(int position, int yes){
+		playerInfo.get(position).setInBar(yes);
 	}
 
 	public void setPlayerStatus(int position, int status){

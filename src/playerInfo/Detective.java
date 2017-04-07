@@ -44,11 +44,13 @@ public class Detective extends Town{
 	 */
 	@Override
 	public int doAction(Player p){
-		if(getStatus() == ACTIVE){
-			if(visibleMafia(p)){
+		if(getStatus()!=0){
+			if(p.getRole().contains("Mafia")){
 				return TEAMMAFIA;
-			} return TEAMTOWN;
-		} return p.getStatus();
+			} 
+			return TEAMTOWN;
+		} 
+		return p.getStatus();
 	}
 	
 	@Override

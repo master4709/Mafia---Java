@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 /**
  * Class GameController
@@ -35,6 +34,7 @@ public class GameController implements ActionListener{
 	private StoryPanel sp;
 	private ViewAllPlayersPanel vapp;
 	private ViewPlayerPanel vpp;
+	private VictoryPanel vp;
 	
 	//All of the possible panels to be displayed on the frame
 	private JPanel panelDay;
@@ -44,8 +44,6 @@ public class GameController implements ActionListener{
 	private JPanel panelViewAllPlayers;
 	private JPanel panelViewPlayer;
 	private JPanel panelVictory;
-	//winner of the game
-	private JLabel winner;
 	//Location inside the list of players for the night cycle
 	private int position = -1;
 	//Boolean for if the game is in test mode
@@ -76,13 +74,12 @@ public class GameController implements ActionListener{
 		sp = new StoryPanel(this);
 		vapp = new ViewAllPlayersPanel(this,globalListener);
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
+		vp = new VictoryPanel(globalListener);
 		
 		sf = new SaveFile();
 		
 		//Creates the buttons of all of the players in the game
-		dp.displayCenter(g.getPlayerInfo());
-		np.displayCenter(g.getPlayerInfo());
-		vapp.displayCenter(g.getPlayerInfo());
+		fillPanels();
 
 		panelCheck = cpp.getContentPane();
 		panelNight = np.getContentPane();
@@ -90,46 +87,53 @@ public class GameController implements ActionListener{
 		panelStory = sp.getContentPane(); 
 		panelViewAllPlayers = vapp.getContentPane();
 		panelViewPlayer = vpp.getContentPane();
+		panelVictory = vp.getContentPane();
+		
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
 			switchDay();
 		}else{
-			switchViewAllPlayers();
+			switchPanel(panelViewAllPlayers);
 		}
 	}
-	/**
-	 * Switch to the ViewAllPlayers JPanel
-	 */
-	public void switchViewAllPlayers(){
-		//Set the frame to the new JPanel content pane
-		switchPanel(panelViewAllPlayers);
+	
+	private void fillPanels(){
+		int y = 0;
+		for(String name: g.getPlayerNames()){
+			if(!name.contains("Dead")){
+				dp.displayPlayerButton(name, y);
+				np.displayPlayerButton(name, y);
+			}
+			vapp.displayPlayerButton(name, y);
+			y++;
+		}
+		
+		vp.setPlayerInfo(g.getPlayerNames());
+		
 	}
 	/**
 	 * Switch to the ViewPlayer JPanel and display the current plays information
 	 * @param i - the index value for which player to show
 	 */
-	public void switchViewPlayer(int i){
+	private void switchViewPlayer(int i){
 		vpp.setPlayer(g.getPlayerCopy(i));
 		switchPanel(panelViewPlayer);
 	}
 	
 	/**
 	 * switches the content panel to the dayCycle page
-	 * Sets the target of the day cycle to -1 -- ensures that a player button must be pressed to continue the game 
+	 * Sets the target of the day cylce to -1 -- ensures that a player button must be pressed to continue the game 
 	 * Saves the game to the saveGame.txt document
 	 * If there was no winner, continues the cycle else goes to the win game panel
 	 */
-	public void switchDay(){
+	private void switchDay(){
 		target = -1;
 		sf.save(g.getPlayerInfo(), g.getLynchTarget());
 		String win = g.checkWinner();
 		if(win.contains("None")){
+
 			switchPanel(panelDay);
 		}else{
-			VictoryPanel v = new VictoryPanel();
-			v.initialize();
-			winner.setText(win);
-			v.displayTop(winner);
-			v.setPlayerInfo(g.getPlayerInfo());
+			vp.setWinner(win);
 			switchPanel(panelVictory);
 			dp.setContinueButtonVisible(false);
 		}
@@ -140,7 +144,7 @@ public class GameController implements ActionListener{
 	 * Updates Night Panel text with the information of the next player
 	 * Set the frame to new updated panelNight content pane 
 	 */
-	public void switchNight(){
+	private void switchNight(){
 		np.setDisplay(g.getPlayerCopy(position));//Sets the display for current player to select his/her target
 		switchPanel(panelNight);
 	}
@@ -148,7 +152,7 @@ public class GameController implements ActionListener{
 	 * Updates the Check Player panel text with the next player
 	 * Switch the frame to the CheckPlayerPanel
 	 */
-	public void switchCheckPlayer(){
+	private void switchCheckPlayer(){
 		cpp.setPlayerName(g.getPlayerCopy(position).getName());
 		switchPanel(panelCheck);
 	}
@@ -157,7 +161,7 @@ public class GameController implements ActionListener{
 	 * @param name - String of the players name
 	 * @param dead - Boolean if the player is dead or alive
 	 */
-	public void switchStory(String name, boolean dead){
+	private void switchStory(String name, boolean dead){
 		sp.setStory(name,dead);
 		switchPanel(panelStory);
 	}
@@ -219,7 +223,11 @@ public class GameController implements ActionListener{
 			}
 		}
 	}
-	
+	/**
+	 * Recursive method to find the next player in the list of players that is alive for the night cycle
+	 * @param position - the current position in the list 
+	 * @return
+	 */
 	private int nextPlayer(int position){
 		System.out.print("Finding next player: ");
 		
@@ -236,13 +244,17 @@ public class GameController implements ActionListener{
 			return position;
 		}
 	}
-	
+	/**
+	 * Removes the button on the night and day panel for the specific player
+	 * Used when a player dies 
+	 * @param target - place in the list to remove the button
+	 */
 	private void removePlayerButton(int target){
 		dp.removePlayerButton(target);
 		np.removePlayerButton(target);
 	}
 	/**
-	 * This class sets the message for the detective during the night
+	 * This method sets the message for the detective during the night
 	 * It looks at the index value of the target of the detective
 	 * THen displays if they are art of the Mafia or not
 	 * @param target
@@ -278,12 +290,17 @@ public class GameController implements ActionListener{
 		case "Continue_CheckPlayerPanel":
 			switchNight(); break;
 		case "Continue_NightPanel":
+			if(target!=-1){
+				System.out.println(g.getPlayerCopy(position)+" has targeted player "+g.getPlayerCopy(target)+ "for night action");	
+			}
 			g.setPlayerTarget(position, target);//Set the target of the player who just finished his/her night round
 			findNextPlayer(); break;
 		case "Continue_StoryPanel":
 			switchDay(); break;
 		case "Back_ViewPlayerPanel":
-			switchViewAllPlayers(); break;
+			switchPanel(panelViewAllPlayers); break;
+		case "ViewPlayers_DayPanel":
+			switchPanel(panelViewAllPlayers); break;
 		case "Detective":
 			if(target!=-1){//Only if the detective has selected a target will the button be pressed
 				detective();//Reveals the team of the target of the detective

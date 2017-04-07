@@ -49,6 +49,7 @@ public class NightPanel extends MyPanel{
 		//Create all of the needed buttons and labels and adds them to the panel
 		displaySouth();
 		displayNorth(mafiaMember);
+		displayCenter();
 	}
 	/**
 	 * Creates the name, role, info, and mafia labels and adds them to the north Panel
@@ -73,26 +74,16 @@ public class NightPanel extends MyPanel{
 	 * This displays all of the possible buttons that each player can press when it is his/ her turn
 	 * Each button represents a player
 	 */
-	public void displayCenter(List<Player> playerInfo){
-		//The y position 
-		int k=0;
-		//Loops through the list of players adn create a button for each player
-		for(Player p: playerInfo){
-			if(p.getStatus()!=0){
-				displayPlayerButton(p);
-			}
-			//Add one to the y position
-			k = k+1;
-		}
+	private void displayCenter(){
 		//Create the detective button
 		btnDetective = new MyButton("Confirm Target", textFont);
-		center.add(btnDetective, "cell 0 "+k+1+",alignx center");
+		center.add(btnDetective, "cell 0 14,alignx center");
 		btnDetective.setName("Detective");
 		btnDetective.addActionListener(packageListener);
 		btnDetective.setVisible(false);
 		
 		lblDetective = new MyLabel("", textColor, textFont);
-		center.add(lblDetective, "cell 0 "+k+",alignx center");
+		center.add(lblDetective, "cell 0 13,alignx center");
 		
 	}
 	/**
@@ -105,16 +96,17 @@ public class NightPanel extends MyPanel{
 		btnContinue.setName("Continue_NightPanel");
 	}
 	/**
-	 * Creates a button with the text value of a player depending on i
-	 * @param i
+	 * Creates a button representing a player for the Center Panel
+	 * @param name - String for the text displayed on the JButotn
+	 * @param position - index value of player and location on center grid y value
 	 */
-	private void displayPlayerButton(Player p){
-		//Create string of the players name
-		String text = p.getName();
-		JButton btnPlayer = new MyButton(text, textFont);//Create a new button with passing the String text
-		btnPlayer.setName("Night_"+Integer.toString(p.getPosition()));//Sets the name of the button to the index value of the player
-		center.add(btnPlayer, "cell 0 "+p.getPosition()+",growx");//Add the button to the center panel
-		btnPlayer.addActionListener(packageListener);//Add action listener 
+	public void displayPlayerButton(String name, int position){
+		//if(test) {text = text+" | "+playerInfo.get(i).getRole();}
+		JButton btnPlayer = new MyButton(name);//Create a new button with passing the String text
+		btnPlayer.setName("Night_"+Integer.toString(position));//Sets the name of the button to the index value of the player
+		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
+		btnPlayer.addActionListener(packageListener);//Add action listener  
+		btnPlayer.setFont(new MyFont(setButtonFont(name)));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
@@ -190,8 +182,6 @@ public class NightPanel extends MyPanel{
 		int screenWidth = 480;
 		int screenHeight = 850;
 		while(textWidth<screenWidth-25 && textHeight<screenHeight/11){
-			
-			
 			font++;
 			textWidth = (int)(new MyFont(font).getStringBounds(name, frc).getWidth());
 			textHeight = (int)(new MyFont(font).getStringBounds(name, frc).getHeight());
@@ -227,5 +217,21 @@ public class NightPanel extends MyPanel{
 			textWidth = (int)(new MyFont(font).getStringBounds(members, frc).getWidth());
 		}
 		lblMafia.setFont(new MyFont(font));
+	}
+	
+	private int setButtonFont(String text){
+		int font = 10;
+		
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+		int textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
+		
+		int screenWidth = 480;
+		
+		while(font<30 && textWidth<screenWidth-100){
+			font++;
+			textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
+		}
+		return font;
 	}
 }

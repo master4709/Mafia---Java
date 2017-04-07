@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import displayGame.GameController;
+import displayGame.VictoryPanel;
 import displayMain.MainController;
 import displaySetUp.SetUpController;
 import logic.LoadFile;
@@ -77,6 +78,6 @@ public class Controller implements ActionListener{
 				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
 		SetUp up = new SetUp(names,roles);
-		gc.start(up.getPlayerInfo(), -1,true);
+		gc.start(up.getPlayerInfo(), 4,true);
 	}
 }

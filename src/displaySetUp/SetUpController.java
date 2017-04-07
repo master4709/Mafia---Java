@@ -123,7 +123,7 @@ public class SetUpController implements ActionListener{
 		rsp.clearRolesSelected();
 		for (JButton roleButton : rsp.getRoleButtons()) {
 			roleButton.setEnabled(true);
-			roleButton.setBackground(Colors.grey);
+			roleButton.setBackground(Colors.defaultButtonBackgroundColor);
 		}
 		rsp.getAssignTownies().setEnabled(true);
 		rsp.getContinueButton().setVisible(false);
@@ -164,7 +164,6 @@ public class SetUpController implements ActionListener{
 		final int rolesSelectedSize = rsp.getRolesSelected().size();
 		final int playerNamesSize = pnp.getPlayerNames().size();
 
-		source.setBackground(Colors.white);
 		source.setEnabled(false);
 
 		rsp.getPlayersLeft().setText(String.valueOf(

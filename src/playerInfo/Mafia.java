@@ -52,18 +52,18 @@ public class Mafia extends Player {
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Mafia: Something";
 	}
 
 	@Override
 	public String getRoleInfo() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Do nothing at night";
 	}
 
 	@Override
 	public String getRoleGoal() {
 		// TODO Auto-generated method stub
-		return null;
+		return "To make the majority of the town Mafia members";
 	}
 }

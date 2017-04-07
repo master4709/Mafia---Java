@@ -53,12 +53,12 @@ public class LoadFile {
 				String name;
 				if(role.contains("Mafia")){
 					role+=" "+line.get(3);
-					name = line.get(4);
+					name = getName(line,4);
 				}else if(role.contains("Lyncher")){
 					lynchTarget = Integer.parseInt(line.get(3));
-					name = line.get(4);
+					name = getName(line,4);
 				}else{
-					name = line.get(3);
+					name = getName(line,3);
 				}
 				
 				switch(role){
@@ -81,6 +81,14 @@ public class LoadFile {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private String getName(List<String> line, int place){
+		String name="";
+		for(int i=place;i<line.size();i++){
+			name+=line.get(i)+" ";
+		}
+		return name;
 	}
 	
 	public List<Player> getPlayers(){

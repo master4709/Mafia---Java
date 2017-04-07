@@ -43,9 +43,10 @@ public class Doctor extends Town{
 	 */
 	@Override
 	public int doAction(Player p){
-		if(getStatus() != ACTIVE){
-			if(p.getStatus() == TARGETED){ 
-				return HEALED;
+		if(getStatus()!=0 && getInBar()!=1){
+			if(p.getStatus() == 2){ 
+				System.out.print("ACTIVE ");
+				return 3;
 			}
 		} return p.getStatus();
 	}

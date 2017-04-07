@@ -2,9 +2,10 @@
 package displayGame;
 
 import myJStuff.*;
-import playerInfo.Player;
 
 import java.awt.event.ActionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class DayPanel extends MyPanel{
 	private JButton btnContinue;
 	
 	private JButton btnHome;
+	private JButton btnViewPlayers;
 	//List of buttons representing each player that is alive
 	//Pressing a button will set them as the target for the day lynching
 	private List<JButton> playerButtonList = new ArrayList<>();
@@ -49,11 +51,6 @@ public class DayPanel extends MyPanel{
 	 * Displays that it is Day Time and rules of the day
 	 */
 	private void displayNorth(){
-
-		btnHome = new MyButton("Home",buttonFont);
-		north.add(btnHome,"cell 0 0,alignx left,aligny top");
-		btnHome.addActionListener(globalListener);
-		btnHome.setName("Home");
 		
 		lblDayTime = new MyLabel("Day Time", textColor, titleFont);
 		north.add(lblDayTime, "flowy,cell 0 0 2 0,alignx center");
@@ -71,36 +68,34 @@ public class DayPanel extends MyPanel{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
+		btnHome = new MyButton("Home",buttonFont);
+		south.add(btnHome,"cell 0 0,alignx left");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home");	
+		
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
-		south.add(btnContinue, "cell 0 0, alignx center");
+		south.add(btnContinue, "cell 1 0, alignx center");
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_DayPanel");
+		
+		btnViewPlayers = new MyButton("Players",buttonFont);
+		south.add(btnViewPlayers,"cell 2 0,alignx right");
+		btnViewPlayers.addActionListener(packageListener);
+		btnViewPlayers.setName("ViewPlayers_DayPanel");
 	}
 	/**
-	 * Creates all of the buttons representing each player that is alive
+	 * Creates a button representing a player for the Center Panel
+	 * @param name - String for the text displayed on the JButotn
+	 * @param position - index value of player and location on center grid y value
 	 */
-	public void displayCenter(List<Player> playerInfo){
-		//Loops through the list of players and create a button for each player
-		for(Player p: playerInfo){
-			if(p.getStatus()!=0){
-				displayPlayerButton(p);
-			}
-		}
-	}
-	/**
-	 * Creates a button for a player when called in displayCenter()
-	 * 
-	 * @param i - index value of player and location on center grid y value
-	 */
-	private void displayPlayerButton(Player p){
-		//Create string of the players name and role (debug)
-		String text = p.getName();
+	public void displayPlayerButton(String name, int position){
 		//if(test) {text = text+" | "+playerInfo.get(i).getRole();}
-		JButton btnPlayer = new MyButton(text);//Create a new button with passing the String text
-		btnPlayer.setName("Day_"+Integer.toString(p.getPosition()));//Sets the name of the button to the index value of the player
-		center.add(btnPlayer, "cell 0 "+p.getPosition()+",growx");//Add the button to the center panel
+		JButton btnPlayer = new MyButton(name);//Create a new button with passing the String text
+		btnPlayer.setName("Day_"+Integer.toString(position));//Sets the name of the button to the index value of the player
+		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
+		btnPlayer.setFont(new MyFont(setButtonFont(name)));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
@@ -133,5 +128,21 @@ public class DayPanel extends MyPanel{
 	
 	public void setContinueButtonVisible(boolean bool){
 		btnContinue.setVisible(bool);
+	}
+	
+	private int setButtonFont(String text){
+		int font = 10;
+		
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+		int textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
+		
+		int screenWidth = 480;
+		
+		while(font<30 && textWidth<screenWidth-100){
+			font++;
+			textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
+		}
+		return font;
 	}
 }

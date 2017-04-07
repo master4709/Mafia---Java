@@ -5,6 +5,8 @@ import myJStuff.*;
 import playerInfo.Player;
 
 import java.awt.event.ActionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -71,27 +73,32 @@ public class ViewAllPlayersPanel extends MyPanel{
 		
 	}
 	/**
-	 * Creates all of the buttons representing each player that is alive
+	 * Creates a button representing a player for the Center Panel
+	 * @param name - String for the text displayed on the JButotn
+	 * @param position - index value of player and location on center grid y value
 	 */
-	public void displayCenter(List<Player> playerInfo){
-		//Loops through the list of players adn create a button for each player
-		for(Player p: playerInfo){
-			displayPlayerButton(p);
-		}
+	public void displayPlayerButton(String name, int position){
+		//if(test) {text = text+" | "+playerInfo.get(i).getRole();}
+		JButton btnPlayer = new MyButton(name);//Create a new button with passing the String text
+		btnPlayer.setName("Select_"+Integer.toString(position));
+		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
+		btnPlayer.addActionListener(packageListener);//Add action listener 
+		btnPlayer.setFont(new MyFont(setButtonFont(name)));
 	}
-
-	/**
-	 * Creates a button for a player when called in displayCenter()
-	 * @param i - 
-	 */
-	private void displayPlayerButton(Player p){
-		//Create string of the players name
-		String text = p.getName();
-		//Create a new button with passing the String text
-		JButton btnPlayer = new MyButton(text);
-		btnPlayer.setName("Select_"+Integer.toString(p.getPosition()));
-		String position = "cell 0 "+p.getPosition()+",growx";
-		center.add(btnPlayer, position); 
-		btnPlayer.addActionListener(packageListener);//Add action listener
+	
+	private int setButtonFont(String text){
+		int font = 10;
+		
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+		int textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
+		
+		int screenWidth = 480;
+		
+		while(font<30 && textWidth<screenWidth-100){
+			font++;
+			textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
+		}
+		return font;
 	}
 }

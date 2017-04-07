@@ -7,10 +7,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import myJStuff.Colors;
-import myJStuff.MyButton;
-import myJStuff.MyLabel;
-import myJStuff.MyPanel;
+import myJStuff.*;
 
 
 /**

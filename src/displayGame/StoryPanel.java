@@ -2,12 +2,17 @@ package displayGame;
 
 import myJStuff.*;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import logic.Story;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Story Panel
  * @author: Ronelle Bakima
@@ -19,7 +24,7 @@ public class StoryPanel extends MyPanel {
 	private JButton btnContinue;
 	private JLabel name;
 	
-	private JLabel story;
+	private JTextArea story;
 	private JLabel location;
 	private JLabel event;
 	
@@ -85,7 +90,7 @@ public class StoryPanel extends MyPanel {
 	private void displayCenter() {
 		line_story = new MyLabel("Here's what happened...", textColor, textFont);
 		center.add(line_story, "cell 0 3");
-		story = new MyLabel("", 20);
+		story = new MyTextArea("", 20);
 		center.add(story, "cell 0 4");
 		event = new MyLabel("", 20);
 		center.add(event, "cell 0 5");	
@@ -94,10 +99,12 @@ public class StoryPanel extends MyPanel {
 	/**Call the story class here also to receive the getters for the location, event, etc....
 	 * Sets all of the labels and such for the story in here
 	 */
-	public void setStory(String str, boolean dead){
+	public void setStory(String str, boolean dead, int screenWidth){
 		Story s = new Story(str);
-		s.information();;
+		s.information();
 		story.setText(s.getStory());
+		story.setLineWrap(true);
+		story.setBounds(0, 0, screenWidth-50, 100);
 		location.setText(s.getLocation());
 		name.setText(s.getName());
 		
@@ -111,5 +118,7 @@ public class StoryPanel extends MyPanel {
 		event.setText(eventTxt);
 	}
 	
-
+	private void setStory(String stroy){
+		
+	}
 }

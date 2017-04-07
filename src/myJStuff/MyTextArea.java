@@ -32,4 +32,14 @@ public class MyTextArea extends JTextArea{
 	}
 	
 	
+	public MyTextArea(String text,int font){
+
+		setText(text);
+		setForeground(Colors.white);
+		setBackground(Colors.black);
+		setFont(new MyFont(font));
+		setWrapStyleWord(true);
+	}
+	
+	
 }

@@ -162,7 +162,7 @@ public class GameController implements ActionListener{
 	 * @param dead - Boolean if the player is dead or alive
 	 */
 	private void switchStory(String name, boolean dead){
-		sp.setStory(name,dead);
+		sp.setStory(name,dead,(int) frame.getWidth());
 		switchPanel(panelStory);
 	}
 	/**

@@ -60,12 +60,12 @@ public class RoleSelectionPanel extends MyPanel{
     }
 
     private void displayNorth() {
-        playersLeft = new MyLabel("", Colors.black, 20);
-        JLabel title = new MyLabel("Select possible player roles", Colors.black, 30);
+        playersLeft = new MyLabel("", 20);
+        JLabel title = new MyLabel("Select possible player roles", 30);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         north.add(title, "cell 0 0,alignx center");
 
-        JLabel centralLabel = new MyLabel("Players remaining: ", Colors.black, 20);
+        JLabel centralLabel = new MyLabel("Players remaining: ", 20);
         centralLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         Border selectRolesMargin = new EmptyBorder(10, 10, 20, 10);
         centralLabel.setBorder(new CompoundBorder(contentPane.getBorder(), selectRolesMargin));
@@ -96,11 +96,11 @@ public class RoleSelectionPanel extends MyPanel{
         continueButton.setName("Continue_RoleSelectionPanel");
         continueButton.addActionListener(globalListener);
 
-        assignTownies = new MyButton("Assign the rest as Townie", Colors.white, Colors.grey, 15);
+        assignTownies = new MyButton("Assign the rest as Townie", 15);
         assignTownies.setName("AssignTownies_RoleSelection");
         assignTownies.addActionListener(packageListener);
 
-        JButton resetBtn = new MyButton("Reset", Colors.white, Colors.grey, 15);
+        JButton resetBtn = new MyButton("Reset", 15);
         resetBtn.setName("Reset_RoleSelection");
         resetBtn.addActionListener(packageListener);
         south.add(resetBtn, "cell 0 0, alignx center");

@@ -55,31 +55,21 @@ public class Godfather extends Mafia {
 		return getRole()+ " " + getName();
 	}
 	
-	/**
-	 * returns the role name
-	 */
+	/** returns the role name */
 	@Override
 	public String getRole() {
-		// TODO Auto-generated method stub
 		return "Mafia- GodFather";
 	}
 
-	/**
-	 * returns the role information
-	 * for directions
-	 */
+	/** returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
-		// TODO Auto-generated method stub
 		return "Hidden from the Detective";
 	}
 
-	/**
-	 * returns the goal of the role
-	 */
+	/** returns the goal of the role*/
 	@Override
 	public String getRoleGoal() {
-		// TODO Auto-generated method stub
 		return "To make the majority of the town mafia members";
 	}
 }

@@ -2,7 +2,7 @@ package playerInfo;
 /**
  * Unlike the Mafia class, some Town Players are classified
  * only as town players.
- * @author nestr
+ * @author Elvin Limpin 30018832
  *
  */
 public class Town extends Player {
@@ -50,31 +50,21 @@ public class Town extends Player {
 		return getRole()+ " " + getName();
 	}
 
-	/**
-	 * returns the role name
-	 */
+	/** returns the role name */
 	@Override
 	public String getRole() {
-		// TODO Auto-generated method stub
 		return "Townie";
 	}
 
-	/**
-	 * returns the role information
-	 * for directions
-	 */
+	/** returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
-		// TODO Auto-generated method stub
 		return "Do nothing at night";
 	}
 
-	/**
-	 * returns the goal of the role
-	 */
+	/** returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
-		// TODO Auto-generated method stub
 		return "Lynch all Mafia to win the game";
 	}
 	

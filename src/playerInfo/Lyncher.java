@@ -2,7 +2,7 @@ package playerInfo;
 /**
  * Unlike the Mafia class, some Town Players are classified
  * only as town players.
- * @author nestr
+ * @author Elvin Limpin 30018832
  *
  */
 public class Lyncher extends Player {
@@ -36,9 +36,7 @@ public class Lyncher extends Player {
 		super(l);
 	}
 
-	/**
-	 * The lyncher does not do anything at night
-	 */
+	/** The lyncher does not do anything at night */
 	@Override
 	public int doAction(Player p) {
 		// These players do nothing
@@ -49,9 +47,7 @@ public class Lyncher extends Player {
 		return getRole()+ " " + getName();
 	}
 
-	/**
-	 * returns the role name
-	 */
+	/** returns the role name */
 	@Override
 	public String getRole() {
 		// TODO Auto-generated method stub
@@ -68,9 +64,7 @@ public class Lyncher extends Player {
 		return "Do nothing at night";
 	}
 
-	/**
-	 * returns the goal of the role
-	 */
+	/** returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
 		// TODO lynch target		

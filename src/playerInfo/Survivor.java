@@ -2,7 +2,7 @@ package playerInfo;
 /**
  * Unlike the Mafia class, some Town Players are classified
  * only as town players.
- * @author nestr
+ * @author Elvin Limpin
  *
  */
 public class Survivor extends Player {
@@ -36,9 +36,7 @@ public class Survivor extends Player {
 		super(s);
 	}
 
-	/**
-	 * The lyncher does not do anything at night
-	 */
+	/** The lyncher does not do anything at night */
 	@Override
 	public int doAction(Player p) {
 		// These players do nothing
@@ -49,31 +47,21 @@ public class Survivor extends Player {
 		return getRole()+ " " + getName();
 	}
 
-	/**
-	 * returns the role name
-	 */
+	/** returns the role name */
 	@Override
 	public String getRole() {
-		// TODO Auto-generated method stub
 		return "Survivor";
 	}
 
-	/**
-	 * returns the role information
-	 * for directions
-	 */
+	/** returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
-		// TODO Auto-generated method stub
 		return "Do nothing at night";
 	}
 
-	/**
-	 * returns the goal of the role
-	 */
+	/** returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
-		// TODO Auto-generated method stub
 		return "Be the last one alive to win the game solo";
 	}
 	

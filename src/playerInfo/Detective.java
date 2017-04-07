@@ -56,31 +56,21 @@ public class Detective extends Town{
 		return getRole()+ " " + getName();
 	}	
 	
-	/**
-	 * returns the role name
-	 */
+	/** returns the role name */
 	@Override
 	public String getRole() {
-		// TODO Auto-generated method stub
 		return "Detective";
 	}
 
-	/**
-	 * returns the role information
-	 * for directions
-	 */
+	/** returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
-		// TODO Auto-generated method stub
 		return "Reveals the team for one player per night";
 	}
 
-	/**
-	 * returns the goal of the role
-	 */
+	/** returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
-		// TODO Auto-generated method stub
 		return "Lynch all Mafia to win the game";
 	}
 	

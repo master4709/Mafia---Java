@@ -39,9 +39,7 @@ public class Hitman extends Mafia {
 		super(h);
 	}
 
-	/**
-	 * Unique action for the hitman
-	 */
+	/** Unique action for the hitman */
 	@Override
 	public int doAction(Player p) {
 		if(getStatus()!=0 && getInBar()!=1){//not dead or stopped by barman and the player has not been protected by the Bodyguard
@@ -57,31 +55,21 @@ public class Hitman extends Mafia {
 	}
 	
 	
-	/**
-	 * returns the role name
-	 */
+	/** returns the role name */
 	@Override
 	public String getRole() {
-		// TODO Auto-generated method stub
 		return "Mafia: Hitman";
 	}
 
-	/**
-	 * returns the role information
-	 * for directions
-	 */
+	/** returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
-		// TODO Auto-generated method stub
 		return "May kill new person each night";
 	}
 
-	/**
-	 * returns the goal of the role
-	 */
+	/** returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
-		// TODO Auto-generated method stub
 		return "To make the majority of the town mafia members";
 	}
 }

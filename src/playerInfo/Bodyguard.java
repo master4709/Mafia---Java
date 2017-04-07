@@ -56,31 +56,21 @@ public class Bodyguard extends Town{
 	}
 	
 	
-	/**
-	 * returns the role name
-	 */
+	/** returns the role name */
 	@Override
 	public String getRole() {
-		// TODO Auto-generated method stub
 		return "Bodyguard";
 	}
 
-	/**
-	 * returns the role information
-	 * for directions
-	 */
+	/** returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
-		// TODO Auto-generated method stub
 		return "May save another person by dying in their place";
 	}
 
-	/**
-	 * returns the goal of the role
-	 */
+	/** returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
-		// TODO Auto-generated method stub
 		return "Lynch all Mafia to win the game";
 	}
 }

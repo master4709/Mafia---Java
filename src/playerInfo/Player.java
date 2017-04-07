@@ -32,28 +32,21 @@ public abstract class Player {
 	
 	private boolean isLynched; 
 	
-	/**
-	 * Constants for status
-	 */
+	/** Constants for status */
+	
 	protected final int DEAD = 0;
 	protected final int ALIVE = 1;
 	protected final int TARGETED = 2;
 	protected final int HEALED = 3;
 	protected final int PROTECTED = 4;
 	
-	/**
-	 * Used by the detective to determine affiliation
-	 */
+	/** Used by the detective to determine affiliation */
 	protected final int TEAMTOWN = 6;
 	
-	/**
-	 * Used by the detective to determine affiliation
-	 */
+	/** Used by the detective to determine affiliation */
 	protected final int TEAMMAFIA  = 7;
 	
-	/**
-	 * on default, protected, or healed
-	 */
+	/** on default, protected, or healed */
 	protected final int ACTIVE = 1 | 2 | 3 | 4;
 	
 	/**
@@ -120,7 +113,6 @@ public abstract class Player {
 	 * @param p
 	 * @return new Status of player
 	 */
-	
 	public abstract int doAction(Player p);
 	
 	public abstract String getRole();
@@ -139,6 +131,10 @@ public abstract class Player {
 		this.status = status;
 	}
 	
+	/** In bar means the player is stopped form their
+	 * action by the barman
+	 * @param inBar
+	 */
 	public void setInBar(int inBar){
 		this.inBar = inBar;
 	}
@@ -159,10 +155,12 @@ public abstract class Player {
 		return this.status;
 	}
 	
+	/** returns whether the player is in the bar or not */
 	public int getInBar(){
 		return inBar;
 	}
 	
+	/** returns whether the player was lynched */
 	public boolean wasLynched(){
 		return this.isLynched;
 	}

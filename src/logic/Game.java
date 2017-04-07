@@ -32,7 +32,7 @@ public class Game{
 	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Mafia- Godfather","Doctor"));
 	
 	//Index value for the target of the Lyncher
-	private int lynchTarget;
+	private int lynchTarget = -1;
 	/**
 	 * Constructor
 	 * Takes params values and stores them into local versions
@@ -42,7 +42,7 @@ public class Game{
 	 * @param lynchTarget
 	 */
 	public Game(List<Player> playerInfo, int lynchTarget, boolean test){
-		this.lynchTarget = lynchTarget;
+		//this.lynchTarget = lynchTarget;
 		this.playerInfo = playerInfo;
 		mafiaMembers();
 		alivePlayers(test);
@@ -59,15 +59,21 @@ public class Game{
 			}
 		}
 	}
-	
+	/**
+	 * Creates a list of player names
+	 * If they are dead, adds "Dead | " to the front f the players name
+	 * @param test - if true, adds the players role to the players name
+	 */
 	private void alivePlayers(boolean test){
 		for(Player p: playerInfo){
 			if(p.getStatus()!=0){
 				if(test){
-					playerNames.add(p.getName()+" "+p.getRole());
+					playerNames.add(p.getName()+" | "+p.getRole());
 				}else{
 					playerNames.add(p.getName());
 				}
+			}else{
+				playerNames.add("Dead | "+p.getName());
 			}
 			
 		}
@@ -98,10 +104,12 @@ public class Game{
 			for(Player p: playerInfo){
 				if(p.getRole().contains(role)){
 					if(p.getTarget()!=-1){
-						if(getPlayer(p.getTarget()).getStatus()==4){
+						//If the player doing action was a killer, checks if the target was protected by the bodyguard
+						//If yes, targets the bodyguard instead of the target of the player
+						if(role.contains("Hitman") || role.contains("Vigilante") && getPlayer(p.getTarget()).getStatus()==4){
 							setPlayerStatus(getPlayer("Bodyguard").getPosition(),p.doAction(getPlayer("Bodyguard")));
 							System.out.println(p.toString() +" is doing action against player "+getPlayer("Bodyguard").toString());
-						}else{
+						}else{//Targets that player
 							setPlayerStatus(p.getTarget(),p.doAction(getPlayer(p.getTarget())));
 							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).toString());
 						}
@@ -222,6 +230,10 @@ public class Game{
 	
 	public int getLynchTarget(){
 		return lynchTarget;
+	}
+	
+	public int getPlayerTotal(){
+		return playerInfo.size();
 	}
 	
 	public List<String> getPlayerNames(){

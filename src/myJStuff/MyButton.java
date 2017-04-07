@@ -15,6 +15,14 @@ public class MyButton extends JButton{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Custom constructor for buttons that comes
+	 * with the default font
+	 * @param text
+	 * @param foreground
+	 * @param background
+	 * @param i
+	 */
 	public MyButton(String text, Color foreground, Color background, int i){
 		setText(text);
 		setForeground(foreground);
@@ -22,6 +30,10 @@ public class MyButton extends JButton{
 		setFont(new MyFont(i));
 	}
 
+	/**
+	 * Default constructor for buttons
+	 * @param text
+	 */
 	public MyButton(String text){
 		setText(text);
 		setForeground(Colors.defaultButtonTextColor);
@@ -29,12 +41,26 @@ public class MyButton extends JButton{
 		setFont(new MyFont(30));
 	}
 
+	/**
+	 * Constructor that takes custom text and text-size
+	 * @param text
+	 * @param size
+	 */
 	public MyButton(String text, int size){
 		setText(text);
 		setForeground(Colors.defaultButtonTextColor);
 		setBackground(Colors.defaultButtonBackgroundColor);
 		setFont(new MyFont(size));
 	}
+	
+	/**
+	 * Alternative custom constructor that takes
+	 * a specific font
+	 * @param text
+	 * @param btnTxtColor
+	 * @param btnBackgroundColor
+	 * @param buttonFont
+	 */
 	public MyButton(String text, Color btnTxtColor, Color btnBackgroundColor, MyFont buttonFont) {
 		setText(text);
 		setForeground(btnTxtColor);

@@ -23,6 +23,11 @@ public class MyLabel extends JLabel{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/** Custom constructor
+	 * @param text
+	 * @param color
+	 * @param size
+	 **/
 	public MyLabel(
 			String text,
 			Color color,
@@ -33,10 +38,21 @@ public class MyLabel extends JLabel{
 		setFont(new MyFont(size));
 	}
 
+	/**
+	 * Constructor sets default values
+	 * except for the string
+	 * @param string
+	 */
 	public MyLabel(String string) {
 		this(string, Colors.white, 25);
 	}
 
+	/**
+	 * Constructor sets default value for
+	 * color (white)
+	 * @param string
+	 * @param i
+	 */
 	public MyLabel(String string, int i) {
 		this(string, Colors.white, i);
 	}

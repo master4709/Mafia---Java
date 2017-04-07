@@ -18,16 +18,22 @@ import playerInfo.Town;
 import playerInfo.Vigilante;
 
 /**
- * This class will create a list to store all the information about each player.  
+ * This class will create a list to store all the information 
+ * about each player and pass that list by a getter method.
+ * It will shuffle the roles and then assign them to each names.
+ * Also it will assign a target for the Lyncher role and pass it by a getter method.
+ * 
  * Author: Mahsa Lotfi 10072013 
  */	
 public class SetUp {
-		
+		/**
+		 * Instance variables
+		 */
 		private List<String> names;
-		//This int stores the information for the lyncher target	
-		private int lynchTargetID;
 		private List<String> roles;
 		List<Player> playerInfo = new ArrayList<>();
+		private int lynchTargetID;
+			
 		
 		/**
 		 * Constructor with 2 arguments. It will initialize names and roles of the 
@@ -44,7 +50,7 @@ public class SetUp {
 	
 			
 		/**
-		 * Method shuffles the roles and matches them with the names
+		 * Method to shuffle the roles and matches them with the names.
 		 */
 		public void setAllPlayers(){
 			Collections.shuffle(roles);
@@ -54,7 +60,7 @@ public class SetUp {
 		}
 		
 		/**
-		 * Recursively finds and sets a target for the lyncher
+		 * This method will find and set a target for the lyncher.
 		 * @param calls
 		 * @return lynchTargetID
 		 */
@@ -88,8 +94,7 @@ public class SetUp {
 		}
 		
 		/**
-		 * Finds the position of a role or the
-		 * first Townie
+		 * This method will find the position of a role or the first Townie
 		 * @param role
 		 * @return position of the player
 		 */

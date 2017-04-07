@@ -25,15 +25,15 @@ public class SetUpController implements ActionListener{
 	private JPanel panelCount;
 	private JPanel panelName;
 	private JPanel panelRole;
-	
-	//Current amount of players selected on the panelCount
+
 	private int playerTotal;
 
-    /***
-     * Initializes the setup frame
-     *
-     * @param frame frame
-     */
+	/***
+	 * Initializes the setup frame and specifies the global listener.
+	 *
+	 * @param frame setup frame
+	 * @param globalListener global listener
+	 */
 	public SetUpController(JFrame frame, ActionListener globalListener){
 		this.globalListener = globalListener;
 		this.frame = frame;
@@ -41,8 +41,9 @@ public class SetUpController implements ActionListener{
 	}
 
     /***
-     * Create panel for selecting number of total players
-     * @see 
+     * Create appropriate panels associated with the setup process.
+	 * Set default total player to 5.
+     *
      */
 	public void start(){
 		pcp = new PlayerCountPanel(this,globalListener);
@@ -57,7 +58,13 @@ public class SetUpController implements ActionListener{
 		switchPanel(panelCount);
 		
 	}
-	
+
+	/***
+	 * Sets the current pane to invisible and set the specified panel
+	 * to visible.
+	 *
+	 * @param panel to switch to
+	 */
 	public void switchPanel(JPanel panel){
 		System.out.println(panel.getName());
 		frame.getContentPane().setVisible(false);
@@ -65,6 +72,12 @@ public class SetUpController implements ActionListener{
 		frame.getContentPane().setVisible(true);
 	}
 
+	/***
+	 * A method for the package listener.
+	 * Handles appropriate events that are involved in the setup process.
+	 *
+	 * @param e event
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton)e.getSource();
@@ -101,6 +114,11 @@ public class SetUpController implements ActionListener{
 		}
 		}
 
+	/***
+	 * Clears the current selection of roles and configure
+	 * corresponding ui components to be enabled and set appropriate visibility
+	 * based on the current state of selections.
+	 */
 	private void resetSelections() {
 		rsp.clearRolesSelected();
 		for (JButton roleButton : rsp.getRoleButtons()) {
@@ -112,6 +130,13 @@ public class SetUpController implements ActionListener{
 		rsp.getPlayersLeft().setText(String.valueOf(pnp.getPlayerNames().size()));
 	}
 
+	/***
+	 * Assigns the remaining players as Townies and configure
+	 * corresponding ui components to be enabled and set appropriate visibility
+	 * based on the current state of selections.
+	 *
+	 * @param source button event source
+	 */
 	private void assignRestAsTownies(JButton source) {
 		final int initialSize = rsp.getRolesSelected().size();
 		for (int i = 0; i < pnp.getPlayerNames().size() - initialSize; i++) {
@@ -126,6 +151,14 @@ public class SetUpController implements ActionListener{
 		rsp.getContinueButton().setVisible(true);
 	}
 
+	/***
+	 * Adds the selected role to the role selection list.
+	 * Configure corresponding ui components to be enabled and set appropriate visibility
+	 * based on the current state of selections.
+	 * Updates the players remaining label to its appropriate value.
+	 *
+	 * @param source button event source corresponding to a specific role
+	 */
 	private void onRoleButtonClick(JButton source) {
 		rsp.addRole(source.getText());
 		final int rolesSelectedSize = rsp.getRolesSelected().size();
@@ -142,6 +175,14 @@ public class SetUpController implements ActionListener{
 
 	}
 
+	/***
+	 * Verifies current number of selected roles and configure
+	 * corresponding ui components to be enabled and set appropriate visibility
+	 * based on the current number of selections.
+	 *
+	 * @param playerNamesSize total number of players
+	 * @param rolesSelectedSize total number of selected roles
+	 */
 	private void verifySelections(int playerNamesSize, int rolesSelectedSize) {
 		if (playerNamesSize == rolesSelectedSize) {
 			rsp.getContinueButton().setVisible(true);
@@ -154,13 +195,17 @@ public class SetUpController implements ActionListener{
 		}
 	}
 
+	/***
+	 *
+	 * @return list of type string containing names of each player.
+	 */
 	public List<String> getPlayerNames(){
 		return pnp.getPlayerNames();
 	}
 	
 	/**
-	 * This needs to return the list of roles somehow
-	 * @return
+	 *
+	 * @return list of type string containing selected roles.
 	 */
 	public List<String> getRoles(){
 		return rsp.getRolesSelected();

@@ -192,10 +192,9 @@ public class GameController implements ActionListener{
 		}
 	}
 	/**
-	 * Finds the next player who is alive in the list of players
-	 * Uses recursion and a global variable called position to loop through the list of players
-	 * If the player is alive displays the CheckPLayer Panel, if not finds the next player
-	 * Once the position has gone beyond the index of playerInfo, calls the nightAction method
+	 * Resets the target for the next player to -1
+	 * Moves the position in the list up one
+	 * Finds the net player in the list that is not dead and sets it to position
 	 */
 	private void findNextPlayer(){
 		target = -1;
@@ -205,6 +204,7 @@ public class GameController implements ActionListener{
 			System.out.println("End of Night");
 			nightAction();
 		}else{
+			//Skips the checkPlayerPanel is the game is in testing mode
 			if(test){
 				switchNight();
 			}else{

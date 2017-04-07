@@ -53,12 +53,6 @@ public class Hitman extends Mafia {
 		return p.getStatus();
 	}
 	
-	@Override
-	public String toString(){
-		return getRole()+ " " + getName();
-	}
-	
-	
 	/** returns the role name */
 	@Override
 	public String getRole() {

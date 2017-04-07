@@ -24,14 +24,11 @@ public class MyLabel extends JLabel{
 	private static final long serialVersionUID = 1L;
 
 	/** Custom constructor
-	 * @param text
-	 * @param color
-	 * @param size
+	 * @param text - text to appear
+	 * @param color - color of the font
+	 * @param size - size of the font
 	 **/
-	public MyLabel(
-			String text,
-			Color color,
-			int size){
+	public MyLabel(String text,	Color color, int size){
 		
 		setText(text);
 		setForeground(Colors.white);
@@ -41,7 +38,7 @@ public class MyLabel extends JLabel{
 	/**
 	 * Constructor sets default values
 	 * except for the string
-	 * @param string
+	 * @param string - the font displayed
 	 */
 	public MyLabel(String string) {
 		this(string, Colors.white, 25);
@@ -50,8 +47,8 @@ public class MyLabel extends JLabel{
 	/**
 	 * Constructor sets default value for
 	 * color (white)
-	 * @param string
-	 * @param i
+	 * @param string - text to display
+	 * @param i - size of the font
 	 */
 	public MyLabel(String string, int i) {
 		this(string, Colors.white, i);

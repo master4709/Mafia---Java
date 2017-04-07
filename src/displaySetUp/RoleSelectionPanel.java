@@ -33,8 +33,11 @@ public class RoleSelectionPanel extends MyPanel{
 
 
     /***
-     * Constructor. Specifies a list of player names
-     * @param
+     * Class constructor. Specifies the package listener associated with the setup process
+     * and the global listener.
+     *
+     * @param packageListener Package listener
+     * @param globalListener global listener
      */
     public RoleSelectionPanel(ActionListener packageListener, ActionListener globalListener) {
     	this.packageListener = packageListener;
@@ -45,6 +48,9 @@ public class RoleSelectionPanel extends MyPanel{
 
     }
 
+    /***
+     * Create button for each role and add to center of existing BorderLayout.
+     */
     private void displayCenter() {
         for (int count = 0; count < 10; count++) {
             if (!availableRoles.get(count).equals(Role.TOWNIE)) {
@@ -53,12 +59,14 @@ public class RoleSelectionPanel extends MyPanel{
                 roleBtn.addActionListener(packageListener);
                 roleButtons.add(roleBtn);
                 center.add(roleBtn, "cell 0 "+count+",growx");
-//                contentPane.add(roleBtn, "span, pushx, grow, wrap");
             }
         }
 
     }
 
+    /***
+     * Create labels to be displayed in north of existing BorderLayout.
+     */
     private void displayNorth() {
         playersLeft = new MyLabel("", 20);
         JLabel title = new MyLabel("Select possible player roles", 30);
@@ -73,7 +81,7 @@ public class RoleSelectionPanel extends MyPanel{
         north.add(playersLeft, "wrap");
     }
 
-    /**
+    /***
      * Initialize contents.
      */
     private void initialize() {
@@ -88,7 +96,10 @@ public class RoleSelectionPanel extends MyPanel{
         displaySouth();
         
     }
-    
+
+    /***
+     * Create labels to be displayed in south of existing BorderLayout.
+     */
     private void displaySouth(){
         continueButton = new MyButton("Continue",buttonFont);
     	south.add(continueButton,"cell 0 1,growx");
@@ -108,30 +119,53 @@ public class RoleSelectionPanel extends MyPanel{
         south.add(assignTownies, "cell 0 0, alignx right");
     }
 
+    /***
+     * Clears the list of selected roles.
+     */
     public void clearRolesSelected() {
         rolesSelected.clear();
     }
-    
+
+    /***
+     * @return list of buttons for each role
+     */
     ArrayList<JButton> getRoleButtons() {
         return roleButtons;
     }
-    
+
+    /***
+     * @return JButton that handles assignment of remaining players as townie
+     */
     JButton getAssignTownies() {
         return assignTownies;
     }
 
+    /***
+     * @return JLabel that displays the remaining amount of players who has
+     * not selected a role.
+     */
     JLabel getPlayersLeft() {
         return playersLeft;
     }
 
+    /***
+     * @return a list of type string containing selected roles
+     */
     ArrayList<String> getRolesSelected() {
         return new ArrayList<>(rolesSelected);
     }
 
+    /***
+     * Adds the specified role to the selected roles list
+     * @param role to add
+     */
     void addRole(String role) {
         rolesSelected.add(role);
     }
 
+    /***
+     * @return continue button in existing panel
+     */
     JButton getContinueButton() {
         return continueButton;
     }

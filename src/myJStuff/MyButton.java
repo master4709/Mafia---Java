@@ -32,7 +32,7 @@ public class MyButton extends JButton{
 
 	/**
 	 * Default constructor for buttons
-	 * @param text
+	 * @param text - text to display
 	 */
 	public MyButton(String text){
 		setText(text);
@@ -43,8 +43,8 @@ public class MyButton extends JButton{
 
 	/**
 	 * Constructor that takes custom text and text-size
-	 * @param text
-	 * @param size
+	 * @param text - text to display
+	 * @param size - size of the font
 	 */
 	public MyButton(String text, int size){
 		setText(text);
@@ -56,10 +56,10 @@ public class MyButton extends JButton{
 	/**
 	 * Alternative custom constructor that takes
 	 * a specific font
-	 * @param text
+	 * @param text - text to display
 	 * @param btnTxtColor
 	 * @param btnBackgroundColor
-	 * @param buttonFont
+	 * @param buttonFont - font for the button
 	 */
 	public MyButton(String text, Color btnTxtColor, Color btnBackgroundColor, MyFont buttonFont) {
 		setText(text);

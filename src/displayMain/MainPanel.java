@@ -12,7 +12,13 @@ import myJStuff.MyPanel;
 /**
  * This class creates panel for Main menu of Mafia game by creating 
  * different panels and putting them together. 
+ * The panels are : North panel, Center panel and South panel. 
  * Each panel contains buttons or labels. Each button is assigned to an action.
+ * There is a "New Game" button which will change the panel to the displaySetUp package. 
+ * The "Continue Game" button will change the panel to the same 
+ * stage that the game was closed before.
+ * The "Rule" and "About" buttons will change the panel to the RulePanel and AboutPanel.
+ * 
  * @author Mahsa Lotfi 10072013
  * 
  */
@@ -32,7 +38,6 @@ public class MainPanel extends MyPanel{
 	private JLabel lblMan;
 	
 	//button for south panel
-	private JButton btnDebug;
 	private MyButton btnTest;
 	
 	/**
@@ -68,7 +73,7 @@ public class MainPanel extends MyPanel{
 	
 	/**
 	 * Method to display contents of south panel. This panel contains 
-	 * the debug button and a button for testing.
+	 * the testing button.
 	 */
 	private void displaySouth(){
 		
@@ -79,7 +84,11 @@ public class MainPanel extends MyPanel{
 	}
 	
 	/**
-	 * Method to display content of center panel. It will set up buttons. 
+	 * Method to display content of center panel. 
+	 * The buttons will be set up in this method.
+	 * Each button will be assigned to a name so 
+	 * the ActionListener can perform specific action
+	 * when the button is pressed.
 	 */
 	private void displayCenter(){
 		btnNewGame = new MyButton("New Game");

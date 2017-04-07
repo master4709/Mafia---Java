@@ -19,8 +19,10 @@ import java.awt.Dimension;
 /**
  * This class creates panel for Rules of Mafia game by creating 
  * different panels and putting them together. 
+ * The panels are : North panel, Center panel and South panel. 
  * Each panel contains button or label or text field. 
  * The back button is assigned to the action of going back to the main menu.  
+ * 
  * @author Mahsa Lotfi 10072013
  *
  */
@@ -57,6 +59,7 @@ public class RulePanel extends MyPanel{
 	
 	/**
 	 * Method to display content of center panel. It will set up the text and scroll panes.
+	 * This method will read the text from a file and present it on the panel.
 	 */
 	private void displayCenter(){
 		//Reading text from a file in data folder and store it as a string.
@@ -70,7 +73,8 @@ public class RulePanel extends MyPanel{
 			inputStream.close();
 		}
 		catch(FileNotFoundException e){
-	    	System.out.println("File not found");
+			e.printStackTrace();
+	    	return;
 	    }	
 		
 		//textField set up.	

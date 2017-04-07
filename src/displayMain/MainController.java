@@ -12,6 +12,7 @@ import javax.swing.JPanel;
  * This class controls 3 panels which are related to the main menu. 
  * The panels are: AboutPanel, RulePanel and MainPanel. 
  * This class will be called first in Controller to begin the game. 
+ * 
  * @author Mahsa Lotfi 10072013
  * 
  */
@@ -22,14 +23,13 @@ public class MainController implements ActionListener {
 	 */
 	
 	private ActionListener globalListener;
-	//JFrame reference 
+	
 	private JFrame frame;
 	
 	private MainPanel mp;
 	private RulePanel rp;
 	private AboutPanel ap;
 	
-	//All of the possible panels to be displayed on the frame
 	private JPanel panelMain;
 	private JPanel panelRule;
 	private JPanel panelAbout;	
@@ -54,7 +54,8 @@ public class MainController implements ActionListener {
 	
 	
 	/**
-	 * Initialize all the panels.
+	 * This method will initialize all the panels 
+	 * related to the main menu.
 	 */
 	public void start(){
 		mp = new MainPanel(this,globalListener);
@@ -69,10 +70,10 @@ public class MainController implements ActionListener {
 	}
 	
 	/**
-	 * Switches the frame to the passed JPanel
+	 * This method will switch the frame to the passed JPanel
 	 * Sets current content pane to invisible
 	 * Sets the frame to the new JPanel
-	 * Sets new contnet pane to visible
+	 * Sets new content pane to visible
 	 * @param panel
 	 */
 	private void switchPanel(JPanel panel){
@@ -86,7 +87,9 @@ public class MainController implements ActionListener {
 	/**
 	 * This method will assign an action to each button in the displayMain Package
 	 * When a button is pressed, the name String of the button is stored as a local variable
-	 * A switch statement is used to compare the name with other string values to find the correct button
+	 * A switch statement is used to compare the name with other string values 
+	 * to find the correct button.
+	 * @param e, ActionEvent e
 	 */
 	public void actionPerformed(ActionEvent e){
 		//Gets the name (NOT TEXT) of the button that was pressed

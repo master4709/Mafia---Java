@@ -11,8 +11,10 @@ import javax.swing.JButton;
 
 /**
  * This class creates About panel for Mafia game by creating 
- * different panels and putting them together. 
+ * different panels and putting them together.
+ * The panels are : North panel, Center panel and South panel. 
  * Each panel contains button or label or text field. 
+ * 
  * @author Mahsa Lotfi 10072013
  * 
  */

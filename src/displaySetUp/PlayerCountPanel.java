@@ -1,15 +1,16 @@
 package displaySetUp;
 
-import myJStuff.*;
-
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
+
+import myJStuff.Colors;
+import myJStuff.MyButton;
+import myJStuff.MyLabel;
+import myJStuff.MyPanel;
 
 
 /**
@@ -45,7 +46,8 @@ public class PlayerCountPanel extends MyPanel{
 		displaySouth();
 		displayCenter();
 	}
-	
+
+	/** Method displays contents in the north **/
 	private void displayNorth(){
 		btnHome = new MyButton("Home",buttonFont);
 		north.add(btnHome,"cell 0 0,alignx left,aligny top");
@@ -60,6 +62,7 @@ public class PlayerCountPanel extends MyPanel{
 		north.add(lblText2, "cell 0 1,alignx center");
 	}
 
+	/** Method displays contents in the center **/
 	private void displayCenter(){
 		//Loops to create a button for each amount of players aloud 
 		for(int i=5;i<=12;i++){
@@ -67,8 +70,11 @@ public class PlayerCountPanel extends MyPanel{
 			displayPlayerButton(i);
 		}
 	}
+	
+	/** Method displays contents in the south**/
 	private void displaySouth(){
-		//Create the button and pass it values for text, foreground and background color, and font
+		//Create the button and pass it values for text
+		//foreground and background color, and font
 		btnContinue = new MyButton("Continue");
 		btnContinue.setName("Continue_PlayerCount");
 		//Add the button to the south panel, button will fill width of screen 
@@ -91,6 +97,10 @@ public class PlayerCountPanel extends MyPanel{
 		buttonList.add(btnPlayer);
 	}
 	
+	/**
+	 * Changes the button selected
+	 * @param position
+	 */
 	public void changeButtonSelected(int position){
 		for(JButton btn: buttonList){
 			if(btn.getName().contains(Integer.toString(position))){

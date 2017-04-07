@@ -34,7 +34,8 @@ public abstract class MyPanel {
 	
 	
 	
-	//Panels that are added to the content pane. All JObjects get added to these panels
+	//Panels that are added to the content pane.
+	//All JObjects get added to these panels
 	protected JPanel contentPane = new JPanel();
 	protected JPanel north;
 	protected JPanel south;
@@ -50,10 +51,7 @@ public abstract class MyPanel {
 	
 	protected Border emptyBorder = BorderFactory.createEmptyBorder();
 	
-	/**
-	 * This default constructor sets up the layout for the GUI
-	 * 
-	 */
+	/** This default constructor sets up the layout for the GUI **/
 	public MyPanel(){
 		
 		setFont();
@@ -86,7 +84,7 @@ public abstract class MyPanel {
 		setBackground(Colors.black);
 	}
 	
-	// Default sizes for certain font templates
+	/** Sets the default font **/
 	private void setFont(){
 		titleFont = 65;
 		textFont = 25;
@@ -95,7 +93,7 @@ public abstract class MyPanel {
 		roleFont = 40;
 	}
 	
-	// Defaullt colors for certain components
+	/** Sets the default colors **/
 	private void setColor(){
 		textColor = Colors.black;
 		backgroundColor = Colors.defaultBackgroundColor;
@@ -104,7 +102,8 @@ public abstract class MyPanel {
 		btnBackgroundColor = Colors.defaultButtonBackgroundColor;
 	}
 	
-	// Ensure the background color for all panels are black
+	/** Ensures that the panel background is black
+	 * @param c - color black**/
 	public void setBackground(Color c){
 		north.setBackground(c);
 		south.setBackground(c);
@@ -115,6 +114,7 @@ public abstract class MyPanel {
 		contentPane.setBackground(c);
 	}
 	
+	/** Sets the default theme **/
 	public void setTheme(){
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -124,7 +124,8 @@ public abstract class MyPanel {
 		        }
 		    }
 		} catch (Exception e) {
-		   System.out.println("Not Found");
+		   System.out.println("Nimbus theme is not found.");
+		   e.printStackTrace();
 		}
 	}
 	

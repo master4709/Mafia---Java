@@ -121,6 +121,8 @@ public class GameController implements ActionListener{
 		if(win.contains("None")){
 			switchPanel(panelDay);
 		}else{
+			//wp.setWinner(win);
+			//switchPanel(winPanel);
 			System.out.println(win+" HAS WON THE GAME BOIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS");
 			dp.setContinueButtonVisible(false);
 		}

@@ -15,7 +15,6 @@ public class Godfather extends Mafia {
 	 * creating a Godfather role
 	 * @param name
 	 * @param position
-	 * @param role
 	 */
 	public Godfather(String name, int position) {
 		super(name, position);

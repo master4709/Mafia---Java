@@ -12,7 +12,6 @@ public class Goon extends Mafia {
 	 * creating a barman role
 	 * @param name
 	 * @param position
-	 * @param role
 	 */
 	public Goon(String name, int position) {
 		super(name, position);

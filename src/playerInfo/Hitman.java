@@ -12,7 +12,6 @@ public class Hitman extends Mafia {
 	 * creating a hitman role
 	 * @param name
 	 * @param position
-	 * @param role
 	 */
 	public Hitman(String name, int position) {
 		super(name, position);

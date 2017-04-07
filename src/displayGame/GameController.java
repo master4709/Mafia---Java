@@ -110,6 +110,9 @@ public class GameController implements ActionListener{
 	
 	/**
 	 * switches the content panel to the dayCycle page
+	 * Sets the target of the day cylce to -1 -- ensures that a player button must be pressed to continue the game 
+	 * Saves the game to the saveGame.txt document
+	 * If there was no winner, continues the cycle else goes to the win game panel
 	 */
 	public void switchDay(){
 		target = -1;
@@ -118,7 +121,6 @@ public class GameController implements ActionListener{
 		if(win.contains("None")){
 			switchPanel(panelDay);
 		}else{
-			frame.dispose();
 			System.out.println(win+" HAS WON THE GAME BOIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS");
 			dp.setContinueButtonVisible(false);
 		}

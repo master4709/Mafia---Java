@@ -40,15 +40,6 @@ public abstract class Player {
 	protected final int HEALED = 3;
 	protected final int PROTECTED = 4;
 	
-	/** Used by the detective to determine affiliation */
-	protected final int TEAMTOWN = 6;
-	
-	/** Used by the detective to determine affiliation */
-	protected final int TEAMMAFIA  = 7;
-	
-	/** on default, protected, or healed */
-	protected final int ACTIVE = 1 | 2 | 3 | 4;
-	
 	/**
 	 * Initializes default values for Player attributes
 	 * @param name
@@ -105,6 +96,8 @@ public abstract class Player {
 			return true;
 		} return false;
 	}
+	
+	public abstract Player copy();
 	
 	/**
 	 * Requires a copy of a player (the target) as param

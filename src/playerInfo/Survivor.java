@@ -5,7 +5,7 @@ package playerInfo;
  * @author Elvin Limpin
  *
  */
-public class Survivor extends Player {
+public class Survivor extends Town {
 
 	/**
 	 * Used for inheriting different town subclasses

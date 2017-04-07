@@ -95,7 +95,7 @@ public class Game{
 	
 	/**
 	 * This method takes the value from the target selection of 
-	 * @param playerTarget
+	 * @return int - position in the list for the target of night action (EG killed or healed event)
 	 */
 	public Integer nightAction(){
 		System.out.println("Do night logic");
@@ -189,11 +189,19 @@ public class Game{
 	public void setPlayerTarget(int position, int target){
 		playerInfo.get(position).setTarget(target);
 	}
-	
+	/**
+	 * 
+	 * @param position - index value of the player being targeted for the bar
+	 * @param yes - sets the value for in bar. 0 not in bar | 1 in bar
+	 */
 	public void setPlayerInBar(int position, int yes){
 		playerInfo.get(position).setInBar(yes);
 	}
-
+	/**
+	 * Sets the status of the designated player
+	 * @param position
+	 * @param status
+	 */
 	public void setPlayerStatus(int position, int status){
 		playerInfo.get(position).setStatus(status);
 	}
@@ -237,7 +245,7 @@ public class Game{
 	}
 	
 	public Player getPlayerCopy(int i){
-		return playerInfo.get(i);
+		return playerInfo.get(i).copy();
 	}
 	
 	public int getLynchTarget(){

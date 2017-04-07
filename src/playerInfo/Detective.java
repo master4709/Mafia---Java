@@ -39,17 +39,12 @@ public class Detective extends Town{
 	
 
 	/**
-	 * Unique action of vigilante
+	 * Unique action of Doctor
+	 * Not done here boiiiiiss
 	 * @param p
 	 */
 	@Override
 	public int doAction(Player p){
-		if(getStatus()!=0){
-			if(p.getRole().contains("Mafia")){
-				return TEAMMAFIA;
-			} 
-			return TEAMTOWN;
-		} 
 		return p.getStatus();
 	}
 	

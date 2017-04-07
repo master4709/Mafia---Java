@@ -74,7 +74,7 @@ public class GameController implements ActionListener{
 		sp = new StoryPanel(this);
 		vapp = new ViewAllPlayersPanel(this,globalListener);
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
-		vp = new VictoryPanel(globalListener);
+		vp = new VictoryPanel();
 		
 		sf = new SaveFile();
 		
@@ -290,9 +290,7 @@ public class GameController implements ActionListener{
 		case "Continue_CheckPlayerPanel":
 			switchNight(); break;
 		case "Continue_NightPanel":
-			if(target!=-1){
-				System.out.println(g.getPlayerCopy(position)+" has targeted player "+g.getPlayerCopy(target)+ "for night action");	
-			}
+			if(target!=-1) System.out.println(g.getPlayerCopy(position)+" has targeted player "+g.getPlayerCopy(target)+ "for night action");
 			g.setPlayerTarget(position, target);//Set the target of the player who just finished his/her night round
 			findNextPlayer(); break;
 		case "Continue_StoryPanel":

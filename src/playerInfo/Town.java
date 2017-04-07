@@ -28,12 +28,12 @@ public class Town extends Player {
 		super(name, position, status, isLynched);
 	}
 	
-	/**
-	 * Copy constructor
-	 * @param t
-	 */
-	public Town(Town t){
-		super(t);
+	public Town(Town toCopy){
+		super(toCopy);
+	}
+	
+	public Player copy(){
+		return new Town(this);
 	}
 
 	/**

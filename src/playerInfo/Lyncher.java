@@ -5,7 +5,7 @@ package playerInfo;
  * @author Elvin Limpin 30018832
  *
  */
-public class Lyncher extends Player {
+public class Lyncher extends Town {
 
 	/**
 	 * Used for inheriting different town subclasses

@@ -14,32 +14,28 @@ public class MyTextArea extends JTextArea{
 
 	/**
 	 * Default constructor
-	 * @param text
+	 * @param text - text to appear
 	 * @param textColor
 	 * @param backgroundColor
-	 * @param font
+	 * @param font - font size
 	 */
-	public MyTextArea(
-			String text,
-			Color textColor,
-			Color backgroundColor,
-			int font){
-		
+	public MyTextArea(String text, Color textColor, Color backgroundColor, int font){
 		setText(text);
 		setForeground(Colors.white);
 		setBackground(backgroundColor);
 		setFont(new MyFont(font));
 	}
 	
-	
+	/**
+	 * Constructor with custom text and font size only
+	 * @param text - text to appear
+	 * @param font - font size
+	 */
 	public MyTextArea(String text,int font){
-
 		setText(text);
 		setForeground(Colors.white);
 		setBackground(Colors.black);
 		setFont(new MyFont(font));
 		setWrapStyleWord(true);
-	}
-	
-	
+	}	
 }

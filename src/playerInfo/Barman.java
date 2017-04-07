@@ -58,11 +58,6 @@ public class Barman extends Mafia {
 		return 0;//Not in bar
 	}
 	
-	@Override
-	public String toString(){
-		return getRole()+ " " + getName();
-	}
-	
 	/** returns the role name */
 	@Override
 	public String getRole() {

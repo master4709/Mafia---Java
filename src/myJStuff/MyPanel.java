@@ -21,18 +21,15 @@ import net.miginfocom.swing.MigLayout;
 
 public abstract class MyPanel {
 
-	
 	protected ActionListener packageListener;
 	
 	// the following fields are inherited by Panels.
-	// they might be overriden
+	// they might be overridden
 	protected Color textColor;
 	protected Color backgroundColor;
 	protected Color selectColor;
 	protected Color btnTxtColor;
 	protected Color btnBackgroundColor;
-	
-	
 	
 	//Panels that are added to the content pane.
 	//All JObjects get added to these panels
@@ -81,7 +78,7 @@ public abstract class MyPanel {
 		contentPane.add(center, BorderLayout.CENTER);
 		center.setLayout(new MigLayout("", "[grow]", "[]"));
 		
-		setBackground(Colors.black);
+		setBackground(Colors.defaultBackgroundColor);
 	}
 	
 	/** Sets the default font **/
@@ -129,6 +126,7 @@ public abstract class MyPanel {
 		}
 	}
 	
+	/** returns the content pane */
 	public JPanel getContentPane(){
 		return contentPane;
 	}

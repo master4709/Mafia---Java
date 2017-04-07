@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import displayGame.GameController;
-import displayGame.VictoryPanel;
 import displayMain.MainController;
 import displaySetUp.SetUpController;
 import logic.LoadFile;

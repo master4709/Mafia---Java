@@ -1,7 +1,7 @@
 package displaySetUp;
 
 import logic.Role;
-import myJStuff.Colors;
+//import myJStuff.Colors;
 import myJStuff.MyButton;
 import myJStuff.MyLabel;
 import myJStuff.MyPanel;
@@ -54,7 +54,7 @@ public class RoleSelectionPanel extends MyPanel{
     private void displayCenter() {
         for (int count = 0; count < 10; count++) {
             if (!availableRoles.get(count).equals(Role.TOWNIE)) {
-                JButton roleBtn = new MyButton(availableRoles.get(count).getRoleID(), Colors.white, Colors.grey, 30);
+                JButton roleBtn = new MyButton(availableRoles.get(count).getRoleID());
                 roleBtn.setName("RoleButton " + (count+1));
                 roleBtn.addActionListener(packageListener);
                 roleButtons.add(roleBtn);
@@ -89,7 +89,7 @@ public class RoleSelectionPanel extends MyPanel{
         rolesSelected = new ArrayList<>();
         availableRoles = new ArrayList<>(Arrays.asList(Role.values()));
         roleButtons = new ArrayList<>();
-        continueButton = new MyButton("Continue ", Colors.white, Colors.black, 15);
+        continueButton = new MyButton("Continue ");
 
         displayNorth();
         displayCenter();

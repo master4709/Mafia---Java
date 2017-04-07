@@ -35,6 +35,10 @@ public class Survivor extends Town {
 	public Survivor(Survivor s){
 		super(s);
 	}
+	
+	public Player copy(){
+		return new Survivor(this);
+	}
 
 	/** The lyncher does not do anything at night */
 	@Override

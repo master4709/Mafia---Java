@@ -37,6 +37,13 @@ public class Bodyguard extends Town{
 		super(b);
 	}
 	
+	/**
+	 * Copy method
+	 */
+	public Player copy(){
+		return new Bodyguard(this);
+	}
+	
 
 	/**
 	 * Unique action of the bodyguard

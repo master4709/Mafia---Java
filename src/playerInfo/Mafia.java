@@ -37,7 +37,6 @@ public class Mafia extends Player {
 	
 	/**
 	 * Copy method
-	 * @param m
 	 */
 	public Player copy(){
 		return new Mafia(this);

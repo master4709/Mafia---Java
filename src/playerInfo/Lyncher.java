@@ -35,6 +35,10 @@ public class Lyncher extends Town {
 	public Lyncher(Lyncher l){
 		super(l);
 	}
+	
+	public Player copy(){
+		return new Lyncher(this);
+	}
 
 	/** The lyncher does not do anything at night */
 	@Override

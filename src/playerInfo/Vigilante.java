@@ -38,6 +38,10 @@ public class Vigilante extends Town{
 		super(v);
 	}
 	
+	public Player copy(){
+		return new Vigilante(this);
+	}
+	
 	/**
 	 * Unique action of vigilante
 	 * @param p

@@ -37,6 +37,10 @@ public class Detective extends Town{
 		super(d);
 	}
 	
+	public Player copy(){
+		return new Detective(this);
+	}
+	
 
 	/**
 	 * Unique action of Doctor

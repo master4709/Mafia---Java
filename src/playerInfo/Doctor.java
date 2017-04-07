@@ -37,6 +37,10 @@ public class Doctor extends Town{
 		super(d);
 	}
 	
+	public Player copy(){
+		return new Doctor(this);
+	}
+	
 	/**
 	 * Unique action of the doctor
 	 * @param p

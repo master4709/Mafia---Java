@@ -20,7 +20,7 @@ public class Colors{
 	public static final Color grey 		= new Color(32,28,28);
 	
 	public static final Color defaultButtonTextColor 		= white;
-	public static final Color defaultButtonBackgroundColor 	= pink;
+	public static final Color defaultButtonBackgroundColor 	= black;
 	public static final Color defaultBackgroundColor 		= black;
 	public static final Color defaultBorderColor 			= grey;
 	public static final Color select 						= blue;

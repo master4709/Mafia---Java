@@ -1,8 +1,9 @@
 package playerInfo;
 /**
- * The bodyguard is a town member that may check
- * protect a player at night by dying in their place
- * @author Elvin Limpin 30018832
+ * This class extends Town class.
+ * The bodyguard is a town member that may protect 
+ * a player at night by dying in their place.
+ * @author Mahsa Lotfi 10072013
  */
 
 public class Bodyguard extends Town{
@@ -10,9 +11,8 @@ public class Bodyguard extends Town{
 	/**
 	 * Constructor passes values to player while
 	 * creating a doctor role
-	 * @param name
-	 * @param position
-	 * @param role
+	 * @param name, String name
+	 * @param position, integer position
 	 */
 	public Bodyguard(String name, int position) {
 		super(name, position);
@@ -20,10 +20,10 @@ public class Bodyguard extends Town{
 	
 	/**
 	 * Used for continuing saved games
-	 * @param name
-	 * @param position
-	 * @param status
-	 * @param isLynched
+	 * @param name, String 
+	 * @param position, integer
+	 * @param status, integer
+	 * @param isLynched, boolean
 	 */
 	public Bodyguard(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
@@ -31,15 +31,13 @@ public class Bodyguard extends Town{
 	
 	/**
 	 * Copy constructor
-	 * @param b
+	 * @param b, Bodyguard 
 	 */
 	public Bodyguard(Bodyguard b){
 		super(b);
 	}
 	
-	/**
-	 * Copy method
-	 */
+	/**Copy method*/
 	public Player copy(){
 		return new Bodyguard(this);
 	}
@@ -47,7 +45,7 @@ public class Bodyguard extends Town{
 
 	/**
 	 * Unique action of the bodyguard
-	 * @param p
+	 * @param p, Player
 	 */
 	@Override
 	public int doAction(Player p){
@@ -57,25 +55,20 @@ public class Bodyguard extends Town{
 		} return p.getStatus();
 	}
 	
-	@Override
-	public String toString() {
-		return getRole()+ " " + getName();
-	}
 	
-	
-	/** returns the role name */
+	/** Returns the role name */
 	@Override
 	public String getRole() {
 		return "Bodyguard";
 	}
 
-	/** returns the role information for directions */
+	/** Returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
 		return "May save another person by dying in their place";
 	}
 
-	/** returns the goal of the role */
+	/** Returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
 		return "Lynch all Mafia to win the game";

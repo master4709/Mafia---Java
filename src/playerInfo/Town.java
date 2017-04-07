@@ -2,7 +2,7 @@ package playerInfo;
 /**
  * Unlike the Mafia class, some Town Players are classified
  * only as town players.
- * @author Elvin Limpin 30018832
+ * @author Mahsa Lotfi 10072013
  *
  */
 public class Town extends Player {
@@ -46,10 +46,12 @@ public class Town extends Player {
 		return p.getStatus();
 	}
 	
-	public String toString() {
+	@Override
+	public String toString(){
 		return getRole()+ " " + getName();
 	}
-
+	
+	
 	/** returns the role name */
 	@Override
 	public String getRole() {

@@ -2,7 +2,7 @@ package playerInfo;
 /**
  * The vigilante is a town member that may kill
  * Any player at night.
- * @author Elvin Limpin 30018832
+ * @author Mahsa Lotfi 10072013
  */
 
 
@@ -54,10 +54,6 @@ public class Vigilante extends Town{
 		return p.getStatus();
 	}
 	
-	@Override
-	public String toString() {
-		return getRole()+ " " + getName();
-	}
 	
 	/** returns the role name */
 	@Override

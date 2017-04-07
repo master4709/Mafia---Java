@@ -13,7 +13,7 @@ import displayGame.GameController;
 import displayMain.MainController;
 import displaySetUp.SetUpController;
 import logic.LoadFile;
-import logic.SetUp;
+import logic.NewFile;
 
 public class Controller implements ActionListener{
 	
@@ -61,7 +61,7 @@ public class Controller implements ActionListener{
 			mc.start();
 			break;
 		case"Continue_RoleSelectionPanel":
-			SetUp up = new SetUp(suc.getPlayerNames(),suc.getRoles());
+			NewFile up = new NewFile(suc.getPlayerNames(),suc.getRoles());
 			gc.start(up.getPlayerInfo(), up.getLynchTarget(),false);
 			break;
 		case"Testing_MainPanel":
@@ -76,7 +76,7 @@ public class Controller implements ActionListener{
 				"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
 				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
-		SetUp up = new SetUp(names,roles);
+		NewFile up = new NewFile(names,roles);
 		gc.start(up.getPlayerInfo(), 4,true);
 	}
 }

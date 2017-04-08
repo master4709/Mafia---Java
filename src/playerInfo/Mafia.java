@@ -14,7 +14,6 @@ public class Mafia extends Player {
 	 * classes to the Player class
 	 * @param name
 	 * @param position
-	 * @param role
 	 */
 	public Mafia(String name, int position) {
 		super(name, position);

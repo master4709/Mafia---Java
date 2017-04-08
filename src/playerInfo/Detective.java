@@ -1,18 +1,18 @@
 package playerInfo;
 /**
+ * This class extends Town class.
  * The detective is a town member that may check
  * the affiliation of any player at night.
- * @author Elvin Limpin 30018832
+ * @author Mahsa Lotfi 10072013
  */
 
 public class Detective extends Town{
 
 	/**
 	 * Constructor passes values to player while
-	 * creating a detective role
-	 * @param name
-	 * @param position
-	 * @param role
+	 * creating a detective role.
+	 * @param name, String
+	 * @param position, integer
 	 */
 	public Detective(String name, int position) {
 		super(name, position);
@@ -20,10 +20,10 @@ public class Detective extends Town{
 	
 	/**
 	 * Used for continuing saved games
-	 * @param name
-	 * @param position
-	 * @param status
-	 * @param isLynched
+	 * @param name, String
+	 * @param position, integer
+	 * @param status, integer
+	 * @param isLynched, boolean
 	 */
 	public Detective(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
@@ -52,10 +52,6 @@ public class Detective extends Town{
 		return p.getStatus();
 	}
 	
-	@Override
-	public String toString() {
-		return getRole()+ " " + getName();
-	}	
 	
 	/** returns the role name */
 	@Override

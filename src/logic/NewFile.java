@@ -10,6 +10,7 @@ import playerInfo.Bodyguard;
 import playerInfo.Detective;
 import playerInfo.Doctor;
 import playerInfo.Godfather;
+import playerInfo.Goon;
 import playerInfo.Hitman;
 import playerInfo.Lyncher;
 import playerInfo.Player;
@@ -25,7 +26,7 @@ import playerInfo.Vigilante;
  * 
  * Author: Mahsa Lotfi 10072013 
  */	
-public class SetUp {
+public class NewFile extends SaveFile{
 		/**
 		 * Instance variables
 		 */
@@ -41,11 +42,12 @@ public class SetUp {
 		 * @param List<String> names, name of players.
 		 * @param ArrayList<String> roleSelected, roles that are selected by players.
 		 */	
-		public SetUp( List<String> names, List<String> rolesSelected){
+		public NewFile( List<String> names, List<String> rolesSelected){
 			this.names = names;
 			this.roles = rolesSelected;
 			setAllPlayers();	
 			this.lynchTargetID = setLynchTarget();
+			save(playerInfo, lynchTargetID);
 		}
 	
 			
@@ -89,9 +91,12 @@ public class SetUp {
 				case "Lyncher": 			return new Lyncher(names.get(i), i);
 				case "Survivor": 			return new Survivor(names.get(i), i);
 				case "Vigilante": 			return new Vigilante(names.get(i), i);
+				case "Mafia: Goon":			return new Goon(names.get(i), i);
 				default: 					return new Town(names.get(i), i);
 				}
 		}
+		
+		
 		
 		/**
 		 * This method will find the position of a role or the first Townie

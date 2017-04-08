@@ -75,7 +75,7 @@ public class Controller implements ActionListener{
 		List<String> names = new ArrayList<>(Arrays.asList(
 				"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
 				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
-		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
+		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Goon","Lyncher","Mafia- Godfather","Vigilante"));
 		SetUp up = new SetUp(names,roles);
 		gc.start(up.getPlayerInfo(), 4,true);
 	}

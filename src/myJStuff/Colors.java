@@ -9,7 +9,7 @@ import java.awt.Color;
 public class Colors{
 	
 	public static final Color black 	= new Color(0,0,0);
-	public static final Color maroon 	= new Color(141,69,30);
+	public static final Color maroon 	= new Color(110,20,20);
 	public static final Color orange 	= new Color(229,125,22);
 	public static final Color green 	= new Color(0,128,0);
 	public static final Color purple 	= new Color(127,0,255);

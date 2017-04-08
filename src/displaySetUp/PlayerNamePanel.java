@@ -12,6 +12,7 @@ import myJStuff.MyButton;
 import myJStuff.MyLabel;
 import myJStuff.MyPanel;
 import myJStuff.MyTextField;
+import net.miginfocom.swing.MigLayout;
 /**
  * This class creates the Panel for selecting how many
  * players you want in the game
@@ -44,11 +45,6 @@ public class PlayerNamePanel extends MyPanel{
 
 	/** Method displays contents in the north **/
 	private void displayNorth(){
-		btnHome = new MyButton("Home",buttonFont);
-		north.add(btnHome,"cell 0 0,alignx left,aligny top");
-		btnHome.addActionListener(globalListener);
-		btnHome.setName("Home");
-		btnHome.setBorder(emptyBorder);
 		
 		lblEnterPlayers = new MyLabel("Enter Player Names", roleFont);
 		north.add(lblEnterPlayers);
@@ -58,8 +54,7 @@ public class PlayerNamePanel extends MyPanel{
 	public void displayCenter(int playerTotal){
         for (int count = 0; count < playerTotal; count++) {
             // this sets a default text in the textField
-            JTextField playerNameInput =
-            		new MyTextField("Player " + String.valueOf(count+1), 0);
+            JTextField playerNameInput = new MyTextField("Player " + String.valueOf(count+1), 30);
             center.add(playerNameInput, "cell 0 " + count + " ,growx");
             textFields.add(playerNameInput);
         }
@@ -67,10 +62,17 @@ public class PlayerNamePanel extends MyPanel{
 	
 	/** Method displays contents in the south **/
 	private void displaySouth(){
-		btnContinue = new MyButton("Continue", buttonFont);
-		south.add(btnContinue, "cell 0 0,growx");
-        btnContinue.addActionListener(packageListener);
-        btnContinue.setName("Continue_PlayerName");
+		south.setLayout(new MigLayout("", "[][grow]", "[]"));
+		
+		btnHome = new MyButton("Home",buttonFont);
+		south.add(btnHome,"cell 0 0,alignx left");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home");
+		
+		btnContinue = new MyButton("Continue");
+		btnContinue.setName("Continue_PlayerName");
+		south.add(btnContinue, "cell 1 0,growx");
+		btnContinue.addActionListener(packageListener);
 	}
 	
 	/**

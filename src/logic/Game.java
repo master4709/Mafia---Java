@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import playerInfo.Player;
+import playerInfo.*;
 
 /**Game Class
 	*This class runs the main logic and loop for the game
@@ -19,8 +19,7 @@ import playerInfo.Player;
 
 public class Game{
 	
-	//List of all of the Mafia members to be presented to each one every night
-	private List<String> mafiaMembers = new ArrayList<>();
+	
 	
 	//List of each player (class) and his/her info (name, role, target, position, etc)
 	private List<Player> playerInfo = new ArrayList<>();
@@ -28,11 +27,18 @@ public class Game{
 	//List of player names that are alive at the start of the game, used for making the buttons in Day Panel and Night Panel
 	private List<String> playerNames = new ArrayList<>();
 	
+	//List of all of the Mafia members to be presented to each one every night
+	private List<String> mafiaMembers = new ArrayList<>();
 	
+	//Lmao
 	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Mafia- Godfather","Doctor"));
+	
+	private List<Integer> events = new ArrayList<>();
 	
 	//Index value for the target of the Lyncher
 	private int lynchTarget = -1;
+	
+	private int round;
 	/**
 	 * Constructor
 	 * Takes params values and stores them into local versions
@@ -41,9 +47,10 @@ public class Game{
 	 * @param mafiaMembers
 	 * @param lynchTarget
 	 */
-	public Game(List<Player> playerInfo, int lynchTarget, boolean test){
-		this.lynchTarget = lynchTarget;
+	public Game(List<Player> playerInfo, int lynchTarget, int round, boolean test){
 		this.playerInfo = playerInfo;
+		this.lynchTarget = lynchTarget;
+		this.round = round;
 		mafiaMembers();
 		alivePlayers(test);
 	}
@@ -86,7 +93,7 @@ public class Game{
 		if(target!=-1){
 			System.out.println(getPlayer(target).getName()+" has been lynched");
 			setPlayerStatus(target,0);//Sets status of player to DEAD
-			getPlayer(target).setLynched(true);
+			setPlayerLynched(target,true);
 			if(playerInfo.get(target).getRole().contains("Hitman")){
 				//newHitman(target);
 			}
@@ -97,7 +104,7 @@ public class Game{
 	 * This method takes the value from the target selection of 
 	 * @return int - position in the list for the target of night action (EG killed or healed event)
 	 */
-	public Integer nightAction(){
+	public void nightAction(){
 		System.out.println("Do night logic");
 		
 		for(String role: nightPlayer){
@@ -125,9 +132,14 @@ public class Game{
 				}
 			}
 		}
-		
-		int target = resetStatus();
-		return target;
+		round++;
+		events = new ArrayList<>();
+		for(Player p:playerInfo){
+			int player = resetPlayer(p.copy());
+			if(player!=-1){
+				events.add(player);
+			}
+		}
 	}
 	
 	
@@ -135,32 +147,34 @@ public class Game{
 	 * Resets all of the status for every player
 	 * Starts the loop through players at the last position 
 	 */
-	private Integer resetStatus(){
-		int target = -1;
-		for(int i=0;i<playerInfo.size();i++){
-			//If the player has been targeted that night to be killed
-			if(getPlayer(i).getStatus()==2){
-				System.out.println(getPlayer(i).getName()+" is dead");
-				target = i;
-			}else if(getPlayer(i).getStatus()==3){
-				System.out.println(getPlayer(i).getName()+" is saved");
-				target = i;
-			}else if(getPlayer(i).getStatus()!=0){
-				setPlayerStatus(i,1);
-			}
-			setPlayerInBar(i,0);
+	private Integer resetPlayer(Player p){
+		setPlayerInBar(p.getPosition(),0);
+		if(p.getStatus()==2){
+			System.out.println(p.getName()+" is dead");
+			return p.getPosition();
+		}else if(p.getStatus()==3){
+			System.out.println(p.getName()+" is saved");
+			return p.getPosition();
+		}else if(p.getStatus()!=0){
+			setPlayerStatus(p.getStatus(),1);
 		}
-		return target;
+		return -1;
 	}
-	
+	/**
+	 * Checks if any player has achieved victory
+	 * @return - String - winner or "None"
+	 */
 	public String checkWinner(){
 		int mafiaTotal = 0;
 		int townTotal = -1;
+		//Counts total amount of alive Mafia and Town Members
 		for(Player p: playerInfo){
 			if(p.getStatus()!=0){
 				if(p.getRole().contains("Mafia")){
+					System.out.println(p.getRole());
 					mafiaTotal++;
 				}else{
+					System.out.println(p.getRole());
 					townTotal++;
 				}
 			}
@@ -183,8 +197,8 @@ public class Game{
 
 	/**
 	 * Sets the target of the current player
-	 * @param position
-	 * @param target
+	 * @param position- index value of player list
+	 * @param target - index value for the player who is selecting night action
 	 */
 	public void setPlayerTarget(int position, int target){
 		playerInfo.get(position).setTarget(target);
@@ -199,11 +213,20 @@ public class Game{
 	}
 	/**
 	 * Sets the status of the designated player
-	 * @param position
-	 * @param status
+	 * @param position - index value of player in the list of players
+	 * @param status - int value of status of the player being changed
+	 * | 0 Dead | 1 Alive | 2 Targeted | 3 Healed | 4 Protected | 
 	 */
 	public void setPlayerStatus(int position, int status){
 		playerInfo.get(position).setStatus(status);
+	}
+	/**
+	 * Sets the status of the current player to be in the bar or not in
+	 * @param position - index value of player in the list of players
+	 * @param lynched - boolean for if the player was lynched during the day
+	 */
+	public void setPlayerLynched(int position, boolean lynched){
+		playerInfo.get(position).setLynched(lynched);
 	}
 
 	/**
@@ -224,39 +247,57 @@ public class Game{
 		return clone;
 	}
 	/**
-	 * Returns a player
-	 * @param i
+	 * Returns a copy of the current player
+	 * @param i - index value of the current player
 	 * @return player
 	 */
-	private Player getPlayer(int i){
-		Player player = playerInfo.get(i);
-		return player;
+	public Player getPlayer(int i){
+		return playerInfo.get(i).copy();
 	}
-	
+	/**
+	 * Returns a copy of the current player
+	 * @param s - name of the role of the current player
+	 * @return
+	 */
 	private Player getPlayer(String s){
-		Player player = null;
+		Player player = new Town("The player does not exist: "+s,0,0,false);
 		for(Player p: playerInfo){
 			if(p.getRole().contains(s)){
-				player = p;
+				player = p.copy();
 				break;
 			}
 		}
 		return player;
 	}
-	
-	public Player getPlayerCopy(int i){
-		return playerInfo.get(i).copy();
-	}
-	
+	/**
+	 * Returns the index value of the target of the lyncher
+	 * @return integer
+	 */
 	public int getLynchTarget(){
 		return lynchTarget;
 	}
-	
+	/**
+	 * Returns the current round
+	 * @return integer - round
+	 */
+	public int getRound(){
+		return round;
+	}
+	/**
+	 * Returns the total amount of players
+	 * @return integer - totalPlayers
+	 */
 	public int getPlayerTotal(){
 		return playerInfo.size();
 	}
-	
+	/**
+	 * @return list<String> of current player name
+	 */
 	public List<String> getPlayerNames(){
 		return playerNames;
+	}
+	
+	public List<Integer> getEvents(){
+		return events;
 	}
 }

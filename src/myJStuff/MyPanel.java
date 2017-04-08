@@ -10,11 +10,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
@@ -45,8 +43,6 @@ public abstract class MyPanel {
 	protected int textFont;
 	protected int roleFont;
 	protected int infoFont;
-	
-	protected Border emptyBorder = BorderFactory.createEmptyBorder();
 	
 	/** This default constructor sets up the layout for the GUI **/
 	public MyPanel(){

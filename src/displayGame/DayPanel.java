@@ -75,11 +75,11 @@ public class DayPanel extends MyPanel{
 		
 		//New Button using the default button presets and text Continue
 		btnContinue = new MyButton("Continue");
-		south.add(btnContinue, "cell 1 0, alignx center");
+		south.add(btnContinue, "cell 1 0, growx");
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_DayPanel");
 		
-		btnViewPlayers = new MyButton("Players",buttonFont);
+		btnViewPlayers = new MyButton("<html> View<br>Players <html>",buttonFont*2/3);
 		south.add(btnViewPlayers,"cell 2 0,alignx right");
 		btnViewPlayers.addActionListener(packageListener);
 		btnViewPlayers.setName("ViewPlayers_DayPanel");
@@ -116,13 +116,19 @@ public class DayPanel extends MyPanel{
 	 * @param previous
 	 * @param target
 	 */
-	public void setButtonSelected(int previous,int target){
+	public void setButtonSelected(int previous, String current){
 		for(JButton button: playerButtonList){
-			if(button.getName().contains(Integer.toString(target))){
+			if(button.getName().equals(current)){
 				button.setBackground(selectColor);
 			}else if(button.getName().contains(Integer.toString(previous))){
 				button.setBackground(btnBackgroundColor);
 			}
+		}
+	}
+	
+	public void resetButtonColor(){
+		for(JButton button: playerButtonList){
+			button.setBackground(btnBackgroundColor);
 		}
 	}
 	

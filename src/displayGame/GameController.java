@@ -64,10 +64,10 @@ public class GameController implements ActionListener{
 	 * @param lynchTarget - index value of the target for the lyncher player, -1 if no lyncher player
 	 * @param test - if true, bypasses specific screens, (ViewAllPlayersPanel and CheckPlayerPanel)
 	 */
-	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
+	public void start(List<Player> playerInfo, int lynchTarget, int round, boolean test){
 		this.test = test;
 		
-		g = new Game(playerInfo,lynchTarget,test);
+		g = new Game(playerInfo,lynchTarget,round,test);
 		dp = new DayPanel(this,globalListener);
 		cpp = new CheckPlayerPanel(this);
 		np = new NightPanel(this,g.getMafiaMember());
@@ -115,7 +115,7 @@ public class GameController implements ActionListener{
 	 * @param i - the index value for which player to show
 	 */
 	private void switchViewPlayer(int i){
-		vpp.setPlayer(g.getPlayerCopy(i));
+		vpp.setPlayer(g.getPlayer(i));
 		switchPanel(panelViewPlayer);
 	}
 	
@@ -126,6 +126,7 @@ public class GameController implements ActionListener{
 	 * If there was no winner, continues the cycle else goes to the win game panel
 	 */
 	private void switchDay(){
+		dp.resetButtonColor();
 		target = -1;
 		sf.save(g.getPlayerInfo(), g.getLynchTarget());
 		String win = g.checkWinner();
@@ -145,7 +146,7 @@ public class GameController implements ActionListener{
 	 * Set the frame to new updated panelNight content pane 
 	 */
 	private void switchNight(){
-		np.setDisplay(g.getPlayerCopy(position));//Sets the display for current player to select his/her target
+		np.setDisplay(g.getPlayer(position));//Sets the display for current player to select his/her target
 		switchPanel(panelNight);
 	}
 	/**
@@ -153,7 +154,7 @@ public class GameController implements ActionListener{
 	 * Switch the frame to the CheckPlayerPanel
 	 */
 	private void switchCheckPlayer(){
-		cpp.setPlayerName(g.getPlayerCopy(position).getName());
+		cpp.setPlayerName(g.getPlayer(position).getName());
 		switchPanel(panelCheck);
 	}
 	/**
@@ -182,23 +183,22 @@ public class GameController implements ActionListener{
 	 * Calls the night Action method in the game class and odes all of the logic for each player each night
 	 * If there was a target of action that night
 	 */
-	private void nightAction(){
-		//If someone was saved or killed this night sets event to their index value
-		//Set to -1 if no one was saved or killed that night
-		int target = g.nightAction();
-		//If there was a target this night
-		if(target!=-1){
-			String name = g.getPlayerCopy(target).getName();
-			//If the player was killed that night remove the player button from both the Day and Night Panel
-			if(g.getPlayerCopy(target).getStatus()==2){
-				g.setPlayerStatus(target, 0);
-				removePlayerButton(target);
-				switchStory(name,true);
-			}else if(g.getPlayerCopy(target).getStatus()==3){//Else
-				g.setPlayerStatus(target, 1);
-				switchStory(name,false);
+	private void checkStory(int position){
+		
+		if(g.getEvents().size()>position){
+			System.out.println("Story is here boiiii");
+			Player p = g.getPlayer(g.getEvents().get(position));
+			if(p.getStatus()==2){
+				g.setPlayerStatus(p.getPosition(), 0);
+				removePlayerButton(p.getPosition());
+				switchStory(p.getName(),true);
+			}else if(p.getStatus()==3){//Else
+				g.setPlayerStatus(p.getPosition(), 1);
+				switchStory(p.getName(),false);
+			}else{
+				switchDay();
 			}
-		}else{//Skip the story panel and go to the next day.
+		}else{
 			switchDay();
 		}
 	}
@@ -213,7 +213,8 @@ public class GameController implements ActionListener{
 		position = nextPlayer(position);
 		if(position ==-1){
 			System.out.println("End of Night");
-			nightAction();
+			g.nightAction();
+			checkStory(0);
 		}else{
 			//Skips the checkPlayerPanel is the game is in testing mode
 			if(test){
@@ -234,13 +235,13 @@ public class GameController implements ActionListener{
 		if(position>=g.getPlayerInfo().size()){//If position is at the end of the list
 			System.out.println("End of list");
 			return -1;
-		}else if(g.getPlayerCopy(position).getStatus()==0){//If the player is dead, find the next one
-			System.out.println(g.getPlayerCopy(position).getName().toUpperCase()+ " is Dead");
+		}else if(g.getPlayer(position).getStatus()==0){//If the player is dead, find the next one
+			System.out.println(g.getPlayer(position).getName().toUpperCase()+ " is Dead");
 			g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
 			position++;
 			return nextPlayer(position);
 		}else{
-			System.out.println(g.getPlayerCopy(position).getName().toUpperCase()+ " is alive");
+			System.out.println(g.getPlayer(position).getName().toUpperCase()+ " is alive");
 			return position;
 		}
 	}
@@ -262,7 +263,7 @@ public class GameController implements ActionListener{
 	private void detective(){
 		//If the target of the detective player is part of the Mafia
 		//*Note* the Mafia GodFather is hidden from the detective
-		if(g.getPlayerCopy(target).getRole().contains("Mafia:")){
+		if(g.getPlayer(target).getRole().contains("Mafia:")){
 			np.setDetectiveMessage("Part of the Mafia");
 		}else{
 			np.setDetectiveMessage("Not part of the Mafia");
@@ -290,11 +291,11 @@ public class GameController implements ActionListener{
 		case "Continue_CheckPlayerPanel":
 			switchNight(); break;
 		case "Continue_NightPanel":
-			if(target!=-1) System.out.println(g.getPlayerCopy(position)+" has targeted player "+g.getPlayerCopy(target)+ "for night action");
+			if(target!=-1) System.out.println(g.getPlayer(position)+" has targeted player "+g.getPlayer(target)+ "for night action");
 			g.setPlayerTarget(position, target);//Set the target of the player who just finished his/her night round
 			findNextPlayer(); break;
 		case "Continue_StoryPanel":
-			switchDay(); break;
+			checkStory(1); break;
 		case "Back_ViewPlayerPanel":
 			switchPanel(panelViewAllPlayers); break;
 		case "ViewPlayers_DayPanel":
@@ -304,18 +305,19 @@ public class GameController implements ActionListener{
 				detective();//Reveals the team of the target of the detective
 			} break;
 		default://If the button pressed was not a continue or back button
-			//Gets the index value of the button that was pressed in its respective lists
-			char c = name.charAt(name.length() -1);
-			int i = Character.getNumericValue(c);
-			if(name.contains("Select")){//If the button press came from the ViewAllPlayersPanel
-				switchViewPlayer(i);
-			}else if(name.contains("Day")){//If the press came from the DayPanel
-				dp.setButtonSelected(target,i);//Set the pressed button to select color and reverts the previous one to 
-				target = i;
-			}else if(name.contains("Night")){//If the press came from the NightPanel
-				np.setButtonSelected(target, i);
-				target = i;
-			} break;
+			int player=-1;
+			if(name.contains("Select")){
+				player = Integer.parseInt(name.substring(7, name.length()));
+				switchViewPlayer(player);
+			}else if(name.contains("Day")){
+				player = Integer.parseInt(name.substring(4, name.length()));
+				dp.setButtonSelected(target,name);
+				target = player;
+			}else if(name.contains("Night")){
+				player = Integer.parseInt(name.substring(6, name.length()));
+				np.setButtonSelected(target,name);
+				target = player;
+			}break;
 		} 
     }
 }

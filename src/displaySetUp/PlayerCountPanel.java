@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import myJStuff.*;
+import net.miginfocom.swing.MigLayout;
 
 
 /**
@@ -46,16 +47,12 @@ public class PlayerCountPanel extends MyPanel{
 
 	/** Method displays contents in the north **/
 	private void displayNorth(){
-		btnHome = new MyButton("Home",buttonFont);
-		north.add(btnHome,"cell 0 0,alignx left,aligny top");
-		btnHome.addActionListener(globalListener);
-		btnHome.setName("Home");
-		btnHome.setBorder(emptyBorder);
+		
 		
 		lblText = new MyLabel("How Many", textColor, titleFont);
-		north.add(lblText, "cell 0 0,alignx left");
+		north.add(lblText, "cell 0 0,alignx center");
 		
-		lblText2 = new MyLabel("  Players?", textColor, titleFont);
+		lblText2 = new MyLabel("Players?", textColor, titleFont);
 		north.add(lblText2, "cell 0 1,alignx center");
 	}
 
@@ -70,15 +67,17 @@ public class PlayerCountPanel extends MyPanel{
 	
 	/** Method displays contents in the south**/
 	private void displaySouth(){
-		//Create the button and pass it values for text
-		//foreground and background color, and font
+		south.setLayout(new MigLayout("", "[][grow]", "[]"));
+		
+		btnHome = new MyButton("Home",buttonFont);
+		south.add(btnHome,"cell 0 0,alignx left");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home");
+		
 		btnContinue = new MyButton("Continue");
 		btnContinue.setName("Continue_PlayerCount");
-		//Add the button to the south panel, button will fill width of screen 
-		south.add(btnContinue, "cell 0 0,growx");
-		//Add action listener for when the button is pressed
+		south.add(btnContinue, "cell 1 0,growx");
 		btnContinue.addActionListener(packageListener);
-		
 	}
 	/**
 	 * Creates a button displaying option to pick amount of players

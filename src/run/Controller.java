@@ -23,6 +23,9 @@ public class Controller implements ActionListener{
 	private SetUpController suc;
 	private GameController gc;
 	
+	private NewFile nf;
+	private LoadFile lf;
+	
 	public Controller(){
 		setBounds();
 	}
@@ -53,16 +56,16 @@ public class Controller implements ActionListener{
 			suc.start();
 			break;
 		case"ContinueGame_MainPanel":
-			LoadFile lf = new LoadFile();
+			lf = new LoadFile();
 			lf.scan();
-			gc.start(lf.getPlayers(), lf.getLynchTarget(), false);
+			gc.start(lf.getPlayers(), lf.getLynchTarget(),1,false);
 			break;
 		case"Home":
 			mc.start();
 			break;
 		case"Continue_RoleSelectionPanel":
-			NewFile up = new NewFile(suc.getPlayerNames(),suc.getRoles());
-			gc.start(up.getPlayerInfo(), up.getLynchTarget(),false);
+			nf = new NewFile(suc.getPlayerNames(),suc.getRoles());
+			gc.start(nf.getPlayerInfo(), nf.getLynchTarget(),1,false);
 			break;
 		case"Testing_MainPanel":
 			test();
@@ -72,11 +75,10 @@ public class Controller implements ActionListener{
 	}
 	
 	private void test(){
-		List<String> names = new ArrayList<>(Arrays.asList(
-				"Pierce","Mahsa","Christilyn","Elvin","Ronelle",
-				"Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill&Melinda Gates"));
-		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante"));
-		NewFile up = new NewFile(names,roles);
-		gc.start(up.getPlayerInfo(), 4,true);
+		//12 players
+		List<String> names = new ArrayList<>(Arrays.asList("Pierce","Mahsa","Christilyn","Elvin","Ronelle","Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill Gates","Captain Jack","Lollipoppy"));
+		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante","Town","Mafia: Goon"));
+		nf = new NewFile(names,roles);
+		gc.start(nf.getPlayerInfo(),nf.getLynchTarget(),1,true);
 	}
 }

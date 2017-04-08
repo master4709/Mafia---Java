@@ -6,6 +6,7 @@ package myJStuff;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 
 public class MyButton extends JButton{
 	/**
@@ -28,6 +29,7 @@ public class MyButton extends JButton{
 		setForeground(foreground);
 		setBackground(background);
 		setFont(new MyFont(i));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 	}
 
 	/**
@@ -39,6 +41,7 @@ public class MyButton extends JButton{
 		setForeground(Colors.defaultButtonTextColor);
 		setBackground(Colors.defaultButtonBackgroundColor);
 		setFont(new MyFont(30));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 	}
 
 	/**
@@ -51,6 +54,7 @@ public class MyButton extends JButton{
 		setForeground(Colors.defaultButtonTextColor);
 		setBackground(Colors.defaultButtonBackgroundColor);
 		setFont(new MyFont(size));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 	}
 	
 	/**
@@ -66,5 +70,6 @@ public class MyButton extends JButton{
 		setForeground(btnTxtColor);
 		setBackground(btnBackgroundColor);
 		setFont(buttonFont);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 	}
 }

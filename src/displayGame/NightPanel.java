@@ -129,9 +129,9 @@ public class NightPanel extends MyPanel{
 		}
 	}
 	
-	public void setButtonSelected(int previous,int target){
+	public void setButtonSelected(int previous,String current){
 		for(JButton button: playerButtonList){
-			if(button.getName().contains(Integer.toString(target))){
+			if(button.getName().equals(current)){
 				button.setBackground(selectColor);
 			}else if(button.getName().contains(Integer.toString(previous))){
 				button.setBackground(btnBackgroundColor);

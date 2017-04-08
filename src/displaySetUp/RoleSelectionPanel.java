@@ -1,6 +1,5 @@
 package displaySetUp;
 
-import logic.Role;
 //import myJStuff.Colors;
 import myJStuff.MyButton;
 import myJStuff.MyLabel;
@@ -12,6 +11,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,7 +28,6 @@ public class RoleSelectionPanel extends MyPanel{
     
     private ActionListener globalListener;
     private ArrayList<String> rolesSelected;
-    private ArrayList<Role> availableRoles;
     private ArrayList<JButton> roleButtons;
 
 
@@ -49,19 +48,64 @@ public class RoleSelectionPanel extends MyPanel{
     }
 
     /***
-     * Create button for each role and add to center of existing BorderLayout.
+     * Add each role button to center of existing BorderLayout.
      */
     private void displayCenter() {
+        createRoleButtons();
+        for (int count = 0; count < roleButtons.size(); count++) {
+            center.add(roleButtons.get(count), "cell 0 "+count+",growx");
+        }
+    }
+
+    /***
+     * Create button for each role.
+     */
+    private void createRoleButtons() {
+        ArrayList<String> availableRoles = scanForAvailableRoles();
         for (int count = 0; count < 10; count++) {
-            if (!availableRoles.get(count).equals(Role.TOWNIE)) {
-                JButton roleBtn = new MyButton(availableRoles.get(count).getRoleID());
+            if (!availableRoles.get(count).equals("Townie")) {
+                JButton roleBtn = new MyButton(availableRoles.get(count));
                 roleBtn.setName("RoleButton " + (count+1));
                 roleBtn.addActionListener(packageListener);
-                roleButtons.add(roleBtn);
-                center.add(roleBtn, "cell 0 "+count+",growx");
+                if (availableRoles.get(count).contains("Mafia")) {
+                    roleButtons.add(roleBtn);
+                } else {
+                    roleButtons.add(0, roleBtn);
+                }
             }
         }
+    }
 
+    /***
+     * Scans the playerInfo directory for available roles to display
+     */
+    private ArrayList<String> scanForAvailableRoles() {
+        ArrayList<String> availableRoles = new ArrayList<>();
+        File dir = new File("src/playerInfo");
+        File[] files = dir.listFiles();
+        assert files != null;
+        for (File file : files) {
+            String fileName = file.getName();
+            if (fileName.contains(".java") && !fileName.equals("Player.java")
+                    && !fileName.equals("Mafia.java") && !fileName.equals("Town.java")) {
+
+                switch (fileName) {
+                    case "Goon.java":
+                    case "Hitman.java":
+                    case "Barman.java":
+                        availableRoles.add("Mafia: " + fileName.substring(0, fileName.length() - 5));
+                        break;
+                    case "Godfather.java":
+                        availableRoles.add("Mafia- " + fileName.substring(0, fileName.length() - 5));
+                        break;
+                    default:
+                        availableRoles.add(fileName.substring(0, fileName.length() - 5));
+                        break;
+                }
+
+            }
+        }
+        return availableRoles;
     }
 
     /***
@@ -87,7 +131,6 @@ public class RoleSelectionPanel extends MyPanel{
     private void initialize() {
 
         rolesSelected = new ArrayList<>();
-        availableRoles = new ArrayList<>(Arrays.asList(Role.values()));
         roleButtons = new ArrayList<>();
         continueButton = new MyButton("Continue ");
 

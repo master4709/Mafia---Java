@@ -37,7 +37,7 @@ public class SetUpController implements ActionListener{
 	public SetUpController(JFrame frame, ActionListener globalListener){
 		this.globalListener = globalListener;
 		this.frame = frame;
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
     /***
@@ -123,6 +123,7 @@ public class SetUpController implements ActionListener{
 		rsp.clearRolesSelected();
 		for (JButton roleButton : rsp.getRoleButtons()) {
 			roleButton.setEnabled(true);
+			roleButton.setForeground(Colors.defaultButtonTextColor);
 			roleButton.setBackground(Colors.defaultButtonBackgroundColor);
 		}
 		rsp.getAssignTownies().setEnabled(true);
@@ -165,6 +166,8 @@ public class SetUpController implements ActionListener{
 		final int playerNamesSize = pnp.getPlayerNames().size();
 
 		source.setEnabled(false);
+		source.setBackground(Colors.defaultButtonTextColor);
+		source.setForeground(Colors.defaultButtonBackgroundColor);
 
 		rsp.getPlayersLeft().setText(String.valueOf(
 				(playerNamesSize - rolesSelectedSize < 0) ? 0 : playerNamesSize - rolesSelectedSize

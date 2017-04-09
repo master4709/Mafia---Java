@@ -105,7 +105,7 @@ public class Game{
 	 * @return int - position in the list for the target of night action (EG killed or healed event)
 	 */
 	public void nightAction(){
-		System.out.println("Do night logic");
+		System.out.println("Do all actions for ending night");
 		
 		for(String role: nightPlayer){
 			for(Player p: playerInfo){
@@ -134,6 +134,7 @@ public class Game{
 		}
 		round++;
 		events = new ArrayList<>();
+		System.out.println("Reset All Player status");
 		for(Player p:playerInfo){
 			int player = resetPlayer(p.copy());
 			if(player!=-1){
@@ -149,6 +150,7 @@ public class Game{
 	 */
 	private Integer resetPlayer(Player p){
 		setPlayerInBar(p.getPosition(),0);
+		setPlayerTarget(p.getPosition(),-1);
 		if(p.getStatus()==2){
 			System.out.println(p.getName()+" is dead");
 			return p.getPosition();
@@ -192,6 +194,12 @@ public class Game{
 			return "Lyncher";
 		}else{
 			return "None";
+		}
+	}
+	
+	private void newHitman(int position){
+		for(Player p: playerInfo){
+			
 		}
 	}
 
@@ -296,7 +304,10 @@ public class Game{
 	public List<String> getPlayerNames(){
 		return playerNames;
 	}
-	
+	/**
+	 * Returns a List of events that happened during the night
+	 * @return
+	 */
 	public List<Integer> getEvents(){
 		return events;
 	}

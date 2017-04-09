@@ -253,6 +253,7 @@ public class GameController implements ActionListener{
 	private void removePlayerButton(int target){
 		dp.removePlayerButton(target);
 		np.removePlayerButton(target);
+		vapp.setPlayerButtonDead(target);
 	}
 	/**
 	 * This method sets the message for the detective during the night

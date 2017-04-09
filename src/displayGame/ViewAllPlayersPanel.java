@@ -7,6 +7,7 @@ import playerInfo.Player;
 import java.awt.event.ActionListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -28,6 +29,8 @@ public class ViewAllPlayersPanel extends MyPanel{
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
 	private JButton btnHome;
+	
+	private List<JButton> playerButtonList = new ArrayList<>();
 	/**
 	 * Create the panel.
 	 */
@@ -84,6 +87,12 @@ public class ViewAllPlayersPanel extends MyPanel{
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
 		btnPlayer.setFont(new MyFont(setButtonFont(name)));
+		playerButtonList.add(btnPlayer);
+	}
+	
+	public void setPlayerButtonDead(int position){
+		String text = playerButtonList.get(position).getText();
+		playerButtonList.get(position).setText("Dead | " +text);
 	}
 	
 	private int setButtonFont(String text){

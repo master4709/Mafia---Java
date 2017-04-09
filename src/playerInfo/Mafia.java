@@ -7,7 +7,7 @@ package playerInfo;
  * @author Elvin Limpin 30018832
  *
  */
-public class Mafia extends Player {
+public abstract class Mafia extends Player {
 
 	/**
 	 * Constructor passing values from different mafia
@@ -32,32 +32,5 @@ public class Mafia extends Player {
 	
 	public Mafia(Mafia toCopy){
 		super(toCopy);
-	}
-	
-	/**
-	 * Copy method
-	 */
-	public Player copy(){
-		return new Mafia(this);
-	}
-
-	@Override
-	public int doAction(Player p) {
-		return p.getStatus();
-	}
-
-	@Override
-	public String getRole() {
-		return "Mafia: Something";
-	}
-
-	@Override
-	public String getRoleInfo() {
-		return "Do nothing at night";
-	}
-
-	@Override
-	public String getRoleGoal() {
-		return "To make the majority of the town Mafia members";
 	}
 }

@@ -47,6 +47,7 @@ public class Hitman extends Mafia {
 	@Override
 	public int doAction(Player p) {
 		if(getStatus()!=0 && getInBar()!=1){//not dead or stopped by barman and the player has not been protected by the Bodyguard
+			System.out.print("ACTIVE: ");
 			return TARGETED;
 		}
 		return p.getStatus();

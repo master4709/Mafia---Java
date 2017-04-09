@@ -18,9 +18,6 @@ import playerInfo.*;
 */
 
 public class Game{
-	
-	
-	
 	//List of each player (class) and his/her info (name, role, target, position, etc)
 	private List<Player> playerInfo = new ArrayList<>();
 	
@@ -33,6 +30,7 @@ public class Game{
 	//Lmao
 	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Mafia- GodFather","Doctor"));
 	
+	//List of player indexes that were healed or killed that night, maximum of 2 people in the list
 	private List<Integer> events = new ArrayList<>();
 	
 	//Index value for the target of the Lyncher
@@ -114,8 +112,8 @@ public class Game{
 						//Targets the bodyguard if the target of killer is protected (status = 4)
 						if((role.contains("Hitman") || role.contains("Vigilante")) && getPlayer(p.getTarget()).getStatus()==4){
 							System.out.println("The Bodyguard has save player: "+getPlayer(p.getTarget()).getName());
-							status  = p.doAction(getPlayer("Bodyguard"));
-							setPlayerStatus(getPlayer("Bodyguard").getPosition(),status);
+							Player body  = getPlayer("Bodyguard");
+							setPlayerStatus(body.getPosition(), p.doAction(body));
 							System.out.println(p.toString() +" is doing action against player "+getPlayer("Bodyguard").getName());
 						}else if(role.contains("Barman")){//Changes the in Bar of the player if the current role is Barman
 							int bar = p.doAction(getPlayer(p.getTarget()));
@@ -161,11 +159,11 @@ public class Game{
 		setPlayerInBar(p.getPosition(),0);
 		setPlayerTarget(p.getPosition(),-1);
 		if(p.getStatus()==2){
-			System.out.println(p.getName()+" was targeted and killed this night");
+			System.out.println(p.getName()+" was targeted and KILLED");
 			if(p.getRole().contains("Hitman")) newHitman();
 			return p.getPosition();
 		}else if(p.getStatus()==3){
-			System.out.println(p.getName()+" wsa targeted but saved by the doctor this night");
+			System.out.println(p.getName()+" was targeted but SAVED");
 			return p.getPosition();
 		}else if(p.getStatus()!=0){
 			setPlayerStatus(p.getStatus(),1);

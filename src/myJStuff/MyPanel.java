@@ -55,6 +55,8 @@ public abstract class MyPanel {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
+		contentPane.setName("MyPanel --- Rename your Panel");
+		
 		//These panels are what all JLabels, buttons etc. are added to
 		north = new JPanel();
 		contentPane.add(north, BorderLayout.NORTH);

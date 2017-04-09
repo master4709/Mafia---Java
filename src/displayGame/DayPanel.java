@@ -106,7 +106,8 @@ public class DayPanel extends MyPanel{
 	public void removePlayerButton(int target){
 		if(target!=-1){//Error handling, Must have a valid target to remove the button
 			for(JButton button: playerButtonList){//Loops through the list of player buttons
-				if(button.getName().contains(Integer.toString(target))){//Finds the one with the same name as the target. THe buttons are named 0,1,2... etc
+				String number = button.getName().substring(4, button.getName().length());
+				if(number.equals(Integer.toString(target))){//Finds the one with the same name as the target. THe buttons are named 0,1,2... etc
 					center.remove(button);//Remove the button from the list of buttons 
 				}
 			}

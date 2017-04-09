@@ -39,6 +39,7 @@ public class PlayerNamePanel extends MyPanel{
 	public PlayerNamePanel(ActionListener packageListener, ActionListener globalListener) {
 		this.packageListener = packageListener;
 		this.globalListener = globalListener;
+		contentPane.setName("PlayerNamePanel");
 		displayNorth();
 		displaySouth();
 	}
@@ -46,7 +47,7 @@ public class PlayerNamePanel extends MyPanel{
 	/** Method displays contents in the north **/
 	private void displayNorth(){
 		
-		lblEnterPlayers = new MyLabel("Enter Player Names", roleFont);
+		lblEnterPlayers = new MyLabel("Enter Player Names", 52);
 		north.add(lblEnterPlayers);
 	}
 
@@ -54,8 +55,9 @@ public class PlayerNamePanel extends MyPanel{
 	public void displayCenter(int playerTotal){
         for (int count = 0; count < playerTotal; count++) {
             // this sets a default text in the textField
-            JTextField playerNameInput = new MyTextField("Player " + String.valueOf(count+1), 30);
+            JTextField playerNameInput = new MyTextField("", 30);
             center.add(playerNameInput, "cell 0 " + count + " ,growx");
+            playerNameInput.setName(Integer.toString(count+1));
             textFields.add(playerNameInput);
         }
 	}
@@ -83,7 +85,11 @@ public class PlayerNamePanel extends MyPanel{
 		List<String> names = new ArrayList<>();
 		
 		for(JTextField f: textFields){
-			names.add(f.getText());
+			if(f.getText().equals("")||f.getText()==null){
+				names.add("Player "+f.getName());
+			}else{
+				names.add(f.getText());
+			}
 		}
 		return names;
 	}

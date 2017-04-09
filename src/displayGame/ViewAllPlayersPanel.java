@@ -2,7 +2,7 @@
 package displayGame;
 
 import myJStuff.*;
-import playerInfo.Player;
+import net.miginfocom.swing.MigLayout;
 
 import java.awt.event.ActionListener;
 import java.awt.font.FontRenderContext;
@@ -47,11 +47,6 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 		
-		btnHome = new MyButton("Home",buttonFont);
-		north.add(btnHome,"cell 0 0,alignx left,aligny top");
-		btnHome.addActionListener(globalListener);
-		btnHome.setName("Home");
-		
 		lblDayTime = new MyLabel("View Roles", textColor, titleFont);
 		north.add(lblDayTime, "flowy,cell 0 0");
 		
@@ -68,9 +63,15 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
+		south.setLayout(new MigLayout("", "[][grow]", "[]"));
+		
+		btnHome = new MyButton("Home",buttonFont);
+		south.add(btnHome,"cell 0 0,alignx left,alignx left");
+		btnHome.addActionListener(globalListener);
+		btnHome.setName("Home");
 		//New Button using the default button presets and text Continue
-		btnContinue = new MyButton("Start Game");
-		south.add(btnContinue, "cell 0 0, alignx center");
+		btnContinue = new MyButton("Go to Day");
+		south.add(btnContinue, "cell 1 0, grow x");
 		btnContinue.setName("Continue_ViewAllPlayersPanel");
 		btnContinue.addActionListener(packageListener);
 		
@@ -89,12 +90,21 @@ public class ViewAllPlayersPanel extends MyPanel{
 		btnPlayer.setFont(new MyFont(setButtonFont(name)));
 		playerButtonList.add(btnPlayer);
 	}
-	
+	/**
+	 * Every time a player dies in the game,
+	 * sets the text of their button to add Dead |  
+	 * @param position - index value of the player that died
+	 */
 	public void setPlayerButtonDead(int position){
 		String text = playerButtonList.get(position).getText();
 		playerButtonList.get(position).setText("Dead | " +text);
 	}
-	
+	/**
+	 * Sets the button font size for each of the player buttons
+	 * Ensures that the button does not proceed the size of the screen
+	 * @param text - String displayed on button
+	 * @return int -  value of font size for button
+	 */
 	private int setButtonFont(String text){
 		int font = 10;
 		

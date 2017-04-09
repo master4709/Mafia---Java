@@ -69,6 +69,7 @@ public class Controller implements ActionListener{
 			break;
 		case"Testing_MainPanel":
 			test();
+			break;
 		default:
 			break;
 		}
@@ -76,8 +77,8 @@ public class Controller implements ActionListener{
 	
 	private void test(){
 		//12 players
-		List<String> names = new ArrayList<>(Arrays.asList("Pierce","Mahsa","Christilyn","Elvin","Ronelle","Nathaly","Nick","Tai Lopez","Kevin O'Leary","Bill Gates","Captain Jack","Lollipoppy"));
-		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- Godfather","Vigilante","Town","Mafia: Goon"));
+		List<String> names = new ArrayList<>(Arrays.asList("Pierce","Mahsa","Christilyn","Elvin","Ronelle","Harry","Ron","Hermione","Tom Riddle"));//,"Albus D","Captain Jack","Frodo"));
+		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- GodFather"));//,"Vigilante","Town","Mafia: Goon"));
 		nf = new NewFile(names,roles);
 		gc.start(nf.getPlayerInfo(),nf.getLynchTarget(),1,true);
 	}

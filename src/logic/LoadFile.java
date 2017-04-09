@@ -3,22 +3,13 @@ package logic;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-import playerInfo.Barman;
-import playerInfo.Bodyguard;
-import playerInfo.Detective;
-import playerInfo.Doctor;
-import playerInfo.Godfather;
-import playerInfo.Hitman;
-import playerInfo.Lyncher;
-import playerInfo.Player;
-import playerInfo.Survivor;
-import playerInfo.Town;
-import playerInfo.Vigilante;
+import playerInfo.*;
 
-public class LoadFile {
+public class LoadFile extends CreatePlayer{
 	
 	private final String save = "data/saveGame.txt";
 	
@@ -28,8 +19,6 @@ public class LoadFile {
 	
 	private int lynchTarget = -1;
 	
-	
-	
 	public LoadFile(){
 		
 	}
@@ -37,6 +26,7 @@ public class LoadFile {
 	public void scan(){
 		int position = 0;
 		try {
+			System.out.println("Loading Player data from file: "+save);
 			Scanner fileScanner = new Scanner(new File(save));
 			while(fileScanner.hasNextLine()){
 				String currentLine = fileScanner.nextLine();
@@ -61,26 +51,21 @@ public class LoadFile {
 					name = getName(line,3);
 				}
 				
-				switch(role){
-				case "Mafia: Barman": 		playerInfo.add(new Barman(name, position, status, lynched)); break;
-				case "Bodyguard": 			playerInfo.add(new Bodyguard(name, position, status, lynched)); break;
-				case "Detective": 			playerInfo.add(new Detective(name, position, status, lynched)); break;
-				case "Doctor": 				playerInfo.add(new Doctor(name, position, status, lynched)); break;
-				case "Mafia- Godfather": 	playerInfo.add(new Godfather(name, position, status, lynched)); break;
-				case "Mafia: Hitman": 		playerInfo.add(new Hitman(name, position, status, lynched)); break;
-				case "Lyncher": 			playerInfo.add(new Lyncher(name, position, status, lynched)); break;
-				case "Survivor": 			playerInfo.add(new Survivor(name, position, status, lynched)); break;
-				case "Vigilante": 			playerInfo.add(new Vigilante(name, position, status, lynched)); break;
-				default: 					playerInfo.add(new Town(name, position, status, lynched)); break;
-				}
+				Player p = createPlayer(name,role,position,status,lynched);
+				playerInfo.add(p);
 				position++;
 			}
 			fileScanner.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("ERROR: Could not find file :"+save);
-			e.printStackTrace();
+			System.out.println("Loading internal default save game");
+			List<String> names = new ArrayList<>(Arrays.asList("Jon Snow","Daenerys","Cersei","Arya","Samwell","Bran","Sandor","Gregor","Tyrion"));
+			List<String> roles = new ArrayList<>((Arrays.asList("Town","Detective","Mafia: Barman","Mafia: Hitman","Doctor","Survivor","Lyncher","Bodyguard","Townie","Mafia-Godfather")));
+			for(int i=0;i<names.size();i++){
+				Player p = createPlayer(names.get(i),roles.get(i),i);
+				playerInfo.add(p);
+			}
 		}
-		
 	}
 	
 	private String getName(List<String> line, int place){
@@ -88,6 +73,7 @@ public class LoadFile {
 		for(int i=place;i<line.size();i++){
 			name+=line.get(i)+" ";
 		}
+		name=name.substring(0, name.length()-1);
 		return name;
 	}
 	

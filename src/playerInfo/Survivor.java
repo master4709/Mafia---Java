@@ -64,7 +64,7 @@ public class Survivor extends Town {
 	/** returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
-		return "Be the last one alive to win the game solo";
+		return "Be the last town member alive and you win";
 	}
 	
 }

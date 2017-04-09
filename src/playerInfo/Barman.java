@@ -51,7 +51,6 @@ public class Barman extends Mafia {
 	 */
 	public int doAction(Player p) {
 		if(getStatus()!=0 && getInBar()!=1){
-			System.out.print("ACTIVE ");
 			return 1;//Player in bar
 		}
 		return 0;//Not in bar

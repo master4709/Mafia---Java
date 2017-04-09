@@ -93,7 +93,6 @@ public class SetUpController implements ActionListener{
 					switchPanel(panelName);
 					break;
 				case"Continue_PlayerName":
-					System.out.println(pnp.getPlayerNames());
 					switchPanel(panelRole);
 					rsp.getPlayersLeft().setText(String.valueOf(pnp.getPlayerNames().size()));
 					break;

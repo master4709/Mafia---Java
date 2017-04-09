@@ -157,4 +157,8 @@ public abstract class Player {
 	public boolean wasLynched(){
 		return this.isLynched;
 	}
+	
+	public String toString(){
+		return getRole()+ " " + getName();
+	}
 }

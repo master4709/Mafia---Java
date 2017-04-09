@@ -46,12 +46,6 @@ public class Town extends Player {
 		return p.getStatus();
 	}
 	
-	@Override
-	public String toString(){
-		return getRole()+ " " + getName();
-	}
-	
-	
 	/** returns the role name */
 	@Override
 	public String getRole() {

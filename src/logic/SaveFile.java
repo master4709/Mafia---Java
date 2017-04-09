@@ -17,7 +17,7 @@ public class SaveFile {
 	public void save(List<Player> playerInfo, int lynchTarget){
 		try {
 			PrintWriter pw = new PrintWriter(saveFile);
-			System.out.println("Printing to "+saveFile);
+			System.out.println("Saving Player info to "+saveFile);
 			for(Player p: playerInfo){
 				pw.print(p.getStatus()+" ");
 				pw.print(String.valueOf(p.wasLynched())+" ");

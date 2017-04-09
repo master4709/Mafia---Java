@@ -5,18 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import playerInfo.Barman;
-import playerInfo.Bodyguard;
-import playerInfo.Detective;
-import playerInfo.Doctor;
-import playerInfo.Godfather;
-import playerInfo.Goon;
-import playerInfo.Hitman;
-import playerInfo.Lyncher;
-import playerInfo.Player;
-import playerInfo.Survivor;
-import playerInfo.Town;
-import playerInfo.Vigilante;
+import playerInfo.*;
 
 /**
  * This class will create a list to store all the information 
@@ -57,7 +46,7 @@ public class NewFile extends SaveFile{
 		public void setAllPlayers(){
 			Collections.shuffle(roles);
 			for(int i =0; i<names.size(); i++){
-				playerInfo.add(createPlayer(i));
+				playerInfo.add(createPlayer(names.get(i),roles.get(i),i));
 			}
 		}
 		
@@ -75,27 +64,21 @@ public class NewFile extends SaveFile{
 			return -1;
 		}
 		
-		/**
-		 * Creates a player determined by the role
-		 * @param i (position)
-		 * @return a Player class
-		 */
-		public Player createPlayer(int i){
-			switch(roles.get(i)){
-				case "Mafia: Barman": 		return new Barman(names.get(i), i);
-				case "Bodyguard": 			return new Bodyguard(names.get(i), i);
-				case "Detective": 			return new Detective(names.get(i), i);
-				case "Doctor": 				return new Doctor(names.get(i), i);
-				case "Mafia- Godfather": 	return new Godfather(names.get(i), i);
-				case "Mafia: Hitman": 		return new Hitman(names.get(i), i);
-				case "Lyncher": 			return new Lyncher(names.get(i), i);
-				case "Survivor": 			return new Survivor(names.get(i), i);
-				case "Vigilante": 			return new Vigilante(names.get(i), i);
-				case "Mafia: Goon":			return new Goon(names.get(i), i);
-				default: 					return new Town(names.get(i), i);
-				}
+		public Player createPlayer(String name, String role, int position){
+			switch(role){
+			case "Mafia: Barman": 		return new Barman(name,position);
+			case "Bodyguard": 			return new Bodyguard(name,position);
+			case "Detective": 			return new Detective(name,position);
+			case "Doctor": 				return new Doctor(name,position);
+			case "Mafia- GodFather": 	return new GodFather(name,position);
+			case "Mafia: Hitman": 		return new Hitman(name,position);
+			case "Lyncher": 			return new Lyncher(name,position);
+			case "Survivor": 			return new Survivor(name,position);
+			case "Vigilante": 			return new Vigilante(name,position);
+			case "Mafia: Goon":			return new Goon(name,position);
+			default: 					return new Town(name,position);
+			}
 		}
-		
 		
 		
 		/**

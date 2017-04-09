@@ -49,7 +49,6 @@ public class Doctor extends Town{
 	public int doAction(Player p){
 		if(getStatus()!=0 && getInBar()!=1){
 			if(p.getStatus() == 2){ 
-				System.out.print("ACTIVE ");
 				return 3;
 			}
 		} return p.getStatus();

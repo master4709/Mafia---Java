@@ -8,7 +8,7 @@ package playerInfo;
  * @author Elvin Limpin 30018832
  */
 
-public class Godfather extends Mafia {
+public class GodFather extends Mafia {
 	
 	/**
 	 * Constructor passes values to player while
@@ -16,7 +16,7 @@ public class Godfather extends Mafia {
 	 * @param name
 	 * @param position
 	 */
-	public Godfather(String name, int position) {
+	public GodFather(String name, int position) {
 		super(name, position);
 	}
 	
@@ -27,7 +27,7 @@ public class Godfather extends Mafia {
 	 * @param status
 	 * @param isLynched
 	 */
-	public Godfather(String name, int position, int status, boolean isLynched){
+	public GodFather(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
 	}
 	
@@ -35,12 +35,12 @@ public class Godfather extends Mafia {
 	 * Copy constructor
 	 * @param b
 	 */
-	public Godfather(Godfather g){
+	public GodFather(GodFather g){
 		super(g);
 	}
 	
 	public Player copy(){
-		return new Godfather(this);
+		return new GodFather(this);
 	}
 
 	@Override

@@ -45,18 +45,17 @@ public class GameController implements ActionListener{
 	private JPanel panelViewPlayer;
 	private JPanel panelVictory;
 	//Location inside the list of players for the night cycle
-	private int position = -1;
+	private int position;
 	//Boolean for if the game is in test mode
 	private boolean test = false;
 	//Location of the current target for both the day lynching and every night player
-	private int target = -1;
+	private int target;
 	
 	//Must be private. so only one instance can be made
 	public GameController(JFrame frame, ActionListener globalListener){
 		this.frame = frame;
 		this.globalListener = globalListener;
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.setVisible(true);
 	}
 	/**
 	 * Initializes all of the Panels and Game Class with:
@@ -89,8 +88,12 @@ public class GameController implements ActionListener{
 		panelViewPlayer = vpp.getContentPane();
 		panelVictory = vp.getContentPane();
 		
+		target = -1;
+		position = -1;
+		
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
-			switchDay();
+			
+			switchPanel(panelDay);
 		}else{
 			switchPanel(panelViewAllPlayers);
 		}
@@ -128,7 +131,6 @@ public class GameController implements ActionListener{
 	private void switchDay(){
 		dp.resetButtonColor();
 		target = -1;
-		sf.save(g.getPlayerInfo(), g.getLynchTarget());
 		String win = g.checkWinner();
 		if(win.contains("None")){
 
@@ -174,7 +176,7 @@ public class GameController implements ActionListener{
 	 * @param panel
 	 */
 	private void switchPanel(JPanel panel){
-		//System.out.println(panel.getName().toUpperCase());
+		//System.out.println("SWITCHING: "+panel.getName());
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);
@@ -186,7 +188,6 @@ public class GameController implements ActionListener{
 	private void checkStory(int position){
 		
 		if(g.getEvents().size()>position){
-			System.out.println("Story is here boiiii");
 			Player p = g.getPlayer(g.getEvents().get(position));
 			if(p.getStatus()==2){
 				g.setPlayerStatus(p.getPosition(), 0);
@@ -211,9 +212,11 @@ public class GameController implements ActionListener{
 		target = -1;
 		position++;
 		position = nextPlayer(position);
-		if(position ==-1){
+		if(position ==-1){//The night cycle has gone through every player
 			System.out.println("End of Night");
 			g.nightAction();
+			g.reset();
+			sf.save(g.getPlayerInfo(), g.getLynchTarget());
 			checkStory(0);
 		}else{
 			//Skips the checkPlayerPanel is the game is in testing mode
@@ -292,7 +295,6 @@ public class GameController implements ActionListener{
 		case "Continue_CheckPlayerPanel":
 			switchNight(); break;
 		case "Continue_NightPanel":
-			if(target!=-1) System.out.println(g.getPlayer(position)+" has targeted player "+g.getPlayer(target)+ "for night action");
 			g.setPlayerTarget(position, target);//Set the target of the player who just finished his/her night round
 			findNextPlayer(); break;
 		case "Continue_StoryPanel":

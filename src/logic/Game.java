@@ -31,7 +31,7 @@ public class Game{
 	private List<String> mafiaMembers = new ArrayList<>();
 	
 	//Lmao
-	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Mafia- Godfather","Doctor"));
+	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Mafia- GodFather","Doctor"));
 	
 	private List<Integer> events = new ArrayList<>();
 	
@@ -60,7 +60,6 @@ public class Game{
 	 */
 	private void mafiaMembers(){
 		for(int i =0;i<playerInfo.size();i++){
-			System.out.println(getPlayer(i).getRole());
 			if(getPlayer(i).getRole().contains("Mafia")){
 				mafiaMembers.add(getPlayer(i).getName());
 			}
@@ -95,7 +94,7 @@ public class Game{
 			setPlayerStatus(target,0);//Sets status of player to DEAD
 			setPlayerLynched(target,true);
 			if(playerInfo.get(target).getRole().contains("Hitman")){
-				//newHitman(target);
+				newHitman();
 			}
 		}
 	}
@@ -111,20 +110,24 @@ public class Game{
 			for(Player p: playerInfo){
 				if(p.getRole().contains(role)){
 					if(p.getTarget()!=-1){
-						//If the player doing action was a killer, checks if the target was protected by the bodyguard
-						//If yes, targets the bodyguard instead of the target of the player
+						int status;
+						//Targets the bodyguard if the target of killer is protected (status = 4)
 						if((role.contains("Hitman") || role.contains("Vigilante")) && getPlayer(p.getTarget()).getStatus()==4){
 							System.out.println("The Bodyguard has save player: "+getPlayer(p.getTarget()).getName());
-							setPlayerStatus(getPlayer("Bodyguard").getPosition(),p.doAction(getPlayer("Bodyguard")));
-							System.out.println(p.toString() +" is doing action against player "+getPlayer("Bodyguard").toString());
-						//Changes the in Bar of the player if the current role is Barman
-						}else if(role.contains("Barman")){
-							setPlayerInBar(p.getTarget(),p.doAction(getPlayer(p.getTarget())));
+							status  = p.doAction(getPlayer("Bodyguard"));
+							setPlayerStatus(getPlayer("Bodyguard").getPosition(),status);
+							System.out.println(p.toString() +" is doing action against player "+getPlayer("Bodyguard").getName());
+						}else if(role.contains("Barman")){//Changes the in Bar of the player if the current role is Barman
+							int bar = p.doAction(getPlayer(p.getTarget()));
+							setPlayerInBar(p.getTarget(),bar);
 							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).getName());
-						}else{//Targets that player
-							setPlayerStatus(p.getTarget(),p.doAction(getPlayer(p.getTarget())));
+						}else{//Does action against target of current night role
+							status  = p.doAction(getPlayer(p.getTarget()));
+							setPlayerStatus(p.getTarget(),status);
 							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).getName());
 						}
+					}else if(p.getStatus()==0){
+						System.out.println(p.toString() + " is DEAD and will do nothing");
 					}else{
 						System.out.println(p.toString()+" is NOT doing action");
 					}
@@ -133,8 +136,12 @@ public class Game{
 			}
 		}
 		round++;
+		
+	}
+	
+	public void reset(){
 		events = new ArrayList<>();
-		System.out.println("Reset All Player status");
+		System.out.println("Reset Player targets, inBar, status");
 		for(Player p:playerInfo){
 			int player = resetPlayer(p.copy());
 			if(player!=-1){
@@ -143,19 +150,22 @@ public class Game{
 		}
 	}
 	
-	
 	/**
-	 * Resets all of the status for every player
-	 * Starts the loop through players at the last position 
+	 * Resets the status of the current Player
+	 * In bar = 0
+	 * Target = -1
+	 * @return -1 if the player was not saved or targeted by the Mafia
+	 * @return player position if the player was involved in night action
 	 */
 	private Integer resetPlayer(Player p){
 		setPlayerInBar(p.getPosition(),0);
 		setPlayerTarget(p.getPosition(),-1);
 		if(p.getStatus()==2){
-			System.out.println(p.getName()+" is dead");
+			System.out.println(p.getName()+" was targeted and killed this night");
+			if(p.getRole().contains("Hitman")) newHitman();
 			return p.getPosition();
 		}else if(p.getStatus()==3){
-			System.out.println(p.getName()+" is saved");
+			System.out.println(p.getName()+" wsa targeted but saved by the doctor this night");
 			return p.getPosition();
 		}else if(p.getStatus()!=0){
 			setPlayerStatus(p.getStatus(),1);
@@ -173,34 +183,47 @@ public class Game{
 		for(Player p: playerInfo){
 			if(p.getStatus()!=0){
 				if(p.getRole().contains("Mafia")){
-					System.out.println(p.getRole());
 					mafiaTotal++;
 				}else{
-					System.out.println(p.getRole());
 					townTotal++;
 				}
 			}
 		} if(townTotal==1 && getPlayer("Survivor").getStatus()!=0){
-			System.out.println("The Survivor was the last remaining Town emeber alive");
+			System.out.println("The Survivor was the last remaining Town member alive");
 			return "Survivor";
+		}else if(lynchTarget!=-1 && getPlayer(lynchTarget).wasLynched()){
+			System.out.println("The Lyncher has lynched player: " + getPlayer(lynchTarget).getName());
+			return "Lyncher";
 		}else if(mafiaTotal>townTotal){
-			System.out.println("THe Mafia have a majority: "+ mafiaTotal +" | " + townTotal);
+			System.out.println("The Mafia have a majority: "+ mafiaTotal +" | " + townTotal);
 			return "Mafia";
 		}else if(mafiaTotal==0){
 			System.out.println("The Mafia have been removed from the Town!");
 			return "Town";
-		}else if(lynchTarget!=-1 && getPlayer(lynchTarget).wasLynched()){
-			System.out.println("hHe Lyncher has lynched player: " + getPlayer(lynchTarget).getName());
-			return "Lyncher";
 		}else{
 			return "None";
 		}
 	}
 	
-	private void newHitman(int position){
-		for(Player p: playerInfo){
-			
+	private void newHitman(){
+		Player p;
+		if(getPlayer("Goon")!=null){
+			p = getPlayer("Goon");
+			System.out.println(p.toString()+ " is taking Hitmans spot");
+			setHitman(p);
+		}else if(getPlayer("Barman")!=null){
+			p = getPlayer("Barman");
+			System.out.println(p.toString()+ " is taking Hitmans spot");
+			setHitman(p);
+		}else if(getPlayer("GodFather")!=null){
+			p = getPlayer("GodFather");
+			System.out.println(p.toString()+ " is taking Hitmans spot");
+			setHitman(p);
 		}
+	}
+	
+	private void setHitman(Player p){
+		playerInfo.set(p.getPosition(), new Hitman(p.getName(),p.getPosition(),p.getStatus(),p.wasLynched()));
 	}
 
 	/**
@@ -240,7 +263,7 @@ public class Game{
 	/**
 	 * Returns a list of Mafia Members
 	 * This is used for printing in the NightPanel
-	 * @return x (List of Mafia Members)
+	 * @return clone - List<String>
 	 */
 	public List<String> getMafiaMember(){
 		List<String> clone = new ArrayList<String>(mafiaMembers);
@@ -248,7 +271,8 @@ public class Game{
 	}
 	/**
 	 * Returns a list of players
-	 * @return x (List of Players)
+	 * Used for Saving the game at the start of every day cycle
+	 * @return clone - List<Player>
 	 */
 	public List<Player> getPlayerInfo(){
 		List<Player> clone = new ArrayList<Player>(playerInfo);
@@ -257,7 +281,7 @@ public class Game{
 	/**
 	 * Returns a copy of the current player
 	 * @param i - index value of the current player
-	 * @return player
+	 * @return Player
 	 */
 	public Player getPlayer(int i){
 		return playerInfo.get(i).copy();
@@ -268,7 +292,7 @@ public class Game{
 	 * @return
 	 */
 	private Player getPlayer(String s){
-		Player player = new Town("The player does not exist: "+s,0,0,false);
+		Player player = null;
 		for(Player p: playerInfo){
 			if(p.getRole().contains(s)){
 				player = p.copy();

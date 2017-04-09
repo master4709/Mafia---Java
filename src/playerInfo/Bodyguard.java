@@ -41,7 +41,6 @@ public class Bodyguard extends Town{
 	public Player copy(){
 		return new Bodyguard(this);
 	}
-	
 
 	/**
 	 * Unique action of the bodyguard
@@ -50,8 +49,11 @@ public class Bodyguard extends Town{
 	@Override
 	public int doAction(Player p){
 		if(getStatus()!=0 && getInBar()!=1){
+			System.out.print("ACTIVE: ");
 			return 4;
-		} return p.getStatus();
+		}
+		System.out.print("FAILED: ");
+		return p.getStatus();
 	}
 	
 	

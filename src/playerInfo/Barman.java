@@ -67,10 +67,4 @@ public class Barman extends Mafia {
 	public String getRoleInfo() {
 		return "May stop the action of another player each night";
 	}
-
-	/** returns the goal of the role */
-	@Override
-	public String getRoleGoal() {
-		return "To make the majority of the town mafia members";
-	}
 }

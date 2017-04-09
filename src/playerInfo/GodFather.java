@@ -63,10 +63,4 @@ public class GodFather extends Mafia {
 	public String getRoleInfo() {
 		return "Hidden from the Detective";
 	}
-
-	/** returns the goal of the role*/
-	@Override
-	public String getRoleGoal() {
-		return "To make the majority of the town mafia members";
-	}
 }

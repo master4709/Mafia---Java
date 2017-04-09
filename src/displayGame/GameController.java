@@ -48,7 +48,7 @@ public class GameController implements ActionListener{
 	private int position;
 	//Boolean for if the game is in test mode
 	private boolean test = false;
-	//Location of the current target for both the day lynching and every night player
+	//Location of the current target for both the day lynching and every night player for his/her action
 	private int target;
 	
 	//Must be private. so only one instance can be made
@@ -69,7 +69,7 @@ public class GameController implements ActionListener{
 		g = new Game(playerInfo,lynchTarget,round,test);
 		dp = new DayPanel(this,globalListener);
 		cpp = new CheckPlayerPanel(this);
-		np = new NightPanel(this,g.getMafiaMember());
+		np = new NightPanel(this,g.getMafiaMember(),g.getLynchTargetString());
 		sp = new StoryPanel(this);
 		vapp = new ViewAllPlayersPanel(this,globalListener);
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
@@ -92,8 +92,7 @@ public class GameController implements ActionListener{
 		position = -1;
 		
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
-			
-			switchPanel(panelDay);
+			switchDay();
 		}else{
 			switchPanel(panelViewAllPlayers);
 		}
@@ -128,18 +127,21 @@ public class GameController implements ActionListener{
 	 * Saves the game to the saveGame.txt document
 	 * If there was no winner, continues the cycle else goes to the win game panel
 	 */
-	private void switchDay(){
-		dp.resetButtonColor();
-		target = -1;
+	private void checkWinner(){
+		
 		String win = g.checkWinner();
 		if(win.contains("None")){
-
-			switchPanel(panelDay);
+			switchDay();
 		}else{
 			vp.setWinner(win);
 			switchPanel(panelVictory);
-			dp.setContinueButtonVisible(false);
 		}
+	}
+	
+	private void switchDay(){
+		dp.resetButtonColor();;
+		target = -1;
+		switchPanel(panelDay);
 	}
 
 	
@@ -176,7 +178,7 @@ public class GameController implements ActionListener{
 	 * @param panel
 	 */
 	private void switchPanel(JPanel panel){
-		//System.out.println("SWITCHING: "+panel.getName());
+		System.out.println("SWITCHING: "+panel.getName());
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);
@@ -197,10 +199,10 @@ public class GameController implements ActionListener{
 				g.setPlayerStatus(p.getPosition(), 1);
 				switchStory(p.getName(),false);
 			}else{
-				switchDay();
+				checkWinner();
 			}
 		}else{
-			switchDay();
+			checkWinner();
 		}
 	}
 	/**
@@ -267,7 +269,7 @@ public class GameController implements ActionListener{
 	private void detective(){
 		//If the target of the detective player is part of the Mafia
 		//*Note* the Mafia GodFather is hidden from the detective
-		if(g.getPlayer(target).getRole().contains("Mafia:")){
+		if(g.getPlayer(target).visibleMafia()){
 			np.setDetectiveMessage("Part of the Mafia");
 		}else{
 			np.setDetectiveMessage("Not part of the Mafia");
@@ -288,10 +290,13 @@ public class GameController implements ActionListener{
 			switchDay(); break;
 		case "Continue_DayPanel":
 			if(target!=-1){//Makes sure a target has been chosen for the day 
-				g.dayCycle(target);
+				g.lynchPlayer(target);
 				removePlayerButton(target);
+				checkWinner();
 				findNextPlayer();//Finds the first person in the list of players that is alive and displays his/her night screen
-			} break;
+			}else{
+				System.out.println("Please select a target to Lynch");
+			}break;
 		case "Continue_CheckPlayerPanel":
 			switchNight(); break;
 		case "Continue_NightPanel":

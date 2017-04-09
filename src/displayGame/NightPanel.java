@@ -37,14 +37,17 @@ public class NightPanel extends MyPanel{
 	//List of all of the buttons representing each of the players
 	private List<JButton> playerButtonList = new ArrayList<>();
 	//List of all of the Mafia Members
+	
+	private String lynchTarget;
 
 	/**
 	 * Create the panel and all of the sub panels
 	 * Displays all of the needed buttons and labels etc...
 	 * @param playerInfo
 	 */
-	public NightPanel(ActionListener packageListener, List<String> mafiaMember) {
+	public NightPanel(ActionListener packageListener, List<String> mafiaMember, String lynchTarget) {
 		this.packageListener = packageListener;
+		this.lynchTarget = lynchTarget;
 		contentPane.setName("Night Panel");
 		//Create all of the needed buttons and labels and adds them to the panel
 		displaySouth();
@@ -153,6 +156,7 @@ public class NightPanel extends MyPanel{
 		lblName.setText(player.getName());
 		lblRole.setText(player.getRole());
 		lblInfo.setText(player.getRoleInfo());
+		lblGoal.setText(player.getRoleGoal());
 		//Clears Detective Label
 		lblDetective.setText("");
 		//If The current player is the detective display the button to check if the target is part of the Mafia
@@ -164,6 +168,8 @@ public class NightPanel extends MyPanel{
 		//if the player is part of the Mafia, display a list of all Mafia Members to the screen
 		if(player.getRole().contains("Mafia")){
 			lblMafia.setVisible(true);
+		}else if(player.getRole().contains("Lyncher")){
+			lblGoal.setText(lblGoal.getText()+" "+lynchTarget);
 		}else{
 			lblMafia.setVisible(false);
 		}

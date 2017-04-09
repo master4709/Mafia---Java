@@ -7,7 +7,7 @@ package playerInfo;
  * @author Elvin Limpin 30018832
  *
  */
-public class Mafia extends Player {
+public abstract class Mafia extends Player {
 
 	/**
 	 * Constructor passing values from different mafia
@@ -37,7 +37,7 @@ public class Mafia extends Player {
 	@Override
 	public Player copy() {
 		// TODO Auto-generated method stub
-		return new Mafia(this);
+		return this;
 	}
 
 	@Override
@@ -45,22 +45,14 @@ public class Mafia extends Player {
 		// TODO Auto-generated method stub
 		return p.getStatus();
 	}
-
-	@Override
-	public String getRole() {
-		// TODO Auto-generated method stub
-		return "Mafia Role";
-	}
-
 	@Override
 	public String getRoleInfo() {
 		// TODO Auto-generated method stub
 		return "Mafia Info";
 	}
-
 	@Override
 	public String getRoleGoal() {
 		// TODO Auto-generated method stub
-		return "Mafia Goal";
+		return "Make the majority of the town Mafia by any means";
 	}
 }

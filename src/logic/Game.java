@@ -49,50 +49,41 @@ public class Game{
 		this.playerInfo = playerInfo;
 		this.lynchTarget = lynchTarget;
 		this.round = round;
-		mafiaMembers();
-		alivePlayers(test);
-	}
-	
-	/**
-	 * Creates a list of all of the Mafia Members
-	 */
-	private void mafiaMembers(){
-		for(int i =0;i<playerInfo.size();i++){
-			if(getPlayer(i).getRole().contains("Mafia")){
-				mafiaMembers.add(getPlayer(i).getName());
-			}
-		}
+		playerNames(test);
 	}
 	/**
 	 * Creates a list of player names
+	 * Also creates a list of Mafia members
 	 * If they are dead, adds "Dead | " to the front f the players name
 	 * @param test - if true, adds the players role to the players name
 	 */
-	private void alivePlayers(boolean test){
+	private void playerNames(boolean test){
 		for(Player p: playerInfo){
 			if(p.getStatus()!=0){
 				if(test){
-					playerNames.add(p.getName()+" | "+p.getRole());
+					playerNames.add(p.toString());
 				}else{
 					playerNames.add(p.getName());
 				}
 			}else{
 				playerNames.add("Dead | "+p.getName());
 			}
-			
+			if(p.getRole().contains("Mafia")){
+				mafiaMembers.add(p.getName());
+			}
 		}
 	}
 	
 	/**
 	 * This method will kill one player each day, depending on who the players vote out.
 	 */
-	public void dayCycle(int target){
+	public void lynchPlayer(int target){
 		if(target!=-1){
-			System.out.println(getPlayer(target).getName()+" has been lynched");
+			System.out.println(getPlayer(target).getName().toUpperCase()+" has been lynched");
 			setPlayerStatus(target,0);//Sets status of player to DEAD
-			setPlayerLynched(target,true);
+			setPlayerLynched(target,true);///Sets player to has been lynched during the day time
 			if(playerInfo.get(target).getRole().contains("Hitman")){
-				newHitman();
+				newHitman(target);//If the hitman dies, try find a new Mafia member to become Hitman
 			}
 		}
 	}
@@ -107,41 +98,39 @@ public class Game{
 		for(String role: nightPlayer){
 			for(Player p: playerInfo){
 				if(p.getRole().contains(role)){
+					System.out.print("PLAYER: ");
 					if(p.getTarget()!=-1){
-						int status;
+						System.out.println(p.toString()+ " is doing night action");
 						//Targets the bodyguard if the target of killer is protected (status = 4)
 						if((role.contains("Hitman") || role.contains("Vigilante")) && getPlayer(p.getTarget()).getStatus()==4){
-							System.out.println("The Bodyguard has save player: "+getPlayer(p.getTarget()).getName());
-							Player body  = getPlayer("Bodyguard");
-							setPlayerStatus(body.getPosition(), p.doAction(body));
-							System.out.println(p.toString() +" is doing action against player "+getPlayer("Bodyguard").getName());
+							int body = p.doAction(getPlayer("Bodyguard"));
+							setPlayerStatus(getPlayer("Bodyguard").getPosition(), body);
 						}else if(role.contains("Barman")){//Changes the in Bar of the player if the current role is Barman
 							int bar = p.doAction(getPlayer(p.getTarget()));
 							setPlayerInBar(p.getTarget(),bar);
-							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).getName());
 						}else{//Does action against target of current night role
-							status  = p.doAction(getPlayer(p.getTarget()));
+							int status  = p.doAction(getPlayer(p.getTarget()));
 							setPlayerStatus(p.getTarget(),status);
-							System.out.println(p.toString() +" is doing action against player "+getPlayer(p.getTarget()).getName());
 						}
-					}else if(p.getStatus()==0){
-						System.out.println(p.toString() + " is DEAD and will do nothing");
+						break;
 					}else{
 						System.out.println(p.toString()+" is NOT doing action");
 					}
-					break;
 				}
 			}
 		}
 		round++;
-		
 	}
-	
+	/**
+	 * Resets the status of every player
+	 * 
+	 */
 	public void reset(){
 		events = new ArrayList<>();
 		System.out.println("Reset Player targets, inBar, status");
 		for(Player p:playerInfo){
-			int player = resetPlayer(p.copy());
+			//Returns the Index value of any player that was killed or saved that night
+			int player = resetPlayer(p);
 			if(player!=-1){
 				events.add(player);
 			}
@@ -160,7 +149,7 @@ public class Game{
 		setPlayerTarget(p.getPosition(),-1);
 		if(p.getStatus()==2){
 			System.out.println(p.getName()+" was targeted and KILLED");
-			if(p.getRole().contains("Hitman")) newHitman();
+			if(p.getRole().contains("Hitman")) newHitman(p.getPosition());
 			return p.getPosition();
 		}else if(p.getStatus()==3){
 			System.out.println(p.getName()+" was targeted but SAVED");
@@ -202,8 +191,13 @@ public class Game{
 			return "None";
 		}
 	}
-	
-	private void newHitman(){
+	/**
+	 * Removes the current Hitman from the game if dead
+	 * Finds the next Mafia member to become the new Hitman
+	 *  1. Goon, 2. Barman, 2. GodFather.
+	 * @param hitman - index value of dead Hitman
+	 */
+	private void newHitman(int hitman){
 		Player p;
 		if(getPlayer("Goon")!=null){
 			p = getPlayer("Goon");
@@ -219,9 +213,12 @@ public class Game{
 			setHitman(p);
 		}
 	}
-	
+	/**
+	 * Sets the passed Player to become the new Hitman
+	 * @param p - Player changing to the Hitman position, does not change Player location in list
+	 */
 	private void setHitman(Player p){
-		playerInfo.set(p.getPosition(), new Hitman(p.getName(),p.getPosition(),p.getStatus(),p.wasLynched()));
+		playerInfo.set(p.getPosition(), new Hitman(p.getName(),p.getPosition()));
 	}
 
 	/**
@@ -282,7 +279,12 @@ public class Game{
 	 * @return Player
 	 */
 	public Player getPlayer(int i){
-		return playerInfo.get(i).copy();
+		if(i>=0&&i<playerInfo.size()){
+			return playerInfo.get(i).copy();
+		}else{
+			return null; 
+		}
+		
 	}
 	/**
 	 * Returns a copy of the current player
@@ -298,6 +300,16 @@ public class Game{
 			}
 		}
 		return player;
+	}
+	
+	public String getLynchTargetString(){
+		System.out.println(lynchTarget);
+		if(lynchTarget!=-1){
+			return playerInfo.get(lynchTarget).getName();
+		}else{
+			return "No target";
+		}
+		
 	}
 	/**
 	 * Returns the index value of the target of the lyncher

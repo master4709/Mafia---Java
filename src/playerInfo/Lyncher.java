@@ -69,7 +69,7 @@ public class Lyncher extends Town {
 	@Override
 	public String getRoleGoal() {
 		// TODO lynch target		
-		return "Get them lynched to win the game solo:";
+		return "Lynch all Mafia or to win solo lynch ";
 	}
 	
 }

@@ -65,10 +65,4 @@ public class Goon extends Mafia {
 	public String getRoleInfo() {
 		return "Do nothing at night";
 	}
-
-	/** returns the goal of the role */
-	@Override
-	public String getRoleGoal() {
-		return "To make the majority of the town mafia members";
-	}
 }

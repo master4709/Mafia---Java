@@ -52,22 +52,15 @@ public class Hitman extends Mafia {
 		}
 		return p.getStatus();
 	}
-	
-	/** returns the role name */
+
 	@Override
 	public String getRole() {
+		// TODO Auto-generated method stub
 		return "Mafia: Hitman";
 	}
-
-	/** returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
-		return "May kill new person each night";
-	}
-
-	/** returns the goal of the role */
-	@Override
-	public String getRoleGoal() {
-		return "To make the majority of the town mafia members";
+		// TODO Auto-generated method stub
+		return "Kill a different player each night";
 	}
 }

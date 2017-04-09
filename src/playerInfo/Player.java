@@ -1,5 +1,11 @@
 package playerInfo;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Inherited by different roles as a framework to store
  * attributes and a unique action
@@ -85,18 +91,6 @@ public abstract class Player {
 		this.isLynched = p.isLynched;
 	}
 	
-	/**
-	 * determines whether the player is the 
-	 * barman or the hitman
-	 * @param p
-	 * @return if player is part of mafia
-	 */
-	protected boolean visibleMafia(Player p){
-		if(p.getRole().contains("Mafia:")){
-			return true;
-		} return false;
-	}
-	
 	public abstract Player copy();
 	
 	/**
@@ -111,6 +105,18 @@ public abstract class Player {
 	public abstract String getRole();
 	public abstract String getRoleInfo();
 	public abstract String getRoleGoal();
+	
+	/**
+	 * determines whether the player is the 
+	 * barman or the hitman
+	 * @param p
+	 * @return if player is part of mafia
+	 */
+	public boolean visibleMafia(){
+		if(getRole().contains("Mafia:")){
+			return true;
+		} return false;
+	}
 	
 	public void setTarget(int target){
 		this.target = target;

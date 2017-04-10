@@ -108,9 +108,6 @@ public class GameController implements ActionListener{
 			vapp.displayPlayerButton(name, y);
 			y++;
 		}
-		
-		vp.setPlayerInfo(g.getPlayerNames());
-		
 	}
 	/**
 	 * Switch to the ViewPlayer JPanel and display the current plays information
@@ -134,6 +131,7 @@ public class GameController implements ActionListener{
 			switchDay();
 		}else{
 			vp.setWinner(win);
+			vp.setPlayerInfo(g.getPlayerNames());
 			switchPanel(panelVictory);
 		}
 	}

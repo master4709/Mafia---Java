@@ -73,7 +73,7 @@ public class GameController implements ActionListener{
 		sp = new StoryPanel(this);
 		vapp = new ViewAllPlayersPanel(this,globalListener);
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
-		vp = new VictoryPanel();
+		vp = new VictoryPanel(globalListener);
 		
 		sf = new SaveFile();
 		
@@ -117,13 +117,13 @@ public class GameController implements ActionListener{
 	 * @param i - the index value for which player to show
 	 */
 	private void switchViewPlayer(int i){
-		vpp.setPlayer(g.getPlayer(i));
+		vpp.setPlayer(g.getPlayer(i), (int) frame.getWidth());
 		switchPanel(panelViewPlayer);
 	}
 	
 	/**
 	 * switches the content panel to the dayCycle page
-	 * Sets the target of the day cylce to -1 -- ensures that a player button must be pressed to continue the game 
+	 * Sets the target of the day cycle to -1 -- ensures that a player button must be pressed to continue the game 
 	 * Saves the game to the saveGame.txt document
 	 * If there was no winner, continues the cycle else goes to the win game panel
 	 */
@@ -174,7 +174,7 @@ public class GameController implements ActionListener{
 	 * Switches the frame to the passed JPanel
 	 * Sets current content pane to invisible
 	 * Sets the frame to the new JPanel
-	 * Sets new contnet pane to visible
+	 * Sets new content pane to visible
 	 * @param panel
 	 */
 	private void switchPanel(JPanel panel){

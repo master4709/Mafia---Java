@@ -20,7 +20,9 @@ import java.util.List;
  *
  */
 public class StoryPanel extends MyPanel {
-	
+	/**
+	 * initializes variables
+	 */
 	private JButton btnContinue;
 	private JLabel name;
 	
@@ -31,9 +33,6 @@ public class StoryPanel extends MyPanel {
 	private JLabel line_name;
 	private JLabel line_location;
 	private JLabel line_story;
-	
-	//private MyTextArea myTxtPane;
-	//private JScrollPane scrollPane;
 	
 	public StoryPanel(ActionListener actionListener){
 		this.packageListener = actionListener;
@@ -65,11 +64,11 @@ public class StoryPanel extends MyPanel {
 	private void displayTop(){
 		line_name = new MyLabel("Name: ", textColor, textFont);
 		north.add(line_name, "cell 0 1");
-		name = new MyLabel("", 20);
+		name = new MyLabel("", 30);
 		north.add(name, "cell 1 1");
 		line_location = new MyLabel("Location: ", textColor, textFont);
 		north.add(line_location, "cell 0 2");
-		location = new MyLabel("",20);
+		location = new MyLabel("",30);
 		north.add(location, "cell 1 2");
 		
 	}
@@ -90,9 +89,9 @@ public class StoryPanel extends MyPanel {
 	private void displayCenter() {
 		line_story = new MyLabel("Here's what happened...", textColor, textFont);
 		center.add(line_story, "cell 0 3");
-		story = new MyTextArea("", 20);
+		story = new MyTextArea("", 30);
 		center.add(story, "cell 0 4");
-		event = new MyLabel("", 20);
+		event = new MyLabel("", 30);
 		center.add(event, "cell 0 5");	
 	}
 
@@ -102,6 +101,9 @@ public class StoryPanel extends MyPanel {
 	public void setStory(String str, boolean dead, int screenWidth){
 		Story s = new Story(str);
 		s.information();
+		/**
+		 * wraps the story text to display all the words on the screen
+		 */
 		story.setText(s.getStory());
 		story.setLineWrap(true);
 		story.setBounds(0, 0, screenWidth-50, 100);
@@ -116,9 +118,5 @@ public class StoryPanel extends MyPanel {
 				eventTxt = "They were healed by the doctor.";
 			}
 		event.setText(eventTxt);
-	}
-	
-	private void setStory(String stroy){
-		
 	}
 }

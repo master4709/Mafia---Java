@@ -45,7 +45,8 @@ public class Bodyguard extends Townie{
 	}
 
 	/**
-	 * Unique action of the bodyguard
+	 * Unique action of the bodyguard which is protecting
+	 * one player at night.
 	 * @param p, Player
 	 */
 	@Override

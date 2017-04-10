@@ -33,21 +33,22 @@ public class Detective extends Townie{
 	
 	/**
 	 * Copy constructor
-	 * @param d
+	 * @param d, Detective d
 	 */
 	public Detective(Detective d){
 		super(d);
 	}
 	
+	/**Copy method*/
 	public Player copy(){
 		return new Detective(this);
 	}
 	
 
 	/**
-	 * Unique action of Doctor
-	 * Not done here boiiiiiss
-	 * @param p
+	 * Unique action of Detective which is checking 
+	 * one player's affiliation at night.
+	 * @param p, Player p
 	 */
 	@Override
 	public int doAction(Player p){

@@ -1,5 +1,6 @@
 package playerInfo;
 /**
+ * This class extends Player class.
  * Unlike the Mafia class, some Town Players are classified
  * only as town players.
  * @author Mahsa Lotfi 10072013
@@ -9,9 +10,8 @@ public class Survivor extends Townie {
 
 	/**
 	 * Used for inheriting different town subclasses
-	 * @param name
-	 * @param position
-	 * @param role
+	 * @param name, String
+	 * @param position, integer
 	 */
 	public Survivor(String name, int position) {
 		super(name, position);
@@ -20,10 +20,10 @@ public class Survivor extends Townie {
 	
 	/**
 	 * Used for continuing saved games
-	 * @param name
-	 * @param position
-	 * @param status
-	 * @param isLynched
+	 * @param name, String
+	 * @param position, integer
+	 * @param status, integer
+	 * @param isLynched, boolean
 	 */
 	public Survivor(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
@@ -32,12 +32,13 @@ public class Survivor extends Townie {
 	
 	/**
 	 * Copy constructor
-	 * @param t
+	 * @param s, Survivor
 	 */
 	public Survivor(Survivor s){
 		super(s);
 	}
 	
+	/**Copy method*/
 	public Player copy(){
 		return new Survivor(this);
 	}

@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * This class creates the panel for selecting roles.
@@ -96,7 +95,7 @@ public class RoleSelectionPanel extends MyPanel{
                     case "Barman.java":
                         availableRoles.add("Mafia: " + fileName.substring(0, fileName.length() - 5));
                         break;
-                    case "Godfather.java":
+                    case "GodFather.java":
                         availableRoles.add("Mafia- " + fileName.substring(0, fileName.length() - 5));
                         break;
                     default:

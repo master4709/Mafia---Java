@@ -52,8 +52,6 @@ public class NewFile extends SaveFile{
 		
 		/**
 		 * This method will find and set a target for the lyncher.
-		 * @param calls
-		 * @return lynchTargetID
 		 */
 		public int setLynchTarget(){
 			for(int i = 0; i < roles.size(); i++){
@@ -82,9 +80,8 @@ public class NewFile extends SaveFile{
 		*/
 		
 		/**
-		 * This method will find the position of a role or the first Townie
+		 * This method will find the position of a role 
 		 * @param role
-		 * @return position of the player
 		 */
 		public int findPosition(String role){
 			for(Player p : playerInfo){

@@ -4,62 +4,107 @@ import myJStuff.MyPanel;
 import playerInfo.Player;
 import myJStuff.*;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * @author: Ronelle Bakima
+ * 30005568
+ * 
+ * */
+
 public class VictoryPanel extends MyPanel {
+	/**
+	 * declaration of variables
+	 */
 	private JLabel winner_title;
 	private JLabel names_roles;
 	private JLabel winner_name;
-	private String text;
 	private JLabel content;
 	private JButton btnHome;
 	
-	public VictoryPanel() {
+	private ActionListener globalListener;
+	
+	private String text;
+	private JLabel label_name_role;
+	private JLabel display;
+	/**
+	 * Constructor method that takes a listener as a 
+	 * parameter, calls initialize();
+	 * @param listener
+	 */
+	public VictoryPanel(ActionListener listener) {
+		globalListener = listener;
 		initialize();
 	}
-	//public VictoryPanel(ActionListener actionListener){
-		//this.packageListener = actionListener;
-		//initialize();
-	//}
+	
+	/**
+	 * returns contentPane
+	 */
 	public JPanel getContentPane(){
 		return contentPane;
 	}
+	/**
+	 * calls north, bottom, and center displays
+	 */
 	public void initialize() {
 		displayNorth();
 		displayBottom();
 		displayCenter();
 	}
+	/**
+	 * displays the north of the panel:
+	 * who the winner is
+	 */
 	public void displayNorth() {
 		winner_title = new MyLabel("The Winner is:", 20);
 		north.add(winner_title, "cell 0 1");
 		winner_name = new MyLabel("", 20);
 		north.add(winner_name, "cell 0 2");
 	}
+	/**
+	 * displays the center of the panel:
+	 * everybody's names and their roles
+	 */
 	public void displayCenter() {
 		names_roles = new MyLabel("Names and Roles:", 20);
 		center.add(names_roles, "cell 0 1");
-		content = new MyLabel("", 20);
-		center.add(content, "cell 0 2");
 	}
+	/**
+	 * displays the bottom of the panel:
+	 * the home button
+	 */
 	private void displayBottom() {
 		btnHome = new MyButton("Home");
 		south.add(btnHome, "cell 1 0");
-		btnHome.addActionListener(packageListener);
+		btnHome.addActionListener(globalListener);
 		btnHome.setName("Home");
 	}
+	/**
+	 * Sets all the names and roles in order to be 
+	 * displayed. Takes the list of the player info
+	 * as an argument
+	 * @param nameAndRole
+	 */
 	public void setPlayerInfo(List<String> nameAndRole) {
-		//Maybe make a new JLabel for each player and change the y by one and then you have a list of JLabels
-		//Instead of using one JLbael
-		for (String name: nameAndRole) {
-			text += '\n';
-			text += name;
+		for (int i = 0; i < nameAndRole.size(); i++) {
+			text = nameAndRole.get(i);
+			display.setText(text);
+			display = new MyLabel("", 20);
+			center.add(display, "cell 0 2");
 		}
-		content.setText(text);
 	}
-	
+	/**
+	 * Sets the winner of the game
+	 * takes name as an argument from game
+	 * controller
+	 * @param name
+	 */
 	public void setWinner(String name){
 		winner_name.setText(name);
 	}

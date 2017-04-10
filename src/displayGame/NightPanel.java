@@ -4,8 +4,6 @@ import myJStuff.*;
 import playerInfo.Player;
 
 import java.awt.event.ActionListener;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,10 +65,8 @@ public class NightPanel extends MyPanel{
 		north.add(lblInfo, "cell 0 2");
 		lblGoal = new MyLabel(text, textColor, infoFont);
 		north.add(lblGoal, "cell 0 3");
-		lblMafia= new MyLabel("Mafia Members: "+mafiaMembers, textColor, infoFont);
-		north.add(lblMafia, "cell 0 4");
-		lblMafia.setVisible(false);
-		lblMafia.setFont(new MyFont(setFontMafia("Mafia Members: "+mafiaMembers)));
+		lblMafia= new MyLabel("Mafia Members: "+mafiaMembers.toString(), textColor, infoFont);
+		lblMafia.setFont(new MyFont(setFont("Mafia Members: "+mafiaMembers,50,20)));
 	}
 	
 	/**
@@ -109,7 +105,7 @@ public class NightPanel extends MyPanel{
 		btnPlayer.setName("Night_"+Integer.toString(position));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener  
-		btnPlayer.setFont(new MyFont(setButtonFont(name)));
+		btnPlayer.setFont(new MyFont(setFont(name,100,30)));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
@@ -144,8 +140,7 @@ public class NightPanel extends MyPanel{
 	}
 	/**
 	 * Sets the display for the new player at night
-	 * @param i, position in list of current player
-	 * @param mafiaMember
+	 * @param player - Player, the 
 	 */
 	public void setDisplay(Player player){
 		//Resets the player target to -1
@@ -167,79 +162,15 @@ public class NightPanel extends MyPanel{
 		}
 		//if the player is part of the Mafia, display a list of all Mafia Members to the screen
 		if(player.getRole().contains("Mafia")){
-			lblMafia.setVisible(true);
+			north.add(lblMafia, "cell 0 4");
 		}else if(player.getRole().contains("Lyncher")){
 			lblGoal.setText(lblGoal.getText()+" "+lynchTarget);
 		}else{
-			lblMafia.setVisible(false);
+			north.remove(lblMafia);
 		}
-		
-		lblName.setFont(new MyFont(setFontPlayer(player.getName())));
-		lblInfo.setFont(new MyFont(setFontInfo(player.getRoleInfo())));
-	}
-	
-	public int setFontPlayer(String name){
-		int font = 10;
-		
-		AffineTransform affinetransform = new AffineTransform();
-		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
-		int textWidth = (int)(new MyFont(font).getStringBounds(name, frc).getWidth());
-		
-		int screenWidth = 480;
-		while(textWidth<screenWidth-25 && font<70){
-			font++;
-			textWidth = (int)(new MyFont(font).getStringBounds(name, frc).getWidth());
-		}
-		return font;
-	}
-	
-	public int setFontInfo(String info){
-		int font = 10;
-		
-		AffineTransform affinetransform = new AffineTransform();
-		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
-		int textWidth = (int)(new MyFont(font).getStringBounds(info, frc).getWidth());
-		
-		int screenWidth = 480;
-		while(textWidth<screenWidth-50 && font<25){
-			font++;
-			textWidth = (int)(new MyFont(font).getStringBounds(info, frc).getWidth());
-		}
-		return font;
-	}
-	
-	public int setFontMafia(String members){
-		int font = 10;
-		
-		AffineTransform affinetransform = new AffineTransform();
-		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
-		int textWidth = (int)(new MyFont(font).getStringBounds(members, frc).getWidth());
-		
-		int screenWidth = 480;
-		while(textWidth<screenWidth-50 && font<20){
-			font++;
-			textWidth = (int)(new MyFont(font).getStringBounds(members, frc).getWidth());
-		}
-		return font;
-	}
-	/**
-	 * Sets the button font size for each of the player buttons
-	 * Ensures that the button does not proceed the size of the screen
-	 * @param text - String displayed on button
-	 * @return int -  value of font size for button
-	 */
-	private int setButtonFont(String text){
-		int font = 10;
-		
-		AffineTransform affinetransform = new AffineTransform();
-		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
-		int textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
-		
-		int screenWidth = 480;
-		while(textWidth<screenWidth-100 && font<30){
-			font++;
-			textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
-		}
-		return font;
+								  //method in MyPanel
+		lblName.setFont(new MyFont(setFont(lblName.getText(),25,70)));
+		lblInfo.setFont(new MyFont(setFont(lblInfo.getText(),50,25)));
+		lblGoal.setFont(new MyFont(setFont(lblGoal.getText(),50,20)));
 	}
 }

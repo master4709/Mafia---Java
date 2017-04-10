@@ -9,6 +9,8 @@ package myJStuff;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -44,6 +46,8 @@ public abstract class MyPanel {
 	protected int roleFont;
 	protected int infoFont;
 	
+	protected EmptyBorder emptyBorder = new EmptyBorder(5, 5, 5, 5);
+	
 	/** This default constructor sets up the layout for the GUI **/
 	public MyPanel(){
 		
@@ -52,7 +56,7 @@ public abstract class MyPanel {
 		setTheme();
 
 		//Everything gets displayed on this panel 
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(emptyBorder);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		contentPane.setName("MyPanel --- Rename your Panel");
@@ -60,7 +64,7 @@ public abstract class MyPanel {
 		//These panels are what all JLabels, buttons etc. are added to
 		north = new JPanel();
 		contentPane.add(north, BorderLayout.NORTH);
-		north.setLayout(new MigLayout("", "[grow,center]", "[]"));
+		north.setLayout(new MigLayout("gap rel 0", "[grow,center]", "[]"));
 		
 		south = new JPanel();
 		contentPane.add(south, BorderLayout.SOUTH);
@@ -99,18 +103,17 @@ public abstract class MyPanel {
 	
 	/** Ensures that the panel background is black
 	 * @param c - color black**/
-	public void setBackground(Color c){
+	protected void setBackground(Color c){
 		north.setBackground(c);
 		south.setBackground(c);
 		east.setBackground(c);
 		west.setBackground(c);
 		center.setBackground(c);
-		//Creates a black border on the screen
 		contentPane.setBackground(c);
 	}
 	
 	/** Sets the default theme **/
-	public void setTheme(){
+	protected void setTheme(){
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 		        if ("Nimbus".equals(info.getName())) {
@@ -122,6 +125,29 @@ public abstract class MyPanel {
 		   System.out.println("Nimbus theme is not found.");
 		   e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Sets the font size for the current lbl or button
+	 * Ensures that the button does not proceed the size of the screen
+	 * @param text - String displayed on lbl or button
+	 * @param screen - Int value of space from edge of screen for text
+	 * @param max - Maximum Int size for the lbl or button
+	 * @return int -  value of font size for lbl or button
+	 */
+	protected int setFont(String text, int screen, int max){
+		int font = 10;
+		
+		AffineTransform affinetransform = new AffineTransform();
+		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
+		int textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
+		
+		int screenWidth = 480;
+		while(textWidth<screenWidth-screen && font<max){
+			font++;
+			textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
+		}
+		return font;
 	}
 	
 	/** returns the content pane */

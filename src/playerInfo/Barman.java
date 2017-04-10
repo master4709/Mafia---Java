@@ -65,6 +65,6 @@ public class Barman extends Mafia {
 	/** returns the role information for directions */
 	@Override
 	public String getRoleInfo() {
-		return "May stop the action of another player each night";
+		return "Stop the action of another player every night";
 	}
 }

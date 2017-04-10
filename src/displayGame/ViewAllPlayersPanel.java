@@ -5,8 +5,6 @@ import myJStuff.*;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.event.ActionListener;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +85,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 		btnPlayer.setName("Select_"+Integer.toString(position));
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
-		btnPlayer.setFont(new MyFont(setButtonFont(name)));
+		btnPlayer.setFont(new MyFont(setFont(name,100,30)));
 		playerButtonList.add(btnPlayer);
 	}
 	/**
@@ -98,26 +96,5 @@ public class ViewAllPlayersPanel extends MyPanel{
 	public void setPlayerButtonDead(int position){
 		String text = playerButtonList.get(position).getText();
 		playerButtonList.get(position).setText("Dead | " +text);
-	}
-	/**
-	 * Sets the button font size for each of the player buttons
-	 * Ensures that the button does not proceed the size of the screen
-	 * @param text - String displayed on button
-	 * @return int -  value of font size for button
-	 */
-	private int setButtonFont(String text){
-		int font = 10;
-		
-		AffineTransform affinetransform = new AffineTransform();
-		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
-		int textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
-		
-		int screenWidth = 480;
-		
-		while(font<30 && textWidth<screenWidth-100){
-			font++;
-			textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
-		}
-		return font;
 	}
 }

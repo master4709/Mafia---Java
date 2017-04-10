@@ -53,15 +53,15 @@ public class Town extends Player {
 	}
 
 	/** returns the role information for directions */
-
+	@Override
 	public String getRoleInfo() {
 		return "Do nothing at night";
 	}
 
 	/** returns the goal of the role */
-
+	@Override
 	public String getRoleGoal() {
-		return "Lynch all Mafia to win the game";
+		return "Lynch all members of the Mafia";
 	}
 	
 }

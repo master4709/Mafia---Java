@@ -4,8 +4,6 @@ package displayGame;
 import myJStuff.*;
 
 import java.awt.event.ActionListener;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +93,7 @@ public class DayPanel extends MyPanel{
 		btnPlayer.setName("Day_"+Integer.toString(position));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
-		btnPlayer.setFont(new MyFont(setButtonFont(name)));
+		btnPlayer.setFont(new MyFont(setFont(name,100,30)));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
@@ -135,21 +133,5 @@ public class DayPanel extends MyPanel{
 	
 	public void setContinueButtonVisible(boolean bool){
 		btnContinue.setVisible(bool);
-	}
-	
-	private int setButtonFont(String text){
-		int font = 10;
-		
-		AffineTransform affinetransform = new AffineTransform();
-		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
-		int textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
-		
-		int screenWidth = 480;
-		
-		while(font<30 && textWidth<screenWidth-100){
-			font++;
-			textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
-		}
-		return font;
 	}
 }

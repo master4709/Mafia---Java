@@ -9,10 +9,6 @@ import logic.Story;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.List;
 /**
  * Story Panel
  * @author: Ronelle Bakima

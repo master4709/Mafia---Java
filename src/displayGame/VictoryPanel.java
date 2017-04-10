@@ -1,14 +1,10 @@
 package displayGame;
 
 import myJStuff.MyPanel;
-import playerInfo.Player;
 import myJStuff.*;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
-import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.util.List;
 
@@ -25,13 +21,11 @@ public class VictoryPanel extends MyPanel {
 	private JLabel winner_title;
 	private JLabel names_roles;
 	private JLabel winner_name;
-	private JLabel content;
 	private JButton btnHome;
 	
 	private ActionListener globalListener;
 	
 	private String text;
-	private JLabel label_name_role;
 	private JLabel display;
 	/**
 	 * Constructor method that takes a listener as a 

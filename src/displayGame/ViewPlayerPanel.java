@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import javax.swing.JPanel;
 /**
  *@author: Ronelle Bakima
  *30005568
@@ -19,7 +18,6 @@ public class ViewPlayerPanel extends MyPanel{
 	
 	private JButton btnBack;
 	private List<String> mafiaMembers;
-	
 	private JTextArea role;
 	private JLabel name;
 	private JTextArea roleInfo;

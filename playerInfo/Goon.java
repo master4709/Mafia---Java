@@ -15,7 +15,6 @@ public class Goon extends Mafia {
 	 */
 	public Goon(String name, int position) {
 		super(name, position);
-		setRole(scan("Goon"));
 	}
 	
 	/**
@@ -27,7 +26,6 @@ public class Goon extends Mafia {
 	 */
 	public Goon(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
-		setRole(scan("Goon"));
 	}
 	
 	/** 
@@ -54,5 +52,17 @@ public class Goon extends Mafia {
 			return 1;//Player in bar
 		}
 		return 0;//Not in bar
+	}
+	
+	/** returns the role name */
+	@Override
+	public String getRole() {
+		return "Mafia: Goon";
+	}
+
+	/** returns the role information for directions */
+	@Override
+	public String getRoleInfo() {
+		return "Do nothing at night";
 	}
 }

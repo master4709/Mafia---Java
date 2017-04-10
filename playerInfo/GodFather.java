@@ -18,7 +18,6 @@ public class GodFather extends Mafia {
 	 */
 	public GodFather(String name, int position) {
 		super(name, position);
-		setRole(scan("GodFather"));
 	}
 	
 	/**
@@ -30,7 +29,6 @@ public class GodFather extends Mafia {
 	 */
 	public GodFather(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
-		setRole(scan("GodFather"));
 	}
 	
 	/** 
@@ -45,13 +43,24 @@ public class GodFather extends Mafia {
 		return new GodFather(this);
 	}
 
-	
+	@Override
 	/**
 	 * Unique action of the godfather
 	 * @param p
 	 */
-	@Override
 	public int doAction(Player p) {
 		return p.getStatus();
+	}
+	
+	/** returns the role name */
+	@Override
+	public String getRole() {
+		return "Mafia- GodFather";
+	}
+
+	/** returns the role information for directions */
+	@Override
+	public String getRoleInfo() {
+		return "Hidden from the Detective";
 	}
 }

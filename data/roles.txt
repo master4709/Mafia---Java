@@ -6,6 +6,6 @@ Survivor|Do nothing at night|Lynch all Mafia or be the last surving town member
 Townie|Do nothing at night|Lynch all members of the Mafia
 Vigilante|May kill a different player each night|Lycnh or Kill all members of the Mafia
 Mafia Barman|Stop another player from doing night action|Make the majority of the town Mafia by any means
-Mafia- Godfather|Hidden from the Detective|Make the majority of the town Mafia by any means
+Mafia- GodFather|Hidden from the Detective|Make the majority of the town Mafia by any means
 Mafia: Goon|Do nothing at night|Make the majority of the town Mafia by any means
 Mafia: Hitman|Kill a different player each night|Make the majority of the town Mafia by any means

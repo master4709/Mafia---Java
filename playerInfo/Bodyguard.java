@@ -16,7 +16,6 @@ public class Bodyguard extends Townie{
 	 */
 	public Bodyguard(String name, int position) {
 		super(name, position);
-		setRole(scan("Bodyguard"));
 	}
 	
 	/**
@@ -28,7 +27,6 @@ public class Bodyguard extends Townie{
 	 */
 	public Bodyguard(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
-		setRole(scan("Bodyguard"));
 	}
 	
 	/**
@@ -56,5 +54,24 @@ public class Bodyguard extends Townie{
 		}
 		System.out.print("FAILED: ");
 		return p.getStatus();
+	}
+	
+	
+	/** Returns the role name */
+	@Override
+	public String getRole() {
+		return "Bodyguard";
+	}
+
+	/** Returns the role information for directions */
+	@Override
+	public String getRoleInfo() {
+		return "May save another person by dying in their place";
+	}
+
+	/** Returns the goal of the role */
+	@Override
+	public String getRoleGoal() {
+		return "Lynch all Mafia to win the game";
 	}
 }

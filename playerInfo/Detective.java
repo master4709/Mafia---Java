@@ -16,7 +16,6 @@ public class Detective extends Townie{
 	 */
 	public Detective(String name, int position) {
 		super(name, position);
-		setRole(scan("Detective"));
 	}
 	
 	/**
@@ -28,7 +27,6 @@ public class Detective extends Townie{
 	 */
 	public Detective(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
-		setRole(scan("Detective"));
 	}
 	
 	/**
@@ -53,4 +51,25 @@ public class Detective extends Townie{
 	public int doAction(Player p){
 		return p.getStatus();
 	}
+	
+	
+	/** returns the role name */
+	@Override
+	public String getRole() {
+		return "Detective";
+	}
+
+	/** returns the role information for directions */
+	@Override
+	public String getRoleInfo() {
+		return "Reveals the team for one player per night";
+	}
+
+	/** returns the goal of the role */
+	@Override
+	public String getRoleGoal() {
+		return "Lynch all Mafia to win the game";
+	}
+	
+	
 }

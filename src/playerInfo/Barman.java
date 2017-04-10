@@ -18,6 +18,7 @@ public class Barman extends Mafia {
 	 */
 	public Barman(String name, int position) {
 		super(name, position);
+		setRole(scan("Barman"));
 	}
 	
 	/**
@@ -29,6 +30,7 @@ public class Barman extends Mafia {
 	 */
 	public Barman(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
+		setRole(scan("Barman"));
 	}
 	
 	/** 
@@ -42,29 +44,16 @@ public class Barman extends Mafia {
 	public Player copy(){
 		return new Barman(this);
 	}
-
-
-	@Override
+	
 	/**
 	 * Unique action of barman
 	 * @param p
 	 */
+	@Override
 	public int doAction(Player p) {
 		if(getStatus()!=0 && getInBar()!=1){
 			return 1;//Player in bar
 		}
 		return 0;//Not in bar
-	}
-	
-	/** returns the role name */
-	@Override
-	public String getRole() {
-		return "Mafia: Barman";
-	}
-
-	/** returns the role information for directions */
-	@Override
-	public String getRoleInfo() {
-		return "Stop the action of another player every night";
 	}
 }

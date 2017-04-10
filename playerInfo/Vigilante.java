@@ -17,7 +17,6 @@ public class Vigilante extends Townie{
 	 */
 	public Vigilante(String name, int position) {
 		super(name, position);
-		setRole(scan("Vigilante"));
 	}
 	
 	/**
@@ -29,7 +28,6 @@ public class Vigilante extends Townie{
 	 */
 	public Vigilante(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
-		setRole(scan("Vigilante"));
 	}
 	
 	/**
@@ -54,5 +52,24 @@ public class Vigilante extends Townie{
 			return 2;
 		}
 		return p.getStatus();
+	}
+	
+	
+	/** returns the role name */
+	@Override
+	public String getRole() {
+		return "Vigilante";
+	}
+
+	/** returns the role information for directions */
+	@Override
+	public String getRoleInfo() {
+		return "May kill new person each night";
+	}
+
+	/** returns the goal of the role */
+	@Override
+	public String getRoleGoal() {
+		return "Lynch all Mafia to win the game";
 	}	
 }

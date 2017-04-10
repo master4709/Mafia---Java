@@ -29,11 +29,11 @@ import java.util.List;
 
 public abstract class Player {
 	
-	private String name=""; //from UserInput
+	private String name; //from UserInput
 	
-	private String role="";
-	private String action="";
-	private String goal="";
+	private String role;
+	private String action;
+	private String goal;
 
 	private int position;
 	private int target;  	//position of target. -1 if N/A
@@ -106,14 +106,13 @@ public abstract class Player {
 			 String line;
 			    while ((line = br.readLine()) != null) {
 			       if(line.contains(roleName)){
-			    	   String[] split = line.split("\\|");
+			    	   String[] split = line.split("|");
 			    	   role.add(split[0]);
 			    	   role.add(split[1]);
 			    	   role.add(split[2]);
 			    	   return role;
 			       }
 			    }if (role.size()==0){
-			    	System.out.println("Cound not find role: "+roleName+" in file data/roles.txt");
 			    	role.add("No Role Found");
 			    	role.add("No info for role");
 			    	role.add("No goal found for role");

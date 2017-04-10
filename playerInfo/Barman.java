@@ -1,11 +1,14 @@
 package playerInfo;
 /**
- * The goon is a mafia member that does not
- * do any actions at night
+ * The barman is a mafia member that may
+ * stop the actions of a player at night.
+ * 
+ * The barman becomes the hitman once the
+ * hitman is dead.
  * @author Elvin Limpin 30018832
  */
 
-public class Goon extends Mafia {
+public class Barman extends Mafia {
 
 	/**
 	 * Constructor passes values to player while
@@ -13,9 +16,8 @@ public class Goon extends Mafia {
 	 * @param name
 	 * @param position
 	 */
-	public Goon(String name, int position) {
+	public Barman(String name, int position) {
 		super(name, position);
-		setRole(scan("Goon"));
 	}
 	
 	/**
@@ -25,21 +27,20 @@ public class Goon extends Mafia {
 	 * @param status
 	 * @param isLynched
 	 */
-	public Goon(String name, int position, int status, boolean isLynched){
+	public Barman(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
-		setRole(scan("Goon"));
 	}
 	
 	/** 
 	 * Copy constructor
 	 * @param b
 	 */
-	public Goon(Goon g){
-		super(g);
+	public Barman(Barman b){
+		super(b);
 	}
 	
 	public Player copy(){
-		return new Goon(this);
+		return new Barman(this);
 	}
 
 
@@ -50,9 +51,20 @@ public class Goon extends Mafia {
 	 */
 	public int doAction(Player p) {
 		if(getStatus()!=0 && getInBar()!=1){
-			System.out.print("ACTIVE ");
 			return 1;//Player in bar
 		}
 		return 0;//Not in bar
+	}
+	
+	/** returns the role name */
+	@Override
+	public String getRole() {
+		return "Mafia: Barman";
+	}
+
+	/** returns the role information for directions */
+	@Override
+	public String getRoleInfo() {
+		return "Stop the action of another player every night";
 	}
 }

@@ -5,7 +5,7 @@ package playerInfo;
  * @author Mahsa Lotfi 10072013
  *
  */
-public class Survivor extends Town {
+public class Lyncher extends Townie {
 
 	/**
 	 * Used for inheriting different town subclasses
@@ -13,7 +13,7 @@ public class Survivor extends Town {
 	 * @param position
 	 * @param role
 	 */
-	public Survivor(String name, int position) {
+	public Lyncher(String name, int position) {
 		super(name, position);
 	}
 	
@@ -24,7 +24,7 @@ public class Survivor extends Town {
 	 * @param status
 	 * @param isLynched
 	 */
-	public Survivor(String name, int position, int status, boolean isLynched){
+	public Lyncher(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
 	}
 	
@@ -32,12 +32,12 @@ public class Survivor extends Town {
 	 * Copy constructor
 	 * @param t
 	 */
-	public Survivor(Survivor s){
-		super(s);
+	public Lyncher(Lyncher l){
+		super(l);
 	}
 	
 	public Player copy(){
-		return new Survivor(this);
+		return new Lyncher(this);
 	}
 
 	/** The lyncher does not do anything at night */
@@ -48,23 +48,28 @@ public class Survivor extends Town {
 	}
 	
 	
-
 	/** returns the role name */
 	@Override
 	public String getRole() {
-		return "Survivor";
+		// TODO Auto-generated method stub
+		return "Lyncher";
 	}
 
-	/** returns the role information for directions */
+	/**
+	 * returns the role information
+	 * for directions
+	 */
 	@Override
 	public String getRoleInfo() {
+		// TODO Auto-generated method stub
 		return "Do nothing at night";
 	}
 
 	/** returns the goal of the role */
 	@Override
 	public String getRoleGoal() {
-		return "Be the last town member alive and you win";
+		// TODO lynch target		
+		return "Lynch all Mafia or to win solo lynch ";
 	}
 	
 }

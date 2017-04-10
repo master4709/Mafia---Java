@@ -89,7 +89,7 @@ public class NightPanel extends MyPanel{
 	 * Displays the button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		btnContinue = new MyButton("Continue");
+		btnContinue = new MyButton("Continue",28);
 		south.add(btnContinue, "cell 0 0,alignx center");
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_NightPanel");
@@ -105,7 +105,7 @@ public class NightPanel extends MyPanel{
 		btnPlayer.setName("Night_"+Integer.toString(position));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener  
-		btnPlayer.setFont(new MyFont(setFont(name,100,30)));
+		btnPlayer.setFont(new MyFont(setFont(name,100,28)));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
@@ -150,8 +150,8 @@ public class NightPanel extends MyPanel{
 		//Sets the labels to the current players information
 		lblName.setText(player.getName());
 		lblRole.setText(player.getRole());
-		lblInfo.setText(player.getRoleInfo());
-		lblGoal.setText(player.getRoleGoal());
+		lblInfo.setText(player.getAction());
+		lblGoal.setText(player.getGoal());
 		//Clears Detective Label
 		lblDetective.setText("");
 		//If The current player is the detective display the button to check if the target is part of the Mafia

@@ -5,7 +5,7 @@ package playerInfo;
  * @author Mahsa Lotfi 10072013
  *
  */
-public class Town extends Player {
+public class Townie extends Player {
 
 	/**
 	 * Used for inheriting different town subclasses
@@ -13,8 +13,9 @@ public class Town extends Player {
 	 * @param position
 	 * @param role
 	 */
-	public Town(String name, int position) {
+	public Townie(String name, int position) {
 		super(name, position);
+		setRole(scan("Townie"));
 	}
 	
 	/**
@@ -24,16 +25,17 @@ public class Town extends Player {
 	 * @param status
 	 * @param isLynched
 	 */
-	public Town(String name, int position, int status, boolean isLynched){
+	public Townie(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
+		setRole(scan("Townie"));
 	}
 	
-	public Town(Town toCopy){
+	public Townie(Townie toCopy){
 		super(toCopy);
 	}
 	
 	public Player copy(){
-		return new Town(this);
+		return new Townie(this);
 	}
 
 	/**
@@ -44,24 +46,6 @@ public class Town extends Player {
 	public int doAction(Player p) {
 		// These players do nothing
 		return p.getStatus();
-	}
-	
-	/** returns the role name */
-	@Override
-	public String getRole() {
-		return "Townie";
-	}
-
-	/** returns the role information for directions */
-	@Override
-	public String getRoleInfo() {
-		return "Do nothing at night";
-	}
-
-	/** returns the goal of the role */
-	@Override
-	public String getRoleGoal() {
-		return "Lynch all members of the Mafia";
 	}
 	
 }

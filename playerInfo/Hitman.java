@@ -15,7 +15,6 @@ public class Hitman extends Mafia {
 	 */
 	public Hitman(String name, int position) {
 		super(name, position);
-		setRole(scan("Hitman"));
 	}
 	
 	/**
@@ -27,7 +26,6 @@ public class Hitman extends Mafia {
 	 */
 	public Hitman(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
-		setRole(scan("Hitman"));
 	}
 	
 	/**
@@ -52,7 +50,17 @@ public class Hitman extends Mafia {
 			System.out.print("ACTIVE: ");
 			return TARGETED;
 		}
-		System.out.print("FAILED: ");
 		return p.getStatus();
+	}
+
+	@Override
+	public String getRole() {
+		// TODO Auto-generated method stub
+		return "Mafia: Hitman";
+	}
+	@Override
+	public String getRoleInfo() {
+		// TODO Auto-generated method stub
+		return "Kill a different player each night";
 	}
 }

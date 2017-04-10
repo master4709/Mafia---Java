@@ -45,4 +45,14 @@ public abstract class Mafia extends Player {
 		// TODO Auto-generated method stub
 		return p.getStatus();
 	}
+	@Override
+	public String getRoleInfo() {
+		// TODO Auto-generated method stub
+		return "Mafia Info";
+	}
+	@Override
+	public String getRoleGoal() {
+		// TODO Auto-generated method stub
+		return "Make the majority of the town Mafia by any means";
+	}
 }

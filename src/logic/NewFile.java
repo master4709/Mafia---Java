@@ -46,7 +46,7 @@ public class NewFile extends SaveFile{
 		public void setAllPlayers(){
 			Collections.shuffle(roles);
 			for(int i =0; i<names.size(); i++){
-				playerInfo.add(createPlayer(names.get(i),roles.get(i),i));
+				playerInfo.add(CreatePlayerUtil.createPlayer(names.get(i),roles.get(i),i));
 			}
 		}
 		
@@ -64,7 +64,7 @@ public class NewFile extends SaveFile{
 			return -1;
 		}
 		
-		public Player createPlayer(String name, String role, int position){
+		/*public Player createPlayer(String name, String role, int position){
 			switch(role){
 			case "Mafia: Barman": 		return new Barman(name,position);
 			case "Bodyguard": 			return new Bodyguard(name,position);
@@ -76,10 +76,10 @@ public class NewFile extends SaveFile{
 			case "Survivor": 			return new Survivor(name,position);
 			case "Vigilante": 			return new Vigilante(name,position);
 			case "Mafia: Goon":			return new Goon(name,position);
-			default: 					return new Town(name,position);
+			default: 					return new Townie(name,position);
 			}
 		}
-		
+		*/
 		
 		/**
 		 * This method will find the position of a role or the first Townie

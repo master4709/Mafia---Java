@@ -53,6 +53,7 @@ public class RoleSelectionPanel extends MyPanel{
     private void displayCenter() {
         createRoleButtons();
         for (int count = 0; count < roleButtons.size(); count++) {
+        	
             center.add(roleButtons.get(count), "cell 0 "+count+",growx");
         }
     }
@@ -62,7 +63,7 @@ public class RoleSelectionPanel extends MyPanel{
      */
     private void createRoleButtons() {
         ArrayList<String> availableRoles = scanForAvailableRoles();
-        for (int count = 0; count < 10; count++) {
+        for (int count = 0; count < availableRoles.size(); count++) {
             if (!availableRoles.get(count).equals("Townie")) {
                 JButton roleBtn = new MyButton(availableRoles.get(count));
                 roleBtn.setName("RoleButton " + (count+1));

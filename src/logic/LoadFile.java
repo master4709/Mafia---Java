@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import playerInfo.*;
 
-public class LoadFile extends CreatePlayer{
+public class LoadFile{
 	
 	private final String save = "data/saveGame.txt";
 	
@@ -51,7 +51,7 @@ public class LoadFile extends CreatePlayer{
 					name = getName(line,3);
 				}
 				
-				Player p = createPlayer(name,role,position,status,lynched);
+				Player p = CreatePlayerUtil.createPlayer(name,role,position,status,lynched);
 				playerInfo.add(p);
 				position++;
 			}
@@ -62,7 +62,7 @@ public class LoadFile extends CreatePlayer{
 			List<String> names = new ArrayList<>(Arrays.asList("Jon Snow","Daenerys","Cersei","Arya","Samwell","Bran","Sandor","Gregor","Tyrion"));
 			List<String> roles = new ArrayList<>((Arrays.asList("Town","Detective","Mafia: Barman","Mafia: Hitman","Doctor","Survivor","Lyncher","Bodyguard","Townie","Mafia-Godfather")));
 			for(int i=0;i<names.size();i++){
-				Player p = createPlayer(names.get(i),roles.get(i),i);
+				Player p = CreatePlayerUtil.createPlayer(names.get(i),roles.get(i),i);
 				playerInfo.add(p);
 			}
 		}

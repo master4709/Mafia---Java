@@ -16,7 +16,6 @@ public class Doctor extends Townie{
 	 */
 	public Doctor(String name, int position) {
 		super(name, position);
-		setRole(scan("Doctor"));
 	}
 	
 	/**
@@ -28,7 +27,6 @@ public class Doctor extends Townie{
 	 */
 	public Doctor(String name, int position, int status, boolean isLynched){
 		super(name, position, status, isLynched);
-		setRole(scan("Doctor"));
 	}
 	
 	/** 
@@ -55,4 +53,24 @@ public class Doctor extends Townie{
 			}
 		} return p.getStatus();
 	}
+	
+	
+	/** returns the role name */
+	@Override
+	public String getRole() {
+		return "Doctor";
+	}
+
+	/** returns the role information for directions */
+	@Override
+	public String getRoleInfo() {
+		return "May heal one player each night";
+	}
+
+	/** returns the goal of the role */
+	@Override
+	public String getRoleGoal() {
+		return "Lynch all Mafia to win the game";
+	}
+	
 }

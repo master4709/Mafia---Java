@@ -100,7 +100,6 @@ public class Game{
 				if(p.getRole().contains(role)){
 					System.out.print("PLAYER: ");
 					if(p.getTarget()!=-1){
-						System.out.println(p.toString()+ " is doing night action");
 						//Targets the bodyguard if the target of killer is protected (status = 4)
 						if((role.contains("Hitman") || role.contains("Vigilante")) && getPlayer(p.getTarget()).getStatus()==4){
 							int body = p.doAction(getPlayer("Bodyguard"));
@@ -112,6 +111,7 @@ public class Game{
 							int status  = p.doAction(getPlayer(p.getTarget()));
 							setPlayerStatus(p.getTarget(),status);
 						}
+						System.out.println(p.toString()+ " is doing night action");
 						break;
 					}else{
 						System.out.println(p.toString()+" is NOT doing action");

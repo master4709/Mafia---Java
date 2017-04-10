@@ -122,6 +122,7 @@ public abstract class Player {
 			    return role;
 		}catch(IOException e){
 			System.out.println("Could not find file: data/roles.txt");
+			System.out.println("Please contacta a system admin about downloading the file again");
 			role.add("No Role Found");
 	    	role.add("No info for role");
 	    	role.add("No goal found for role");

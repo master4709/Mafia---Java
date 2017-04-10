@@ -27,6 +27,7 @@ public class VictoryPanel extends MyPanel {
 	
 	private String text;
 	private JLabel display;
+	
 	/**
 	 * Constructor method that takes a listener as a 
 	 * parameter, calls initialize();

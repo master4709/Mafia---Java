@@ -52,10 +52,8 @@ public class Bodyguard extends Townie{
 	@Override
 	public int doAction(Player p){
 		if(getStatus()!=0 && getInBar()!=1){
-			System.out.print("ACTIVE: ");
-			return 4;
+			System.out.print("ACTIVE: "); return 4;
 		}
-		System.out.print("FAILED: ");
-		return p.getStatus();
+		System.out.print("FAILED: "); return p.getStatus();
 	}
 }

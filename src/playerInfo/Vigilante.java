@@ -53,8 +53,7 @@ public class Vigilante extends Townie{
 	@Override
 	public int doAction(Player p){
 		if(getStatus()!=0 && getInBar()!=1){
-			return 2;
-		}
-		return p.getStatus();
+			System.out.print("ACTIVE: ");return 2;
+		} System.out.print("FAIL: ");return p.getStatus();
 	}	
 }

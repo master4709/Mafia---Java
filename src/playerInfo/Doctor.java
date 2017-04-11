@@ -53,8 +53,8 @@ public class Doctor extends Townie{
 	public int doAction(Player p){
 		if(getStatus()!=0 && getInBar()!=1){
 			if(p.getStatus() == 2){ 
-				return 3;
+				System.out.print("ACTIVE: ");return 3;
 			}
-		} return p.getStatus();
+		} System.out.print("FAIL: ");return p.getStatus();
 	}
 }

@@ -52,8 +52,8 @@ public class Barman extends Mafia {
 	@Override
 	public int doAction(Player p) {
 		if(getStatus()!=0 && getInBar()!=1){
-			return 1;//Player in bar
+			System.out.print("ACTIVE: ");return 1;//Player in bar
 		}
-		return 0;//Not in bar
+		 System.out.print("FAIL: ");return 0;
 	}
 }

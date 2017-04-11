@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
 /**
  * This class is used to display the list of possible targets of the day lynching
  * The north Panel displays all of the JLabels needed for the Day Cycle
@@ -66,19 +67,19 @@ public class DayPanel extends MyPanel{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		btnHome = new MyButton("Home",buttonFont);
+		btnHome = new MyButton("Home",buttonFont*2/3);
 		south.add(btnHome,"cell 0 0,alignx left");
 		btnHome.addActionListener(globalListener);
 		btnHome.setName("Home");	
 		
 		//New Button using the default button presets and text Continue
-		btnContinue = new MyButton("Continue");
-		south.add(btnContinue, "cell 1 0, growx");
+		btnContinue = new MyButton("Lynch Player");
+		south.add(btnContinue, "cell 2 0, growx");
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_DayPanel");
 		
-		btnViewPlayers = new MyButton("<html> View<br>Players <html>",buttonFont*2/3);
-		south.add(btnViewPlayers,"cell 2 0,alignx right");
+		btnViewPlayers = new MyButton("View Roles",buttonFont*2/3);
+		south.add(btnViewPlayers,"cell 1 0,alignx left");
 		btnViewPlayers.addActionListener(packageListener);
 		btnViewPlayers.setName("ViewPlayers_DayPanel");
 	}
@@ -93,7 +94,8 @@ public class DayPanel extends MyPanel{
 		btnPlayer.setName("Day_"+Integer.toString(position));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
-		btnPlayer.setFont(new MyFont(setFont(name,100,30)));
+		btnPlayer.setFont(new MyFont(setFont(name,75,30)));
+		if(btnPlayer.getFont().getSize()<25) btnPlayer.setBorder(new EmptyBorder(13,5,13,5));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	

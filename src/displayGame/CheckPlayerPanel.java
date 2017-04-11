@@ -48,7 +48,7 @@ public class CheckPlayerPanel extends MyPanel{
 		//This button displays the text yes and when pressed goes to the GameController and switches the contentPane
 		//to the next player in the night cycle
 		btnYes = new MyButton("That's me",roleFont);
-		south.add(btnYes, "cell 0 0,growx");
+		south.add(btnYes, "cell 1 0,growx");
 		btnYes.addActionListener(packageListener);
 		btnYes.setName("Continue_CheckPlayerPanel");
 		
@@ -59,6 +59,7 @@ public class CheckPlayerPanel extends MyPanel{
 	 */
 	public void setPlayerName(String text){
 		lblPlayer.setText(text);
+		lblPlayer.setFont(new MyFont(setFont(text,75,100)));
 	}
 
 }

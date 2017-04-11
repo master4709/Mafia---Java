@@ -65,8 +65,6 @@ public class MainPanel extends MyPanel{
 
 		ImageIcon icon = new ImageIcon("data/pictures/mafia.png");
 		lblMan = new JLabel(icon);
-
-		north.add(lblMan, "cell 0 0, alignx center");
 		north.add(lblMan, "center");
 	}
 
@@ -78,7 +76,7 @@ public class MainPanel extends MyPanel{
 	private void displaySouth(){
 		
 		btnTest = new MyButton("Test Game");
-		south.add(btnTest, "cell 0 0 ,growx");
+		south.add(btnTest, "cell 1 0 ,growx");
 		btnTest.addActionListener(globalListener);
 		btnTest.setName("Testing_MainPanel");
 	}

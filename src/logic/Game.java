@@ -98,7 +98,6 @@ public class Game{
 		for(String role: nightPlayer){
 			for(Player p: playerInfo){
 				if(p.getRole().contains(role)){
-					System.out.print("PLAYER: ");
 					if(p.getTarget()!=-1){
 						//Targets the bodyguard if the target of killer is protected (status = 4)
 						if((role.contains("Hitman") || role.contains("Vigilante")) && getPlayer(p.getTarget()).getStatus()==4){
@@ -111,10 +110,12 @@ public class Game{
 							int status  = p.doAction(getPlayer(p.getTarget()));
 							setPlayerStatus(p.getTarget(),status);
 						}
-						System.out.println(p.toString()+ " is doing night action");
+						System.out.println(p.toString()+ " is doing night action against player " + getPlayer(p.getTarget()).getName());
 						break;
+					}else if(p.getStatus()==0){
+						System.out.println("DEAD: "+p.toString()+" is not doing anything");
 					}else{
-						System.out.println(p.toString()+" is NOT doing action");
+						System.out.println("NOTHING: "+p.toString() +" did not choose a night target");
 					}
 				}
 			}
@@ -127,7 +128,7 @@ public class Game{
 	 */
 	public void reset(){
 		events = new ArrayList<>();
-		System.out.println("Reset Player targets, inBar, status");
+		System.out.println("Reset All Player targets, inBar, status");
 		for(Player p:playerInfo){
 			//Returns the Index value of any player that was killed or saved that night
 			int player = resetPlayer(p);
@@ -303,11 +304,10 @@ public class Game{
 	}
 	
 	public String getLynchTargetString(){
-		System.out.println(lynchTarget);
 		if(lynchTarget!=-1){
 			return playerInfo.get(lynchTarget).getName();
 		}else{
-			return "No target";
+			return "No Target";
 		}
 		
 	}

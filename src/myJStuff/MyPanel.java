@@ -68,7 +68,7 @@ public abstract class MyPanel {
 		
 		south = new JPanel();
 		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[grow]", "[]"));
+		south.setLayout(new MigLayout("", "[][grow]", "[]"));
 		
 		west = new JPanel();
 		contentPane.add(west, BorderLayout.WEST);
@@ -136,7 +136,7 @@ public abstract class MyPanel {
 	 * @return int -  value of font size for lbl or button
 	 */
 	protected int setFont(String text, int screen, int max){
-		int font = 10;
+		int font = 5;
 		
 		AffineTransform affinetransform = new AffineTransform();
 		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);

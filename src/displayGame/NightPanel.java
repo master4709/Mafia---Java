@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
 
 /**
  * NightPanel
@@ -80,6 +81,7 @@ public class NightPanel extends MyPanel{
 		btnDetective.setName("Detective");
 		btnDetective.addActionListener(packageListener);
 		btnDetective.setVisible(false);
+		btnDetective.setBorder(new EmptyBorder(2,2,2,2));
 		
 		lblDetective = new MyLabel("", textColor, textFont);
 		center.add(lblDetective, "cell 0 13,alignx center");
@@ -90,7 +92,7 @@ public class NightPanel extends MyPanel{
 	 */
 	private void displaySouth(){
 		btnContinue = new MyButton("Continue",28);
-		south.add(btnContinue, "cell 0 0,alignx center");
+		south.add(btnContinue, "cell 1 0,alignx center");
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_NightPanel");
 	}
@@ -105,7 +107,8 @@ public class NightPanel extends MyPanel{
 		btnPlayer.setName("Night_"+Integer.toString(position));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener  
-		btnPlayer.setFont(new MyFont(setFont(name,100,28)));
+		btnPlayer.setFont(new MyFont(setFont(name,75,28)));
+		if(btnPlayer.getFont().getSize()<25) btnPlayer.setBorder(new EmptyBorder(13,5,13,5));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	
@@ -169,7 +172,7 @@ public class NightPanel extends MyPanel{
 			north.remove(lblMafia);
 		}
 								  //method in MyPanel
-		lblName.setFont(new MyFont(setFont(lblName.getText(),25,70)));
+		lblName.setFont(new MyFont(setFont(lblName.getText(),50,70)));
 		lblInfo.setFont(new MyFont(setFont(lblInfo.getText(),50,25)));
 		lblGoal.setFont(new MyFont(setFont(lblGoal.getText(),50,20)));
 	}

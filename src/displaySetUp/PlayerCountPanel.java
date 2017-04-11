@@ -67,7 +67,6 @@ public class PlayerCountPanel extends MyPanel{
 	
 	/** Method displays contents in the south**/
 	private void displaySouth(){
-		south.setLayout(new MigLayout("", "[][grow]", "[]"));
 		
 		btnHome = new MyButton("Home",buttonFont);
 		south.add(btnHome,"cell 0 0,alignx left");

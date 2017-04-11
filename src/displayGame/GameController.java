@@ -30,6 +30,7 @@ public class GameController implements ActionListener{
 	private Game g;
 	private DayPanel dp;
 	private NightPanel np;
+	private CheckLynchPanel clp;
 	private CheckPlayerPanel cpp;
 	private StoryPanel sp;
 	private ViewAllPlayersPanel vapp;
@@ -39,7 +40,8 @@ public class GameController implements ActionListener{
 	//All of the possible panels to be displayed on the frame
 	private JPanel panelDay;
 	private JPanel panelNight;
-	private JPanel panelCheck;
+	private JPanel panelCheckPlayer;
+	private JPanel panelCheckLynch;
 	private JPanel panelStory;
 	private JPanel panelViewAllPlayers;
 	private JPanel panelViewPlayer;
@@ -68,6 +70,7 @@ public class GameController implements ActionListener{
 		
 		g = new Game(playerInfo,lynchTarget,round,test);
 		dp = new DayPanel(this,globalListener);
+		clp = new CheckLynchPanel(this);
 		cpp = new CheckPlayerPanel(this);
 		np = new NightPanel(this,g.getMafiaMember(),g.getLynchTargetString());
 		sp = new StoryPanel(this);
@@ -80,7 +83,8 @@ public class GameController implements ActionListener{
 		//Creates the buttons of all of the players in the game
 		fillPanels();
 
-		panelCheck = cpp.getContentPane();
+		panelCheckPlayer = cpp.getContentPane();
+		panelCheckLynch = clp.getContentPane();
 		panelNight = np.getContentPane();
 		panelDay = dp.getContentPane();
 		panelStory = sp.getContentPane(); 
@@ -118,27 +122,10 @@ public class GameController implements ActionListener{
 		switchPanel(panelViewPlayer);
 	}
 	
-	/**
-	 * switches the content panel to the dayCycle page
-	 * Sets the target of the day cycle to -1 -- ensures that a player button must be pressed to continue the game 
-	 * Saves the game to the saveGame.txt document
-	 * If there was no winner, continues the cycle else goes to the win game panel
-	 */
-	private void checkWinner(){
-		
-		String win = g.checkWinner();
-		if(win.contains("None")){
-			switchDay();
-		}else{
-			vp.setWinner(win);
-			vp.setPlayerInfo(g.getPlayerNames());
-			switchPanel(panelVictory);
-		}
-	}
-	
 	private void switchDay(){
 		dp.resetButtonColor();;
 		target = -1;
+		sf.save(g.getPlayerInfo(), g.getLynchTarget());
 		switchPanel(panelDay);
 	}
 
@@ -157,7 +144,7 @@ public class GameController implements ActionListener{
 	 */
 	private void switchCheckPlayer(){
 		cpp.setPlayerName(g.getPlayer(position).getName());
-		switchPanel(panelCheck);
+		switchPanel(panelCheckPlayer);
 	}
 	/**
 	 * Switches the frame to the Story Panel to display the death or savior of a player
@@ -181,6 +168,26 @@ public class GameController implements ActionListener{
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);
 	}
+	
+	/**
+	 * switches the content panel to the dayCycle page
+	 * Sets the target of the day cycle to -1 -- ensures that a player button must be pressed to continue the game 
+	 * Saves the game to the saveGame.txt document
+	 * If there was no winner, continues the cycle else goes to the win game panel
+	 */
+	private void checkWinner(String time){
+		
+		String win = g.checkWinner();
+		if(win.contains("None")&&time.equals("Night")){
+			switchDay();
+		}else if(win.contains("None")&&time.equals("Day")){
+			findNextPlayer();
+		}else{
+			vp.setWinner(win);
+			vp.setPlayerInfo(g.getPlayerNames());
+			switchPanel(panelVictory);
+		}
+	}
 	/**
 	 * Calls the night Action method in the game class and odes all of the logic for each player each night
 	 * If there was a target of action that night
@@ -197,10 +204,10 @@ public class GameController implements ActionListener{
 				g.setPlayerStatus(p.getPosition(), 1);
 				switchStory(p.getName(),false);
 			}else{
-				checkWinner();
+				checkWinner("Night");
 			}
 		}else{
-			checkWinner();
+			checkWinner("Night");
 		}
 	}
 	/**
@@ -216,7 +223,6 @@ public class GameController implements ActionListener{
 			System.out.println("End of Night");
 			g.nightAction();
 			g.reset();
-			sf.save(g.getPlayerInfo(), g.getLynchTarget());
 			checkStory(0);
 		}else{
 			//Skips the checkPlayerPanel is the game is in testing mode
@@ -287,14 +293,20 @@ public class GameController implements ActionListener{
 		case "Continue_ViewAllPlayersPanel":
 			switchDay(); break;
 		case "Continue_DayPanel":
-			if(target!=-1){//Makes sure a target has been chosen for the day 
-				g.lynchPlayer(target);
-				removePlayerButton(target);
-				checkWinner();
-				findNextPlayer();//Finds the first person in the list of players that is alive and displays his/her night screen
+			if(target!=-1){//Makes sure a target has been chosen for the day
+				clp.setPlayer(g.getPlayer(target).getName());
+				switchPanel(panelCheckLynch);
 			}else{
 				System.out.println("Please select a target to Lynch");
 			}break;
+		case "Continue_CheckLynchPanel":
+			g.lynchPlayer(target);
+			removePlayerButton(target);
+			checkWinner("Day");
+			break;
+		case"Undo_CheckLynchPanel":
+			switchDay();
+			break;
 		case "Continue_CheckPlayerPanel":
 			switchNight(); break;
 		case "Continue_NightPanel":

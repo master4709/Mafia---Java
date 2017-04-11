@@ -24,6 +24,7 @@ public class RoleSelectionPanel extends MyPanel{
     private JLabel playersLeft;
     private JButton continueButton;
     private JButton assignTownies;
+    private JButton btnHome;
     
     private ActionListener globalListener;
     private ArrayList<String> rolesSelected;
@@ -144,12 +145,6 @@ public class RoleSelectionPanel extends MyPanel{
      * Create labels to be displayed in south of existing BorderLayout.
      */
     private void displaySouth(){
-        continueButton = new MyButton("Continue",buttonFont);
-    	south.add(continueButton,"cell 1 1,growx");
-    	continueButton.setVisible(false);
-        continueButton.setName("Continue_RoleSelectionPanel");
-        continueButton.addActionListener(globalListener);
-
         assignTownies = new MyButton("Assign the rest as Townie", 15);
         assignTownies.setName("AssignTownies_RoleSelection");
         assignTownies.addActionListener(packageListener);
@@ -160,6 +155,17 @@ public class RoleSelectionPanel extends MyPanel{
         south.add(resetBtn, "cell 1 0, alignx center");
 
         south.add(assignTownies, "cell 1 0, alignx right");
+
+        btnHome = new MyButton("Home",buttonFont);
+        south.add(btnHome,"cell 1 1,alignx left");
+        btnHome.addActionListener(globalListener);
+        btnHome.setName("Home");
+
+        continueButton = new MyButton("Continue",buttonFont);
+        south.add(continueButton,"cell 1 1,growx");
+        continueButton.setEnabled(false);
+        continueButton.setName("Continue_RoleSelectionPanel");
+        continueButton.addActionListener(globalListener);
     }
 
     /***

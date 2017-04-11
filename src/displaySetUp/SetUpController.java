@@ -126,7 +126,7 @@ public class SetUpController implements ActionListener{
 			roleButton.setBackground(Colors.defaultButtonBackgroundColor);
 		}
 		rsp.getAssignTownies().setEnabled(true);
-		rsp.getContinueButton().setVisible(false);
+		rsp.getContinueButton().setEnabled(false);
 		rsp.getPlayersLeft().setText(String.valueOf(pnp.getPlayerNames().size()));
 	}
 
@@ -148,7 +148,7 @@ public class SetUpController implements ActionListener{
 		}
 		rsp.getPlayersLeft().setText("0");
 		source.setEnabled(false);
-		rsp.getContinueButton().setVisible(true);
+		rsp.getContinueButton().setEnabled(true);
 	}
 
 	/***
@@ -186,13 +186,13 @@ public class SetUpController implements ActionListener{
 	 */
 	private void verifySelections(int playerNamesSize, int rolesSelectedSize) {
 		if (playerNamesSize == rolesSelectedSize) {
-			rsp.getContinueButton().setVisible(true);
+			rsp.getContinueButton().setEnabled(true);
 			rsp.getAssignTownies().setEnabled(false);
 			for (JButton roleButton : rsp.getRoleButtons()) {
 				roleButton.setEnabled(false);
 			}
 		} else {
-			rsp.getContinueButton().setVisible(false);
+			rsp.getContinueButton().setEnabled(false);
 		}
 	}
 

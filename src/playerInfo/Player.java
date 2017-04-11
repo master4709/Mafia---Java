@@ -115,7 +115,7 @@ public abstract class Player {
 			    }if (role.size()==0){
 			    	System.out.println("Cound not find role: "+roleName+" in file data/roles.txt");
 			    	role.add(roleName);
-			    	role.add("No action found for role");
+			    	role.add("No role found in data/roles.txt");
 			    	role.add("No goal found for role");
 			    }
 			    return role;

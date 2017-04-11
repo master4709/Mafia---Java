@@ -109,9 +109,9 @@ public class GameController implements ActionListener{
 				np.displayPlayerButton(name, y);
 			}
 			vapp.displayPlayerButton(name, y);
+			vp.setPlayerInfo(g.getPlayer(y));
 			y++;
 		}
-		vp.setPlayerInfo(g.getPlayerNames());
 	}
 	/**
 	 * Switch to the ViewPlayer JPanel and display the current plays information
@@ -184,7 +184,6 @@ public class GameController implements ActionListener{
 			findNextPlayer();
 		}else{
 			vp.setWinner(win);
-			
 			switchPanel(panelVictory);
 		}
 	}

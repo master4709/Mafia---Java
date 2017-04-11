@@ -248,7 +248,7 @@ public class GameController implements ActionListener{
 			System.out.println(g.getPlayer(position).getName().toUpperCase()+ " is Dead");
 			g.setPlayerTarget(position, -1);//Sets the target for any dead player to -1
 			position++;
-			return nextPlayer(position);
+			return nextPlayer(position);//Find next player
 		}else{
 			System.out.println(g.getPlayer(position).getName().toUpperCase()+ " is alive");
 			return position;
@@ -323,7 +323,7 @@ public class GameController implements ActionListener{
 				detective();//Reveals the team of the target of the detective
 			} break;
 		default://If the button pressed was not a continue or back button
-			int player=-1;
+			int player;
 			if(name.contains("Select")){
 				player = Integer.parseInt(name.substring(7, name.length()));
 				switchViewPlayer(player);

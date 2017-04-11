@@ -29,7 +29,10 @@ public class StoryPanel extends MyPanel {
 	private JLabel line_name;
 	private JLabel line_location;
 	private JLabel line_story;
-	
+	/**
+	 * constructor method for the story panel
+	 * @param actionListener
+	 */
 	public StoryPanel(ActionListener actionListener){
 		this.packageListener = actionListener;
 		initalize();
@@ -60,11 +63,11 @@ public class StoryPanel extends MyPanel {
 	private void displayTop(){
 		line_name = new MyLabel("Name: ", textColor, textFont);
 		north.add(line_name, "cell 0 1");
-		name = new MyLabel("", 30);
+		name = new MyLabel("", 20);
 		north.add(name, "cell 1 1");
 		line_location = new MyLabel("Location: ", textColor, textFont);
 		north.add(line_location, "cell 0 2");
-		location = new MyLabel("",30);
+		location = new MyLabel("",20);
 		north.add(location, "cell 1 2");
 		
 	}
@@ -85,9 +88,9 @@ public class StoryPanel extends MyPanel {
 	private void displayCenter() {
 		line_story = new MyLabel("Here's what happened...", textColor, textFont);
 		center.add(line_story, "cell 0 3");
-		story = new MyTextArea("", 30);
+		story = new MyTextArea("", 20);
 		center.add(story, "cell 0 4");
-		event = new MyLabel("", 30);
+		event = new MyLabel("", 20);
 		center.add(event, "cell 0 5");	
 	}
 

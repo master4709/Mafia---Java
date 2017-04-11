@@ -32,7 +32,7 @@ public class Story {
 	}
 	//extracts info from stories.txt
 	public void storyScanner() {
-		String fileName = "data/story/stories.txt";
+		String fileName = "src/data/story/stories.txt";
 		try {
 			Scanner inputStream = new Scanner (new File(fileName));
 			while(inputStream.hasNextLine()){
@@ -47,7 +47,7 @@ public class Story {
 	}
 	//extracts info from locations.txt
 	public void locationScanner() {
-		String fileName = "data/story/locations.txt";
+		String fileName = "src/data/story/locations.txt";
 		try {
 			Scanner inputStream = new Scanner (new File(fileName));
 			while(inputStream.hasNextLine()){
@@ -62,7 +62,7 @@ public class Story {
 	}
 	//extracts info from causeOfDeath.txt
 	public void causeScanner() {
-		String fileName = "data/story/causeOfDeath.txt";
+		String fileName = "src/data/story/causeOfDeath.txt";
 		try {
 			Scanner inputStream = new Scanner (new File(fileName));
 			while(inputStream.hasNextLine()){

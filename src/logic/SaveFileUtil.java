@@ -8,7 +8,7 @@ import playerInfo.Player;
 
 public class SaveFileUtil {
 	
-	private final String saveFile = "data/saveGame.txt";
+	private final String saveFile = "src/data/saveGame.txt";
 	
 	public void saveGame(List<Player> playerInfo, int lynchTarget){
 		try(PrintWriter pw = new PrintWriter(saveFile)) {

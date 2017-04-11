@@ -5,6 +5,7 @@ import myJStuff.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JLabel;
 
 import javax.swing.JButton;
@@ -29,7 +30,7 @@ public class AboutPanel extends MyPanel{
 	private JButton btnBack;
 	
 	//textPane for center panel
-	private MyTextArea myTxtPane;
+	private JTextArea myTxtPane;
 
 	/**
 	 * Constructor with one argument of ActionListener actionListener.

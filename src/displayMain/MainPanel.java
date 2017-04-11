@@ -7,8 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import myJStuff.MyButton;
-import myJStuff.MyPanel;
+import myJStuff.*;
 /**
  * This class creates panel for Main menu of Mafia game by creating 
  * different panels and putting them together. 
@@ -38,7 +37,7 @@ public class MainPanel extends MyPanel{
 	private JLabel lblMan;
 	
 	//button for south panel
-	private MyButton btnTest;
+	private JButton btnTest;
 	
 	/**
 	 * Constructor with one argument of ActionListener actionListener.

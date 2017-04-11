@@ -125,7 +125,7 @@ public class GameController implements ActionListener{
 	private void switchDay(){
 		dp.resetButtonColor();;
 		target = -1;
-		sf.save(g.getPlayerInfo(), g.getLynchTarget());
+		sf.saveGame(g.getPlayerInfo(), g.getLynchTarget());
 		switchPanel(panelDay);
 	}
 

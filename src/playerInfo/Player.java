@@ -115,22 +115,22 @@ public abstract class Player {
 			    }if (role.size()==0){
 			    	System.out.println("Cound not find role: "+roleName+" in file data/roles.txt");
 			    	role.add(roleName);
-			    	role.add("No info for role");
+			    	role.add("No action found for role");
 			    	role.add("No goal found for role");
 			    }
 			    return role;
 		}catch(IOException e){
 			System.out.println("Could not find file: data/roles.txt");
 			System.out.println("Please contacta a system admin about downloading the file again");
-			role.add("No Role Found");
-	    	role.add("No info for role");
+			role.add(roleName + " No name found");
+	    	role.add("No action found for role");
 	    	role.add("No goal found for role");
 	    	return role;
 		}
 	}
 	
 	protected void setRole(List<String> roleInfo){
-		if(roleInfo.size()==0){
+		if(roleInfo == null || roleInfo.size()==0){
 			role = "No Role";
 			action = "No Action";
 			goal = "No Goal";

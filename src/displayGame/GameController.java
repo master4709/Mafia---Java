@@ -57,7 +57,6 @@ public class GameController implements ActionListener{
 	public GameController(JFrame frame, ActionListener globalListener){
 		this.frame = frame;
 		this.globalListener = globalListener;
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	/**
 	 * Initializes all of the Panels and Game Class with:

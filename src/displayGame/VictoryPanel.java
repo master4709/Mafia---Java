@@ -50,25 +50,18 @@ public class VictoryPanel extends MyPanel {
 	public void initialize() {
 		displayNorth();
 		displayBottom();
-		displayCenter();
 	}
 	/**
 	 * displays the north of the panel:
 	 * who the winner is
 	 */
 	public void displayNorth() {
-		winner_title = new MyLabel("The Winner is:", 20);
+		winner_title = new MyLabel("The Winner is:", 30);
 		north.add(winner_title, "cell 0 1");
-		winner_name = new MyLabel("", 20);
+		winner_name = new MyLabel("", 30);
 		north.add(winner_name, "cell 0 2");
-	}
-	/**
-	 * displays the center of the panel:
-	 * everybody's names and their roles
-	 */
-	public void displayCenter() {
-		names_roles = new MyLabel("Names and Roles:", 20);
-		center.add(names_roles, "cell 0 1");
+		names_roles = new MyLabel("Names and Roles:", 30);
+		north.add(names_roles, "cell 0 3");
 	}
 	/**
 	 * displays the bottom of the panel:
@@ -89,7 +82,7 @@ public class VictoryPanel extends MyPanel {
 	public void setPlayerInfo(List<String> nameAndRole) {
 		for (int i = 0; i < nameAndRole.size(); i++) {
 			text = nameAndRole.get(i);			
-			display = new MyLabel("", 20);
+			display = new MyLabel("", 30);
 			display.setText(text);
 			center.add(display, "cell 0 "+i);
 		}

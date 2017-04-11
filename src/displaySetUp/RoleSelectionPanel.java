@@ -145,7 +145,7 @@ public class RoleSelectionPanel extends MyPanel{
      */
     private void displaySouth(){
         continueButton = new MyButton("Continue",buttonFont);
-    	south.add(continueButton,"cell 0 1,growx");
+    	south.add(continueButton,"cell 1 1,growx");
     	continueButton.setVisible(false);
         continueButton.setName("Continue_RoleSelectionPanel");
         continueButton.addActionListener(globalListener);
@@ -157,9 +157,9 @@ public class RoleSelectionPanel extends MyPanel{
         JButton resetBtn = new MyButton("Reset", 15);
         resetBtn.setName("Reset_RoleSelection");
         resetBtn.addActionListener(packageListener);
-        south.add(resetBtn, "cell 0 0, alignx center");
+        south.add(resetBtn, "cell 1 0, alignx center");
 
-        south.add(assignTownies, "cell 0 0, alignx right");
+        south.add(assignTownies, "cell 1 0, alignx right");
     }
 
     /***

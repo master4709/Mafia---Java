@@ -2,11 +2,11 @@ package logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import playerInfo.Player;
@@ -23,32 +23,34 @@ public class FileUtil{
 	/**
 	 * Instance variables
 	 */
-	private List<String> names;
-	private List<String> roles;
-	protected List<String> line;
+	private List<Player> playerInfo = new ArrayList<>();
 	
-	List<Player> playerInfo = new ArrayList<>();
 	private int lynchTargetID = -1;
 
-	protected final String save = "data/saveGame.txt";
+	private final String saveName = "data/saveGame.txt";
 	
-	public List<Player> newGame(List<String> names, List<String> rolesSelected){
-		this.names = names;
-		this.roles = rolesSelected;
-		setAllPlayers();
-		return playerInfo;
+	
+	public FileUtil(){
 	}
 	
-
-	public void newFile(List<String> names, List<String> rolesSelected){
-		saveFile(newGame(names, rolesSelected), setLynchTarget());
+	public void newFile(List<String> names, List<String> roles){
+		Collections.shuffle(roles);
+		setAllNewPlayers(names,roles);
+		if(findPosition("Lyncher")!=-1){
+			lynchTargetID = setLynchTarget(roles);
+		}else{
+			lynchTargetID = -1;
+		}
+		
 	}
 	
 	public void loadFile(){
+		lynchTargetID = -1;
 		int position = 0;
+		List<String> line;
 		try {
-			System.out.println("Loading Player data from file: "+save);
-			Scanner fileScanner = new Scanner(new File(save));
+			System.out.println("Loading Player data from file: "+saveName);
+			Scanner fileScanner = new Scanner(new File(saveName));
 			while(fileScanner.hasNextLine()){
 				String currentLine = fileScanner.nextLine();
 				Scanner lineScanner = new Scanner(currentLine);
@@ -65,41 +67,11 @@ public class FileUtil{
 		}
 	}
 	
-	public void saveFile(List<Player> playerInfo, int lynchTarget){
-		try {
-			PrintWriter pw = new PrintWriter(save);
-			System.out.println("SAVING Player info to "+save);
-			for(Player p: playerInfo){
-				pw.print(p.getStatus()+" ");
-				pw.print(String.valueOf(p.wasLynched())+" ");
-				pw.print(p.getRole()+" ");
-				if(p.getRole().contains("Lyncher")){
-					pw.print(lynchTarget+" ");
-				}
-				pw.print(p.getName());
-				pw.println();
-			}
-			pw.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}	
-	}
-		
-	/**
-	 * Method to shuffle the roles and matches them with the names.
-	 */
-	public void setAllPlayers(){
-		Collections.shuffle(roles);
-		for(int i =0; i<names.size(); i++){
-			playerInfo.add(CreatePlayerUtil.createPlayer(names.get(i),roles.get(i),i));
-		}
-	}
-	
 	/**
 	 * 
 	 */
-	protected void loadException(){
-		System.out.println("ERROR: Could not find file :"+save);
+	private void loadException(){
+		System.out.println("ERROR: Could not find file :"+saveName);
 		System.out.println("Loading internal default save game");
 		List<String> names = new ArrayList<>(
 			Arrays.asList("Jon Snow","Daenerys","Cersei","Arya","Samwell","Bran","Sandor","Gregor","Tyrion"));
@@ -117,7 +89,7 @@ public class FileUtil{
 	 * @param positionID
 	 * @return
 	 */
-	protected int scanLine(List<String> line, int positionID){
+	private int scanLine(List<String> line, int positionID){
 		int status = Integer.parseInt(line.get(0));
 		boolean lynched = Boolean.valueOf(line.get(1));
 		String role = line.get(2);
@@ -132,17 +104,14 @@ public class FileUtil{
 		}else{
 			name = getName(line,3);
 		}
-		
-		Player p = CreatePlayerUtil.createPlayer(name,role,positionID,status,lynched);
-		playerInfo.add(p);
+		playerInfo.add(CreatePlayerUtil.createPlayer(name,role,positionID,status,lynched));
 		return positionID++;
 	}
-	
 	/**
-	 * 
-	 * @param line
-	 * @param place
-	 * @return
+	 * Adds the remaining String elements in the the List together to make the player name
+	 * @param line - current line of the scanner
+	 * @param place - place in the line to start adding the rest of the list to the name
+	 * @return String - name of player
 	 */
 	private String getName(List<String> line, int place){
 		String name="";
@@ -153,17 +122,29 @@ public class FileUtil{
 		return name;
 	}
 	
+	
+	
+	/**
+	 * SHOULD RENAME
+	 * Method to shuffle the roles and matches them with the names.
+	 */
+	private void setAllNewPlayers(List<String> names,List<String> roles){
+		for(int i =0; i<names.size(); i++){
+			playerInfo.add(CreatePlayerUtil.createPlayer(names.get(i),roles.get(i),i));
+		}
+	}
+	
 	/**
 	 * This method will find and set a target for the lyncher.
 	 */
-	public int setLynchTarget(){
-		for(int i = 0; i < roles.size(); i++){
-			if(!playerInfo.get(i).getRole().equalsIgnoreCase("Lyncher")){
-				this.lynchTargetID = findPosition(roles.get(i));
-				return findPosition(roles.get(i));
-			} 
+	public int setLynchTarget(List<String> roles){
+		Random r = new Random();
+		int target = r.nextInt(roles.size());
+		int lyncher = findPosition("Lyncher");
+		while(target==lyncher){
+			target = r.nextInt(roles.size());
 		}
-		return -1;
+		return target;
 	}
 	
 	/**
@@ -182,7 +163,9 @@ public class FileUtil{
 	 * Getter method for playerInfo list.
 	 */	
 	public List<Player> getPlayerInfo(){
-		return playerInfo;
+		List<Player> clone = new ArrayList<>(playerInfo);
+		playerInfo = new ArrayList<>();
+		return clone;
 	}
 	
 	/**

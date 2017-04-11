@@ -6,17 +6,12 @@ import java.util.List;
 
 import playerInfo.Player;
 
-public class SaveFile {
+public class SaveFileUtil {
 	
-	private String saveFile = "data/saveGame.txt";
+	private final String saveFile = "data/saveGame.txt";
 	
-	public SaveFile(){
-		
-	}
-	
-	public void save(List<Player> playerInfo, int lynchTarget){
-		try {
-			PrintWriter pw = new PrintWriter(saveFile);
+	public void saveGame(List<Player> playerInfo, int lynchTarget){
+		try(PrintWriter pw = new PrintWriter(saveFile)) {
 			System.out.println("SAVING Player info to "+saveFile);
 			for(Player p: playerInfo){
 				//System.out.print(p.getName() + " " + p.getStatus() + " | ");
@@ -31,10 +26,10 @@ public class SaveFile {
 			}
 			pw.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Could not save to file: "+saveFile);
+			System.out.println("");
 			e.printStackTrace();
 		}
 		
 	}
-
 }

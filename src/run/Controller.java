@@ -12,19 +12,17 @@ import javax.swing.JFrame;
 import displayGame.GameController;
 import displayMain.MainController;
 import displaySetUp.SetUpController;
-import logic.LoadFile;
-import logic.NewFile;
+import logic.FileUtil;
 
 public class Controller implements ActionListener{
 	
 	private JFrame frame = new JFrame();
 	
+	private FileUtil fu = new FileUtil();
+	
 	private MainController mc;
 	private SetUpController suc;
 	private GameController gc;
-	
-	private NewFile nf;
-	private LoadFile lf;
 	
 	public Controller(){
 		setBounds();
@@ -56,16 +54,15 @@ public class Controller implements ActionListener{
 			suc.start();
 			break;
 		case"ContinueGame_MainPanel":
-			lf = new LoadFile();
-			lf.scan();
-			gc.start(lf.getPlayers(), lf.getLynchTarget(),1,false);
+			fu.loadFile();
+			gc.start(fu.getPlayerInfo(), fu.getLynchTarget(),1,false);
 			break;
 		case"Home":
 			mc.start();
 			break;
 		case"Continue_RoleSelectionPanel":
-			nf = new NewFile(suc.getPlayerNames(),suc.getRoles());
-			gc.start(nf.getPlayerInfo(), nf.getLynchTarget(),1,false);
+			fu.newFile(suc.getPlayerNames(),suc.getRoles());
+			gc.start(fu.getPlayerInfo(), fu.getLynchTarget(),1,false);
 			break;
 		case"Testing_MainPanel":
 			test();
@@ -79,7 +76,7 @@ public class Controller implements ActionListener{
 		//12 players
 		List<String> names = new ArrayList<>(Arrays.asList("Pierce","Mahsa","Christilyn","Elvin","Ronelle","Harry","Ron","Hermione","Tom Riddle","Albus D","Captain Jack","Sparkey Sparkey Boom Man"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- GodFather","Vigilante","Town","Mafia: Goon"));
-		nf = new NewFile(names,roles);
-		gc.start(nf.getPlayerInfo(),nf.getLynchTarget(),1,true);
+		fu.newFile(names,roles);
+		gc.start(fu.getPlayerInfo(),fu.getLynchTarget(),1,true);
 	}
 }

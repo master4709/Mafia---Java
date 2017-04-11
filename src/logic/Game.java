@@ -141,9 +141,9 @@ public class Game{
 			Player p = getPlayer(i);
 			System.out.print("EVENT: ");
 			if(p.getStatus()==2){
-				System.out.println(getPlayer(i).toString()+ " had DEATH event happen to them");
+				//System.out.println(getPlayer(i).toString()+ " had DEATH event happen to them");
 			}else{
-				System.out.println(getPlayer(i).toString()+ " had SAVE event happen to them");
+				//System.out.println(getPlayer(i).toString()+ " had SAVE event happen to them");
 			}
 		}
 	}
@@ -301,9 +301,8 @@ public class Game{
 		if(i>=0&&i<playerInfo.size()){
 			return playerInfo.get(i).copy();
 		}else{
-			return null; 
+			return new Townie("No player "+i,-1); 
 		}
-		
 	}
 	/**
 	 * Returns a copy of the current player
@@ -311,14 +310,12 @@ public class Game{
 	 * @return
 	 */
 	private Player getPlayer(String s){
-		Player player = null;
 		for(Player p: playerInfo){
-			if(p.getRole().contains(s)){
-				player = p.copy();
-				break;
+			if(p.getName().contains(s) || p.getRole().contains(s)){
+				return p.copy();
 			}
 		}
-		return player;
+		return new Townie("No player or Role "+s,-1);
 	}
 	
 	public String getLynchTargetString(){

@@ -1,6 +1,7 @@
 package displayGame;
 
 import myJStuff.MyPanel;
+import playerInfo.Player;
 import myJStuff.*;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -79,13 +80,12 @@ public class VictoryPanel extends MyPanel {
 	 * as an argument
 	 * @param nameAndRole
 	 */
-	public void setPlayerInfo(List<String> nameAndRole) {
-		for (int i = 0; i < nameAndRole.size(); i++) {
-			text = nameAndRole.get(i);			
-			display = new MyLabel("", 30);
-			display.setText(text);
-			center.add(display, "cell 0 "+i);
-		}
+	public void setPlayerInfo(Player p) {
+			JLabel status = new MyLabel("",30);
+			center.add(status,"cell 0 "+p.getPosition());
+			text = p.toString();			
+			display = new MyLabel(text, 30);
+			center.add(display, "cell 1 "+p.getPosition());
 	}
 	/**
 	 * Sets the winner of the game

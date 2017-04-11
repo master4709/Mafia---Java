@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
 import java.awt.Dimension;
@@ -37,7 +38,7 @@ public class RulePanel extends MyPanel{
 	private JButton btnBack;
 	
 	//Panes for center panel
-	private MyTextArea myTxtPane;
+	private JTextArea myTxtPane;
 	private JScrollPane scrollPane;
 	
 	

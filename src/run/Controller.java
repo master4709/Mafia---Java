@@ -51,18 +51,21 @@ public class Controller implements ActionListener{
 		
 		switch(name){
 		case"NewGame_MainPanel":
+			//Starts the SetUpController
 			suc.start();
 			break;
 		case"ContinueGame_MainPanel":
+			//Loads the save file
 			fu.loadFile();
-			gc.start(fu.getPlayerInfo(), fu.getLynchTarget(),1,false);
+			//Starts the game with save file info
+			gc.start(fu.getPlayerInfo(), fu.getLynchTarget(),false);
 			break;
 		case"Home":
 			mc.start();
 			break;
 		case"Continue_RoleSelectionPanel":
 			fu.newFile(suc.getPlayerNames(),suc.getRoles());
-			gc.start(fu.getPlayerInfo(), fu.getLynchTarget(),1,false);
+			gc.start(fu.getPlayerInfo(), fu.getLynchTarget(),false);
 			break;
 		case"Testing_MainPanel":
 			test();
@@ -77,6 +80,6 @@ public class Controller implements ActionListener{
 		List<String> names = new ArrayList<>(Arrays.asList("Pierce","Mahsa","Christilyn","Elvin","Ronelle","Harry","Ron","Hermione","Tom Riddle","Albus D","Captain Jack","Sparkey Sparkey Boom Man"));
 		List<String> roles = new ArrayList<>(Arrays.asList("Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor","Mafia: Barman","Lyncher","Mafia- GodFather","Vigilante","Town","Mafia: Goon"));
 		fu.newFile(names,roles);
-		gc.start(fu.getPlayerInfo(),fu.getLynchTarget(),1,true);
+		gc.start(fu.getPlayerInfo(),fu.getLynchTarget(),true);
 	}
 }

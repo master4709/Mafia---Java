@@ -7,14 +7,13 @@ import java.util.List;
 import playerInfo.*;
 
 /**Game Class
-	*This class runs the main logic and loop for the game
-	*This class uses the Players class to assign values for the amount of players and their names vis Player Input
-	*It then receives a list of all the Players with their assigned role etc.
-	*The class then enters the game loop and asks for the user input on the first person to be lynched on Day 1 dayCycle()
-	*The game then goes to the nightCycle() which asks for the target of each player every night. Players may die during this phase also
-	*The gave is over when the Mafia out number the town members or no Mafia members are left
-	*@author Pierce de Jong 30006609
-	*
+ * Handles most of the logic for day and night cycle
+ * Stores the list of players
+ * Lynch and kill a a player after the day in  lynchPlayer(int)
+ * Do all of the actions for all of the players in nightAction()
+ * Resets each player at the end of night
+ * This class stores all of the player information for the game
+ * @author Pierce de Jong 30006609
 */
 
 public class Game{
@@ -35,20 +34,17 @@ public class Game{
 	
 	//Index value for the target of the Lyncher
 	private int lynchTarget = -1;
-	
-	private int round;
 	/**
 	 * Constructor
 	 * Takes params values and stores them into local versions
 	 *
-	 * @param playerInfo
-	 * @param mafiaMembers
-	 * @param lynchTarget
+	 * @param playerInfo - List<Player> - current players in the game
+	 * @param lynchTarget - Integer - ID value of target of Lyncher (if no lynncher then -1)
+	 * @param test - Boolean for if the game is in test mode
 	 */
-	public Game(List<Player> playerInfo, int lynchTarget, int round, boolean test){
+	public Game(List<Player> playerInfo, int lynchTarget, boolean test){
 		this.playerInfo = playerInfo;
 		this.lynchTarget = lynchTarget;
-		this.round = round;
 		playerNames(test);
 		System.out.println(playerInfo.toString());
 	}
@@ -121,7 +117,6 @@ public class Game{
 				}
 			}
 		}
-		round++;
 	}
 	/**
 	 * Resets the status of every player
@@ -332,13 +327,6 @@ public class Game{
 	 */
 	public int getLynchTarget(){
 		return lynchTarget;
-	}
-	/**
-	 * Returns the current round
-	 * @return integer - round
-	 */
-	public int getRound(){
-		return round;
 	}
 	/**
 	 * Returns the total amount of players

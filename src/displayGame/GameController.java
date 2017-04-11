@@ -64,10 +64,10 @@ public class GameController implements ActionListener{
 	 * @param lynchTarget - index value of the target for the lyncher player, -1 if no lyncher player
 	 * @param test - if true, bypasses specific screens, (ViewAllPlayersPanel and CheckPlayerPanel)
 	 */
-	public void start(List<Player> playerInfo, int lynchTarget, int round, boolean test){
+	public void start(List<Player> playerInfo, int lynchTarget, boolean test){
 		this.test = test;
 		
-		g = new Game(playerInfo,lynchTarget,round,test);
+		g = new Game(playerInfo,lynchTarget,test);
 		dp = new DayPanel(this,globalListener);
 		clp = new CheckLynchPanel(this);
 		cpp = new CheckPlayerPanel(this);

@@ -2,6 +2,7 @@ package logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +19,7 @@ import playerInfo.Player;
  * 
  * Author: Mahsa Lotfi 10072013 
  */	
-public class FileUtil extends SaveFile{
+public class FileUtil{
 	/**
 	 * Instance variables
 	 */
@@ -45,6 +46,25 @@ public class FileUtil extends SaveFile{
 		save(playerInfo, lynchTargetID);
 	}
 
+	public void save(List<Player> playerInfo, int lynchTarget){
+		try {
+			PrintWriter pw = new PrintWriter(save);
+			System.out.println("SAVING Player info to "+save);
+			for(Player p: playerInfo){
+				pw.print(p.getStatus()+" ");
+				pw.print(String.valueOf(p.wasLynched())+" ");
+				pw.print(p.getRole()+" ");
+				if(p.getRole().contains("Lyncher")){
+					pw.print(lynchTarget+" ");
+				}
+				pw.print(p.getName());
+				pw.println();
+			}
+			pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}	
+	}
 		
 	/**
 	 * Method to shuffle the roles and matches them with the names.

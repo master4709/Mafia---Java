@@ -25,28 +25,47 @@ public class FileUtil{
 	 */
 	private List<String> names;
 	private List<String> roles;
-	private List<String> line;
+	protected List<String> line;
 	
 	List<Player> playerInfo = new ArrayList<>();
 	private int lynchTargetID = -1;
 
-	private final String save = "data/saveGame.txt";
+	protected final String save = "data/saveGame.txt";
 	
-	/**
-	 * Constructor with 2 arguments. It will initialize names and roles of the 
-	 * players and create a list which has all the info of players in it.
-	 * @param List<String> names, name of players.
-	 * @param ArrayList<String> roleSelected, roles that are selected by players.
-	 */	
-	public FileUtil( List<String> names, List<String> rolesSelected){
+	public List<Player> newGame(List<String> names, List<String> rolesSelected){
 		this.names = names;
 		this.roles = rolesSelected;
-		setAllPlayers();	
-		this.lynchTargetID = setLynchTarget();
-		save(playerInfo, lynchTargetID);
+		setAllPlayers();
+		return playerInfo;
 	}
+	
 
-	public void save(List<Player> playerInfo, int lynchTarget){
+	public void newFile(List<String> names, List<String> rolesSelected){
+		saveFile(newGame(names, rolesSelected), setLynchTarget());
+	}
+	
+	public void loadFile(){
+		int position = 0;
+		try {
+			System.out.println("Loading Player data from file: "+save);
+			Scanner fileScanner = new Scanner(new File(save));
+			while(fileScanner.hasNextLine()){
+				String currentLine = fileScanner.nextLine();
+				Scanner lineScanner = new Scanner(currentLine);
+				line = new ArrayList<>();
+				while(lineScanner.hasNext()){
+					line.add(lineScanner.next());
+				}
+				lineScanner.close();
+				position = scanLine(line, position);
+			}
+			fileScanner.close();
+		} catch (FileNotFoundException e) {
+			loadException();
+		}
+	}
+	
+	public void saveFile(List<Player> playerInfo, int lynchTarget){
 		try {
 			PrintWriter pw = new PrintWriter(save);
 			System.out.println("SAVING Player info to "+save);
@@ -79,31 +98,7 @@ public class FileUtil{
 	/**
 	 * 
 	 */
-	public void scan(){
-		int position = 0;
-		try {
-			System.out.println("Loading Player data from file: "+save);
-			Scanner fileScanner = new Scanner(new File(save));
-			while(fileScanner.hasNextLine()){
-				String currentLine = fileScanner.nextLine();
-				Scanner lineScanner = new Scanner(currentLine);
-				line = new ArrayList<>();
-				while(lineScanner.hasNext()){
-					line.add(lineScanner.next());
-				}
-				lineScanner.close();
-				position = scanLine(line, position);
-			}
-			fileScanner.close();
-		} catch (FileNotFoundException e) {
-			loadException();
-		}
-	}
-	
-	/**
-	 * 
-	 */
-	private void loadException(){
+	protected void loadException(){
 		System.out.println("ERROR: Could not find file :"+save);
 		System.out.println("Loading internal default save game");
 		List<String> names = new ArrayList<>(
@@ -122,7 +117,7 @@ public class FileUtil{
 	 * @param positionID
 	 * @return
 	 */
-	private int scanLine(List<String> line, int positionID){
+	protected int scanLine(List<String> line, int positionID){
 		int status = Integer.parseInt(line.get(0));
 		boolean lynched = Boolean.valueOf(line.get(1));
 		String role = line.get(2);
@@ -163,7 +158,8 @@ public class FileUtil{
 	 */
 	public int setLynchTarget(){
 		for(int i = 0; i < roles.size(); i++){
-			if(roles.get(i) != "Lyncher"){
+			if(!playerInfo.get(i).getRole().equalsIgnoreCase("Lyncher")){
+				this.lynchTargetID = findPosition(roles.get(i));
 				return findPosition(roles.get(i));
 			} 
 		}
@@ -176,7 +172,7 @@ public class FileUtil{
 	 */
 	public int findPosition(String role){
 		for(Player p : playerInfo){
-			if(p.toString() == role) {
+			if(p.getRole().equalsIgnoreCase(role)) {
 				return p.getPosition();
 			}
 		} return -1;

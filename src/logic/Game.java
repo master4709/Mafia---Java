@@ -28,7 +28,7 @@ public class Game{
 	private List<String> mafiaMembers = new ArrayList<>();
 	
 	//Lmao
-	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Mafia- GodFather","Doctor"));
+	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Doctor"));
 	
 	//List of player indexes that were healed or killed that night, maximum of 2 people in the list
 	private List<Integer> events = new ArrayList<>();
@@ -93,7 +93,7 @@ public class Game{
 	 * @return int - position in the list for the target of night action (EG killed or healed event)
 	 */
 	public void nightAction(){
-		System.out.println("Do all actions for ending night");
+		System.out.println("Do all Night Actions");
 		
 		for(String role: nightPlayer){
 			for(Player p: playerInfo){
@@ -113,7 +113,7 @@ public class Game{
 						System.out.println(p.toString()+ " is doing night action against player " + getPlayer(p.getTarget()).getName());
 						break;
 					}else if(p.getStatus()==0){
-						System.out.println("DEAD: "+p.toString()+" is not doing anything");
+						System.out.println("DEAD: "+p.toString()+" is low key dead");
 					}else{
 						System.out.println("NOTHING: "+p.toString() +" did not choose a night target");
 					}
@@ -136,6 +136,15 @@ public class Game{
 				events.add(player);
 			}
 		}
+		for(int i: events){
+			Player p = getPlayer(i);
+			System.out.print("EVENT: ");
+			if(p.getStatus()==2){
+				System.out.println(getPlayer(i).toString()+ " had DEATH event happen to them");
+			}else{
+				System.out.println(getPlayer(i).toString()+ " had SAVE event happen to them");
+			}
+		}
 	}
 	
 	/**
@@ -149,16 +158,24 @@ public class Game{
 		setPlayerInBar(p.getPosition(),0);
 		setPlayerTarget(p.getPosition(),-1);
 		if(p.getStatus()==2){
-			System.out.println(p.getName()+" was targeted and KILLED");
+			//System.out.println(p.getName()+" was targeted and KILLED");
 			if(p.getRole().contains("Hitman")) newHitman(p.getPosition());
 			return p.getPosition();
 		}else if(p.getStatus()==3){
-			System.out.println(p.getName()+" was targeted but SAVED");
+			//System.out.println(p.getName()+" was targeted but SAVED");
 			return p.getPosition();
-		}else if(p.getStatus()!=0){
+		}else if(p.getStatus()==4){
 			setPlayerStatus(p.getStatus(),1);
+			//System.out.println(p.getName()+"was saved by the Bodyguard (Should not be here for final game)");
+			return -1;
+		}else{
+			if(p.getStatus()==0){
+				//System.out.println(p.getName()+ " is dead. Lynching: " +Boolean.toString(p.wasLynched()));
+			}else{
+				//System.out.println(p.getName()+ " is alive");
+			}
+			return -1;
 		}
-		return -1;
 	}
 	/**
 	 * Checks if any player has achieved victory

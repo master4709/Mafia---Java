@@ -24,6 +24,7 @@ public class MyTextArea extends JTextArea{
 		setForeground(Colors.white);
 		setBackground(backgroundColor);
 		setFont(new MyFont(font));
+		setEditable(false);
 	}
 	
 	/**
@@ -37,5 +38,6 @@ public class MyTextArea extends JTextArea{
 		setBackground(Colors.black);
 		setFont(new MyFont(font));
 		setWrapStyleWord(true);
+		setEditable(false);
 	}	
 }

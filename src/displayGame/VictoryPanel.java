@@ -88,10 +88,10 @@ public class VictoryPanel extends MyPanel {
 	 */
 	public void setPlayerInfo(List<String> nameAndRole) {
 		for (int i = 0; i < nameAndRole.size(); i++) {
-			text = nameAndRole.get(i);
-			display.setText(text);
+			text = nameAndRole.get(i);			
 			display = new MyLabel("", 20);
-			center.add(display, "cell 0 2");
+			display.setText(text);
+			center.add(display, "cell 0 "+i);
 		}
 	}
 	/**

@@ -50,7 +50,6 @@ public class VictoryPanel extends MyPanel {
 	public void initialize() {
 		displayNorth();
 		displayBottom();
-		displayCenter();
 	}
 	/**
 	 * displays the north of the panel:
@@ -61,12 +60,6 @@ public class VictoryPanel extends MyPanel {
 		north.add(winner_title, "cell 0 1");
 		winner_name = new MyLabel("", 30);
 		north.add(winner_name, "cell 0 2");
-	}
-	/**
-	 * displays the center of the panel:
-	 * everybody's names and their roles
-	 */
-	public void displayCenter() {
 		names_roles = new MyLabel("Names and Roles:", 30);
 		north.add(names_roles, "cell 0 3");
 	}

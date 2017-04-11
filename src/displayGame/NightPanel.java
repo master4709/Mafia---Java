@@ -108,7 +108,7 @@ public class NightPanel extends MyPanel{
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener  
 		btnPlayer.setFont(new MyFont(setFont(name,75,28)));
-		if(btnPlayer.getFont().getSize()<25) btnPlayer.setBorder(new EmptyBorder(13,5,13,5));
+		if(btnPlayer.getFont().getSize()<25) btnPlayer.setBorder(new EmptyBorder(12,5,12,5));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
 	

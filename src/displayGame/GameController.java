@@ -96,7 +96,7 @@ public class GameController implements ActionListener{
 		position = -1;
 		
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
-			switchDay();
+			switchPanel(panelDay);
 		}else{
 			switchPanel(panelViewAllPlayers);
 		}

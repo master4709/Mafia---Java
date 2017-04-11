@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
 /**
  * This class is used to display the list of possible targets of the day lynching
  * 
@@ -94,7 +95,10 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 * @param position - index value of the player that died
 	 */
 	public void setPlayerButtonDead(int position){
-		String text = playerButtonList.get(position).getText();
+		String text = "Dead | " + playerButtonList.get(position).getText();
 		playerButtonList.get(position).setText("Dead | " +text);
+		int font = setFont(text,100,30);
+		playerButtonList.get(position).setFont(new MyFont(font));
+		if(font<25) playerButtonList.get(position).setBorder(new EmptyBorder(12,5,12,5));
 	}
 }

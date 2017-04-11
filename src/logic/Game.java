@@ -50,6 +50,7 @@ public class Game{
 		this.lynchTarget = lynchTarget;
 		this.round = round;
 		playerNames(test);
+		System.out.println(playerInfo.toString());
 	}
 	/**
 	 * Creates a list of player names
@@ -93,7 +94,7 @@ public class Game{
 	 * @return int - position in the list for the target of night action (EG killed or healed event)
 	 */
 	public void nightAction(){
-		System.out.println("Do all Night Actions");
+		System.out.println("NIGHT ACTIONS");
 		
 		for(String role: nightPlayer){
 			for(Player p: playerInfo){
@@ -128,7 +129,7 @@ public class Game{
 	 */
 	public void reset(){
 		events = new ArrayList<>();
-		System.out.println("Reset All Player targets, inBar, status");
+		System.out.println("RESET All Player targets, inBar, status");
 		for(Player p:playerInfo){
 			//Returns the Index value of any player that was killed or saved that night
 			int player = resetPlayer(p);
@@ -157,14 +158,14 @@ public class Game{
 	private Integer resetPlayer(Player p){
 		setPlayerInBar(p.getPosition(),0);
 		setPlayerTarget(p.getPosition(),-1);
-		if(p.getStatus()==2){
+		if(p.getStatus()==2){//Player was killed by Htman/ Vigialnte
 			//System.out.println(p.getName()+" was targeted and KILLED");
 			if(p.getRole().contains("Hitman")) newHitman(p.getPosition());
 			return p.getPosition();
-		}else if(p.getStatus()==3){
+		}else if(p.getStatus()==3){//Player was saved by Doctor
 			//System.out.println(p.getName()+" was targeted but SAVED");
 			return p.getPosition();
-		}else if(p.getStatus()==4){
+		}else if(p.getStatus()==4){//Player was saved by Bodyguard
 			setPlayerStatus(p.getStatus(),1);
 			//System.out.println(p.getName()+"was saved by the Bodyguard (Should not be here for final game)");
 			return -1;
@@ -183,7 +184,7 @@ public class Game{
 	 */
 	public String checkWinner(){
 		int mafiaTotal = 0;
-		int townTotal = -1;
+		int townTotal = 0;
 		//Counts total amount of alive Mafia and Town Members
 		for(Player p: playerInfo){
 			if(p.getStatus()!=0){

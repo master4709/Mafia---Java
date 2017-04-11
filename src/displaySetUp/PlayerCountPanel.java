@@ -47,9 +47,7 @@ public class PlayerCountPanel extends MyPanel{
 
 	/** Method displays contents in the north **/
 	private void displayNorth(){
-		
-		
-		lblText = new MyLabel("How Many", textColor, titleFont);
+		lblText = new MyLabel("How Many?", textColor, titleFont);
 		north.add(lblText, "cell 0 0,alignx center");
 		
 		lblText2 = new MyLabel("Players?", textColor, titleFont);

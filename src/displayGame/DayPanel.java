@@ -24,6 +24,7 @@ public class DayPanel extends MyPanel{
 	//These labels display the text for what to do on this screen
 	private JLabel lblDescription1;
 	private JLabel lblDescription2;
+	private JLabel lblDescription3;
 	//Pressing this button goes to the next screen using the GameController
 	private JButton btnContinue;
 	
@@ -51,16 +52,23 @@ public class DayPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 		
-		lblDayTime = new MyLabel("Day Time", textColor, titleFont);
-		north.add(lblDayTime, "flowy,cell 0 0 2 0,alignx center");
+		lblDayTime = new MyLabel("Day ", textColor, titleFont);
+		north.add(lblDayTime, "flowy,cell 0 0,alignx center");
 		
-		String text1 = "Talk among yourselves to choose who to lynch";// There must be a 50% majority to lynch him/her";
-		lblDescription1 = new MyLabel(text1, textColor, infoFont);
-		north.add(lblDescription1, "cell 0 1 2 1");
+		String text = "Talk among yourselves to choose who to lynch.";// There must be a 50% majority to lynch him/her";
+		lblDescription1 = new MyLabel(text);
+		lblDescription1.setFont(new MyFont(setFont(text,75,infoFont)));
+		north.add(lblDescription1, "cell 0 1,alignx center");
 		
-		String text2 = "Select him/her once there is a majority vote";// There must be a 50% majority to lynch him/her";
-		lblDescription2 = new MyLabel(text2, textColor, infoFont);
-		north.add(lblDescription2, "cell 0 2 2 1");
+		text = "Once once one player has recieved 50% of the votes:";// There must be a 50% majority to lynch him/her";
+		lblDescription2 = new MyLabel(text);
+		lblDescription2.setFont(new MyFont(setFont(text,75,infoFont)));
+		north.add(lblDescription2, "cell 0 2,alignx center");
+		
+		text = "select that player and lynch him/her.";// There must be a 50% majority to lynch him/her";
+		lblDescription3 = new MyLabel(text);
+		lblDescription3.setFont(new MyFont(setFont(text,75,infoFont)));
+		north.add(lblDescription3, "cell 0 3,alignx center");
 	
 	}
 	/**
@@ -101,7 +109,7 @@ public class DayPanel extends MyPanel{
 	
 	/**
 	 * Removes the button of the the target
-	 * @param target
+	 * @param target - Index value of button to be removed 
 	 */
 	public void removePlayerButton(int target){
 		if(target!=-1){//Error handling, Must have a valid target to remove the button
@@ -114,8 +122,10 @@ public class DayPanel extends MyPanel{
 		}
 	}
 	/**
-	 * @param previous
-	 * @param target
+	 * Sets the new button pressed to selectColor
+	 * Returns the previously selected color to btnBackgroundColor
+	 * @param previous - int value of the last button pressed
+	 * @param current - text on the button that has been pressed
 	 */
 	public void setButtonSelected(int previous, String current){
 		for(JButton button: playerButtonList){
@@ -126,14 +136,12 @@ public class DayPanel extends MyPanel{
 			}
 		}
 	}
-	
+	/**
+	 * Resets the default background color of all buttons
+	 */
 	public void resetButtonColor(){
 		for(JButton button: playerButtonList){
 			button.setBackground(btnBackgroundColor);
 		}
-	}
-	
-	public void setContinueButtonVisible(boolean bool){
-		btnContinue.setVisible(bool);
 	}
 }

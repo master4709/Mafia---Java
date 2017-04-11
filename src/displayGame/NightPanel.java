@@ -111,16 +111,18 @@ public class NightPanel extends MyPanel{
 		if(btnPlayer.getFont().getSize()<25) btnPlayer.setBorder(new EmptyBorder(12,5,12,5));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
-	
-	public JButton getDetectiveButton(){
-		return btnDetective;
-	}
-	
+	/**
+	 * Sets the message for the detective
+	 * @param text - Part of the Mafia, or not part
+	 */
 	public void setDetectiveMessage(String text){
 		btnDetective.setVisible(false);
 		lblDetective.setText(text);
 	}
-	
+	/**
+	 * Removes the button of the the target
+	 * @param target - Index value of button to be removed 
+	 */
 	public void removePlayerButton(int target){
 		if(target!=-1){//Error handling, Must have a valid target to remove the button
 			for(JButton button: playerButtonList){//Loops through the list of player buttons
@@ -131,7 +133,12 @@ public class NightPanel extends MyPanel{
 			}
 		}
 	}
-	
+	/**
+	 * Sets the new button pressed to selectColor
+	 * Returns the previously selected color to btnBackgroundColor
+	 * @param previous - int value of the last button pressed
+	 * @param current - text on the button that has been pressed
+	 */
 	public void setButtonSelected(int previous,String current){
 		for(JButton button: playerButtonList){
 			if(button.getName().equals(current)){

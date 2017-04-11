@@ -137,7 +137,7 @@ public class FileUtil{
 	/**
 	 * This method will find and set a target for the lyncher.
 	 */
-	public int setLynchTarget(List<String> roles){
+	private int setLynchTarget(List<String> roles){
 		Random r = new Random();
 		int target = r.nextInt(roles.size());
 		int lyncher = findPosition("Lyncher");
@@ -151,7 +151,7 @@ public class FileUtil{
 	 * This method will find the position of a role 
 	 * @param role
 	 */
-	public int findPosition(String role){
+	private int findPosition(String role){
 		for(Player p : playerInfo){
 			if(p.getRole().equalsIgnoreCase(role)) {
 				return p.getPosition();

@@ -6,13 +6,9 @@ import java.util.List;
 
 import playerInfo.Player;
 
-public class SaveFile {
+public class SaveFileUtil {
 	
-	private String saveFile = "data/saveGame.txt";
-	
-	public SaveFile(){
-		
-	}
+	private final String saveFile = "data/saveGame.txt";
 	
 	public void saveGame(List<Player> playerInfo, int lynchTarget){
 		try(PrintWriter pw = new PrintWriter(saveFile)) {

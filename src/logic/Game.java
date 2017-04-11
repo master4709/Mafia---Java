@@ -301,9 +301,8 @@ public class Game{
 		if(i>=0&&i<playerInfo.size()){
 			return playerInfo.get(i).copy();
 		}else{
-			return null; 
+			return new Townie("No player "+i,-1); 
 		}
-		
 	}
 	/**
 	 * Returns a copy of the current player
@@ -311,14 +310,12 @@ public class Game{
 	 * @return
 	 */
 	private Player getPlayer(String s){
-		Player player = null;
 		for(Player p: playerInfo){
 			if(p.getName().contains(s) || p.getRole().contains(s)){
-				player = p.copy();
-				break;
+				return p.copy();
 			}
 		}
-		return player;
+		return new Townie("No player or Role "+s,-1);
 	}
 	
 	public String getLynchTargetString(){

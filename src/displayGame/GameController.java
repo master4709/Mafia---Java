@@ -25,7 +25,7 @@ public class GameController implements ActionListener{
 	
 	private ActionListener globalListener;
 	
-	private SaveFile sf;
+	private SaveFileUtil sfu;
 	
 	private Game g;
 	private DayPanel dp;
@@ -77,7 +77,7 @@ public class GameController implements ActionListener{
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
 		vp = new VictoryPanel(globalListener);
 		
-		sf = new SaveFile();
+		sfu = new SaveFileUtil();
 		
 		//Creates the buttons of all of the players in the game
 		fillPanels();
@@ -125,7 +125,7 @@ public class GameController implements ActionListener{
 	private void switchDay(){
 		dp.resetButtonColor();;
 		target = -1;
-		sf.saveGame(g.getPlayerInfo(), g.getLynchTarget());
+		sfu.saveGame(g.getPlayerInfo(), g.getLynchTarget());
 		switchPanel(panelDay);
 	}
 
@@ -240,7 +240,7 @@ public class GameController implements ActionListener{
 	private int nextPlayer(int position){
 		System.out.print("Finding next player: ");
 		
-		if(position>=g.getPlayerInfo().size()){//If position is at the end of the list
+		if(position>=g.getPlayerTotal()){//If position is at the end of the list
 			System.out.println("End of list");
 			return -1;
 		}else if(g.getPlayer(position).getStatus()==0){//If the player is dead, find the next one

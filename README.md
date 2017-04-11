@@ -19,8 +19,15 @@ Copyright 2017 All rights reserved
 
 ##### Compiling and Running ######
 
+1) Use a computer with Java/JVM installed
+* Here are instructions for installing Java:
+* http://pages.cpsc.ucalgary.ca/~verwaal/courses/219/dev.php
+
+2) Once Java is Installed:
 * Windows: Run MafiaWindows.bat
 * Mac or Linux: Run MafiaLinux.bat
+
+##### Set up notes ######
 
 * There is only one CONFIG in this version
 * For upcomming versions, a CONFIG file will be introduced
@@ -93,4 +100,3 @@ is achieved
 	-- OR --
 	Elvin Limpin 30018832
 	elvin.limpin@ucalgary.ca
-	

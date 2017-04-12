@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 /**
  * Class GameController
  * 
- * This class controls all of the panels and switching for the main game part
+ * This class controls all of the JPanels for 
  * 
  * 
  * @author Pierce de Jong 30006609
@@ -95,7 +95,7 @@ public class GameController implements ActionListener{
 		position = -1;
 		
 		if(this.test){//Bypass the viewAllPlayers panel if the game is in test mode
-			switchPanel(panelDay);
+			switchDay();
 		}else{
 			switchPanel(panelViewAllPlayers);
 		}

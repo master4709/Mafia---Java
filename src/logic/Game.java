@@ -46,7 +46,6 @@ public class Game{
 		this.playerInfo = playerInfo;
 		this.lynchTarget = lynchTarget;
 		playerNames(test);
-		System.out.println(playerInfo.toString());
 	}
 	/**
 	 * Creates a list of player names

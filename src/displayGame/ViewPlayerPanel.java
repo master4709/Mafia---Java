@@ -42,7 +42,7 @@ public class ViewPlayerPanel extends MyPanel{
 	 * the panel
 	 */
 	private void displayNorth(){
-		name = new MyLabel("", 40);
+		name = new MyLabel("", 70);
 		north.add(name, "cell 0 1");
 	}
 	/**
@@ -74,6 +74,7 @@ public class ViewPlayerPanel extends MyPanel{
 	 */
 	public void setPlayer(Player player, int screenWidth){
 		name.setText(player.getName());
+		name.setFont(new MyFont(setFontSize(player.getName(),50,80)));
 		String r = "Role: " + player.getRole();
 		String ri = "Role Info: " + player.getAction();
 		String g = "Goal: " + player.getGoal();

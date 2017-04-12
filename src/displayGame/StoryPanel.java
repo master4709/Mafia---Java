@@ -1,7 +1,6 @@
 package displayGame;
 
 import myJStuff.*;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
@@ -38,14 +37,6 @@ public class StoryPanel extends MyPanel {
 		contentPane.setName("Story Panel");
 		
 		initalize();
-	}
-
-	/**
-	 * 
-	 * @return content pane
-	 */
-	public JPanel getContentPane(){
-		return contentPane;
 	}
 	/**
 	 * calls displays for the top, bottom, and

@@ -3,11 +3,9 @@ package displayGame;
 import myJStuff.MyPanel;
 import playerInfo.Player;
 import myJStuff.*;
-import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 /**
  * @author: Ronelle Bakima
@@ -27,7 +25,6 @@ public class VictoryPanel extends MyPanel {
 	private ActionListener globalListener;
 	
 	private String text;
-	private JLabel display;
 	private JLabel status;
 	private String str;
 	
@@ -43,13 +40,6 @@ public class VictoryPanel extends MyPanel {
 		
 		initialize();
 	}
-	
-	/**
-	 * returns contentPane
-	 */
-	public JPanel getContentPane(){
-		return contentPane;
-	}
 	/**
 	 * calls north, bottom, and center displays
 	 */
@@ -64,7 +54,7 @@ public class VictoryPanel extends MyPanel {
 	public void displayNorth() {
 		winner_title = new MyLabel("The Winner is:", 30);
 		north.add(winner_title, "cell 0 1");
-		winner_name = new MyLabel("", 30);
+		winner_name = new MyLabel("", 60);
 		north.add(winner_name, "cell 0 2");
 		names_roles = new MyLabel("Status, Names and Roles:", 30);
 		north.add(names_roles, "cell 0 3");
@@ -85,19 +75,19 @@ public class VictoryPanel extends MyPanel {
 	 * as an argument
 	 * @param nameAndRole
 	 */
-	public void setPlayerInfo(Player p) {
-		text = p.toString();			
-		display = new MyLabel(text, 30);
-		int num = p.getStatus();
-		if (num == 0) {
-			str = "Dead";
+	public void setPlayerInfo(Player p) {		
+		if(p.getStatus()!=0) {
+			str = "Alive- ";
+		}else{
+			if(p.wasLynched()){
+				str = "Lycnhed- ";
+			}else{
+				str = "Murdered- ";
+			}
 		}
-		else if (num == 1) {
-			str = "Alive";
-		}
-		status = new MyLabel(str, 30);
+		status = new MyLabel(str+p.toString(), 30);
+		status.setFont(new MyFont(setFontSize(status.getText(),50,30)));
 		center.add(status,"cell 0 " + p.getPosition());
-		center.add(display, "cell 1 " + p.getPosition());
 	}
 	/**
 	 * Sets the winner of the game

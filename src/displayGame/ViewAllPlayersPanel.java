@@ -12,10 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 /**
- * This class is used to display the list of possible targets of the day lynching
+ * This class creates a JPanel to display all of the player buttons to view assignments in the ViewPlayerPanel
  * 
- * @author 
-
+ * @author Pierce de Jong - 30006609
  */
 public class ViewAllPlayersPanel extends MyPanel{
 	

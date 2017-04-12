@@ -6,6 +6,7 @@ import playerInfo.Player;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -20,6 +21,7 @@ public class ViewPlayerPanel extends MyPanel{
 	private List<String> mafiaMembers;
 	private JLabel name;
 	private JTextArea display;
+	private JLabel lblicon;
 
 	/**
 	 * Create the panel. Displays the top, south, and center of
@@ -60,6 +62,10 @@ public class ViewPlayerPanel extends MyPanel{
 	private void displayCenter() {
 		display = new MyTextArea("", 30);
 		center.add(display, "cell 0 1");
+		
+		ImageIcon icon = new ImageIcon("src/data/pictures/rose.png");
+		lblicon = new JLabel(icon);
+		center.add(lblicon, "cell 0 2");
 	}
 	/**
 	 * sets the name as a JLabel. Sets role, roleInfo, and goal as

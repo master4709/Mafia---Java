@@ -36,6 +36,9 @@ public class VictoryPanel extends MyPanel {
 	 */
 	public VictoryPanel(ActionListener listener) {
 		globalListener = listener;
+		
+		contentPane.setName("Victory Panel");
+		
 		initialize();
 	}
 	
@@ -98,3 +101,4 @@ public class VictoryPanel extends MyPanel {
 	}
 
 }
+

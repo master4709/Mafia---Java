@@ -12,7 +12,9 @@ import java.util.Scanner;
 import playerInfo.Player;
 
 /**
- * This class will create a list to store all the information 
+ * This class will create a new game and also load an existing 
+ * game by reading from a text file.
+ * This class will also create a list to store all the information 
  * about each player and pass that list by a getter method.
  * It will shuffle the roles and then assign them to each names.
  * Also it will assign a target for the Lyncher role and pass it by a getter method.
@@ -29,10 +31,21 @@ public class FileUtil{
 
 	private final String saveName = "src/data/saveGame.txt";
 	
-	
+	/**
+	 * default constructor
+	 */
 	public FileUtil(){
 	}
 	
+	/**
+	 * This method will shuffle the roles and by using
+	 * another method, setAllNewPlayers(), assign those roles
+	 * to the names. If there is a Lyncher role in the role pile 
+	 * it will call the setLynchTarget method to set a target 
+	 * for the lyncher.
+	 * @param names, List<String>
+	 * @param roles, List<String>
+	 */
 	public void newFile(List<String> names, List<String> roles){
 		Collections.shuffle(roles);
 		setAllNewPlayers(names,roles);
@@ -40,12 +53,18 @@ public class FileUtil{
 			lynchTargetID = setLynchTarget(roles);
 		}else{
 			lynchTargetID = -1;
-		}
-		
+		}	
 	}
 	
+	
+	/**
+	 * This method will load an existing game by try to read 
+	 * the last stage of that game from a text file and store 
+	 * it as a List<String>. The catch exception will call 
+	 * loadException method to find FileNotFindException.
+	 */
 	public void loadFile(){
-		lynchTargetID = -1;
+		//lynchTargetID = -1;
 		int position = 0;
 		List<String> line;
 		try {
@@ -68,7 +87,11 @@ public class FileUtil{
 	}
 	
 	/**
-	 * 
+	 * FileNotFoundException for loadFile method.
+	 * This method will print out if the file of previous game 
+	 * was not found and instead will load the internal default
+	 * save game. It will assign all the names and roles to specific 
+	 * ones. 
 	 */
 	private void loadException(){
 		System.out.println("ERROR: Could not find file :"+saveName);
@@ -84,9 +107,12 @@ public class FileUtil{
 	}
 	
 	/**
-	 * 
-	 * @param line
-	 * @param positionID
+	 * This method will be called from loadFile method and it 
+	 * will set the status, name, role and position of each player 
+	 * properly from the list that was created from reading the 
+	 * saved text file.
+	 * @param line, List<String>
+	 * @param positionID, integer
 	 * @return
 	 */
 	private int scanLine(List<String> line, int positionID){
@@ -125,8 +151,10 @@ public class FileUtil{
 	
 	
 	/**
-	 * SHOULD RENAME
-	 * Method to shuffle the roles and matches them with the names.
+	 * This method will store the names of the players 
+	 * and their role into the playerInfo List.
+	 * @param names
+	 * @param roles
 	 */
 	private void setAllNewPlayers(List<String> names,List<String> roles){
 		for(int i =0; i<names.size(); i++){
@@ -135,7 +163,9 @@ public class FileUtil{
 	}
 	
 	/**
-	 * This method will find and set a target for the lyncher.
+	 * This method will set a target to Lyncher role.
+	 * @param roles, List<String>
+	 * @return target, integer
 	 */
 	private int setLynchTarget(List<String> roles){
 		Random r = new Random();
@@ -148,8 +178,8 @@ public class FileUtil{
 	}
 	
 	/**
-	 * This method will find the position of a role 
-	 * @param role
+	 * This method will find the position of a role and return it.
+	 * @param role, String
 	 */
 	private int findPosition(String role){
 		for(Player p : playerInfo){

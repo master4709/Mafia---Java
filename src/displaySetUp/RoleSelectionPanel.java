@@ -30,6 +30,7 @@ public class RoleSelectionPanel extends MyPanel{
     private ArrayList<String> rolesSelected;
     private ArrayList<JButton> roleButtons;
 
+    private JLabel recomendedMafia;
 
     /***
      * Class constructor. Specifies the package listener associated with the setup process
@@ -155,14 +156,17 @@ public class RoleSelectionPanel extends MyPanel{
         south.add(resetBtn, "cell 1 0, alignx center");
 
         south.add(assignTownies, "cell 1 0, alignx right");
+        
+        recomendedMafia = new MyLabel("Recomended Mafia: ");
+        south.add(recomendedMafia,"cell 1 1,alignx center");
 
         btnHome = new MyButton("Home",buttonFontSize);
-        south.add(btnHome,"cell 1 1,alignx left");
+        south.add(btnHome,"cell 1 2,alignx left");
         btnHome.addActionListener(globalListener);
         btnHome.setName("Home");
 
         continueButton = new MyButton("Continue",buttonFontSize);
-        south.add(continueButton,"cell 1 1,growx");
+        south.add(continueButton,"cell 1 2,growx");
         continueButton.setEnabled(false);
         continueButton.setName("Continue_RoleSelectionPanel");
         continueButton.addActionListener(globalListener);
@@ -195,6 +199,10 @@ public class RoleSelectionPanel extends MyPanel{
      */
     JLabel getPlayersLeft() {
         return playersLeft;
+    }
+    
+    JLabel getRecomdedMafia(){
+    	return recomendedMafia;
     }
 
     /***

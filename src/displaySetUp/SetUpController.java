@@ -95,6 +95,17 @@ public class SetUpController implements ActionListener{
 				case"Continue_PlayerName":
 					switchPanel(panelRole);
 					rsp.getPlayersLeft().setText(String.valueOf(pnp.getPlayerNames().size()));
+					int total = pnp.getPlayerNames().size();
+					if(total<6){
+						rsp.getRecomdedMafia().setText("1 Mafia Player Recomeded");
+					}else if(total<9){
+						rsp.getRecomdedMafia().setText("2 Mafia Player Recomeded");
+					}else if(total<12){
+						rsp.getRecomdedMafia().setText("3 Mafia Player Recomeded");
+					}else if(total==12){
+
+						rsp.getRecomdedMafia().setText("4 Mafia Player Recomeded");
+					}
 					break;
 				case "Reset_RoleSelection":
 					resetSelections();

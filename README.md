@@ -19,7 +19,7 @@ Copyright 2017 All rights reserved
 
 ##### Compiling and Running ######
 
-1) Use a computer with Java/JVM installed
+1) Use a computer with Java/JDK installed
 * Here are instructions for installing Java:
 * http://pages.cpsc.ucalgary.ca/~verwaal/courses/219/dev.php
 
@@ -98,5 +98,6 @@ is achieved
 * For more information, contact:
 	CPSC 233 L01 Winter 2017: Team XVIII
 	-- OR --
+	readme author
 	Elvin Limpin 30018832
 	elvin.limpin@ucalgary.ca

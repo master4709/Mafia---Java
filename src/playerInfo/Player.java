@@ -221,6 +221,6 @@ public abstract class Player {
 	}
 	
 	public String toString(){
-		return getRole()+ " " + getName();
+		return getRole()+ ": " + getName();
 	}
 }

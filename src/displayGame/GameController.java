@@ -120,7 +120,12 @@ public class GameController implements ActionListener{
 		vpp.setPlayer(g.getPlayer(i), (int) frame.getWidth());
 		switchPanel(panelViewPlayer);
 	}
-	
+	/**
+	 * Switches the frame to the DayPanel
+	 * Sets the target to -1
+	 * Resets all of the buttons
+	 * Saves the game
+	 */
 	private void switchDay(){
 		dp.resetButtonColor();;
 		target = -1;
@@ -321,10 +326,10 @@ public class GameController implements ActionListener{
 		case "ViewPlayers_DayPanel":
 			switchPanel(panelViewAllPlayers); break;
 		case "Detective":
-			if(target!=-1){//Only if the detective has selected a target will the button be pressed
+			if(target!=-1){//Only if the detective has selected a target can the button be pressed
 				detective();//Reveals the team of the target of the detective
 			} break;
-		default://If the button pressed was not a continue or back button
+		default://One of the player buttons was pressed. 
 			int player;
 			if(name.contains("Select")){
 				player = Integer.parseInt(name.substring(7, name.length()));

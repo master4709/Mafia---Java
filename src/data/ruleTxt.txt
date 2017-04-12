@@ -1,23 +1,27 @@
-The town is overrun by the Mafia.
+This is the Party Game Mafia.
 
-If you are affiliated with the town,
-your goal is to lynch every mafia
+There are two teams:
+The uninformed majority: Town
+The informed minority: Mafia
+
+If you are affiliated with the Town,
+your goal is to lynch every Mafia
 member.
 
-If you are affiliated with the
-Mafia, your goal is to help murder
-every town member.
+If you are affiliated with the Mafia,
+your goal is to overrun the town 
+with Mafia members by lynching
+town members and killing during
+the night
 
-If you are not affiliated with
-either group, you must focus on
-your own survival and goals.
-
-The "game" only ends when one
-party succeeds on their goal.
+The Game ends when one party 
+succeeds on their goal.
 
 During the day...
-A player who is suspected to be
-part of the mafia must be lynched
+All Players talk in a group
+Then decide who to vote out
+There must be a 50% majority vote
+before a player is lynched.
 
 At night...
 Every player must fulfill their
@@ -28,7 +32,7 @@ You have nothing to do at night.
 
 -Town: Detective
 You reveal the affiliation of
-one player at night.
+one player's team at night.
 
 -Town: Doctor
 you may heal one player each
@@ -65,5 +69,6 @@ night.
 
 -Lone Wolf: Survivor
 You have nothing to do at night.
-You win by winning alone.
+You win by being the last town 
+member alive
 

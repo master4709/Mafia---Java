@@ -23,8 +23,6 @@ public class VictoryPanel extends MyPanel {
 	private JButton btnHome;
 	
 	private ActionListener globalListener;
-	
-	private String text;
 	private JLabel status;
 	private String str;
 	
@@ -85,7 +83,7 @@ public class VictoryPanel extends MyPanel {
 				str = "Murdered- ";
 			}
 		}
-		status = new MyLabel(str+p.toString(), 30);
+		status = new MyLabel(str+p.toString());
 		status.setFont(new MyFont(setFontSize(status.getText(),buttonFontSize,50)));
 		center.add(status,"cell 0 " + p.getPosition());
 	}

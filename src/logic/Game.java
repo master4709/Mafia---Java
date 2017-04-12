@@ -131,15 +131,17 @@ public class Game{
 				events.add(player);
 			}
 		}
+		/*
 		for(int i: events){
 			Player p = getPlayer(i);
 			System.out.print("EVENT: ");
 			if(p.getStatus()==2){
-				//System.out.println(getPlayer(i).toString()+ " had DEATH event happen to them");
+				System.out.println(getPlayer(i).toString()+ " had DEATH event happen to them");
 			}else{
-				//System.out.println(getPlayer(i).toString()+ " had SAVE event happen to them");
+				System.out.println(getPlayer(i).toString()+ " had SAVE event happen to them");
 			}
 		}
+		*/
 	}
 	
 	/**

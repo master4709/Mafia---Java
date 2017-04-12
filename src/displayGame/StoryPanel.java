@@ -66,7 +66,7 @@ public class StoryPanel extends MyPanel {
 	 */
 	private void displayBottom() {
 		btnContinue = new MyButton("Continue");
-		south.add(btnContinue);
+		south.add(btnContinue,"cell 1 0,growx");
 		btnContinue.setName("Continue_StoryPanel");
 		btnContinue.addActionListener(packageListener);
 	}

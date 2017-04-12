@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
 
 /**
  * @author Pierce de Jong 30006609
@@ -51,6 +52,7 @@ public class CheckPlayerPanel extends MyPanel{
 		south.add(btnYes, "cell 1 0,growx");
 		btnYes.addActionListener(packageListener);
 		btnYes.setName("Continue_CheckPlayerPanel");
+		btnYes.setBorder(new EmptyBorder(30,5,30,5));
 		
 	}
 	/**

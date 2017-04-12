@@ -92,6 +92,7 @@ public class NightPanel extends MyPanel{
 		south.add(btnContinue, "cell 1 0,alignx center");
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_NightPanel");
+		btnContinue.setBorder(new EmptyBorder(10,10,10,10));
 	}
 	/**
 	 * Creates a button representing a player for the Center Panel

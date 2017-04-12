@@ -102,7 +102,7 @@ public class FileUtil{
 		List<String> names = new ArrayList<>(
 			Arrays.asList("Jon Snow","Daenerys","Cersei","Arya","Samwell","Bran","Sandor","Gregor","Tyrion","Bron"));
 		List<String> roles = new ArrayList<>((
-			Arrays.asList("Town","Detective","Mafia: Barman","Mafia: Hitman","Doctor","Survivor","Lyncher","Bodyguard","Townie","Mafia-Godfather")));
+			Arrays.asList("Town","Detective","Mafia: Barman","Mafia: Hitman","Doctor","Survivor","Lyncher","Bodyguard","Prostitute","Mafia-Godfather")));
 		newFile(names,roles);
 	}
 	

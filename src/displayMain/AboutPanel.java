@@ -74,9 +74,9 @@ public class AboutPanel extends MyPanel{
 	 */
 	private void displayCenter(){
 		myTxtPane = new MyTextArea("", textColor, backgroundColor, textFontSize);
-		myTxtPane.setText("\r\nVersion 1.11\r\nComputer Science 233: Final Project"
+		myTxtPane.setText("\r\nComputer Science 233: Final Project Team 18"
 				+ "\r\n\r\nAuthors:\r\nChristilyn Arjona\r\nRonelle Bakima\r\nPierce De Jong"
-				+ "\r\nElvin Limpin\r\nMahsa Lofti Gaskarimahalleh\r\n\r\n\r\nCopyright 2017. All Rights Reserved.");
+				+ "\r\nElvin Limpin\r\nMahsa Lofti Gaskarimahalleh\r\n\r\n\r\nVersion 4.20\r\nCopyright 2017. All Rights Reserved.");
 				
 		center.add(myTxtPane);
 	}

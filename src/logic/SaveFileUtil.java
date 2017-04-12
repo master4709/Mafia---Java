@@ -15,7 +15,7 @@ public class SaveFileUtil {
 	
 	public static void saveGame(List<Player> playerInfo, int lynchTarget){
 		try(PrintWriter pw = new PrintWriter(saveFile)) {
-			System.out.println("SAVING Player info to "+saveFile);
+			System.out.println("SAVING: Player info to "+saveFile);
 			for(Player p: playerInfo){
 				//System.out.print(p.getName() + " " + p.getStatus() + " | ");
 				pw.print(p.getStatus()+" ");

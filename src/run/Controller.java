@@ -116,7 +116,7 @@ public class Controller implements ActionListener{
 		/** initaizlies all possible roles for easy test troubleshoot */
 		List<String> roles = new ArrayList<>(Arrays.asList(
 				"Doctor","Detective","Mafia: Hitman","Town","Bodyguard","Survivor",
-				"Mafia: Barman","Lyncher","Mafia- GodFather","Vigilante","Town","Mafia: Goon"));
+				"Mafia: Barman","Lyncher","Mafia- GodFather","Vigilante","Prostitute","Mafia: Goon"));
 		
 		fu.newFile(names,roles);
 		gc.start(fu.getPlayerInfo(),fu.getLynchTarget(),true);

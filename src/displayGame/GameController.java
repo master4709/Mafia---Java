@@ -109,12 +109,20 @@ public class GameController implements ActionListener{
 		}
 	}
 	/**
-	 * Switch to the ViewPlayer JPanel and display the current plays information
-	 * @param i - the index value for which player to show
+	 * Updates the Check Player panel text with the next player
+	 * Switches the frame
 	 */
-	private void switchViewPlayer(int i){
-		vpp.setPlayer(g.getPlayer(i), (int) frame.getWidth());
-		switchPanel(panelViewPlayer);
+	private void switchCheckPlayer(){
+		cpp.setPlayerName(g.getPlayer(position).getName());
+		switchPanel(panelCheckPlayer);
+	}
+	/**
+	 * Updates the Check Player panel text with the player that is being lynched
+	 * Switches the frame
+	 */
+	private void switchCheckLynch(){
+		clp.setPlayer(g.getPlayer(target).getName());
+		switchPanel(panelCheckLynch);
 	}
 	/**
 	 * Switches the frame to the DayPanel
@@ -128,8 +136,6 @@ public class GameController implements ActionListener{
 		SaveFileUtil.saveGame(g.getPlayerInfo(), g.getLynchTarget());
 		switchPanel(panelDay);
 	}
-
-	
 	/**
 	 * Updates Night Panel text with the information of the next player
 	 * Set the frame to new updated panelNight content pane 
@@ -139,21 +145,35 @@ public class GameController implements ActionListener{
 		switchPanel(panelNight);
 	}
 	/**
-	 * Updates the Check Player panel text with the next player
-	 * Switch the frame to the CheckPlayerPanel
-	 */
-	private void switchCheckPlayer(){
-		cpp.setPlayerName(g.getPlayer(position).getName());
-		switchPanel(panelCheckPlayer);
-	}
-	/**
 	 * Switches the frame to the Story Panel to display the death or savior of a player
 	 * @param name - String of the players name
 	 * @param dead - Boolean if the player is dead or alive
 	 */
 	private void switchStory(String name, boolean dead){
-		sp.setStory(name,dead,(int) frame.getWidth());
+		sp.setStory(name,dead);
 		switchPanel(panelStory);
+	}
+	/**
+	 * Updates the Victory Panel for the winner
+	 * 	- displays all of the players and their status
+	 *  - sets the lbl for the winner
+	 *  - switches the Frame
+	 * @param vicotor - String value of who one ("Mafia","Town","Lyncher","Vigilante")
+	 */
+	private void switchVictory(String victor){
+		for(Player p: g.getPlayerInfo()){
+			vp.setPlayerInfo(p.copy());
+		}
+		vp.setWinner(victor);
+		switchPanel(panelVictory);
+	}
+	/**
+	 * Switch to the ViewPlayer JPanel and display the current plays information
+	 * @param i - the index value for which player to show
+	 */
+	private void switchViewPlayer(int i){
+		vpp.setPlayer(g.getPlayer(i));
+		switchPanel(panelViewPlayer);
 	}
 	/**
 	 * Switches the frame to the passed JPanel
@@ -168,7 +188,6 @@ public class GameController implements ActionListener{
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);
 	}
-	
 	/**
 	 * switches the content panel to the dayCycle page
 	 * Sets the target of the day cycle to -1 -- ensures that a player button must be pressed to continue the game 
@@ -183,11 +202,7 @@ public class GameController implements ActionListener{
 		}else if(win.contains("None")&&time.equals("Day")){
 			findNextPlayer();
 		}else{
-			for(Player p: g.getPlayerInfo()){
-				vp.setPlayerInfo(p.copy());
-			}
-			vp.setWinner(win);
-			switchPanel(panelVictory);
+			switchVictory(win);
 			SaveFileUtil.deleteFile();
 		}
 	}
@@ -196,7 +211,6 @@ public class GameController implements ActionListener{
 	 * If there was a target of action that night
 	 */
 	private void checkStory(int position){
-		
 		if(g.getEvents().size()>position){
 			Player p = g.getPlayer(g.getEvents().get(position));
 			if(p.getStatus()==2){
@@ -297,8 +311,7 @@ public class GameController implements ActionListener{
 			switchDay(); break;
 		case "Continue_DayPanel":
 			if(target!=-1){//Makes sure a target has been chosen for the day
-				clp.setPlayer(g.getPlayer(target).getName());
-				switchPanel(panelCheckLynch);
+				switchCheckLynch();
 			}else{
 				System.out.println("Please select a target to Lynch");
 			}break;

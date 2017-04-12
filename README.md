@@ -11,7 +11,7 @@ Copyright 2017 All rights reserved
    * Pierce De Jong		Game Cycle / Save IO / Game GUI
    * Mahsa Lotfi		Player Classes / Main GUI
    * Elvin Limpin		Action Logic / OO Architect / UI&UX
-* University of Calgary CPSC 233 L01 Winter 2017 Team XVIII
+* University of Calgary CPSC 233 L01 Winter 2017 Team XVIII (18)
 * Version 4.20
 * Not available in a public repository as of Version 4.20
 
@@ -45,13 +45,21 @@ who keeps track of the decisions players make
 Through this application, we eliminate the
 need of the god
 
+The game is played with an informed minority, the Mafia
+and an uninformed majority, the Town.
+
+Members of the Mafia know who each other are where as Town members
+have no idea who anyone else is
+
 ###### Gameplay #####
 
 Goals:
-* Team Mafia: become the majority by killing
-the town members
-* Team Town: lynch/kill all mafia
-* Lone Wolf: Win alone by survivng/lynching a target
+* Team Mafia: Gain control of the town through lynching, killing 
+	and other actions during then night
+* Team Town: Lynch all of Mafia members of Kill them (Vigilante)
+* Lown Wolf:
+	1. Lyncher: Win by lynching a specific player during the day
+	2. Survivor: Win by being the last member of the Town alive
 
 Setup:
 * 5-12 players can play the game
@@ -59,28 +67,31 @@ Setup:
 * Possible Roles are chosen by players
 
 Game Cycle:
-*Day: one player must be lynched everyday
-as decided upon through real life discussion
-*Night: players perform their unique actions
-
+*Day: Each day consists of player discussing between each other
+and then voting to Lynch and kill one player
+*Night: Each player takes control of the phone in the order they
+inputed their names. The player then selects a target for the 
+night action. (E.G. killing, healing, stopping another player)
 Game Over:
 *Mafia, Town, or a Lone Wolf wins once their goal
 is achieved
 
 ### Contribution guidelines ###
 
-##### Members ######
-
 * Work on your own class, unless you ask for permission
 * Alert the group chat whenever you make commits
 * Properly document your code!
+
+##### Members ######
+
+
 
 ###### Markers / Instructors ######
 
 * Use the class diagram as reference
 * Use test game to skip the setup functionality
 * Overview of packages:
-    *run - initializes the panel and calls the logic
+    *run - initializes the frame and controls the displayPackages
     *logic - contains mechanics for the game cycle and game
     over (game) as well as the mechanics for generating
     stories (Story)

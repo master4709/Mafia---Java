@@ -64,6 +64,8 @@ public class MainController implements ActionListener {
 		panelAbout = ap.getContentPane();
 					
 		switchPanel(panelMain);
+		//Uncomment this to remove the test button from the main panel
+		//mp.hideTestButton();
 	}
 	
 	/**

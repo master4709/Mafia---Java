@@ -89,7 +89,7 @@ public class StoryPanel extends MyPanel {
 	/**Call the story class here also to receive the getters for the location, event, etc....
 	 * Sets all of the labels and such for the story in here
 	 */
-	public void setStory(String str, boolean dead, int screenWidth){
+	public void setStory(String str, boolean dead){
 		Story s = new Story(str);
 		s.information();
 		/**
@@ -102,7 +102,7 @@ public class StoryPanel extends MyPanel {
 		story.setEditable(false);
 		String str1 = s.getStory();
 		story.setLineWrap(true);
-		story.setBounds(0, 0, screenWidth-50, 100);
+		story.setBounds(0, 0, width-50, 100);
 		String str2 = "So here's what happened... ";
 
 		String eventTxt = "";

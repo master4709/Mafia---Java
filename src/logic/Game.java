@@ -27,7 +27,7 @@ public class Game{
 	private List<String> mafiaMembers = new ArrayList<>();
 	
 	//Lmao
-	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Bodyguard","Mafia: Hitman","Vigilante","Doctor"));
+	private List<String> nightPlayer = new ArrayList<>(Arrays.asList("Mafia: Barman","Prostitute","Bodyguard","Mafia: Hitman","Vigilante","Doctor"));
 	
 	//List of player indexes that were healed or killed that night, maximum of 2 people in the list
 	private List<Integer> events = new ArrayList<>();
@@ -99,7 +99,7 @@ public class Game{
 						if((role.contains("Hitman") || role.contains("Vigilante")) && getPlayer(p.getTarget()).getStatus()==4){
 							int body = p.doAction(getPlayer("Bodyguard"));
 							setPlayerStatus(getPlayer("Bodyguard").getPosition(), body);
-						}else if(role.contains("Barman")){//Changes the in Bar of the player if the current role is Barman
+						}else if(role.contains("Barman") || role.contains("Prostitute")){//Changes the in Bar of the player if the current role is Barman
 							int bar = p.doAction(getPlayer(p.getTarget()));
 							setPlayerInBar(p.getTarget(),bar);
 						}else{//Does action against target of current night role
@@ -123,7 +123,7 @@ public class Game{
 	 */
 	public void reset(){
 		events = new ArrayList<>();
-		System.out.println("RESET All Player targets, inBar, status");
+		System.out.println("RESET All: Player targets, inBar, status");
 		for(Player p:playerInfo){
 			//Returns the Index value of any player that was killed or saved that night
 			int player = resetPlayer(p);

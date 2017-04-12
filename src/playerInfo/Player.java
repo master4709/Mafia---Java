@@ -99,7 +99,11 @@ public abstract class Player {
 	}
 	
 	public abstract Player copy();
-	
+	/**
+	 * Scans the roles text document to find the name, action and goal of each player
+	 * @param roleName
+	 * @return List<String> role
+	 */
 	protected List<String> scan(String roleName){
 		List<String> role = new ArrayList<>();
 		try(BufferedReader br = new BufferedReader(new FileReader("src/data/roles.txt"));){

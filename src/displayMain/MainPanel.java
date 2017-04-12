@@ -112,4 +112,10 @@ public class MainPanel extends MyPanel{
 		btnAbout.setName("About_MainPanel");
 		
 	}
+	/**
+	 * Hides the test button
+	 */
+	public void hideTestButton(){
+		btnTest.setVisible(false);
+	}
 }

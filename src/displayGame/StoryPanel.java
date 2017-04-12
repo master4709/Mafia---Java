@@ -63,13 +63,9 @@ public class StoryPanel extends MyPanel {
 	 * the top of the screen
 	 */
 	private void displayTop(){
-		//line_name = new MyLabel("Name: ", textColor, textFont);
-		//north.add(line_name, "cell 0 1");
 		name = new MyLabel("", 30);
 		north.add(name, "cell 0 1");
-		//line_location = new MyLabel("Location: ", textColor, textFont);
-		//north.add(line_location, "cell 0 2");
-		location = new MyLabel("",30);
+		location = new MyLabel("", 30);
 		north.add(location, "cell 0 2");
 		
 	}

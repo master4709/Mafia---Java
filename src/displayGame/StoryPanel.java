@@ -2,12 +2,16 @@ package displayGame;
 
 import myJStuff.*;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 
 import logic.Story;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 /**
  * Story Panel
@@ -21,20 +25,18 @@ public class StoryPanel extends MyPanel {
 	 */
 	private JButton btnContinue;
 	private JLabel name;
-	
 	private JTextArea story;
 	private JLabel location;
-	private JLabel event;
-	
-	private JLabel line_name;
-	private JLabel line_location;
-	private JLabel line_story;
+	private JScrollPane scrollPane;
 	/**
 	 * constructor method for the story panel
 	 * @param actionListener
 	 */
 	public StoryPanel(ActionListener actionListener){
 		this.packageListener = actionListener;
+		
+		contentPane.setName("Story Panel");
+		
 		initalize();
 	}
 
@@ -61,14 +63,14 @@ public class StoryPanel extends MyPanel {
 	 * the top of the screen
 	 */
 	private void displayTop(){
-		line_name = new MyLabel("Name: ", textColor, textFont);
-		north.add(line_name, "cell 0 1");
-		name = new MyLabel("", 20);
-		north.add(name, "cell 1 1");
-		line_location = new MyLabel("Location: ", textColor, textFont);
-		north.add(line_location, "cell 0 2");
-		location = new MyLabel("",20);
-		north.add(location, "cell 1 2");
+		//line_name = new MyLabel("Name: ", textColor, textFont);
+		//north.add(line_name, "cell 0 1");
+		name = new MyLabel("", 30);
+		north.add(name, "cell 0 1");
+		//line_location = new MyLabel("Location: ", textColor, textFont);
+		//north.add(line_location, "cell 0 2");
+		location = new MyLabel("",30);
+		north.add(location, "cell 0 2");
 		
 	}
 	/**
@@ -86,12 +88,15 @@ public class StoryPanel extends MyPanel {
 	 * the center of the panel
 	 */
 	private void displayCenter() {
-		line_story = new MyLabel("Here's what happened...", textColor, textFont);
-		center.add(line_story, "cell 0 3");
-		story = new MyTextArea("", 20);
-		center.add(story, "cell 0 4");
-		event = new MyLabel("", 20);
-		center.add(event, "cell 0 5");	
+		story = new MyTextArea("", 30);
+		center.add(story, "cell 0 1");
+		
+		//sets up a scroll bar so you can scroll down the page
+		scrollPane = new JScrollPane(story);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setPreferredSize(new Dimension(500, 750));
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		center.add(scrollPane);
 	}
 
 	/**Call the story class here also to receive the getters for the location, event, etc....
@@ -103,19 +108,25 @@ public class StoryPanel extends MyPanel {
 		/**
 		 * wraps the story text to display all the words on the screen
 		 */
-		story.setText(s.getStory());
+		String l = "Location: " + s.getLocation();
+		location.setText(l);
+		String n = "Name: " + s.getName();
+		name.setText(n);
+		story.setEditable(false);
+		String str1 = s.getStory();
 		story.setLineWrap(true);
 		story.setBounds(0, 0, screenWidth-50, 100);
-		location.setText(s.getLocation());
-		name.setText(s.getName());
-		
+		String str2 = "So here's what happened... ";
+
 		String eventTxt = "";
 			if(dead) {
-				eventTxt = "They were killed by the mafia.";
+				eventTxt = " Sadely, They were killed by the mafia.";
 			}
 			else {
-				eventTxt = "They were healed by the doctor.";
+				eventTxt = " Thankfully, They were healed by the doctor.";
 			}
-		event.setText(eventTxt);
+			
+		story.setText(str2 + str1 + eventTxt);
+		
 	}
 }

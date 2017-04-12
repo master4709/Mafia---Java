@@ -16,16 +16,16 @@ import logic.FileUtil;
 
 public class Controller implements ActionListener{
 	
-	private JFrame frame = new JFrame();
+	private JFrame frame;
 	
-	private FileUtil fu = new FileUtil();
+	private FileUtil fu;
 	
 	private MainController mc;
 	private SetUpController suc;
 	private GameController gc;
 	
 	public Controller(){
-		setBounds();
+		createFrame();
 	}
 	
 	public void run(){
@@ -33,13 +33,18 @@ public class Controller implements ActionListener{
 		suc = new SetUpController(frame,this);
 		gc = new GameController(frame,this);
 		
+		
+		
+		fu = new FileUtil();
+		
 		mc.start();
 	}
 	
-	private void setBounds(){
+	private void createFrame(){
 		//When changing theses must also change the values in setFont() in NightPanel
 		int width = 480;
 		int height = 852;
+		frame = new JFrame();
 		frame.setBounds(550, 20, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);

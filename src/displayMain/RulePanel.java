@@ -51,6 +51,8 @@ public class RulePanel extends MyPanel{
 	 */
 	public RulePanel(ActionListener actionListener) {
 		this.packageListener = actionListener;
+		
+		contentPane.setName("Rule Panel");
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();

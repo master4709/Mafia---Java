@@ -48,6 +48,8 @@ public class MainPanel extends MyPanel{
 	public MainPanel(ActionListener packageListener, ActionListener globalListener) {
 		this.packageListener = packageListener;
 		this.globalListener = globalListener;
+		
+		contentPane.setName("Main Panel");
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();

@@ -39,6 +39,8 @@ public class AboutPanel extends MyPanel{
 	 */
 	public AboutPanel(ActionListener actionListener) {
 		this.packageListener = actionListener;
+
+		contentPane.setName("About Panel");
 		//displaying contents of each panels
 		displayNorth();
 		displaySouth();

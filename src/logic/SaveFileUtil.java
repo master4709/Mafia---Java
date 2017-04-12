@@ -11,9 +11,9 @@ import playerInfo.Player;
 
 public class SaveFileUtil {
 	
-	private final String saveFile = "src/data/saveGame.txt";
+	private static final String saveFile = "src/data/saveGame.txt";
 	
-	public void saveGame(List<Player> playerInfo, int lynchTarget){
+	public static void saveGame(List<Player> playerInfo, int lynchTarget){
 		try(PrintWriter pw = new PrintWriter(saveFile)) {
 			System.out.println("SAVING Player info to "+saveFile);
 			for(Player p: playerInfo){
@@ -35,7 +35,7 @@ public class SaveFileUtil {
 		}
 	}
 	
-	public void deleteFile(){
+	public static void deleteFile(){
 		try {
 			System.out.println("Game Over");
 			System.out.println("Deleteing Save Game");

@@ -85,7 +85,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 		btnPlayer.setName("Select_"+Integer.toString(position));
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
-		btnPlayer.setFont(new MyFont(setFontSize(name,100,30)));
+		btnPlayer.setFont(new MyFont(setFontSize(name,buttonFontSize,100)));
 		playerButtonList.add(btnPlayer);
 	}
 	/**
@@ -95,8 +95,8 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 */
 	public void setPlayerButtonDead(int position){
 		String text = "Dead | " + playerButtonList.get(position).getText();
-		playerButtonList.get(position).setText("Dead | " +text);
-		int font = setFontSize(text,100,30);
+		playerButtonList.get(position).setText(text);
+		int font = setFontSize(text,buttonFontSize,100);
 		playerButtonList.get(position).setFont(new MyFont(font));
 		if(font<25) playerButtonList.get(position).setBorder(new EmptyBorder(12,5,12,5));
 	}

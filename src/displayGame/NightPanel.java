@@ -24,8 +24,7 @@ public class NightPanel extends MyPanel{
 	//Create all of the labels for the NorthPanel
 	private JLabel lblName;
 	private JLabel lblRole;
-	private JLabel lblInfo;
-	private JLabel lblGoal;
+	private JLabel lblAction;
 	private JLabel lblMafia;
 	private JLabel lblDetective;
 	
@@ -62,12 +61,10 @@ public class NightPanel extends MyPanel{
 		north.add(lblName, "flowy,cell 0 0");
 		lblRole = new MyLabel(text, textColor, roleFontSize);
 		north.add(lblRole, "cell 0 1");
-		lblInfo = new MyLabel(text, textColor, infoFontSize);
-		north.add(lblInfo, "cell 0 2");
-		lblGoal = new MyLabel(text, textColor, infoFontSize);
-		north.add(lblGoal, "cell 0 3");
+		lblAction = new MyLabel(text, textColor, infoFontSize);
+		north.add(lblAction, "cell 0 2");
 		lblMafia= new MyLabel("Mafia Members: "+mafiaMembers.toString(), textColor, infoFontSize);
-		lblMafia.setFont(new MyFont(setFontSize("Mafia Members: "+mafiaMembers,50,20)));
+		lblMafia.setFont(new MyFont(setFontSize("Mafia Members: "+mafiaMembers,20,75)));
 	}
 	
 	/**
@@ -107,7 +104,7 @@ public class NightPanel extends MyPanel{
 		btnPlayer.setName("Night_"+Integer.toString(position));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener  
-		btnPlayer.setFont(new MyFont(setFontSize(name,75,28)));
+		btnPlayer.setFont(new MyFont(setFontSize(name,buttonFontSize,100)));
 		if(btnPlayer.getFont().getSize()<25) btnPlayer.setBorder(new EmptyBorder(12,5,12,5));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
@@ -160,8 +157,7 @@ public class NightPanel extends MyPanel{
 		//Sets the labels to the current players information
 		lblName.setText(player.getName());
 		lblRole.setText(player.getRole());
-		lblInfo.setText(player.getAction());
-		lblGoal.setText(player.getGoal());
+		lblAction.setText(player.getAction());
 		//Clears Detective Label
 		lblDetective.setText("");
 		//If The current player is the detective display the button to check if the target is part of the Mafia
@@ -174,13 +170,12 @@ public class NightPanel extends MyPanel{
 		if(player.getRole().contains("Mafia")){
 			north.add(lblMafia, "cell 0 4");
 		}else if(player.getRole().contains("Lyncher")){
-			lblGoal.setText(lblGoal.getText()+" "+lynchTarget);
+			lblAction.setText("Lynch "+lynchTarget+" during the Day to win");
 		}else{
 			north.remove(lblMafia);
 		}
 								  //method in MyPanel
-		lblName.setFont(new MyFont(setFontSize(lblName.getText(),50,70)));
-		lblInfo.setFont(new MyFont(setFontSize(lblInfo.getText(),50,25)));
-		lblGoal.setFont(new MyFont(setFontSize(lblGoal.getText(),50,20)));
+		lblName.setFont(new MyFont(setFontSize(lblName.getText(),titleFontSize,50)));
+		lblAction.setFont(new MyFont(setFontSize(lblAction.getText(),roleFontSize,50)));
 	}
 }

@@ -47,13 +47,15 @@ public class FileUtil{
 	 * @param roles, List<String>
 	 */
 	public void newFile(List<String> names, List<String> roles){
+		playerInfo = new ArrayList<>();
 		Collections.shuffle(roles);
 		setAllNewPlayers(names,roles);
 		if(findPosition("Lyncher")!=-1){
 			lynchTargetID = setLynchTarget(roles);
 		}else{
 			lynchTargetID = -1;
-		}	
+		}
+		SaveFileUtil.saveGame(playerInfo, lynchTargetID);
 	}
 	
 	
@@ -64,7 +66,8 @@ public class FileUtil{
 	 * loadException method to find FileNotFindException.
 	 */
 	public void loadFile(){
-		//lynchTargetID = -1;
+		lynchTargetID = -1;
+		playerInfo = new ArrayList<>();
 		int position = 0;
 		List<String> line;
 		try {
@@ -100,10 +103,7 @@ public class FileUtil{
 			Arrays.asList("Jon Snow","Daenerys","Cersei","Arya","Samwell","Bran","Sandor","Gregor","Tyrion"));
 		List<String> roles = new ArrayList<>((
 			Arrays.asList("Town","Detective","Mafia: Barman","Mafia: Hitman","Doctor","Survivor","Lyncher","Bodyguard","Townie","Mafia-Godfather")));
-		for(int i=0;i<names.size();i++){
-			Player p = CreatePlayerUtil.createPlayer(names.get(i),roles.get(i),i);
-			playerInfo.add(p);
-		}
+		newFile(names,roles);
 	}
 	
 	/**

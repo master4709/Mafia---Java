@@ -115,7 +115,7 @@ public class RoleSelectionPanel extends MyPanel{
      */
     private void displayNorth() {
         playersLeft = new MyLabel("", 20);
-        JLabel title = new MyLabel("Select possible player roles", 30);
+        JLabel title = new MyLabel("Select possible player roles", 37);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         north.add(title, "cell 0 0,alignx center");
 

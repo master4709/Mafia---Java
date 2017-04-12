@@ -65,8 +65,8 @@ public class SetUpController implements ActionListener{
 	 *
 	 * @param panel to switch to
 	 */
-	public void switchPanel(JPanel panel){
-		System.out.println(panel.getName());
+	private void switchPanel(JPanel panel){
+		System.out.println("SWITCHING: "+panel.getName());
 		frame.getContentPane().setVisible(false);
 		frame.setContentPane(panel);
 		frame.getContentPane().setVisible(true);

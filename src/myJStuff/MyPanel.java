@@ -46,8 +46,8 @@ public abstract class MyPanel {
 	protected int roleFontSize;
 	protected int infoFontSize;
 	
-	protected final int width = 480;
-	protected final int height = 850;
+	protected static final int width = 480;
+	protected static final int height = 850;
 	
 	protected EmptyBorder emptyBorder = new EmptyBorder(5, 5, 5, 5);
 	
@@ -136,11 +136,11 @@ public abstract class MyPanel {
 	 * Sets the font size for the current lbl or button
 	 * Ensures that the button does not proceed the size of the screen
 	 * @param text - String displayed on lbl or button
-	 * @param distance - Int value of space from edge of screen for text
 	 * @param max - Maximum Int size for the lbl or button
+	 * @param distance - Int value of space from edge of screen for text
 	 * @return int -  value of font size for lbl or button
 	 */
-	protected int setFontSize(String text, int distance, int max){
+	public static int setFontSize(String text, int max, int distance){
 		int font = 5;
 		
 		AffineTransform affinetransform = new AffineTransform();

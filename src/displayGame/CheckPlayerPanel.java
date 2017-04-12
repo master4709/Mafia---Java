@@ -59,7 +59,7 @@ public class CheckPlayerPanel extends MyPanel{
 	 */
 	public void setPlayerName(String text){
 		lblPlayer.setText(text);
-		lblPlayer.setFont(new MyFont(setFontSize(text,75,100)));
+		lblPlayer.setFont(new MyFont(setFontSize(text,120,50)));
 	}
 
 }

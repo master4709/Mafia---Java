@@ -25,8 +25,6 @@ public class GameController implements ActionListener{
 	
 	private ActionListener globalListener;
 	
-	private SaveFileUtil sfu;
-	
 	private Game g;
 	private DayPanel dp;
 	private NightPanel np;
@@ -76,8 +74,6 @@ public class GameController implements ActionListener{
 		vapp = new ViewAllPlayersPanel(this,globalListener);
 		vpp = new ViewPlayerPanel(this,g.getMafiaMember());
 		vp = new VictoryPanel(globalListener);
-		
-		sfu = new SaveFileUtil();
 		
 		//Creates the buttons of all of the players in the game
 		fillPanels();
@@ -129,7 +125,7 @@ public class GameController implements ActionListener{
 	private void switchDay(){
 		dp.resetButtonColor();;
 		target = -1;
-		sfu.saveGame(g.getPlayerInfo(), g.getLynchTarget());
+		SaveFileUtil.saveGame(g.getPlayerInfo(), g.getLynchTarget());
 		switchPanel(panelDay);
 	}
 
@@ -192,7 +188,7 @@ public class GameController implements ActionListener{
 			}
 			vp.setWinner(win);
 			switchPanel(panelVictory);
-			sfu.deleteFile();
+			SaveFileUtil.deleteFile();
 		}
 	}
 	/**

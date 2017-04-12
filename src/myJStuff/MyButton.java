@@ -4,7 +4,6 @@ package myJStuff;
  * @author Elvin Limpin 30018832
  */
 import java.awt.Color;
-import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +22,7 @@ public class MyButton extends JButton{
 	 * @param text
 	 * @param foreground
 	 * @param background
-	 * @param i
+	 * @param i - font size
 	 */
 	public MyButton(String text, Color foreground, Color background, int i){
 		setText(text);
@@ -72,5 +71,22 @@ public class MyButton extends JButton{
 		setBackground(btnBackgroundColor);
 		setFont(buttonFont);
 		setBorder(new EmptyBorder(4,4,4,4));
+	}
+	
+	/**
+	 * Custom constructor for buttons that comes
+	 * with the default font
+	 * @param text
+	 * @param foreground
+	 * @param background
+	 * @param fontSize - int
+	 * @param distance - int - space from edge of screen for text
+	 */
+	public MyButton(String text, Color foreground, Color background, int fontSize, int distance){
+		setText(text);
+		setForeground(foreground);
+		setBackground(background);
+		setBorder(new EmptyBorder(4,4,4,4));
+		setFont(new MyFont(MyPanel.setFontSize(text,fontSize,distance)));
 	}
 }

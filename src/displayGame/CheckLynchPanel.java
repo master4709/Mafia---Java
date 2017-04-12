@@ -23,19 +23,19 @@ public class CheckLynchPanel extends MyPanel{
 	}
 	
 	private void displayNorth(){
-		lblName = new MyLabel("",titleFont);
+		lblName = new MyLabel("",titleFontSize);
 		center.add(lblName,"cell 0 0, alignx center");
 		lblCheck = new MyLabel("has been Lynched",55);
 		center.add(lblCheck,"cell 0 1, alignx center");
 	}
 	
 	private void displaySouth(){
-		btnUndo = new MyButton("Undo",buttonFont);
+		btnUndo = new MyButton("Undo",buttonFontSize);
 		south.add(btnUndo,"cell 0 0,alignx left");
 		btnUndo.addActionListener(packageListener);
 		btnUndo.setName("Undo_CheckLynchPanel");
 		
-		btnContinue = new MyButton("Continue to Night", buttonFont);
+		btnContinue = new MyButton("Continue to Night", buttonFontSize);
 		south.add(btnContinue,"cell 1 0,growx");
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_CheckLynchPanel");
@@ -43,6 +43,6 @@ public class CheckLynchPanel extends MyPanel{
 	
 	public void setPlayer(String name){
 		lblName.setText(name);
-		lblName.setFont(new MyFont(setFont(name,50,120)));
+		lblName.setFont(new MyFont(setFontSize(name,50,120)));
 	}
 }

@@ -109,7 +109,6 @@ public class GameController implements ActionListener{
 				np.displayPlayerButton(name, y);
 			}
 			vapp.displayPlayerButton(name, y);
-			vp.setPlayerInfo(g.getPlayer(y));
 			y++;
 		}
 	}
@@ -183,8 +182,12 @@ public class GameController implements ActionListener{
 		}else if(win.contains("None")&&time.equals("Day")){
 			findNextPlayer();
 		}else{
+			for(Player p: g.getPlayerInfo()){
+				vp.setPlayerInfo(p.copy());
+			}
 			vp.setWinner(win);
 			switchPanel(panelVictory);
+			sfu.deleteFile();
 		}
 	}
 	/**

@@ -213,15 +213,15 @@ public class Game{
 	 */
 	private void newHitman(int hitman){
 		Player p;
-		if(getPlayer("Goon")!=null){
+		if(getPlayer("Goon")!=null && getPlayer("Goon").getStatus()!=0){
 			p = getPlayer("Goon");
 			System.out.println(p.toString()+ " is taking Hitmans spot");
 			setHitman(p);
-		}else if(getPlayer("Barman")!=null){
+		}else if(getPlayer("Barman")!=null && getPlayer("Barman").getStatus()!=0){
 			p = getPlayer("Barman");
 			System.out.println(p.toString()+ " is taking Hitmans spot");
 			setHitman(p);
-		}else if(getPlayer("GodFather")!=null){
+		}else if(getPlayer("GodFather")!=null && getPlayer("GodFather").getStatus()!=0){
 			p = getPlayer("GodFather");
 			System.out.println(p.toString()+ " is taking Hitmans spot");
 			setHitman(p);
@@ -310,7 +310,7 @@ public class Game{
 				return p.copy();
 			}
 		}
-		return new Townie("No player or Role "+s,-1);
+		return null;
 	}
 	
 	public String getLynchTargetString(){

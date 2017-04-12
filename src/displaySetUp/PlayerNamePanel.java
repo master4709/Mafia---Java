@@ -66,7 +66,7 @@ public class PlayerNamePanel extends MyPanel{
 	private void displaySouth(){
 		south.setLayout(new MigLayout("", "[][grow]", "[]"));
 		
-		btnHome = new MyButton("Home",buttonFont);
+		btnHome = new MyButton("Home",buttonFontSize);
 		south.add(btnHome,"cell 0 0,alignx left");
 		btnHome.addActionListener(globalListener);
 		btnHome.setName("Home");

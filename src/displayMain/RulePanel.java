@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -79,7 +78,7 @@ public class RulePanel extends MyPanel{
 	    }	
 		
 		//textField set up.	
-		myTxtPane = new MyTextArea(textFromFile, textColor, backgroundColor, textFont);
+		myTxtPane = new MyTextArea(textFromFile, textColor, backgroundColor, textFontSize);
 		
 		//scrollPane set up.
 		scrollPane = new JScrollPane(myTxtPane);
@@ -93,7 +92,7 @@ public class RulePanel extends MyPanel{
 	 * Method to display content of north panel, which is label.
 	 */
 	private void displayNorth(){
-		lblAbout = new MyLabel("Rules", titleFont);
+		lblAbout = new MyLabel("Rules", titleFontSize);
 		north.add(lblAbout, "flowx,cell 0 0");
 	}
 	
@@ -107,14 +106,4 @@ public class RulePanel extends MyPanel{
 		btnBack.addActionListener(packageListener);
 		btnBack.setName("Back_RulePanel");			
 	}
-		
-	/**
-	 * Getter method for the content pane.
-	 * @return contentPane
-	 */
-	public JPanel getContentPane(){
-		return contentPane;
-	}
-	
-
 }

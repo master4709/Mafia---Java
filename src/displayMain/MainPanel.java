@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import myJStuff.*;
 /**
@@ -47,7 +46,6 @@ public class MainPanel extends MyPanel{
 	 */
 	
 	public MainPanel(ActionListener packageListener, ActionListener globalListener) {
-
 		this.packageListener = packageListener;
 		this.globalListener = globalListener;
 		//displaying contents of each panels
@@ -75,7 +73,7 @@ public class MainPanel extends MyPanel{
 	private void displaySouth(){
 		
 		btnTest = new MyButton("Test Game");
-		south.add(btnTest, "cell 1 0 ,growx");
+		south.add(btnTest,"cell 1 0,growx");
 		btnTest.addActionListener(globalListener);
 		btnTest.setName("Testing_MainPanel");
 	}
@@ -111,15 +109,5 @@ public class MainPanel extends MyPanel{
 		btnAbout.addActionListener(packageListener);
 		btnAbout.setName("About_MainPanel");
 		
-	}
-	
-	
-	
-	/**
-	 * Getter method for the content pane.
-	 * @return contentPane
-	 */
-	public JPanel getContentPane(){
-		return contentPane;
 	}
 }

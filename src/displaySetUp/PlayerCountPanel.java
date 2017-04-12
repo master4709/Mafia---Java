@@ -46,10 +46,10 @@ public class PlayerCountPanel extends MyPanel{
 
 	/** Method displays contents in the north **/
 	private void displayNorth(){
-		lblText = new MyLabel("How Many?", textColor, titleFont);
+		lblText = new MyLabel("How Many?", textColor, titleFontSize);
 		north.add(lblText, "cell 0 0,alignx center");
 		
-		lblText2 = new MyLabel("Players?", textColor, titleFont);
+		lblText2 = new MyLabel("Players?", textColor, titleFontSize);
 		north.add(lblText2, "cell 0 1,alignx center");
 	}
 
@@ -65,7 +65,7 @@ public class PlayerCountPanel extends MyPanel{
 	/** Method displays contents in the south**/
 	private void displaySouth(){
 		
-		btnHome = new MyButton("Home",buttonFont);
+		btnHome = new MyButton("Home",buttonFontSize);
 		south.add(btnHome,"cell 0 0,alignx left");
 		btnHome.addActionListener(globalListener);
 		btnHome.setName("Home");

@@ -40,11 +40,14 @@ public abstract class MyPanel {
 	protected JPanel east;
 	protected JPanel center;
 	
-	protected int titleFont;
-	protected int buttonFont;
-	protected int textFont;
-	protected int roleFont;
-	protected int infoFont;
+	protected int titleFontSize;
+	protected int buttonFontSize;
+	protected int textFontSize;
+	protected int roleFontSize;
+	protected int infoFontSize;
+	
+	protected final int width = 480;
+	protected final int height = 850;
 	
 	protected EmptyBorder emptyBorder = new EmptyBorder(5, 5, 5, 5);
 	
@@ -57,6 +60,7 @@ public abstract class MyPanel {
 
 		//Everything gets displayed on this panel 
 		contentPane.setBorder(emptyBorder);
+		//contentPane.setBounds(0,0,width,height);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		contentPane.setName("MyPanel --- Rename your Panel");
@@ -65,10 +69,6 @@ public abstract class MyPanel {
 		north = new JPanel();
 		contentPane.add(north, BorderLayout.NORTH);
 		north.setLayout(new MigLayout("gap rel 0", "[grow,center]", "[]"));
-		
-		south = new JPanel();
-		contentPane.add(south, BorderLayout.SOUTH);
-		south.setLayout(new MigLayout("", "[][grow]", "[]"));
 		
 		west = new JPanel();
 		contentPane.add(west, BorderLayout.WEST);
@@ -80,16 +80,21 @@ public abstract class MyPanel {
 		contentPane.add(center, BorderLayout.CENTER);
 		center.setLayout(new MigLayout("", "[grow]", "[]"));
 		
+		
+		south = new JPanel();
+		contentPane.add(south, BorderLayout.SOUTH);
+		south.setLayout(new MigLayout("", "[][grow]", "[]"));
+		
 		setBackground(Colors.defaultBackgroundColor);
 	}
 	
 	/** Sets the default font **/
 	private void setFont(){
-		titleFont = 65;
-		textFont = 25;
-		infoFont = 20;
-		buttonFont = 30;
-		roleFont = 40;
+		titleFontSize = 65;
+		textFontSize = 25;
+		infoFontSize = 20;
+		buttonFontSize = 30;
+		roleFontSize = 40;
 	}
 	
 	/** Sets the default colors **/
@@ -131,19 +136,18 @@ public abstract class MyPanel {
 	 * Sets the font size for the current lbl or button
 	 * Ensures that the button does not proceed the size of the screen
 	 * @param text - String displayed on lbl or button
-	 * @param screen - Int value of space from edge of screen for text
+	 * @param distance - Int value of space from edge of screen for text
 	 * @param max - Maximum Int size for the lbl or button
 	 * @return int -  value of font size for lbl or button
 	 */
-	protected int setFont(String text, int screen, int max){
+	protected int setFontSize(String text, int distance, int max){
 		int font = 5;
 		
 		AffineTransform affinetransform = new AffineTransform();
 		FontRenderContext frc = new FontRenderContext(affinetransform,true,true);
 		int textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
 		
-		int screenWidth = 480;
-		while(textWidth<screenWidth-screen && font<max){
+		while(textWidth<width-distance && font<max){
 			font++;
 			textWidth = (int)(new MyFont(font).getStringBounds(text, frc).getWidth());
 		}

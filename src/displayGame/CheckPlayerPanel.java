@@ -35,10 +35,10 @@ public class CheckPlayerPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 		
-		lblAreYouReally = new MyLabel("Pass device to:", textColor, roleFont);
+		lblAreYouReally = new MyLabel("Pass device to:", textColor, roleFontSize);
 		north.add(lblAreYouReally, "cell 0 0,alignx center");
 		
-		lblPlayer = new MyLabel("", textColor, titleFont);
+		lblPlayer = new MyLabel("", textColor, titleFontSize);
 		north.add(lblPlayer, "cell 0 1,alignx center");
 	}
 	/**
@@ -47,7 +47,7 @@ public class CheckPlayerPanel extends MyPanel{
 	private void displaySouth(){
 		//This button displays the text yes and when pressed goes to the GameController and switches the contentPane
 		//to the next player in the night cycle
-		btnYes = new MyButton("That's me",roleFont);
+		btnYes = new MyButton("That's me",roleFontSize);
 		south.add(btnYes, "cell 1 0,growx");
 		btnYes.addActionListener(packageListener);
 		btnYes.setName("Continue_CheckPlayerPanel");
@@ -59,7 +59,7 @@ public class CheckPlayerPanel extends MyPanel{
 	 */
 	public void setPlayerName(String text){
 		lblPlayer.setText(text);
-		lblPlayer.setFont(new MyFont(setFont(text,75,100)));
+		lblPlayer.setFont(new MyFont(setFontSize(text,75,100)));
 	}
 
 }

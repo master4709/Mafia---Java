@@ -1,7 +1,10 @@
 package logic;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.util.List;
 
 import playerInfo.Player;
@@ -30,6 +33,15 @@ public class SaveFileUtil {
 			System.out.println("");
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public void deleteFile(){
+		try {
+			System.out.println("Game Over");
+			System.out.println("Deleteing Save Game");
+			Files.deleteIfExists(new File(saveFile).toPath());
+		} catch (IOException e) {
+			System.out.println("Could not delete saveGame");
+		}
 	}
 }

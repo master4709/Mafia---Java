@@ -58,16 +58,16 @@ public class NightPanel extends MyPanel{
 	 */
 	private void displayNorth(List<String> mafiaMembers){
 		String text = "";
-		lblName = new MyLabel(text, textColor, titleFont);
+		lblName = new MyLabel(text, textColor, titleFontSize);
 		north.add(lblName, "flowy,cell 0 0");
-		lblRole = new MyLabel(text, textColor, roleFont);
+		lblRole = new MyLabel(text, textColor, roleFontSize);
 		north.add(lblRole, "cell 0 1");
-		lblInfo = new MyLabel(text, textColor, infoFont);
+		lblInfo = new MyLabel(text, textColor, infoFontSize);
 		north.add(lblInfo, "cell 0 2");
-		lblGoal = new MyLabel(text, textColor, infoFont);
+		lblGoal = new MyLabel(text, textColor, infoFontSize);
 		north.add(lblGoal, "cell 0 3");
-		lblMafia= new MyLabel("Mafia Members: "+mafiaMembers.toString(), textColor, infoFont);
-		lblMafia.setFont(new MyFont(setFont("Mafia Members: "+mafiaMembers,50,20)));
+		lblMafia= new MyLabel("Mafia Members: "+mafiaMembers.toString(), textColor, infoFontSize);
+		lblMafia.setFont(new MyFont(setFontSize("Mafia Members: "+mafiaMembers,50,20)));
 	}
 	
 	/**
@@ -76,14 +76,14 @@ public class NightPanel extends MyPanel{
 	 */
 	private void displayCenter(){
 		//Create the detective button
-		btnDetective = new MyButton("Confirm Target", textFont);
+		btnDetective = new MyButton("Confirm Target", textFontSize);
 		center.add(btnDetective, "cell 0 14,alignx center");
 		btnDetective.setName("Detective");
 		btnDetective.addActionListener(packageListener);
 		btnDetective.setVisible(false);
 		btnDetective.setBorder(new EmptyBorder(2,2,2,2));
 		
-		lblDetective = new MyLabel("", textColor, textFont);
+		lblDetective = new MyLabel("", textColor, textFontSize);
 		center.add(lblDetective, "cell 0 13,alignx center");
 		
 	}
@@ -107,7 +107,7 @@ public class NightPanel extends MyPanel{
 		btnPlayer.setName("Night_"+Integer.toString(position));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener  
-		btnPlayer.setFont(new MyFont(setFont(name,75,28)));
+		btnPlayer.setFont(new MyFont(setFontSize(name,75,28)));
 		if(btnPlayer.getFont().getSize()<25) btnPlayer.setBorder(new EmptyBorder(12,5,12,5));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}
@@ -179,8 +179,8 @@ public class NightPanel extends MyPanel{
 			north.remove(lblMafia);
 		}
 								  //method in MyPanel
-		lblName.setFont(new MyFont(setFont(lblName.getText(),50,70)));
-		lblInfo.setFont(new MyFont(setFont(lblInfo.getText(),50,25)));
-		lblGoal.setFont(new MyFont(setFont(lblGoal.getText(),50,20)));
+		lblName.setFont(new MyFont(setFontSize(lblName.getText(),50,70)));
+		lblInfo.setFont(new MyFont(setFontSize(lblInfo.getText(),50,25)));
+		lblGoal.setFont(new MyFont(setFontSize(lblGoal.getText(),50,20)));
 	}
 }

@@ -156,12 +156,12 @@ public class RoleSelectionPanel extends MyPanel{
 
         south.add(assignTownies, "cell 1 0, alignx right");
 
-        btnHome = new MyButton("Home",buttonFont);
+        btnHome = new MyButton("Home",buttonFontSize);
         south.add(btnHome,"cell 1 1,alignx left");
         btnHome.addActionListener(globalListener);
         btnHome.setName("Home");
 
-        continueButton = new MyButton("Continue",buttonFont);
+        continueButton = new MyButton("Continue",buttonFontSize);
         south.add(continueButton,"cell 1 1,growx");
         continueButton.setEnabled(false);
         continueButton.setName("Continue_RoleSelectionPanel");

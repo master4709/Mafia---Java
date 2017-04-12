@@ -4,6 +4,7 @@ package myJStuff;
  * @author Elvin Limpin 30018832
  */
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;

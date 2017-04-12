@@ -46,15 +46,15 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 		
-		lblDayTime = new MyLabel("View Roles", textColor, titleFont);
+		lblDayTime = new MyLabel("View Roles", textColor, titleFontSize);
 		north.add(lblDayTime, "flowy,cell 0 0");
 		
 		String text1 = "Click on your name to check your role";
-		lblDescription1 = new MyLabel(text1, textColor, textFont);
+		lblDescription1 = new MyLabel(text1, textColor, textFontSize);
 		north.add(lblDescription1, "cell 0 1,");
 		
 		String text2 = "Then, pass the device to the next player";
-		lblDescription2 = new MyLabel(text2, textColor, textFont);
+		lblDescription2 = new MyLabel(text2, textColor, textFontSize);
 		north.add(lblDescription2, "cell 0 2,");
 	
 	}
@@ -64,7 +64,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 	private void displaySouth(){
 		south.setLayout(new MigLayout("", "[][grow]", "[]"));
 		
-		btnHome = new MyButton("Home",buttonFont);
+		btnHome = new MyButton("Home",buttonFontSize);
 		south.add(btnHome,"cell 0 0,alignx left,alignx left");
 		btnHome.addActionListener(globalListener);
 		btnHome.setName("Home");
@@ -86,7 +86,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 		btnPlayer.setName("Select_"+Integer.toString(position));
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
-		btnPlayer.setFont(new MyFont(setFont(name,100,30)));
+		btnPlayer.setFont(new MyFont(setFontSize(name,100,30)));
 		playerButtonList.add(btnPlayer);
 	}
 	/**
@@ -97,7 +97,7 @@ public class ViewAllPlayersPanel extends MyPanel{
 	public void setPlayerButtonDead(int position){
 		String text = "Dead | " + playerButtonList.get(position).getText();
 		playerButtonList.get(position).setText("Dead | " +text);
-		int font = setFont(text,100,30);
+		int font = setFontSize(text,100,30);
 		playerButtonList.get(position).setFont(new MyFont(font));
 		if(font<25) playerButtonList.get(position).setBorder(new EmptyBorder(12,5,12,5));
 	}

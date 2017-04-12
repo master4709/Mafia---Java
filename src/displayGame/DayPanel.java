@@ -52,22 +52,22 @@ public class DayPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 		
-		lblDayTime = new MyLabel("Day ", textColor, titleFont);
+		lblDayTime = new MyLabel("Day Time", textColor, 90);
 		north.add(lblDayTime, "flowy,cell 0 0,alignx center");
 		
 		String text = "Talk among yourselves to choose who to lynch.";// There must be a 50% majority to lynch him/her";
 		lblDescription1 = new MyLabel(text);
-		lblDescription1.setFont(new MyFont(setFont(text,75,infoFont)));
+		lblDescription1.setFont(new MyFont(setFontSize(text,75,infoFontSize)));
 		north.add(lblDescription1, "cell 0 1,alignx center");
 		
 		text = "Once once one player has recieved 50% of the votes:";// There must be a 50% majority to lynch him/her";
 		lblDescription2 = new MyLabel(text);
-		lblDescription2.setFont(new MyFont(setFont(text,75,infoFont)));
+		lblDescription2.setFont(new MyFont(setFontSize(text,75,infoFontSize)));
 		north.add(lblDescription2, "cell 0 2,alignx center");
 		
 		text = "select that player and lynch him/her.";// There must be a 50% majority to lynch him/her";
 		lblDescription3 = new MyLabel(text);
-		lblDescription3.setFont(new MyFont(setFont(text,75,infoFont)));
+		lblDescription3.setFont(new MyFont(setFontSize(text,75,infoFontSize)));
 		north.add(lblDescription3, "cell 0 3,alignx center");
 	
 	}
@@ -75,7 +75,7 @@ public class DayPanel extends MyPanel{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		btnHome = new MyButton("Home",buttonFont*2/3);
+		btnHome = new MyButton("Home",buttonFontSize*2/3);
 		south.add(btnHome,"cell 0 0,alignx left");
 		btnHome.addActionListener(globalListener);
 		btnHome.setName("Home");	
@@ -86,7 +86,7 @@ public class DayPanel extends MyPanel{
 		btnContinue.addActionListener(packageListener);
 		btnContinue.setName("Continue_DayPanel");
 		
-		btnViewPlayers = new MyButton("View Roles",buttonFont*2/3);
+		btnViewPlayers = new MyButton("View Roles",buttonFontSize*2/3);
 		south.add(btnViewPlayers,"cell 1 0,alignx left");
 		btnViewPlayers.addActionListener(packageListener);
 		btnViewPlayers.setName("ViewPlayers_DayPanel");
@@ -102,7 +102,7 @@ public class DayPanel extends MyPanel{
 		btnPlayer.setName("Day_"+Integer.toString(position));//Sets the name of the button to the index value of the player
 		center.add(btnPlayer, "cell 0 "+position+",growx");//Add the button to the center panel
 		btnPlayer.addActionListener(packageListener);//Add action listener 
-		btnPlayer.setFont(new MyFont(setFont(name,75,30)));
+		btnPlayer.setFont(new MyFont(setFontSize(name,75,30)));
 		if(btnPlayer.getFont().getSize()<25) btnPlayer.setBorder(new EmptyBorder(12,5,12,5));
 		playerButtonList.add(btnPlayer);//Add to the list of player buttons
 	}

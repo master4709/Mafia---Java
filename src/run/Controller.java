@@ -42,6 +42,8 @@ public class Controller implements ActionListener{
 		int height = 852;
 		frame.setBounds(550, 20, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setVisible(true);
 	}
 
 	@Override

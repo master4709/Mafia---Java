@@ -46,9 +46,6 @@ public class MainController implements ActionListener {
 		this.globalListener = globalListener;		
 		//setting up the frame 
 		this.frame = frame;
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.setResizable(false);
-		this.frame.setVisible(true);
 	}
 	
 	

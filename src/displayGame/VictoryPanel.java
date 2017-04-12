@@ -28,6 +28,8 @@ public class VictoryPanel extends MyPanel {
 	
 	private String text;
 	private JLabel display;
+	private JLabel status;
+	private String str;
 	
 	/**
 	 * Constructor method that takes a listener as a 
@@ -64,7 +66,7 @@ public class VictoryPanel extends MyPanel {
 		north.add(winner_title, "cell 0 1");
 		winner_name = new MyLabel("", 30);
 		north.add(winner_name, "cell 0 2");
-		names_roles = new MyLabel("Names and Roles:", 30);
+		names_roles = new MyLabel("Status, Names and Roles:", 30);
 		north.add(names_roles, "cell 0 3");
 	}
 	/**
@@ -84,11 +86,18 @@ public class VictoryPanel extends MyPanel {
 	 * @param nameAndRole
 	 */
 	public void setPlayerInfo(Player p) {
-			JLabel status = new MyLabel("",30);
-			center.add(status,"cell 0 "+p.getPosition());
-			text = p.toString();			
-			display = new MyLabel(text, 30);
-			center.add(display, "cell 1 "+p.getPosition());
+		text = p.toString();			
+		display = new MyLabel(text, 30);
+		int num = p.getStatus();
+		if (num == 0) {
+			str = "Dead";
+		}
+		else if (num == 1) {
+			str = "Alive";
+		}
+		status = new MyLabel(str, 30);
+		center.add(status,"cell 0 " + p.getPosition());
+		center.add(display, "cell 1 " + p.getPosition());
 	}
 	/**
 	 * Sets the winner of the game
@@ -101,4 +110,3 @@ public class VictoryPanel extends MyPanel {
 	}
 
 }
-

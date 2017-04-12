@@ -84,7 +84,7 @@ public class VictoryPanel extends MyPanel {
 			}
 		}
 		status = new MyLabel(str+p.toString());
-		status.setFont(new MyFont(setFontSize(status.getText(),buttonFontSize,50)));
+		status.setFont(new MyFont(setFontSize(status.getText(),buttonFontSize,75)));
 		center.add(status,"cell 0 " + p.getPosition());
 	}
 	/**

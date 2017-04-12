@@ -100,7 +100,7 @@ public class FileUtil{
 		System.out.println("ERROR: Could not find file :"+saveName);
 		System.out.println("Loading internal default save game");
 		List<String> names = new ArrayList<>(
-			Arrays.asList("Jon Snow","Daenerys","Cersei","Arya","Samwell","Bran","Sandor","Gregor","Tyrion"));
+			Arrays.asList("Jon Snow","Daenerys","Cersei","Arya","Samwell","Bran","Sandor","Gregor","Tyrion","Bron"));
 		List<String> roles = new ArrayList<>((
 			Arrays.asList("Town","Detective","Mafia: Barman","Mafia: Hitman","Doctor","Survivor","Lyncher","Bodyguard","Townie","Mafia-Godfather")));
 		newFile(names,roles);

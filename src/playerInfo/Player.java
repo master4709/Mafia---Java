@@ -105,8 +105,9 @@ public abstract class Player {
 	 * @return List<String> role
 	 */
 	protected List<String> scan(String roleName){
+		String location = "src/data/roles.txt";
 		List<String> role = new ArrayList<>();
-		try(BufferedReader br = new BufferedReader(new FileReader("src/data/roles.txt"));){
+		try(BufferedReader br = new BufferedReader(new FileReader(location));){
 			 String line;
 			    while ((line = br.readLine()) != null) {
 			       if(line.contains(roleName)){
@@ -117,14 +118,14 @@ public abstract class Player {
 			    	   break;
 			       }
 			    }if (role.size()==0){
-			    	System.out.println("Cound not find role: "+roleName+" in file src/data/roles.txt");
+			    	System.out.println("Cound not find role: "+roleName+" in file "+location);
 			    	role.add(roleName);
 			    	role.add("No role found in data/roles.txt");
 			    	role.add("No goal found for role");
 			    }
 			    return role;
 		}catch(IOException e){
-			System.out.println("Could not find file: src/data/roles.txt");
+			System.out.println("Could not find file: "+location);
 			System.out.println("Please contacta a system admin about downloading the file again");
 			role.add(roleName + " No name found");
 	    	role.add("No action found for role");

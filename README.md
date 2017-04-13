@@ -40,17 +40,37 @@ Copyright 2017 All rights reserved
 
 ### What is Mafia? ###
 
-##### Overview ######
+Mafia is a party game designed to have two teams:
+
+1.The Informed minority -The Mafia (Each member knows who the other Mafia members are)
+2.The Uninformed majority -The Town (No member knows the side of another player)
+
+The Mafia is trying to take control of the town by gaining a majority while
+the town is trying to lynch all members of the Mafia. After each lynching,
+night passes and specific players will perform night actions against other 
+players.
+
+
+##### Application Overview ######
 
 Mafia is a role-playing game for parties.
 Traditionally, a "god" player must be present
 who keeps track of the decisions players make
 
 Through this application, we eliminate the
-need of the god
+need of the god player
 
-The game is played with an informed minority, the Mafia
-and an uninformed majority, the Town.
+The Phone removes the need for one player to lead the group and tell everyone else
+to go to sleep, going through each players actions, and also making a story
+
+The application removes the need for everyone to close their eyes for a pro-longed time
+while most of the players do his/her night action. The phone is instead passed around the 
+group while everyone selects his/her action for the night, allowing everyone to continue
+to talk to each other and have fun. At the end of the night a story will appear to be read
+out to the entire group
+ 
+The phone also allows every player to play instead of one player
+forced to be God 
 
 Members of the Mafia know who each other are where as Town members
 have no idea who anyone else is

@@ -1,18 +1,13 @@
 package displaySetUp;
 
-//import myJStuff.Colors;
-import myJStuff.MyButton;
-import myJStuff.MyLabel;
-import myJStuff.MyPanel;
+import myJStuff.*;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  * This class creates the panel for selecting roles.
@@ -116,7 +111,6 @@ public class RoleSelectionPanel extends MyPanel{
     private void displayNorth() {
         playersLeft = new MyLabel("", 40);
         JLabel title = new MyLabel("Select possible player roles", 37);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
         north.add(title, "cell 0 0,alignx center");
 
         JLabel centralLabel = new MyLabel("Players remaining: ", 30);

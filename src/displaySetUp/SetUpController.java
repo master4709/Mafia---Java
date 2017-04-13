@@ -2,10 +2,13 @@ package displaySetUp;
 
 import myJStuff.Colors;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * 
@@ -37,7 +40,6 @@ public class SetUpController implements ActionListener{
 	public SetUpController(JFrame frame, ActionListener globalListener){
 		this.globalListener = globalListener;
 		this.frame = frame;
-		this.frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
     /***

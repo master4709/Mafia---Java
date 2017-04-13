@@ -68,7 +68,7 @@ public abstract class MyPanel {
 		//These panels are what all JLabels, buttons etc. are added to
 		north = new JPanel();
 		contentPane.add(north, BorderLayout.NORTH);
-		north.setLayout(new MigLayout("gap rel 0", "[grow,center]", "[]"));
+		north.setLayout(new MigLayout("", "[grow,center]", "[]"));
 		
 		//Used as a side buffer with the screen edge for the center panel
 		west = new JPanel();

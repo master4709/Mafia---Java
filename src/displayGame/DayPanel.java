@@ -52,7 +52,7 @@ public class DayPanel extends MyPanel{
 	 */
 	private void displayNorth(){
 		
-		lblDayTime = new MyLabel("Day Time", textColor, 90);
+		lblDayTime = new MyLabel("Day Time", textColor, 80);
 		north.add(lblDayTime, "flowy,cell 0 0,alignx center");
 		
 		String text = "Talk among yourselves to choose who to lynch.";// There must be a 50% majority to lynch him/her";

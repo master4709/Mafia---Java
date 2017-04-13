@@ -4,7 +4,10 @@ import myJStuff.*;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -58,7 +61,7 @@ public class RoleSelectionPanel extends MyPanel{
      * Create button for each role.
      */
     private void createRoleButtons() {
-        ArrayList<String> availableRoles = scanForAvailableRoles();
+        List<String> availableRoles = scanForAvailableRoles();
         for (int count = 0; count < availableRoles.size(); count++) {
             if (!availableRoles.get(count).equals("Townie")) {
                 JButton roleBtn = new MyButton(availableRoles.get(count));
@@ -76,32 +79,22 @@ public class RoleSelectionPanel extends MyPanel{
     /***
      * Scans the playerInfo directory for available roles to display
      */
-    private ArrayList<String> scanForAvailableRoles() {
-        ArrayList<String> availableRoles = new ArrayList<>();
-        File dir = new File("src/playerInfo");
-        File[] files = dir.listFiles();
-        assert files != null;
-        for (File file : files) {
-            String fileName = file.getName();
-            if (fileName.contains(".java") && !fileName.equals("Player.java")
-                    && !fileName.equals("Mafia.java") && !fileName.equals("Town.java")) {
-
-                switch (fileName) {
-                    case "Goon.java":
-                    case "Hitman.java":
-                    case "Barman.java":
-                        availableRoles.add("Mafia: " + fileName.substring(0, fileName.length() - 5));
-                        break;
-                    case "GodFather.java":
-                        availableRoles.add("Mafia- " + fileName.substring(0, fileName.length() - 5));
-                        break;
-                    default:
-                        availableRoles.add(fileName.substring(0, fileName.length() - 5));
-                        break;
-                }
-
-            }
+    private List<String> scanForAvailableRoles() {
+        List<String> availableRoles = new ArrayList<>();
+        Scanner fileScanner;
+		try {
+			fileScanner = new Scanner( new File("data/roles.txt"));
+			while(fileScanner.hasNextLine()) {
+            String line = fileScanner.nextLine();
+            String[] split = line.split("\\|");
+            availableRoles.add(split[0]);
         }
+		} catch (FileNotFoundException e) {
+			System.out.println("Could not find file: data/roles.txt");
+			System.out.println("Please contacta a system admin about downloading the file again");
+			availableRoles.add("No data/roles.txt");
+		}
+        System.out.println(availableRoles);
         return availableRoles;
     }
 

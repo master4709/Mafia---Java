@@ -1,0 +1,12 @@
+Bodyguard|Save another player by dying in his/her place|Lynch all members of the Mafia
+Detective|Reveals the team of one player each night|Lynch all members of the Mafia
+Doctor|Heal another player each night|Lynch all members of the Mafia
+Lyncher|You have nothing to do at night.|Lynch all Mafia or Lynch
+Prostitute|Stop another player from doing night action|Lynch all members of the Mafia
+Survivor|You have nothing to do at night.|Lynch all Mafia or be the last Town member alive
+Townie|You have nothing to do at night.|Lynch all members of the Mafia
+Vigilante|May kill a different player each night|Lynch or Kill all members of the Mafia
+Mafia: Barman|Stop another player from doing night action|Make the majority of the town Mafia by any means
+Mafia- GodFather|Hidden from the Detective|Make the majority of the town Mafia by any means
+Mafia: Goon|You have nothing to do at night.|Make the majority of the town Mafia by any means
+Mafia: Hitman|Kill a different player each night|Make the majority of the town Mafia by any means

@@ -1,12 +1,12 @@
-1 false Vigilante Pierce
-1 false Townie Mahsa
-1 false Survivor Christilyn
-1 false Mafia: Hitman Elvin
-1 false Prostitute Ronelle
-1 false Mafia: Goon Harry
-1 false Mafia: Barman Ron
-1 false Lyncher 5 Hermione
-1 false Detective Tom Riddle
-1 false Mafia- GodFather Albus D
-0 true Doctor Captain Jack
-1 false Bodyguard Sparkey Sparkey Boom Man
+1 false Mafia- GodFather Pierce
+1 false Mafia: Barman Mahsa
+1 false Vigilante Christilyn
+1 false Mafia: Goon Elvin
+1 false Detective Ronelle
+1 false Mafia: Hitman Harry
+1 false Survivor Ron
+1 false Bodyguard Hermione
+1 false Doctor Tom Riddle
+1 false Townie Albus D
+1 false Lyncher 1 Captain Jack
+1 false Prostitute Sparkey Sparkey Boom Man

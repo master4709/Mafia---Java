@@ -1,0 +1,87 @@
+This is the Party Game Mafia.
+
+There are two teams:
+The uninformed majority: Town
+The informed minority: Mafia
+
+Goals:
+-Team Mafia: Gain control of the 
+   town through lynching, killing 
+   and other actions during then 
+   night
+-Team Town: Lynch all of Mafia 
+   members of Kill them (Vigilante)
+-Lown Wolf*:
+   1. Lyncher: Win by lynching a 
+    specific player during the day
+   2. Survivor: Win by being the 
+    last member of the Town alive
+
+The Game is over when one party 
+has won by succeeding their goal
+
+During the day...
+All Players talk in a group
+Then decide who to vote out
+There must be a 50% majority vote
+before a player is lynched.
+
+At night...
+Every player must fulfill their
+role. If you are the:
+
+-Town: Townie
+You have nothing to do at night.
+
+-Town: Bodyguard
+You may save another person by
+dying in their place
+
+-Town: Detective
+You reveal the affiliation of
+one player's team at night.
+
+-Town: Doctor
+you may heal one player each
+night, but not the same one 
+two nights in a row.
+
+-Town: Prostitute
+You can stop another player's
+night action
+
+-Town: Vigilante
+You may choose to kill anyone
+at night.
+
+-Mafia: Hitman
+You may choose to kill anyone
+at night. If the Hitman dies,
+another member of the Mafia
+will replace him
+
+-Mafia: Barman
+You may stop another player's
+action at night
+
+-Mafia: Goon
+You have nothing to do at night.
+
+-Mafia- Godfather
+The detective cannot determine
+your affiliation, but the town
+must lynch you to succeed.
+You have nothing to do at night.
+
+-Lone Wolf*: Lyncher
+Lynch a specific person to win
+alone. You have nothing to do at
+night.
+
+-Lone Wolf*: Survivor
+You have nothing to do at night.
+You win by being the last town 
+member alive
+
+* Note: LoneWolf will also win
+if the Town wins

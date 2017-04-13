@@ -114,17 +114,14 @@ public class RoleSelectionPanel extends MyPanel{
      * Create labels to be displayed in north of existing BorderLayout.
      */
     private void displayNorth() {
-        playersLeft = new MyLabel("", 20);
+        playersLeft = new MyLabel("", 40);
         JLabel title = new MyLabel("Select possible player roles", 37);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         north.add(title, "cell 0 0,alignx center");
 
-        JLabel centralLabel = new MyLabel("Players remaining: ", 20);
-        centralLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        Border selectRolesMargin = new EmptyBorder(10, 10, 20, 10);
-        centralLabel.setBorder(new CompoundBorder(contentPane.getBorder(), selectRolesMargin));
-        north.add(centralLabel, "cell 0 1,split 2, span, center");
-        north.add(playersLeft, "wrap");
+        JLabel centralLabel = new MyLabel("Players remaining: ", 30);
+        north.add(centralLabel, "cell 0 1,alignx center");
+        north.add(playersLeft, "cell 0 1,alignx center");
     }
 
     /***
@@ -153,20 +150,23 @@ public class RoleSelectionPanel extends MyPanel{
         JButton resetBtn = new MyButton("Reset", 15);
         resetBtn.setName("Reset_RoleSelection");
         resetBtn.addActionListener(packageListener);
-        south.add(resetBtn, "cell 1 0, alignx center");
+        south.add(resetBtn, "cell 1 2, alignx center");
 
-        south.add(assignTownies, "cell 1 0, alignx right");
+        south.add(assignTownies, "cell 1 2, alignx right");
         
-        recomendedMafia = new MyLabel("Recomended Mafia: ");
-        south.add(recomendedMafia,"cell 1 1,alignx center");
+        recomendedMafia = new MyLabel("Recomended Mafia: ",20);
+        south.add(recomendedMafia,"cell 1 0,alignx center");
+        
+        JLabel recommended = new MyLabel("Docotor and Mafia: Hitman are HIGHLY recommended in every game",13);
+        south.add(recommended,"cell 1 1,alignx center");
 
         btnHome = new MyButton("Home",buttonFontSize);
-        south.add(btnHome,"cell 1 2,alignx left");
+        south.add(btnHome,"cell 1 3,alignx left");
         btnHome.addActionListener(globalListener);
         btnHome.setName("Home");
 
         continueButton = new MyButton("Continue",buttonFontSize);
-        south.add(continueButton,"cell 1 2,growx");
+        south.add(continueButton,"cell 1 3,growx");
         continueButton.setEnabled(false);
         continueButton.setName("Continue_RoleSelectionPanel");
         continueButton.addActionListener(globalListener);

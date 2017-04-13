@@ -70,9 +70,11 @@ public abstract class MyPanel {
 		contentPane.add(north, BorderLayout.NORTH);
 		north.setLayout(new MigLayout("gap rel 0", "[grow,center]", "[]"));
 		
+		//Used as a side buffer with the screen edge for the center panel
 		west = new JPanel();
 		contentPane.add(west, BorderLayout.WEST);
 		
+		//Used as a side buffer with the screen edge for the center panel
 		east = new JPanel();
 		contentPane.add(east, BorderLayout.EAST);
 		

@@ -105,7 +105,7 @@ public abstract class Player {
 	 * @return List<String> role
 	 */
 	protected List<String> scan(String roleName){
-		String location = "src/data/roles.txt";
+		String location = "data/roles.txt";
 		List<String> role = new ArrayList<>();
 		try(BufferedReader br = new BufferedReader(new FileReader(location));){
 			 String line;

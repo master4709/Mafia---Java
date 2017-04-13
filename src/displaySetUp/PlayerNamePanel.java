@@ -12,7 +12,6 @@ import myJStuff.MyButton;
 import myJStuff.MyLabel;
 import myJStuff.MyPanel;
 import myJStuff.MyTextField;
-import net.miginfocom.swing.MigLayout;
 /**
  * This class creates the Panel for selecting how many
  * players you want in the game
@@ -64,7 +63,6 @@ public class PlayerNamePanel extends MyPanel{
 	
 	/** Method displays contents in the south **/
 	private void displaySouth(){
-		south.setLayout(new MigLayout("", "[][grow]", "[]"));
 		
 		btnHome = new MyButton("Home",buttonFontSize);
 		south.add(btnHome,"cell 0 0,alignx left");

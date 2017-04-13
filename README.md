@@ -8,7 +8,7 @@ Copyright 2017 All rights reserved
 * Authors:
    * Christilyn Arjona	Role&Player SetUp / SetUp GUI
    * Ronelle Bakima		Story / Story IO / Story GUI
-   * Pierce De Jong		Game Cycle / Save IO / Game GUI
+   * Pierce de Jong		Game Cycle / Save IO / Game GUI
    * Mahsa Lotfi		Player Classes / Main GUI
    * Elvin Limpin		Action Logic / OO Architect / UI&UX
 * University of Calgary CPSC 233 L01 Winter 2017 Team XVIII (18)
@@ -26,11 +26,15 @@ Copyright 2017 All rights reserved
 2) Once Java is Installed:
 * Windows: Run MafiaWindows.bat
 * Mac or Linux: Run MafiaLinux.bat
+* On Eclipse via File -Import Projects from File System...
+  -Select the correct directory for Mafia and press finish
+  -Open Mafia/src/run/RunMafia.java in the package explorer
+  -Press the Green Button 
 
 ##### Set up notes ######
 
 * There is only one CONFIG in this version
-* For upcomming versions, a CONFIG file will be introduced
+* For upcoming versions, a CONFIG file will be introduced
     to keep track of languages/alternate themes
 * We use the test game feature to skip the player setup
 

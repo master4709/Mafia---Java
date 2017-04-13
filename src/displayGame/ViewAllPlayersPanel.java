@@ -2,7 +2,6 @@
 package displayGame;
 
 import myJStuff.*;
-import net.miginfocom.swing.MigLayout;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -61,7 +60,6 @@ public class ViewAllPlayersPanel extends MyPanel{
 	 * Creates button needed to be pressed to go to next screen
 	 */
 	private void displaySouth(){
-		south.setLayout(new MigLayout("", "[][grow]", "[]"));
 		
 		btnHome = new MyButton("Home",buttonFontSize);
 		south.add(btnHome,"cell 0 0,alignx left,alignx left");

@@ -19,6 +19,7 @@ Copyright 2017 All rights reserved
 
 ##### Compiling and Running ######
 
+* Command Line
 1) Use a computer with Java/JDK installed
 * Here are instructions for installing Java:
 * http://pages.cpsc.ucalgary.ca/~verwaal/courses/219/dev.php
@@ -26,10 +27,16 @@ Copyright 2017 All rights reserved
 2) Once Java is Installed:
 * Windows: Run MafiaWindows.bat
 * Mac or Linux: Run MafiaLinux.bat
+
+
 * On Eclipse via File -Import Projects from File System...
-  -Select the correct directory for Mafia and press finish
-  -Open Mafia/src/run/RunMafia.java in the package explorer
-  -Press the Green Button 
+  * Select the correct directory for Mafia and press finish
+  * Open Mafia/src/run/RunMafia.java in the package explorer
+  * Press the Green Button
+  
+
+* Jar File
+* run mafia.jar
 
 ##### Set up notes ######
 

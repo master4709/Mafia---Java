@@ -1,4 +1,4 @@
-package displayGame;
+package controllers;
 
 import logic.*;
 import playerInfo.Player;
@@ -10,6 +10,15 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import displayGame.CheckLynchPanel;
+import displayGame.CheckPlayerPanel;
+import displayGame.DayPanel;
+import displayGame.NightPanel;
+import displayGame.StoryPanel;
+import displayGame.VictoryPanel;
+import displayGame.ViewAllPlayersPanel;
+import displayGame.ViewPlayerPanel;
 /**
  * Class GameController
  * 

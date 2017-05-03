@@ -1,4 +1,4 @@
-package displaySetUp;
+package controllers;
 
 import myJStuff.Colors;
 
@@ -9,6 +9,10 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import displaySetUp.PlayerCountPanel;
+import displaySetUp.PlayerNamePanel;
+import displaySetUp.RoleSelectionPanel;
 
 /**
  * 

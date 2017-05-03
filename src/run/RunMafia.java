@@ -1,5 +1,7 @@
 package run;
 
+import controllers.Controller;
+
 /**
  * This class runs the entire game
  * @authors Team 18: Christilyn, Elvin, Masha, Pierce, Ronelle 

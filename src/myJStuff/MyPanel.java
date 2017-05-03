@@ -46,6 +46,8 @@ public abstract class MyPanel {
 	protected int roleFontSize;
 	protected int infoFontSize;
 	
+	protected final static String location = "src/resources/";
+	
 	protected static final int width = 480;
 	protected static final int height = 850;
 	

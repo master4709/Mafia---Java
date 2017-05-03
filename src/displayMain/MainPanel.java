@@ -62,7 +62,7 @@ public class MainPanel extends MyPanel{
 	
 	private void displayNorth(){
 
-		ImageIcon icon = new ImageIcon("data/pictures/mafia.png");
+		ImageIcon icon = new ImageIcon("src/resources/images/mafia.png");
 		lblMan = new JLabel(icon);
 		north.add(lblMan, "center");
 	}

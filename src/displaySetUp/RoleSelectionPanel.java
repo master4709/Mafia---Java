@@ -83,7 +83,7 @@ public class RoleSelectionPanel extends MyPanel{
         List<String> availableRoles = new ArrayList<>();
         Scanner fileScanner;
 		try {
-			fileScanner = new Scanner( new File("data/roles.txt"));
+			fileScanner = new Scanner( new File("src/resources/roles.txt"));
 			while(fileScanner.hasNextLine()) {
             String line = fileScanner.nextLine();
             String[] split = line.split("\\|");
@@ -169,14 +169,14 @@ public class RoleSelectionPanel extends MyPanel{
     /***
      * @return list of buttons for each role
      */
-    ArrayList<JButton> getRoleButtons() {
+    public ArrayList<JButton> getRoleButtons() {
         return roleButtons;
     }
 
     /***
      * @return JButton that handles assignment of remaining players as townie
      */
-    JButton getAssignTownies() {
+    public JButton getAssignTownies() {
         return assignTownies;
     }
 
@@ -184,18 +184,18 @@ public class RoleSelectionPanel extends MyPanel{
      * @return JLabel that displays the remaining amount of players who has
      * not selected a role.
      */
-    JLabel getPlayersLeft() {
+    public JLabel getPlayersLeft() {
         return playersLeft;
     }
     
-    JLabel getRecomdedMafia(){
+    public JLabel getRecomdedMafia(){
     	return recomendedMafia;
     }
 
     /***
      * @return a list of type string containing selected roles
      */
-    ArrayList<String> getRolesSelected() {
+    public ArrayList<String> getRolesSelected() {
         return new ArrayList<>(rolesSelected);
     }
 
@@ -203,14 +203,14 @@ public class RoleSelectionPanel extends MyPanel{
      * Adds the specified role to the selected roles list
      * @param role to add
      */
-    void addRole(String role) {
+    public void addRole(String role) {
         rolesSelected.add(role);
     }
 
     /***
      * @return continue button in existing panel
      */
-    JButton getContinueButton() {
+    public JButton getContinueButton() {
         return continueButton;
     }
 }

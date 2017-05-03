@@ -20,6 +20,8 @@ public class Story {
 	//instance variable for the name of the current target
 	private String name;
 	
+	
+	
 	//constructor for story object. Create a story object with a string as a parameter
 	public Story (String str) {
 		name = str;
@@ -32,7 +34,7 @@ public class Story {
 	}
 	//extracts info from stories.txt
 	private void storyScanner() {
-		String fileName = "data/story/stories.txt";
+		String fileName = "src/resources/story/stories.txt";
 		try {
 			Scanner inputStream = new Scanner (new File(fileName));
 			while(inputStream.hasNextLine()){
@@ -47,7 +49,7 @@ public class Story {
 	}
 	//extracts info from locations.txt
 	private void locationScanner() {
-		String fileName = "data/story/locations.txt";
+		String fileName = "src/resources/story/locations.txt";
 		try {
 			Scanner inputStream = new Scanner (new File(fileName));
 			while(inputStream.hasNextLine()){
@@ -62,7 +64,7 @@ public class Story {
 	}
 	//extracts info from causeOfDeath.txt
 	private void causeScanner() {
-		String fileName = "data/story/causeOfDeath.txt";
+		String fileName = "src/resources/story/causeOfDeath.txt";
 		try {
 			Scanner inputStream = new Scanner (new File(fileName));
 			while(inputStream.hasNextLine()){

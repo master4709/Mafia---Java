@@ -29,7 +29,7 @@ public class FileUtil{
 	
 	private int lynchTargetID = -1;
 
-	private final String saveName = "data/saveGame.txt";
+	private final String saveName = "src/resources/saveGame.txt";
 	
 	/**
 	 * default constructor

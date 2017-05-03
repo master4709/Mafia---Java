@@ -193,7 +193,7 @@ public class Game{
 		} if(townTotal==1 && getPlayer("Survivor").getStatus()!=0){
 			System.out.println("The Survivor was the last remaining Town member alive");
 			return "Survivor";
-		}else if(lynchTarget!=-1 && getPlayer(lynchTarget).wasLynched()){
+		}else if(lynchTarget!=-1 && getPlayer(lynchTarget).isLynched()){
 			System.out.println("The Lyncher has lynched player: " + getPlayer(lynchTarget).getName());
 			return "Lyncher";
 		}else if(mafiaTotal>townTotal){

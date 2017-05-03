@@ -1,4 +1,4 @@
-package logic;
+package util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ import playerInfo.Player;
  * 
  * Author: Mahsa Lotfi 10072013 
  */	
-public class FileUtil{
+public class LoadFileUtil{
 	/**
 	 * Instance variables
 	 */
@@ -34,7 +34,7 @@ public class FileUtil{
 	/**
 	 * default constructor
 	 */
-	public FileUtil(){
+	public LoadFileUtil(){
 	}
 	
 	/**

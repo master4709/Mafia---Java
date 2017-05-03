@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import logic.FileUtil;
+import util.LoadFileUtil;
 
 /**
  * Controller switches between the main menu, game setup,
@@ -18,14 +18,14 @@ import logic.FileUtil;
  * and test gameplay.
  * 
  * Game File IO is also handled by this controller
- * @author Elvin Limpin 30018832
+ * @author Pierce de Jong 30006609
  *
  */
 public class Controller implements ActionListener{
 	
 	private JFrame frame;
 	
-	private FileUtil fu;
+	private LoadFileUtil fu;
 	
 	private MainController mc;
 	private SetUpController suc;
@@ -41,7 +41,7 @@ public class Controller implements ActionListener{
 		suc = new SetUpController(frame,this);
 		gc = new GameController(frame,this);
 		
-		fu = new FileUtil();
+		fu = new LoadFileUtil();
 		
 		mc.start();
 	}
@@ -50,9 +50,9 @@ public class Controller implements ActionListener{
 	private void createFrame(){
 		//When changing theses must also change the values in setFont() in NightPanel
 		int width = 480;
-		int height = 852;
+		int height = 850;
 		frame = new JFrame();
-		frame.setBounds(550, 20, width, height);
+		frame.setBounds(500, 20, width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);
@@ -74,30 +74,25 @@ public class Controller implements ActionListener{
 			/** Starts the SetUpController */
 			suc.start();
 			break;
-		
 		/** loads the save file */
 		case"ContinueGame_MainPanel":
 			fu.loadFile();
 			//Starts the game with save file info
 			gc.start(fu.getPlayerInfo(), fu.getLynchTarget(),false);
 			break;
-			
 		/** returns to home */
 		case"Home":
 			mc.start();
 			break;
-			
 		/** ends set up phase and continues to the game cycle */
 		case"Continue_RoleSelectionPanel":
 			fu.newFile(suc.getPlayerNames(),suc.getRoles());
 			gc.start(fu.getPlayerInfo(), fu.getLynchTarget(),false);
 			break;
-			
 		/** initializes a test game, skipping the set up phase */
 		case"Testing_MainPanel":
 			test();
 			break;
-			
 		default:break;
 		}
 	}

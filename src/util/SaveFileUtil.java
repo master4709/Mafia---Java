@@ -1,4 +1,4 @@
-package logic;
+package util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +19,7 @@ public class SaveFileUtil {
 			for(Player p: playerInfo){
 				//System.out.print(p.getName() + " " + p.getStatus() + " | ");
 				pw.print(p.getStatus()+" ");
-				pw.print(String.valueOf(p.wasLynched())+" ");
+				pw.print(String.valueOf(p.isLynched())+" ");
 				pw.print(p.getRole()+" ");
 				if(p.getRole().contains("Lyncher")){
 					pw.print(lynchTarget+" ");

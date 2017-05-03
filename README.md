@@ -8,7 +8,7 @@ Copyright 2017 All rights reserved
 * Authors:
    * Christilyn Arjona	Role&Player SetUp / SetUp GUI
    * Ronelle Bakima		Story / Story IO / Story GUI
-   * Pierce de Jong		Game Cycle / Save IO / Game GUI
+   * Pierce de Jong		Code Layout / Game Cycle / Save IO / Game GUI /
    * Mahsa Lotfi		Player Classes / Main GUI
    * Elvin Limpin		Action Logic / OO Architect / UI&UX
 * University of Calgary CPSC 233 L01 Winter 2017 Team XVIII (18)
@@ -48,9 +48,8 @@ Copyright 2017 All rights reserved
 ### What is Mafia? ###
 
 Mafia is a party game designed to have two teams:
-
-1.The Informed minority -The Mafia (Each member knows who the other Mafia members are)
-2.The Uninformed majority -The Town (No member knows the side of another player)
+	1.The Informed minority -The Mafia (Each member knows who the other Mafia members are)
+	2.The Uninformed majority -The Town (No member knows the side of another player)
 
 The Mafia is trying to take control of the town by gaining a majority while
 the town is trying to lynch all members of the Mafia. After each lynching,
@@ -112,10 +111,6 @@ is achieved
 * Work on your own class, unless you ask for permission
 * Alert the group chat whenever you make commits
 * Properly document your code!
-
-##### Members ######
-
-
 
 ###### Markers / Instructors ######
 

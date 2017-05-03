@@ -40,7 +40,7 @@ public abstract class Player {
 	private int status;
 	private int inBar; //0 not in bar, 1 in bar
 	
-	private boolean isLynched; 
+	private boolean lynched; 
 	
 	/** Constants for status */
 	
@@ -62,7 +62,7 @@ public abstract class Player {
 		this.target = -1;
 		this.inBar = 0;
 		this.status = 1;
-		this.isLynched = false;
+		this.lynched = false;
 	}
 	
 	/**
@@ -72,13 +72,13 @@ public abstract class Player {
 	 * @param status
 	 * @param isLynched
 	 */
-	public Player(String name, int position, int status, boolean isLynched){
+	public Player(String name, int position, int status, boolean lynched){
 		this.name = name;
 		this.position = position;
 		this.target = -1;
 		this.inBar = 0;
 		this.status = status;
-		this.isLynched = isLynched;		
+		this.lynched = lynched;		
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public abstract class Player {
 		this.position = p.position;
 		this.target = p.target;
 		this.status = p.status;
-		this.isLynched = p.isLynched;
+		this.lynched = p.lynched;
 		this.role = p.role;
 		this.action = p.action;
 		this.goal = p.goal;
@@ -172,7 +172,7 @@ public abstract class Player {
 	}
 	
 	public void setLynched(boolean lynched){
-		this.isLynched = lynched;
+		this.lynched = lynched;
 	}
 	
 	public void setStatus(int status){
@@ -221,8 +221,8 @@ public abstract class Player {
 	}
 	
 	/** returns whether the player was lynched */
-	public boolean wasLynched(){
-		return this.isLynched;
+	public boolean isLynched(){
+		return this.lynched;
 	}
 	
 	public String toString(){

@@ -77,7 +77,7 @@ public class VictoryPanel extends MyPanel {
 		if(p.getStatus()!=0) {
 			str = "Alive- ";
 		}else{
-			if(p.wasLynched()){
+			if(p.isLynched()){
 				str = "Lycnhed- ";
 			}else{
 				str = "Murdered- ";
